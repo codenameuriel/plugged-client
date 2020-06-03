@@ -68,6 +68,7 @@ class Dashboard extends Component {
     return (
       <div>
         <TopNewsContainer
+          links={this.props.links}
           page={this.state.page}
           topNews={this.state.topNews} 
           showPrevPageButton={this.state.showPrevPageButton}

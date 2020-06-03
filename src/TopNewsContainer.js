@@ -27,9 +27,9 @@ class TopNewsContainer extends Component {
             <h1>Trending Stories</h1>
             <p>{jumbotronMessage}</p>
           </div>
-        {/* <Nav 
+        <Nav 
           links={this.props.links}
-        /> */}
+        />
         {this.props.showPrevPageButton && 
           <button 
             onClick={this.props.prevPage} >Previous Page</button>}

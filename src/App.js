@@ -5,7 +5,7 @@ import Login from './Login'
 import Signup from './Signup'
 
 const links = [
-  <NavLink to="/">Home</NavLink>,
+  <NavLink to="/dashboard">Home</NavLink>,
   <NavLink to="/login">Log in</NavLink>, 
   <NavLink to="/signup">Sign up</NavLink>
 ]
@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <div className="App">
         <Route 
-            exact path="/" 
+            exact path="/dashboard" 
             render={routerProps => <Dashboard
               {...routerProps}
               links={[login, signup]}
