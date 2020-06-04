@@ -65,10 +65,19 @@ class Dashboard extends Component {
   }
 
   render() {
+    const [home, login, signup, logout] = this.props.links
+    let conditionalLinks = []
+
+    if (this.props.loggedInUser.username) {
+      conditionalLinks.push(logout)
+    } else {
+      conditionalLinks.push(login, signup)
+    }
+
     return (
       <div>
         <TopNewsContainer
-          links={this.props.links}
+          links={conditionalLinks}
           loggedInUser={this.props.loggedInUser}
           page={this.state.page}
           topNews={this.state.topNews} 

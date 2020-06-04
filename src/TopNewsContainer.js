@@ -13,13 +13,15 @@ class TopNewsContainer extends Component {
     let jumbotronMessage = 'Log in or create an account to see your top stories'
     let nextPageInnerText = `Go to Page ${this.props.page + 1}`
 
-    if (this.props.loggedInUser) {
+    if (this.props.loggedInUser.username) {
       jumbotronMessage = `Welcome back ${this.props.loggedInUser.username}`
     }
 
     if (this.props.page === 8) {
       nextPageInnerText = 'Back to Page 1'
     }
+
+    
 
     return (
       <div>

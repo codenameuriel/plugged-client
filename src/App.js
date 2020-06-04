@@ -3,12 +3,6 @@ import { Route, NavLink } from 'react-router-dom';
 import Dashboard from './Dashboard'
 import Auth from './Auth'
 
-const links = [
-  <NavLink to="/dashboard">Home</NavLink>,
-  <NavLink to="/login">Log in</NavLink>, 
-  <NavLink to="/signup">Sign up</NavLink>
-]
-
 class App extends Component {
   state = {
     loggedInUser: {}
@@ -20,8 +14,19 @@ class App extends Component {
     })
   }
 
+  logOutUser = () => {
+    this.setState({
+      loggedInUser: {}
+    })
+  }
+
   render() {
-    const [, login, signup] = links
+    const links = [
+      <NavLink to="/dashboard">Home</NavLink>,
+      <NavLink to="/login">Log in</NavLink>, 
+      <NavLink to="/signup">Sign up</NavLink>,
+      <NavLink onClick={this.logOutUser} to="/dashboard">Log out</NavLink>
+    ]
 
     return (
       <div className="App">
@@ -34,7 +39,7 @@ class App extends Component {
           exact path="/dashboard" 
           render={routerProps => <Dashboard
             {...routerProps}
-            links={[login, signup]}
+            links={links}
             loggedInUser={this.state.loggedInUser}
             />}
         />
