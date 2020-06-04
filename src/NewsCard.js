@@ -1,5 +1,5 @@
 import React from 'react'
-import Newspaper from './newspaper.jpeg'
+import Plug from './Plug.png'
 
 function NewsCard({author, content, publishedAt, source, title, description, url, urlToImage, loggedInUser, postArticle}) {
   let article = {
@@ -24,7 +24,7 @@ function NewsCard({author, content, publishedAt, source, title, description, url
   return (
     <div>
       <h2>{title}</h2>
-      <a target="_blank" rel="noopener noreferrer" href={url}><img src={urlToImage || Newspaper} alt={title}/></a>
+      <a target="_blank" rel="noopener noreferrer" href={url}><img src={urlToImage || Plug} alt={title}/></a>
       <p>{description}</p>
       {button}
     </div>
