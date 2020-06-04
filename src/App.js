@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import Dashboard from './Dashboard'
-import Login from './Login'
-import Signup from './Signup'
+import Auth from './Auth'
 
 const links = [
   <NavLink to="/dashboard">Home</NavLink>,
@@ -22,34 +21,23 @@ class App extends Component {
   }
 
   render() {
-    const [home, login, signup] = links
+    const [, login, signup] = links
 
     return (
       <div className="App">
+        <Auth
+          links={links}
+          loggedInUser={this.state.loggedInUser}
+          setLoggedInUser={this.setLoggedInUser}
+        />
         <Route 
-            exact path="/dashboard" 
-            render={routerProps => <Dashboard
-              {...routerProps}
-              links={[login, signup]}
-              loggedInUser={this.state.loggedInUser}
-              />}
-          />
-          <Route 
-            exact path="/login" 
-            render={routerProps => <Login 
-              {...routerProps}
-              links={[home, signup]}
-              />}
-          />
-          <Route 
-            exact path="/signup" 
-            render={routerProps => <Signup 
-              {...routerProps}
-              links={[home, login]}
-              loggedInUser={this.state.loggedInUser}
-              setLoggedInUser={this.setLoggedInUser}
-              />}
-          />
+          exact path="/dashboard" 
+          render={routerProps => <Dashboard
+            {...routerProps}
+            links={[login, signup]}
+            loggedInUser={this.state.loggedInUser}
+            />}
+        />
       </div>
     );
   }
