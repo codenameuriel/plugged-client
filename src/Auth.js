@@ -38,7 +38,7 @@ export default class Auth extends Component {
   }
 
   render() {
-    const [home, login, signup] = this.props.links
+    const [dashboard, login, signup] = this.props.links
     const { loggedInUser } = this.props
 
     return (
@@ -47,7 +47,7 @@ export default class Auth extends Component {
           exact path="/login"
           render={routerProps => <Login 
             {...routerProps}
-            links={[home, signup]}
+            links={[dashboard, signup]}
             loggedInUser={loggedInUser}
             username={this.state.username}
             logIn={this.logIn}
@@ -58,7 +58,7 @@ export default class Auth extends Component {
           exact path="/signup"
           render={routerProps => <Signup 
             {...routerProps}
-            links={[home, login]}
+            links={[dashboard, login]}
             loggedInUser={loggedInUser}
             username={this.state.username}
             signUp={this.signUp}

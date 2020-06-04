@@ -24,7 +24,7 @@ class TopNewsContainer extends Component {
       nextPageInnerText = 'Back to Page 1'
     }
 
-
+    const [login, signup] = this.props.links
 
     return (
       <div>
@@ -33,7 +33,7 @@ class TopNewsContainer extends Component {
             <p>{jumbotronMessage}</p>
           </div>
         <Nav 
-          links={this.props.links}
+          links={[login, signup]}
         />
         {this.props.showPrevPageButton && 
           <button 
