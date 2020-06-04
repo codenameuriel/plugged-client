@@ -3,10 +3,13 @@ import Nav from './Nav.js'
 import NewsCard from './NewsCard.js'
 
 class TopNewsContainer extends Component {
-
   renderNewsCards = () => (
     this.props.topNews.map((article, index) => 
-      <NewsCard key={index} {...article} loggedInUser={this.props.loggedInUser}/>)
+      <NewsCard 
+        key={index} {...article} 
+        loggedInUser={this.props.loggedInUser}
+        postArticle={this.props.postArticle}
+      />)
   )
 
   render() {

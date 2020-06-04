@@ -6,7 +6,8 @@ class Dashboard extends Component {
   state = {
     page: 1,
     topNews: [],
-    showPrevPageButton: false
+    showPrevPageButton: false,
+    article: {}
   }
 
   componentDidMount() {
@@ -64,6 +65,27 @@ class Dashboard extends Component {
     }
   }
 
+  postArticle = article => {
+    fetch('http://localhost:4000/articles', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(article)
+    })
+    .then(resp => resp.json)
+    .then(this.setArticle)
+  }
+
+  setArticle = article => {
+    this.setState({
+      article: article
+    })
+  }
+
+  
+
   render() {
     const [home, login, signup, logout] = this.props.links
     let conditionalLinks = []
@@ -85,6 +107,7 @@ class Dashboard extends Component {
           togglePrevPageButton={this.togglePrevPageButton}
           nextPage={this.nextPage}
           prevPage={this.prevPage}
+          postArticle={this.postArticle}
         />
       </div>
     )

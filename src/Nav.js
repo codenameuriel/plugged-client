@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export class Nav extends Component {
   renderLinks = props => (
-    props.map(link => <li>{link}</li>)
+    props.map((link, index) => <li key={index}>{link}</li>)
   )
 
   render() {
