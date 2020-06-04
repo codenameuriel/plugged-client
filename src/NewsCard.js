@@ -13,19 +13,12 @@ function NewsCard({author, content, publishedAt, source, title, description, url
     url_to_image: urlToImage
   }
 
-  // t.string "author"
-  // t.string "content"
-  // t.string "description"
-  // t.string "published_at"
-  // t.string "source"
-  // t.string "title"
-  // t.string "url"
-  // t.string "url_to_image"
-
   let button;
 
   if (loggedInUser.username) {
-    button = <button onClick={() => postArticle(article)}>Add to collection</button>
+    button = <button onClick={() => {
+      postArticle(article)
+    }}>Add to collection</button>
   }
 
   return (

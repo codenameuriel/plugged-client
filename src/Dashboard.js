@@ -74,17 +74,34 @@ class Dashboard extends Component {
       },
       body: JSON.stringify(article)
     })
-    .then(resp => resp.json)
+    .then(resp => resp.json())
     .then(this.setArticle)
   }
 
   setArticle = article => {
     this.setState({
       article: article
-    })
+    }, () => this.addToUserCollection(this.state.article))
   }
 
-  
+  addToUserCollection = article => {
+    let collectionObj = {
+      user_id: this.props.loggedInUser.id,
+      article_id: this.state.article.id
+    }
+
+    fetch('http://localhost:4000/collections', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(collectionObj)
+    })
+    .then(resp => resp.json())
+    .then(console.log)
+  }
+
 
   render() {
     const [home, login, signup, logout] = this.props.links
@@ -108,6 +125,7 @@ class Dashboard extends Component {
           nextPage={this.nextPage}
           prevPage={this.prevPage}
           postArticle={this.postArticle}
+          addToUserCollection={this.addToUserCollection}
         />
       </div>
     )
