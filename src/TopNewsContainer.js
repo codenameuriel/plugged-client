@@ -6,7 +6,7 @@ class TopNewsContainer extends Component {
 
   renderNewsCards = () => (
     this.props.topNews.map((article, index) => 
-      <NewsCard key={index} {...article}/>)
+      <NewsCard key={index} {...article} loggedInUser={this.props.loggedInUser}/>)
   )
 
   render() {
@@ -21,7 +21,7 @@ class TopNewsContainer extends Component {
       nextPageInnerText = 'Back to Page 1'
     }
 
-    
+
 
     return (
       <div>
