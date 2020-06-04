@@ -5,7 +5,7 @@ export default function Login(props) {
   return (
     <div>
       <Nav links={props.links}/>
-      <h1 id="login-h1">Log in</h1>
+      <h1>Log in</h1>
       <form>
         <section>
           <label>Username </label>

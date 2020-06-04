@@ -11,6 +11,16 @@ const links = [
 ]
 
 class App extends Component {
+  state = {
+    loggedInUser: {}
+  }
+
+  setLoggedInUser = user => {
+    this.setState({
+      loggedInUser: user
+    })
+  }
+
   render() {
     const [home, login, signup] = links
 
@@ -21,6 +31,7 @@ class App extends Component {
             render={routerProps => <Dashboard
               {...routerProps}
               links={[login, signup]}
+              loggedInUser={this.state.loggedInUser}
               />}
           />
           <Route 
@@ -35,6 +46,8 @@ class App extends Component {
             render={routerProps => <Signup 
               {...routerProps}
               links={[home, login]}
+              loggedInUser={this.state.loggedInUser}
+              setLoggedInUser={this.setLoggedInUser}
               />}
           />
       </div>
