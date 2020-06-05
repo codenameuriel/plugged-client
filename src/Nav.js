@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 
-export class Nav extends Component {
+class Nav extends Component {
   renderLinks = props => (
-    props.map((link, index) => <li key={index}>{link}</li>)
+    (props || []).map((link, index) => <li key={index}>{link}</li>)
   )
 
   render() {
+    const { links } = this.props
+
     return (
       <div>
         <nav>
           <ul className="navbar">
-            {this.renderLinks(this.props.links)}
+            {this.renderLinks(links)}
           </ul>
         </nav>
       </div>

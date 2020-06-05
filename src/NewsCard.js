@@ -18,6 +18,7 @@ function NewsCard({author, content, publishedAt, source, title, description, url
   if (loggedInUser.username) {
     button = <button onClick={() => {
       postArticle(article)
+      alert('article was added to your collection!')
     }}>Add to collection</button>
   }
 

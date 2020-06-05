@@ -3,28 +3,36 @@ import Nav from './Nav.js'
 import NewsCard from './NewsCard.js'
 
 class TopNewsContainer extends Component {
-  renderNewsCards = () => (
-    this.props.topNews.map((article, index) => 
+  renderNewsCards = () => {
+    const { topNews, loggedInUser, postArticle } = this.props
+
+    return topNews.map((article, index) => 
       <NewsCard 
-        key={index} {...article} 
-        loggedInUser={this.props.loggedInUser}
-        postArticle={this.props.postArticle}
+        key={index} 
+        {...article} 
+        loggedInUser={loggedInUser}
+        postArticle={postArticle}
       />)
-  )
+  }
 
   render() {
-    let jumbotronMessage = 'Log in or create an account to see your top stories'
-    let nextPageInnerText = `Go to Page ${this.props.page + 1}`
+    const { 
+      page, loggedInUser, showPrevPageButton, prevPage, nextPage
+    } = this.props
+    const [login, signup] = this.props.links
 
-    if (this.props.loggedInUser.username) {
-      jumbotronMessage = `Welcome back ${this.props.loggedInUser.username}`
+    let jumbotronMessage = 'Log in or create an account to see your top stories'
+    let nextPageInnerText = `Go to Page ${page + 1}`
+
+    if (loggedInUser.username) {
+      jumbotronMessage = `Welcome back ${loggedInUser.username}`
     }
 
-    if (this.props.page === 8) {
+    if (page === 8) {
       nextPageInnerText = 'Back to Page 1'
     }
 
-    const [login, signup] = this.props.links
+  
 
     return (
       <div>
@@ -35,11 +43,11 @@ class TopNewsContainer extends Component {
         <Nav 
           links={[login, signup]}
         />
-        {this.props.showPrevPageButton && 
+        {showPrevPageButton && 
           <button 
-            onClick={this.props.prevPage} >Previous Page</button>}
+            onClick={prevPage} >Previous Page</button>}
         <button 
-          onClick={this.props.nextPage} >{nextPageInnerText}</button>
+          onClick={nextPage} >{nextPageInnerText}</button>
         {this.renderNewsCards()}
       </div>
     )

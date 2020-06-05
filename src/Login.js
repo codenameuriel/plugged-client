@@ -22,7 +22,7 @@ export default function Login({
         </section>
         <section>
           <label>Password: </label>
-          <input type="text"/>
+          <input type="password"/>
         </section>
         <input type="submit"/>
       </form>

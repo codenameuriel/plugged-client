@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
-import Auth from './Auth'
-import Collection from './Collection';
+import { Route, Link } from 'react-router-dom';
 import { apiKey }  from './apiKey'
+import Auth from './Auth'
 import TopNewsContainer from './TopNewsContainer'
+import Collection from './Collection';
 
-class App extends Component {
+export default class App extends Component {
   state = {
     loggedInUser: {},
     page: 1,
@@ -119,11 +119,11 @@ class App extends Component {
   }
 
   render() {
-    const logoutLink = <NavLink onClick={this.logOutUser} to="/dashboard">Log out</NavLink>
-    const collectionLink = <NavLink to="/dashboard/collection">Collection</NavLink>
-    const dashboardLink = <NavLink to="/dashboard">Dashboard</NavLink>
-    const loginLink = <NavLink to="/login">Log in</NavLink>
-    const signupLink = <NavLink to="/signup">Sign up</NavLink>
+    const logoutLink = <Link onClick={this.logOutUser} to="/dashboard">Log out</Link>
+    const collectionLink = <Link to="/dashboard/collection">Collection</Link>
+    const dashboardLink = <Link to="/dashboard">Dashboard</Link>
+    const loginLink = <Link to="/login">Log in</Link>
+    const signupLink = <Link to="/signup">Sign up</Link>
   
     let topNewsLinks;
     let collectionLinks;
@@ -162,11 +162,10 @@ class App extends Component {
           render={routerProps => <Collection 
             {...routerProps}
             links={collectionLinks}
+            loggedInUser={this.state.loggedInUser}
           />}
         />
       </div>
     );
   }
 }
-
-export default App;
