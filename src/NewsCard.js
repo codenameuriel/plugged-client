@@ -22,6 +22,7 @@ function NewsCard({author, content, publishedAt, source, title, description, url
     }}>Add to collection</button>
   }
 
+  console.log('NewsCard mounted')
   return (
     <div>
       <h2>{title}</h2>

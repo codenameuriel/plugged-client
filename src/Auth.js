@@ -44,7 +44,7 @@ export default class Auth extends Component {
     return (
       <div>
         <Route 
-          exact path="/login"
+          path="/login"
           render={routerProps => <Login 
             {...routerProps}
             links={[dashboard, signup]}

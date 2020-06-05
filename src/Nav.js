@@ -9,13 +9,11 @@ class Nav extends Component {
     const { links } = this.props
 
     return (
-      <div>
         <nav>
           <ul className="navbar">
             {this.renderLinks(links)}
           </ul>
         </nav>
-      </div>
     )
   }
 }

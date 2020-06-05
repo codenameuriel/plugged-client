@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import DBNewsCard from './DBNewsCard'
 import Nav from './Nav'
 
-export default class Collection extends Component {
+export default class CollectionNewsContainer extends Component {
   state = {
     newsCollection: []
   }

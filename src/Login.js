@@ -10,7 +10,7 @@ export default function Login({
       <h1>Log in</h1>
       <form onSubmit={event => {
         logIn(event, username)
-        history.push('/dashboard')
+        history.push('/top-news')
         }}>
         <section>
           <label>Username: </label>

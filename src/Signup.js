@@ -10,7 +10,7 @@ export default function Signup({
       <h1>Sign up</h1>
       <form onSubmit={event => {
         signUp(event, username)
-        history.push('/dashboard')
+        history.push('/top=news')
         }}>
         <section>
           <label>Username: </label>
