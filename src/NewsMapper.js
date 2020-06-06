@@ -12,7 +12,6 @@ const NewsMapper = ({ news, loggedInUser, postArticle }) => {
       />)
   }
 
-  console.log('NewsMapper mounted', news)
   return (
     <div>
       {renderNewsCards()}

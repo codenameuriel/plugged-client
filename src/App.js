@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Auth from './Auth'
-// import CategorySelector from './CategorySelector';
-// import BusinessNews from './BusinessNews'
 import PageManager from './PageManager'
 
 export default class App extends Component {
@@ -27,10 +25,10 @@ export default class App extends Component {
   setArticle = article => {
     this.setState({
       article: article
-    }, () => this.addToUserCollection(this.state.article))
+    }, () => this.addToCollection(this.state.article))
   }
 
-  addToUserCollection = article => {
+  addToCollection = article => {
     let collectionObj = {
       user_id: this.state.loggedInUser.id,
       article_id: this.state.article.id
@@ -84,23 +82,6 @@ export default class App extends Component {
           loggedInUser={this.state.loggedInUser}
           setLoggedInUser={this.setLoggedInUser}
         />
-        {/* <Route
-          exact path="/dashboard/categories"
-          render={routerProps => <CategorySelector
-            {...routerProps}
-          />}
-        />
-        <Route
-          exact path="/dashboard/categories/business"
-          render={routerProps => <BusinessNews
-            loggedInUser={this.state.loggedInUser}
-            page={this.state.page}
-            showPrevPageButton={this.state.showPrevPageButton}
-            nextPage={this.nextPage}
-            prevPage={this.prevPage}
-            postArticle={this.postArticle}
-          />}
-        />  */}
       </div>
     );
   }

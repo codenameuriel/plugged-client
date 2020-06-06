@@ -30,18 +30,42 @@ export default class CollectionNewsContainer extends Component {
         key={article.article.id} 
         {...article.article} 
         loggedInUser={loggedInUser}
+        removeFromCollection={this.removeFromCollection}
       />
     ))
   }
 
+  removeFromCollection = articleID => {
+    fetch(`http://localhost:4000/articles/${articleID}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({id: articleID})
+    })
+    .then(resp => resp.json())
+    .then(this.getUsersNewsCollection)
+  }
+
   render() {
-    console.log(this.state.newsCollection)
+    const { newsCollection } = this.state
     const { links, loggedInUser } = this.props
+    let collectionDisplay;
+
+    if (newsCollection.length > 0) {
+      collectionDisplay = <h1>Here are your saved news, {loggedInUser.username}</h1>
+    } else {
+      collectionDisplay = <>
+      <h1>You have no saved news</h1>
+      <p>Add some news to your collection!</p>
+      </>
+    }
 
     return (
       <div>
         <Nav links={links}/>
-        <h1>Here are your top news, {loggedInUser.username}</h1>
+        {collectionDisplay}
         {this.renderDBNewsCards()}
       </div>
     )
