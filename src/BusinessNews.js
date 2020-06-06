@@ -54,10 +54,8 @@ export default class BusinessNews extends Component {
         <Nav links={links}/>
         <h1>Top stories in Business</h1>
         {showPrevPageButton && 
-          <button onClick={prevPage} >Previous Page</button>
-        }
-        <button 
-          onClick={nextPage} >{nextPageInnerText}</button>
+          <button onClick={prevPage} >Previous Page</button>}
+        <button onClick={nextPage} >{nextPageInnerText}</button>
         <NewsMapper 
           news={businessNews}
           loggedInUser={loggedInUser}

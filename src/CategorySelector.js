@@ -11,9 +11,9 @@ const CategorySelector = ({history, links}) => {
       <div onClick={() => history.push("/categories/entertainment")}>
         <h3>Entertainment</h3>
       </div>
-      <div onClick={() => history.push("/categories/general")}>
+      {/* <div onClick={() => history.push("/categories/general")}>
         <h3>General</h3>
-      </div>
+      </div> */}
       <div onClick={() => history.push("/categories/health")}>
         <h3>Health</h3>
       </div>

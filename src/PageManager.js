@@ -5,7 +5,7 @@ import TopNewsContainer from './TopNewsContainer'
 import CollectionNews from './CollectionNews'
 import BusinessNews from './BusinessNews'
 import EntertainmentNews from './EntertainmentNews'
-import GeneralNews from './GeneralNews'
+// import GeneralNews from './GeneralNews'
 import HealthNews from './HealthNews'
 import ScienceNews from './ScienceNews'
 import SportsNews from './SportsNews'
@@ -162,12 +162,14 @@ export default class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
             showPrevPageButton={this.state.showPrevPageButton}
             nextPage={this.nextPage}
             prevPage={this.prevPage}
           />} 
         />
-        <Route
+        {/* <Route
           exact path="/categories/general"
           render={routerProps => <GeneralNews
             {...routerProps}
@@ -175,11 +177,13 @@ export default class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
             showPrevPageButton={this.state.showPrevPageButton}
             nextPage={this.nextPage}
             prevPage={this.prevPage}
           />} 
-        />
+        /> */}
         <Route
           exact path="/categories/health"
           render={routerProps => <HealthNews
@@ -188,6 +192,8 @@ export default class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
             showPrevPageButton={this.state.showPrevPageButton}
             nextPage={this.nextPage}
             prevPage={this.prevPage}
@@ -201,6 +207,8 @@ export default class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
             showPrevPageButton={this.state.showPrevPageButton}
             nextPage={this.nextPage}
             prevPage={this.prevPage}
@@ -214,6 +222,8 @@ export default class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
             showPrevPageButton={this.state.showPrevPageButton}
             nextPage={this.nextPage}
             prevPage={this.prevPage}
@@ -227,6 +237,8 @@ export default class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
             showPrevPageButton={this.state.showPrevPageButton}
             nextPage={this.nextPage}
             prevPage={this.prevPage}
