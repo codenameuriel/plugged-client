@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { apiKey } from './apiKey'
+import { apiKey } from './apiKey'
 import Nav from './Nav.js'
 import NewsMapper from './NewsMapper'
 
@@ -9,33 +9,37 @@ class TopNewsContainer extends Component {
   }
 
   componentDidMount() {
-    this.getArticlesFromDB()
+    // this.getArticlesFromDB()
+    this.getTopNews()
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.page !== this.props.page)
-      this.getArticlesFromDB()
+      // this.getArticlesFromDB()
+      this.getTopNews()
   }
 
-  // getTopNews = () => {
-  //   fetch(`https://newsapi.org/v2/top-headlines?country=us&pageSize=5&page=${this.props.page}`, apiKey)
-  //     .then(resp => resp.json())
-  //     .then(data => this.setState({
-  //        topNews: data.articles 
-  //      }))
-  // }
-  
-  getArticlesFromDB = () => {
-    fetch(`http://localhost:4000/articles?per_page=3&page=${this.props.page}`)
-    .then(resp => resp.json())
-    .then(data => this.setState({
-      topNews: data
-    }))
+  getTopNews = () => {
+    const { page, setTotalResults } = this.props
+    
+    fetch(`https://newsapi.org/v2/top-headlines?country=us&pageSize=9&page=${page}`, apiKey)
+      .then(resp => resp.json())
+      .then(data => this.setState({
+         topNews: data.articles 
+       }, () => setTotalResults(data.totalResults)))
   }
+  
+  // getArticlesFromDB = () => {
+  //   fetch(`http://localhost:4000/articles?per_page=3&page=${this.props.page}`)
+  //   .then(resp => resp.json())
+  //   .then(data => this.setState({
+  //     topNews: data
+  //   }))
+  // }
 
   render() {
     const { 
-      page, loggedInUser, showPrevPageButton, prevPage, nextPage
+      page, loggedInUser, showPrevPageButton, prevPage, nextPage, lastPage
     } = this.props
 
     let jumbotronMessage = 'Log in or create an account to see your top stories'
@@ -45,7 +49,7 @@ class TopNewsContainer extends Component {
       jumbotronMessage = `Welcome back ${loggedInUser.username}`
     }
 
-    if (page === 8) {
+    if (lastPage) {
       nextPageInnerText = 'Back to Page 1'
     }
 

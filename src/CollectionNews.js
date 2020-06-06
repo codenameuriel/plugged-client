@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import DBNewsCard from './DBNewsCard'
 import Nav from './Nav'
 
-export default class CollectionNewsContainer extends Component {
+export default class CollectionNews extends Component {
   state = {
     newsCollection: []
   }
 
-  getUsersNewsCollection = () => {
+  getNewsCollection = () => {
     const { loggedInUser } = this.props
 
     fetch(`http://localhost:4000/collections/${loggedInUser.id}`)
@@ -18,7 +18,7 @@ export default class CollectionNewsContainer extends Component {
   }
 
   componentDidMount() {
-    this.getUsersNewsCollection()
+    this.getNewsCollection()
   }
 
   renderDBNewsCards = () => {
@@ -45,7 +45,7 @@ export default class CollectionNewsContainer extends Component {
       body: JSON.stringify({id: articleID})
     })
     .then(resp => resp.json())
-    .then(this.getUsersNewsCollection)
+    .then(this.getNewsCollection)
   }
 
   render() {

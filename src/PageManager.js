@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom';
 import CategorySelector from './CategorySelector'
 import TopNewsContainer from './TopNewsContainer'
-import CollectionNewsContainer from './CollectionNewsContainer'
+import CollectionNews from './CollectionNews'
 import BusinessNews from './BusinessNews'
 import EntertainmentNews from './EntertainmentNews'
 import GeneralNews from './GeneralNews'
@@ -11,11 +11,26 @@ import ScienceNews from './ScienceNews'
 import SportsNews from './SportsNews'
 import TechnologyNews from './TechnologyNews'
 
-
 export default class PageManager extends Component {
   state = {
     page: 1,
     showPrevPageButton: false,
+    totalResults: 0,
+    lastPage: false
+  }
+
+  setTotalResults = total => {
+    this.setState({
+      totalResults: total
+    })
+  }
+
+  toggleLastPage = () => {
+    let isLastPage = this.state.lastPage
+
+    this.setState({
+      lastPage: !isLastPage
+    })
   }
 
   togglePrevPageButton = () => {
@@ -31,12 +46,22 @@ export default class PageManager extends Component {
   }
 
   nextPage = () => {
-    let page = this.state.page
-    if (page === 8 ) {
+    const { page, totalResults } = this.state
+
+    let lastPage;
+    
+    if (totalResults % 9 === 0) {
+      lastPage = totalResults / 9
+    } else if (totalResults % 9 !== 0) {
+      lastPage = Math.ceil(totalResults / 9)
+    }
+
+    if (page === lastPage) {
       this.setState({
         page: 1
       }, () => {
         this.togglePrevPageButton()
+        this.toggleLastPage()
       })
     } else {
       this.setState({
@@ -44,6 +69,10 @@ export default class PageManager extends Component {
       }, () => {
         this.togglePrevPageButton()
       })
+    }
+
+    if (page === lastPage - 1) {
+      this.toggleLastPage()
     }
   }
 
@@ -91,6 +120,8 @@ export default class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
             showPrevPageButton={this.state.showPrevPageButton}
             nextPage={this.nextPage}
             prevPage={this.prevPage}
@@ -98,7 +129,7 @@ export default class PageManager extends Component {
         />
         <Route
           path="/collection"
-          render={routerProps => <CollectionNewsContainer
+          render={routerProps => <CollectionNews
             links={collectionLinks}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
@@ -116,6 +147,8 @@ export default class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
             showPrevPageButton={this.state.showPrevPageButton}
             nextPage={this.nextPage}
             prevPage={this.prevPage}
