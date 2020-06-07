@@ -69,7 +69,7 @@ export default class App extends Component {
       <Link to="/login">Log in</Link>,
       <Link to="/signup">Sign up</Link>,
       <Link to="/categories">Categories</Link>,
-      <Link to="/:username/dashboard">Dashboard</Link>
+      <Link to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</Link>
     ]
   
     let authLinks = [links[2], links[3], links[4]]

@@ -120,7 +120,8 @@ export default class PageManager extends Component {
           render={routerProps => <Dashboard
             {...routerProps}
             links={dashboardLinks}
-            loggedInUser={this.props.loggedInUser} 
+            loggedInUser={this.props.loggedInUser}
+            postArticle={this.props.postArticle}
           />} 
         />
         <Route 
