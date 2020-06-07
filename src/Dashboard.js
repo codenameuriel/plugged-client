@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { apiKey } from './apiKey'
 import Nav from './Nav'
 import NewsMapper from './NewsMapper'
@@ -9,8 +10,14 @@ class Dashboard extends Component {
     categories: []
   }
 
+  componentDidMount() {
+    if (this.props.loggedInUser.categories) {
+      this.getUsersCategoryNews()
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    if (prevProps !== this.props){
+    if (prevProps !== this.props && this.state.articles.length < 1){
       this.getUsersCategoryNews()
     }
   }
@@ -25,7 +32,8 @@ class Dashboard extends Component {
         articles: [...this.state.articles, data.articles]
       }, this.setState({
         categories: [...this.state.categories, category.name]
-      })))
+        })
+      ))
     })
   }
 
@@ -44,6 +52,7 @@ class Dashboard extends Component {
 
   render() {
     const { loggedInUser, links } = this.props
+    let dashboardDisplay;
     let v1, v2, v3, v4, v5, v6
     let header1, header2, header3, header4, header5, header6
 
@@ -64,25 +73,38 @@ class Dashboard extends Component {
       header4 = h4
       header5 = h5
       header6 = h6
-    }
 
+      dashboardDisplay = 
+        <>
+          <h1>Welcome to your Dashboard, {loggedInUser.username}</h1>
+          <h2>Here are your top news</h2>
+          {header1}
+          {v1}
+          {header2}
+          {v2}
+          {header3}
+          {v3}
+          {header4}
+          {v4}
+          {header5}
+          {v5}
+          {header6}
+          {v6}
+        </>
+    } else if (!loggedInUser.username) {
+      dashboardDisplay = <h1><Link to="/login">Log in</Link> to see your top news</h1>
+    } else {
+      dashboardDisplay = 
+        <>
+          <h1>You are not subscribed to any news categories</h1>
+          <p><Link to="/categories">Subscribe</Link> to categories here!</p>
+        </>
+    }
+    
     return (
       <div>
         <Nav links={links}/>
-        <h1>Welcome to your Dashboard, {loggedInUser.username}</h1>
-        <h2>Here are your top news</h2>
-        {header1}
-        {v1}
-        {header2}
-        {v2}
-        {header3}
-        {v3}
-        {header4}
-        {v4}
-        {header5}
-        {v5}
-        {header6}
-        {v6}
+        {dashboardDisplay}
       </div>
     )
   }

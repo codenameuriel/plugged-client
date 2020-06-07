@@ -135,20 +135,20 @@ export default class CollectionNews extends Component {
 
     if (newsCollection.length > 0) {
       collectionDisplay = 
-      <>
-      <h1>Here are your saved news, {loggedInUser.username}</h1>
-      {showPrevPageButton && 
-        <button onClick={prevPage} >Previous Page</button>}
-        <button onClick={nextPage} >{nextPageInnerText}</button>
-      </>
+        <>
+          <h1>Here are your saved news, {loggedInUser.username}</h1>
+          {showPrevPageButton && 
+            <button onClick={prevPage} >Previous Page</button>}
+            <button onClick={nextPage} >{nextPageInnerText}</button>
+        </>
     } else if (!loggedInUser.username) {
       collectionDisplay = <h1><Link to="/login">Log in</Link> to see your saved news</h1>
     } else {
       collectionDisplay = 
-      <>
-      <h1>You have no saved news</h1>
-      <p><Link to="/categories">Add</Link> some news to your collection!</p>
-      </>
+        <>
+          <h1>You have no saved news</h1>
+          <p><Link to="/categories">Add</Link> some news to your collection!</p>
+        </>
     }
 
     return (
