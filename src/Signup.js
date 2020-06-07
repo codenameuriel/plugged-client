@@ -1,9 +1,9 @@
 import React from 'react'
 import Nav from './Nav'
 
-export default function Signup({
+const Signup = ({
   history, links, signUp, usernameChange, username, categories, checkBoxChange
-}) { 
+}) => { 
   return (
     <div>
       <Nav links={links}/>
@@ -40,3 +40,5 @@ export default function Signup({
     </div>
   )
 }
+
+export default Signup

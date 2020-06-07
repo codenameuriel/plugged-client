@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import Login from './Login'
 import Signup from './Signup'
 
-export default class Auth extends Component {
+class Auth extends Component {
   state = {
     username: '',
     categories: []
@@ -85,3 +85,5 @@ export default class Auth extends Component {
     )
   }
 }
+
+export default Auth

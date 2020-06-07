@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Auth from './Auth'
 import PageManager from './PageManager'
 
-export default class App extends Component {
+class App extends Component {
   state = {
     loggedInUser: {},
     categories: [],
@@ -107,3 +107,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App

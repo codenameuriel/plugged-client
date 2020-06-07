@@ -11,7 +11,7 @@ import SportsNews from './SportsNews'
 import TechnologyNews from './TechnologyNews'
 import Dashboard from "./Dashboard"
 
-export default class PageManager extends Component {
+class PageManager extends Component {
   state = {
     page: 1,
     showPrevPageButton: false,
@@ -246,3 +246,5 @@ export default class PageManager extends Component {
     )
   }
 }
+
+export default PageManager
