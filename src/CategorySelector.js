@@ -1,31 +1,17 @@
 import React from 'react'
 import Nav from './Nav'
+import CategoryCard from './CategoryCard'
 
-const CategorySelector = ({history, links}) => {
+const CategorySelector = ({history, links, loggedInUser, subscribeToCategory}) => {
   return (
     <div>
       <Nav links={links}/>
-      <div onClick={() => history.push("/categories/business")}>
-        <h3>Business</h3>
-      </div>
-      <div onClick={() => history.push("/categories/entertainment")}>
-        <h3>Entertainment</h3>
-      </div>
-      {/* <div onClick={() => history.push("/categories/general")}>
-        <h3>General</h3>
-      </div> */}
-      <div onClick={() => history.push("/categories/health")}>
-        <h3>Health</h3>
-      </div>
-      <div onClick={() => history.push("/categories/science")}>
-        <h3>Science</h3>
-      </div>
-      <div onClick={() => history.push("/categories/sports")}>
-        <h3>Sports</h3>
-      </div>
-      <div onClick={() => history.push("/categories/technology")}>
-        <h3>Technology</h3>
-      </div>
+      <CategoryCard title={"Business"} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
+      <CategoryCard title={"Entertainment"} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
+      <CategoryCard title={"Health"} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
+      <CategoryCard title={"Science"} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
+      <CategoryCard title={"Sports"} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
+      <CategoryCard title={"Technology"} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
     </div>
   )
 }

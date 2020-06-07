@@ -61,6 +61,22 @@ export default class App extends Component {
     })
   }
 
+  subscribeToCategory = (userID, category) => {
+    fetch('http://localhost:4000/user_categories', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: userID,
+        category_name: category
+      })
+    })
+    .then(resp => resp.json())
+    .then(this.setLoggedInUser)
+  }
+
   render() {
     const links = [
       <Link onClick={this.logOutUser} to="/top-news">Log out</Link>,
@@ -80,6 +96,7 @@ export default class App extends Component {
            links={links}
            loggedInUser={this.state.loggedInUser}
            postArticle={this.postArticle}
+           subscribeToCategory={this.subscribeToCategory}
         />
         <Auth
           links={authLinks}

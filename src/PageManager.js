@@ -5,7 +5,6 @@ import TopNews from './TopNews'
 import CollectionNews from './CollectionNews'
 import BusinessNews from './BusinessNews'
 import EntertainmentNews from './EntertainmentNews'
-// import GeneralNews from './GeneralNews'
 import HealthNews from './HealthNews'
 import ScienceNews from './ScienceNews'
 import SportsNews from './SportsNews'
@@ -112,7 +111,9 @@ export default class PageManager extends Component {
           exact path="/categories"
           render={routerProps => <CategorySelector
             {...routerProps}
-            links={categoryLinks} 
+            links={categoryLinks}
+            loggedInUser={this.props.loggedInUser}
+            subscribeToCategory={this.props.subscribeToCategory} 
           />}
         />
         <Route
@@ -181,21 +182,6 @@ export default class PageManager extends Component {
             prevPage={this.prevPage}
           />} 
         />
-        {/* <Route
-          exact path="/categories/general"
-          render={routerProps => <GeneralNews
-            {...routerProps}
-            links={categorySelectionLinks}
-            loggedInUser={this.props.loggedInUser}
-            postArticle={this.props.postArticle}
-            page={this.state.page}
-            lastPage={this.state.lastPage}
-            setTotalResults={this.setTotalResults}
-            showPrevPageButton={this.state.showPrevPageButton}
-            nextPage={this.nextPage}
-            prevPage={this.prevPage}
-          />} 
-        /> */}
         <Route
           exact path="/categories/health"
           render={routerProps => <HealthNews
