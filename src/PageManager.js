@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom';
 import CategorySelector from './CategorySelector'
-import TopNewsContainer from './TopNewsContainer'
+import TopNews from './TopNews'
 import CollectionNews from './CollectionNews'
 import BusinessNews from './BusinessNews'
 import EntertainmentNews from './EntertainmentNews'
@@ -10,6 +10,7 @@ import HealthNews from './HealthNews'
 import ScienceNews from './ScienceNews'
 import SportsNews from './SportsNews'
 import TechnologyNews from './TechnologyNews'
+import Dashboard from "./Dashboard"
 
 export default class PageManager extends Component {
   state = {
@@ -88,17 +89,19 @@ export default class PageManager extends Component {
   }
 
   render() {
-    const [logout, collection, dashboard, login, signup, categories] = this.props.links
+    const [logout, collection, topNews, login, signup, categories, dashboard] = this.props.links
     let topNewsLinks;
     let collectionLinks;
     let categoryLinks;
     let categorySelectionLinks;
+    let dashboardLinks;
 
     if (this.props.loggedInUser.username) {
-      topNewsLinks = [collection, categories, logout]
-      collectionLinks = [dashboard, categories, logout]
-      categoryLinks = [dashboard, collection, logout]
-      categorySelectionLinks = [dashboard, categories, collection, logout]
+      topNewsLinks = [dashboard, categories, collection, logout]
+      collectionLinks = [dashboard, topNews, categories, logout]
+      categoryLinks = [dashboard, topNews, collection, logout]
+      categorySelectionLinks = [dashboard, topNews, collection, categories, logout]
+      dashboardLinks = [topNews, categories, collection, logout]
     } else {
       topNewsLinks = [login, signup]
     }
@@ -112,9 +115,17 @@ export default class PageManager extends Component {
             links={categoryLinks} 
           />}
         />
+        <Route
+          exact path="/:username/dashboard"
+          render={routerProps => <Dashboard
+            {...routerProps}
+            links={dashboardLinks}
+            loggedInUser={this.props.loggedInUser} 
+          />} 
+        />
         <Route 
           exact path="/top-news"
-          render={routerProps => <TopNewsContainer
+          render={routerProps => <TopNews
             {...routerProps}
             links={topNewsLinks}
             loggedInUser={this.props.loggedInUser}
@@ -133,10 +144,10 @@ export default class PageManager extends Component {
             links={collectionLinks}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
-            page={this.state.page}
-            showPrevPageButton={this.state.showPrevPageButton}
-            nextPage={this.nextPage}
-            prevPage={this.prevPage}
+            // page={this.state.page}
+            // showPrevPageButton={this.state.showPrevPageButton}
+            // nextPage={this.nextPage}
+            // prevPage={this.prevPage}
           />}
         />
         <Route

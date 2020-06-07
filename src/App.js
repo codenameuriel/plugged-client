@@ -6,6 +6,7 @@ import PageManager from './PageManager'
 export default class App extends Component {
   state = {
     loggedInUser: {},
+    categories: [],
     article: {}
   }
 
@@ -48,13 +49,15 @@ export default class App extends Component {
 
   setLoggedInUser = user => {
     this.setState({
-      loggedInUser: user
+      loggedInUser: user,
+      categories: user.categories
     })
   }
 
   logOutUser = () => {
     this.setState({
-      loggedInUser: {}
+      loggedInUser: {},
+      categories: []
     })
   }
 
@@ -62,10 +65,11 @@ export default class App extends Component {
     const links = [
       <Link onClick={this.logOutUser} to="/top-news">Log out</Link>,
       <Link to="/collection">Collection</Link>,
-      <Link to="/top-news">Dashboard</Link>,
+      <Link to="/top-news">Top News</Link>,
       <Link to="/login">Log in</Link>,
       <Link to="/signup">Sign up</Link>,
-      <Link to="/categories">Categories</Link>
+      <Link to="/categories">Categories</Link>,
+      <Link to="/:username/dashboard">Dashboard</Link>
     ]
   
     let authLinks = [links[2], links[3], links[4]]

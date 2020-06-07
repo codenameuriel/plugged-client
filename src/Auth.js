@@ -5,7 +5,8 @@ import Signup from './Signup'
 
 export default class Auth extends Component {
   state = {
-    username: ''
+    username: '',
+    categories: []
   }
 
   logIn = (event, username) => {
@@ -15,7 +16,7 @@ export default class Auth extends Component {
     .then(this.props.setLoggedInUser)
   }
 
-  signUp = (event, username) => {
+  signUp = (event, username, categories) => {
     event.preventDefault()
     fetch('http://localhost:4000/users', {
       method: 'POST',
@@ -24,7 +25,8 @@ export default class Auth extends Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        username: username
+        username: username,
+        categories: categories
       })
     })
     .then(resp => resp.json())
@@ -35,6 +37,18 @@ export default class Auth extends Component {
     this.setState({
       username: event.target.value
     })
+  }
+
+  checkBoxChange = event => {
+    if (event.target.checked) {
+      this.setState({
+        categories: [...this.state.categories, event.target.id]
+      })
+    } else {
+      this.setState({
+        categories: [...this.state.categories].filter(id => id !== event.target.id)
+      })
+    }
   }
 
   render() {
@@ -61,8 +75,10 @@ export default class Auth extends Component {
             links={[dashboard, login]}
             loggedInUser={loggedInUser}
             username={this.state.username}
+            categories={this.state.categories}
             signUp={this.signUp}
             usernameChange={this.usernameChange}
+            checkBoxChange={this.checkBoxChange}
           />}
         />
       </div>

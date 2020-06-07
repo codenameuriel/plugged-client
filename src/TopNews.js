@@ -3,7 +3,7 @@ import { apiKey } from './apiKey'
 import Nav from './Nav.js'
 import NewsMapper from './NewsMapper'
 
-class TopNewsContainer extends Component {
+class TopNews extends Component {
   state = {
     topNews: []
   }
@@ -77,4 +77,4 @@ class TopNewsContainer extends Component {
   }
 }
 
-export default TopNewsContainer
+export default TopNews
