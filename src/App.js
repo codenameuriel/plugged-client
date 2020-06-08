@@ -7,6 +7,7 @@ class App extends Component {
   state = {
     loggedInUser: {},
     categories: [],
+    unsubscribe: [],
     article: {}
   }
 
@@ -77,6 +78,41 @@ class App extends Component {
     .then(this.setLoggedInUser)
   }
 
+  unsubscribeFromCategory = category => {
+    let list = this.state.unsubscribe
+
+    if (!list.find(c => c === category)){
+      this.setState({
+        unsubscribe: [...list, category]
+      })
+    } else {
+      this.setState({
+        unsubscribe: [...list.filter(c => c !== category)]
+      })
+    }
+  }
+
+  unsubscribeSubmit = event => {
+    event.preventDefault()
+
+    fetch('http://localhost:4000/user_categories/unsubscribe', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: this.state.loggedInUser.id,
+        categories: this.state.unsubscribe
+      })
+    })
+    .then(resp => resp.json())
+    .then(this.setLoggedInUser)
+    .then(this.setState({
+      unsubscribe: []
+    }))
+  }
+
   render() {
     const links = [
       <Link onClick={this.logOutUser} to="/top-news">Log out</Link>,
@@ -85,10 +121,9 @@ class App extends Component {
       <Link to="/login">Log in</Link>,
       <Link to="/signup">Sign up</Link>,
       <Link to="/categories">Categories</Link>,
-      <Link to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</Link>
+      <Link to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</Link>,
+      <Link to={`/${this.state.loggedInUser.username}/account`}>Account</Link>
     ]
-  
-    let authLinks = [links[2], links[3], links[4]]
 
     return (
       <div className="App">
@@ -99,9 +134,11 @@ class App extends Component {
            subscribeToCategory={this.subscribeToCategory}
         />
         <Auth
-          links={authLinks}
+          links={links}
           loggedInUser={this.state.loggedInUser}
           setLoggedInUser={this.setLoggedInUser}
+          unsubscribeFromCategory={this.unsubscribeFromCategory}
+          unsubscribeSubmit={this.unsubscribeSubmit}
         />
       </div>
     );

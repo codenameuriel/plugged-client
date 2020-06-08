@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom';
 import Login from './Login'
 import Signup from './Signup'
+import Account from './Account'
 
 class Auth extends Component {
   state = {
@@ -52,8 +53,11 @@ class Auth extends Component {
   }
 
   render() {
-    const [dashboard, login, signup] = this.props.links
+    const [logout, collection, topNews, login, signup, categories, dashboard, ] = this.props.links
     const { loggedInUser } = this.props
+    const accountLinks = [dashboard, topNews, collection, categories, logout]
+    const loginLinks = [topNews, signup]
+    const signUpLinks = [topNews, login]
 
     return (
       <div>
@@ -61,7 +65,7 @@ class Auth extends Component {
           path="/login"
           render={routerProps => <Login 
             {...routerProps}
-            links={[dashboard, signup]}
+            links={loginLinks}
             loggedInUser={loggedInUser}
             username={this.state.username}
             logIn={this.logIn}
@@ -72,13 +76,28 @@ class Auth extends Component {
           exact path="/signup"
           render={routerProps => <Signup 
             {...routerProps}
-            links={[dashboard, login]}
+            links={signUpLinks}
             loggedInUser={loggedInUser}
             username={this.state.username}
             categories={this.state.categories}
             signUp={this.signUp}
             usernameChange={this.usernameChange}
             checkBoxChange={this.checkBoxChange}
+          />}
+        />
+        <Route
+          exact path="/:username/account"
+          render={routerProps => <Account 
+            {...routerProps}
+            links={accountLinks}
+            loggedInUser={loggedInUser}
+            username={this.state.username}
+            categories={this.state.categories}
+            signUp={this.signUp}
+            usernameChange={this.usernameChange}
+            checkBoxChange={this.checkBoxChange}
+            unsubscribeFromCategory={this.props.unsubscribeFromCategory}
+            unsubscribeSubmit={this.props.unsubscribeSubmit}
           />}
         />
       </div>

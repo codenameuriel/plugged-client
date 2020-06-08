@@ -137,9 +137,9 @@ export default class CollectionNews extends Component {
       collectionDisplay = 
         <>
           <h1>Here are your saved news, {loggedInUser.username}</h1>
-          {showPrevPageButton && 
+          {/* {showPrevPageButton && 
             <button onClick={prevPage} >Previous Page</button>}
-            <button onClick={nextPage} >{nextPageInnerText}</button>
+            <button onClick={nextPage} >{nextPageInnerText}</button> */}
         </>
     } else if (!loggedInUser.username) {
       collectionDisplay = <h1><Link to="/login">Log in</Link> to see your saved news</h1>

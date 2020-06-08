@@ -17,7 +17,7 @@ class Dashboard extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps !== this.props && this.state.articles.length < 1){
+    if (prevProps !== this.props) {
       this.getUsersCategoryNews()
     }
   }

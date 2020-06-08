@@ -47,7 +47,6 @@ class PageManager extends Component {
 
   nextPage = () => {
     const { page, totalResults } = this.state
-
     let lastPage;
     
     if (totalResults % 9 === 0) {
@@ -88,7 +87,7 @@ class PageManager extends Component {
   }
 
   render() {
-    const [logout, collection, topNews, login, signup, categories, dashboard] = this.props.links
+    const [logout, collection, topNews, login, signup, categories, dashboard, account] = this.props.links
     let topNewsLinks;
     let collectionLinks;
     let categoryLinks;
@@ -96,11 +95,11 @@ class PageManager extends Component {
     let dashboardLinks;
 
     if (this.props.loggedInUser.username) {
-      topNewsLinks = [dashboard, categories, collection, logout]
-      collectionLinks = [dashboard, topNews, categories, logout]
-      categoryLinks = [dashboard, topNews, collection, logout]
-      categorySelectionLinks = [dashboard, topNews, collection, categories, logout]
-      dashboardLinks = [topNews, categories, collection, logout]
+      topNewsLinks = [dashboard, categories, collection, account, logout]
+      collectionLinks = [dashboard, topNews, categories, account, logout]
+      categoryLinks = [dashboard, topNews, collection, account, logout]
+      categorySelectionLinks = [dashboard, topNews, collection, categories, account, logout]
+      dashboardLinks = [topNews, categories, collection, account, logout]
     } else {
       topNewsLinks = [login, signup]
     }
