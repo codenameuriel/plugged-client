@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { apiKey } from './apiKey'
+import { apiKey } from '../apiKey'
 import Nav from './Nav'
 import NewsMapper from './NewsMapper'
 
@@ -46,13 +46,14 @@ class Dashboard extends Component {
 
   createH1ForCategories = () => {
     let headers = []
-    this.state.categories.forEach(category => headers.push(<h3>Top News in {category}</h3>))
+    this.state.categories.forEach(category => headers.push(<h2>Top News in {category}</h2>))
     return headers
   }
 
   render() {
     const { loggedInUser, links } = this.props
     let dashboardDisplay;
+    let dashboardDisplayHeader;
     let v1, v2, v3, v4, v5, v6
     let header1, header2, header3, header4, header5, header6
 
@@ -76,8 +77,7 @@ class Dashboard extends Component {
 
       dashboardDisplay = 
         <>
-          <h1>Welcome to your Dashboard, {loggedInUser.username}</h1>
-          <h2>Here are your top news</h2>
+          <h1>Here are your top news</h1>
           {header1}
           {v1}
           {header2}
@@ -91,6 +91,12 @@ class Dashboard extends Component {
           {header6}
           {v6}
         </>
+      
+      dashboardDisplayHeader = 
+        <>
+          <h1>Welcome to your Dashboard, {loggedInUser.username}</h1>
+          <Nav links={links}/>
+        </>
     } else if (!loggedInUser.username) {
       dashboardDisplay = <h1><Link to="/login">Log in</Link> to see your top news</h1>
     } else {
@@ -103,7 +109,7 @@ class Dashboard extends Component {
     
     return (
       <div>
-        <Nav links={links}/>
+        {dashboardDisplayHeader}
         {dashboardDisplay}
       </div>
     )

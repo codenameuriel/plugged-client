@@ -6,8 +6,8 @@ export default function Login({
 }) {
   return (
     <div>
-      <Nav links={links}/>
       <h1>Log in</h1>
+      <Nav links={links}/>
       <form onSubmit={event => {
         logIn(event, username)
         history.push(`/${username}/dashboard`)

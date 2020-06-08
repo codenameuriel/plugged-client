@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { apiKey } from './apiKey'
+import { apiKey } from '../apiKey'
 import Nav from './Nav.js'
 import NewsMapper from './NewsMapper'
 
@@ -55,7 +55,7 @@ class TopNews extends Component {
 
     return (
       <div>
-          <div>
+          <div className="jumbotron">
             <h1>Trending Stories</h1>
             <p>{jumbotronMessage}</p>
           </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { apiKey } from './apiKey'
+import { apiKey } from '../apiKey'
 import Nav from './Nav'
 import NewsMapper from './NewsMapper'
 

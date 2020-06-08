@@ -6,8 +6,8 @@ const Signup = ({
 }) => { 
   return (
     <div>
-      <Nav links={links}/>
       <h1>Sign up</h1>
+      <Nav links={links}/>
       <form onSubmit={event => {
         signUp(event, username, categories)
         history.push(`/${username}/dashboard`)

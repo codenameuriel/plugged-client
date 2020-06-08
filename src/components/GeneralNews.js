@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { apiKey } from './apiKey'
+import { apiKey } from '../apiKey'
 import Nav from './Nav'
 import NewsMapper from './NewsMapper'
 
-export default class TechnologyNews extends Component {
+export default class GeneralNews extends Component {
   state = {
-    technologyNews: []
+    generalNews: []
   }
 
   componentDidMount() {
-    this.getTechnologyNews()
+    this.getGeneralNews()
     // this.getArticlesFromDB()
   }
 
@@ -18,29 +18,29 @@ export default class TechnologyNews extends Component {
 
     if (prevProps.page !== page)
       // this.getArticlesFromDB()
-      this.getTechnologyNews()
+      this.getGeneralNews()
   }
 
   // getArticlesFromDB = () => {
   //   fetch(`http://localhost:4000/articles?per_page=3&page=${this.props.page}`)
   //   .then(resp => resp.json())
   //   .then(data => this.setState({
-  //     technologyNews: data
+  //     generalNews: data
   //   }))
   // }
 
-  getTechnologyNews = () => {
+  getGeneralNews = () => {
     const { page, setTotalResults } = this.props
 
-    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=9&page=${page}`, apiKey)
+    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=9&page=${page}`, apiKey)
     .then(resp => resp.json())
     .then(data => this.setState({
-      technologyNews: data.articles
+      generalNews: data.articles
     }, () => setTotalResults(data.totalResults)))
   }
 
   render() {
-    const { technologyNews } = this.state
+    const { generalNews } = this.state
     const { page, links, loggedInUser, postArticle, showPrevPageButton, prevPage, nextPage, lastPage } = this.props
 
     let nextPageInnerText = `Go to Page ${page + 1}`
@@ -48,16 +48,17 @@ export default class TechnologyNews extends Component {
     if (lastPage) {
       nextPageInnerText = 'Back to Page 1'
     }
+    
 
     return (
       <div>
         <Nav links={links}/>
-        <h1>Top stories in Technology</h1>
+        <h1>Top stories in General</h1>
         {showPrevPageButton && 
-          <button onClick={prevPage} >Previous Page</button>}
+        <button onClick={prevPage} >Previous Page</button>}
         <button onClick={nextPage} >{nextPageInnerText}</button>
         <NewsMapper 
-          news={technologyNews}
+          news={generalNews}
           loggedInUser={loggedInUser}
           postArticle={postArticle}
         />

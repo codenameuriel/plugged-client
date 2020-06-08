@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import DBNewsCard from './DBNewsCard'
 import Nav from './Nav'
 
-export default class CollectionNews extends Component {
+class CollectionNews extends Component {
   state = {
     newsCollection: [],
     page: 1,
@@ -54,62 +54,62 @@ export default class CollectionNews extends Component {
     .then(this.getNewsCollection)
   }
 
-  setTotalNews = total => {
-    this.setState({
-      totalResults: total
-    })
-  }
+  // setTotalNews = total => {
+  //   this.setState({
+  //     totalResults: total
+  //   })
+  // }
 
-  toggleLastPage = () => {
-    let isLastPage = this.state.lastPage
+  // toggleLastPage = () => {
+  //   let isLastPage = this.state.lastPage
 
-    this.setState({
-      lastPage: !isLastPage
-    })
-  }
+  //   this.setState({
+  //     lastPage: !isLastPage
+  //   })
+  // }
 
-  togglePrevPageButton = () => {
-    if (this.state.page === 1) {
-      this.setState({
-        showPrevPageButton: false
-      })
-    } else {
-      this.setState({
-        showPrevPageButton: true
-      })
-    }
-  }
+  // togglePrevPageButton = () => {
+  //   if (this.state.page === 1) {
+  //     this.setState({
+  //       showPrevPageButton: false
+  //     })
+  //   } else {
+  //     this.setState({
+  //       showPrevPageButton: true
+  //     })
+  //   }
+  // }
 
-  nextPage = () => {
-    const { page, totalNews } = this.state
+  // nextPage = () => {
+  //   const { page, totalNews } = this.state
 
-    let lastPage;
+  //   let lastPage;
     
-    if (totalNews % 9 === 0) {
-      lastPage = totalNews / 9
-    } else if (totalNews % 9 !== 0) {
-      lastPage = Math.ceil(totalNews / 9)
-    }
+  //   if (totalNews % 9 === 0) {
+  //     lastPage = totalNews / 9
+  //   } else if (totalNews % 9 !== 0) {
+  //     lastPage = Math.ceil(totalNews / 9)
+  //   }
 
-    if (page === lastPage) {
-      this.setState({
-        page: 1
-      }, () => {
-        this.togglePrevPageButton()
-        this.toggleLastPage()
-      })
-    } else {
-      this.setState({
-        page: page + 1
-      }, () => {
-        this.togglePrevPageButton()
-      })
-    }
+  //   if (page === lastPage) {
+  //     this.setState({
+  //       page: 1
+  //     }, () => {
+  //       this.togglePrevPageButton()
+  //       this.toggleLastPage()
+  //     })
+  //   } else {
+  //     this.setState({
+  //       page: page + 1
+  //     }, () => {
+  //       this.togglePrevPageButton()
+  //     })
+  //   }
 
-    if (page === lastPage - 1) {
-      this.toggleLastPage()
-    }
-  }
+  //   if (page === lastPage - 1) {
+  //     this.toggleLastPage()
+  //   }
+  // }
 
   prevPage = () => {
     let page = this.state.page
@@ -125,13 +125,13 @@ export default class CollectionNews extends Component {
   render() {
     const { newsCollection, showPrevPageButton, page, lastPage } = this.state
     const { links, loggedInUser } = this.props
-    const { prevPage, nextPage } = this
+    // const { prevPage, nextPage } = this
     let collectionDisplay;
-    let nextPageInnerText = `Go to Page ${page + 1}`
+    // let nextPageInnerText = `Go to Page ${page + 1}`
 
-    if (lastPage) {
-      nextPageInnerText = 'Back to Page 1'
-    }
+    // if (lastPage) {
+    //   nextPageInnerText = 'Back to Page 1'
+    // }
 
     if (newsCollection.length > 0) {
       collectionDisplay = 
@@ -160,3 +160,5 @@ export default class CollectionNews extends Component {
     )
   }
 }
+
+export default CollectionNews

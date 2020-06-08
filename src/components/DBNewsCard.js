@@ -1,5 +1,5 @@
 import React from 'react'
-import Plug from './Plug.png'
+import Plug from '../assets/Plug.png'
 
 const DBNewsCard = ({id, title, description, url, url_to_image, removeFromCollection}) => {
   let button;

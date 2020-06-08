@@ -1,5 +1,5 @@
 import React from 'react'
-import Plug from './Plug.png'
+import Plug from '../assets/Plug.png'
 
 function NewsCard({author, content, publishedAt, source, title, description, url, urlToImage, loggedInUser, postArticle}) {
   let article = {

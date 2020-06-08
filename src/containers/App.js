@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Auth from './Auth'
-import PageManager from './PageManager'
+import { NavLink } from 'react-router-dom';
+import Auth from '../components/Auth'
+import PageManager from '../components/PageManager'
 
 class App extends Component {
   state = {
@@ -115,14 +115,14 @@ class App extends Component {
 
   render() {
     const links = [
-      <Link onClick={this.logOutUser} to="/top-news">Log out</Link>,
-      <Link to="/collection">Collection</Link>,
-      <Link to="/top-news">Top News</Link>,
-      <Link to="/login">Log in</Link>,
-      <Link to="/signup">Sign up</Link>,
-      <Link to="/categories">Categories</Link>,
-      <Link to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</Link>,
-      <Link to={`/${this.state.loggedInUser.username}/account`}>Account</Link>
+      <NavLink onClick={this.logOutUser} to="/top-news">Log out</NavLink>,
+      <NavLink to="/collection">Collection</NavLink>,
+      <NavLink to="/top-news">Top News</NavLink>,
+      <NavLink to="/login">Log in</NavLink>,
+      <NavLink to="/signup">Sign up</NavLink>,
+      <NavLink to="/categories">Categories</NavLink>,
+      <NavLink to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</NavLink>,
+      <NavLink to={`/${this.state.loggedInUser.username}/account`}>Account</NavLink>
     ]
 
     return (

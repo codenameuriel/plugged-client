@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { apiKey } from './apiKey'
+import { apiKey } from '../apiKey'
 import Nav from './Nav'
 import NewsMapper from './NewsMapper'
 
-export default class ScienceNews extends Component {
+export default class TechnologyNews extends Component {
   state = {
-    scienceNews: []
+    technologyNews: []
   }
 
   componentDidMount() {
-    this.getScienceNews()
+    this.getTechnologyNews()
     // this.getArticlesFromDB()
   }
 
@@ -18,29 +18,29 @@ export default class ScienceNews extends Component {
 
     if (prevProps.page !== page)
       // this.getArticlesFromDB()
-      this.getScienceNews()
+      this.getTechnologyNews()
   }
 
   // getArticlesFromDB = () => {
   //   fetch(`http://localhost:4000/articles?per_page=3&page=${this.props.page}`)
   //   .then(resp => resp.json())
   //   .then(data => this.setState({
-  //     scienceNews: data
+  //     technologyNews: data
   //   }))
   // }
 
-  getScienceNews = () => {
+  getTechnologyNews = () => {
     const { page, setTotalResults } = this.props
 
-    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=science&pageSize=9&page=${page}`, apiKey)
+    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=9&page=${page}`, apiKey)
     .then(resp => resp.json())
     .then(data => this.setState({
-      scienceNews: data.articles
+      technologyNews: data.articles
     }, () => setTotalResults(data.totalResults)))
   }
 
   render() {
-    const { scienceNews } = this.state
+    const { technologyNews } = this.state
     const { page, links, loggedInUser, postArticle, showPrevPageButton, prevPage, nextPage, lastPage } = this.props
 
     let nextPageInnerText = `Go to Page ${page + 1}`
@@ -52,12 +52,12 @@ export default class ScienceNews extends Component {
     return (
       <div>
         <Nav links={links}/>
-        <h1>Top stories in Science</h1>
+        <h1>Top stories in Technology</h1>
         {showPrevPageButton && 
           <button onClick={prevPage} >Previous Page</button>}
         <button onClick={nextPage} >{nextPageInnerText}</button>
         <NewsMapper 
-          news={scienceNews}
+          news={technologyNews}
           loggedInUser={loggedInUser}
           postArticle={postArticle}
         />
