@@ -51,7 +51,13 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { loggedInUser, links } = this.props
+    const { loggedInUser, links, history, handleSearchChange, searchTopic, getTopicNews } = this.props
+    const search = <input onChange={handleSearchChange} type="text" placeholder="Search a topic" value={searchTopic} />
+    const searchBtn = <button onClick={() => {
+      getTopicNews(searchTopic)
+      history.push("/dashboard/topic-news")
+    }}>Search</button>
+
     let dashboardDisplay;
     let dashboardDisplayHeader;
     let v1, v2, v3, v4, v5, v6
@@ -95,13 +101,14 @@ class Dashboard extends Component {
       dashboardDisplayHeader = 
         <>
           <h1>Welcome to your Dashboard, {loggedInUser.username}</h1>
-          <Nav links={links}/>
+          <Nav links={links} search={search} searchBtn={searchBtn} />
         </>
     } else if (!loggedInUser.username) {
       dashboardDisplay = <h1><Link to="/login">Log in</Link> to see your top news</h1>
     } else {
       dashboardDisplay = 
         <>
+          <Nav links={links} search={search} searchBtn={searchBtn} />
           <h1>You are not subscribed to any news categories</h1>
           <p><Link to="/categories">Subscribe</Link> to categories here!</p>
         </>

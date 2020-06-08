@@ -6,13 +6,15 @@ class Nav extends Component {
   )
 
   render() {
-    const { links } = this.props
+    const { links, search, searchBtn } = this.props
 
     return (
       <header>
         <nav>
           <ul className="navbar">
             {this.renderLinks(links)}
+            {search}
+            {searchBtn}
           </ul>
         </nav>
       </header>

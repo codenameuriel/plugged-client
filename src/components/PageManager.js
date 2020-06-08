@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom';
+import { apiKey } from '../apiKey'
 import CategorySelector from './CategorySelector'
 import TopNews from './TopNews'
 import CollectionNews from './CollectionNews'
@@ -10,13 +11,16 @@ import ScienceNews from './ScienceNews'
 import SportsNews from './SportsNews'
 import TechnologyNews from './TechnologyNews'
 import Dashboard from "./Dashboard"
+import TopicNews from './TopicNews'
 
 class PageManager extends Component {
   state = {
     page: 1,
     showPrevPageButton: false,
     totalResults: 0,
-    lastPage: false
+    lastPage: false,
+    topicNews: [],
+    searchTopic: ''
   }
 
   setTotalResults = total => {
@@ -86,6 +90,20 @@ class PageManager extends Component {
     }
   }
 
+  handleSearchChange = event => {
+    this.setState({
+      searchTopic: event.target.value
+    })
+  }
+
+  getTopicNews = search => {
+    fetch(`https://newsapi.org/v2/top-headlines?country=us&q=${search}&pageSize=9&page=1`, apiKey)
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      topicNews: data.articles
+    }))
+  }
+
   render() {
     const [logout, collection, topNews, login, signup, categories, dashboard, account] = this.props.links
     let topNewsLinks;
@@ -93,6 +111,7 @@ class PageManager extends Component {
     let categoryLinks;
     let categorySelectionLinks;
     let dashboardLinks;
+    let topicNewsLinks;
 
     if (this.props.loggedInUser.username) {
       topNewsLinks = [dashboard, categories, collection, account, logout]
@@ -100,6 +119,7 @@ class PageManager extends Component {
       categoryLinks = [dashboard, topNews, collection, account, logout]
       categorySelectionLinks = [dashboard, topNews, collection, categories, account, logout]
       dashboardLinks = [topNews, categories, collection, account, logout]
+      topicNewsLinks = [dashboard, topNews, categories, collection, account, logout]
     } else {
       topNewsLinks = [login, signup]
     }
@@ -122,7 +142,21 @@ class PageManager extends Component {
             links={dashboardLinks}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
+            handleSearchChange={this.handleSearchChange}
+            searchTopic={this.state.searchTopic}
+            getTopicNews={this.getTopicNews}
           />} 
+        />
+        <Route
+          path="/dashboard/topic-news"
+          render={routerProps => <TopicNews
+            {...routerProps}
+            links={topicNewsLinks}
+            loggedInUser={this.props.loggedInUser}
+            postArticle={this.props.postArticle}
+            topicNews={this.state.topicNews}
+            searchTopic={this.state.searchTopic}
+            />} 
         />
         <Route 
           exact path="/top-news"

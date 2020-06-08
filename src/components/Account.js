@@ -13,7 +13,7 @@ class Account extends Component {
   }
 
   renderDisplay = () => {
-    const { loggedInUser, unsubscribeSubmit, links, history } = this.props
+    const { loggedInUser, unsubscribeSubmit, links } = this.props
     let accountView;
 
     if (loggedInUser.username && loggedInUser.categories.length > 0) {
