@@ -122,7 +122,8 @@ class App extends Component {
       <NavLink to="/signup">Sign up</NavLink>,
       <NavLink to="/categories">Categories</NavLink>,
       <NavLink to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</NavLink>,
-      <NavLink to={`/${this.state.loggedInUser.username}/account`}>Account</NavLink>
+      <NavLink to={`/${this.state.loggedInUser.username}/account`}>Account</NavLink>,
+      <NavLink to="/sources">Sources</NavLink>
     ]
 
     return (

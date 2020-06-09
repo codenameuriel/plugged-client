@@ -12,6 +12,8 @@ import SportsNews from './SportsNews'
 import TechnologyNews from './TechnologyNews'
 import Dashboard from "./Dashboard"
 import TopicNews from './TopicNews'
+import Sources from './Sources'
+import SourceNews from './SourceNews'
 
 class PageManager extends Component {
   state = {
@@ -20,7 +22,10 @@ class PageManager extends Component {
     totalResults: 0,
     lastPage: false,
     topicNews: [],
-    searchTopic: ''
+    searchTopic: '',
+    displaySearchTopic: '',
+    source: '',
+    sourceNews: []
   }
 
   setTotalResults = total => {
@@ -96,6 +101,12 @@ class PageManager extends Component {
     })
   }
 
+  clearSearch = () => {
+    this.setState({
+      searchTopic: ''
+    })
+  }
+
   getTopicNews = search => {
     fetch(`https://newsapi.org/v2/top-headlines?country=us&q=${search}&pageSize=9&page=1`, apiKey)
     .then(resp => resp.json())
@@ -104,22 +115,47 @@ class PageManager extends Component {
     }))
   }
 
+  getSourceNews = source => {
+    let parsedSource;
+    if (source.indexOf(' ') > 0) {
+      parsedSource = source.replace(/\s+/g, '-').toLowerCase();
+    } else {
+      parsedSource = source
+    }
+
+    fetch(`https://newsapi.org/v2/top-headlines?sources=${parsedSource}&pageSize=9&page=1`, apiKey)
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      sourceNews: data.articles
+    }, () => this.setSource(source)))
+  }
+
+  setSource = source => {
+    this.setState({
+      source: source
+    })
+  }
+
   render() {
-    const [logout, collection, topNews, login, signup, categories, dashboard, account] = this.props.links
+    const [logout, collection, topNews, login, signup, categories, dashboard, account, sources] = this.props.links
     let topNewsLinks;
     let collectionLinks;
     let categoryLinks;
     let categorySelectionLinks;
     let dashboardLinks;
     let topicNewsLinks;
+    let sourceLinks;
+    let sourceNewsLinks;
 
     if (this.props.loggedInUser.username) {
-      topNewsLinks = [dashboard, categories, collection, account, logout]
-      collectionLinks = [dashboard, topNews, categories, account, logout]
-      categoryLinks = [dashboard, topNews, collection, account, logout]
-      categorySelectionLinks = [dashboard, topNews, collection, categories, account, logout]
-      dashboardLinks = [topNews, categories, collection, account, logout]
-      topicNewsLinks = [dashboard, topNews, categories, collection, account, logout]
+      topNewsLinks = [dashboard, categories, sources, collection, account, logout]
+      collectionLinks = [dashboard, topNews, categories, sources, account, logout]
+      categoryLinks = [dashboard, topNews, collection, sources, account, logout]
+      categorySelectionLinks = [dashboard, topNews, categories, sources, collection, account, logout]
+      dashboardLinks = [topNews, categories, sources, collection, account, logout]
+      topicNewsLinks = [dashboard, topNews, categories, sources, collection, account, logout]
+      sourceLinks = [dashboard, topNews, categories, collection, account, logout]
+      sourceNewsLinks = [dashboard, topNews, categories, sources, collection, account, logout]
     } else {
       topNewsLinks = [login, signup]
     }
@@ -133,6 +169,25 @@ class PageManager extends Component {
             links={categoryLinks}
             loggedInUser={this.props.loggedInUser}
             subscribeToCategory={this.props.subscribeToCategory} 
+          />}
+        />
+        <Route
+          exact path="/sources"
+          render={routerProps => <Sources
+            {...routerProps}
+            links={sourceLinks}
+            getSourceNews={this.getSourceNews}
+            setSource={this.setSource}
+          />}
+        />
+        <Route
+          exact path="/source-news/:source"
+          render={routerProps => <SourceNews
+            {...routerProps}
+            links={sourceNewsLinks}
+            sourceNews={this.state.sourceNews}
+            loggedInUser={this.props.loggedInUser}
+            postArticle={this.props.postArticle}
           />}
         />
         <Route
