@@ -7,7 +7,7 @@ class SourceNews extends Component {
   renderDisplay = () => {
     const { loggedInUser, links, postArticle, sourceNews } = this.props
     let display;
-    
+
     if (loggedInUser.username) {
       display = 
         <>
@@ -25,8 +25,6 @@ class SourceNews extends Component {
   }
 
   render() {
-    const { sourceNews,links, loggedInUser, postArticle } = this.props
-
     return (
       <div>
         {this.renderDisplay()}

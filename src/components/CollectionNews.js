@@ -54,11 +54,11 @@ class CollectionNews extends Component {
     .then(this.getNewsCollection)
   }
 
-  // setTotalNews = total => {
-  //   this.setState({
-  //     totalResults: total
-  //   })
-  // }
+  setTotalNews = total => {
+    this.setState({
+      totalResults: total
+    })
+  }
 
   // toggleLastPage = () => {
   //   let isLastPage = this.state.lastPage
