@@ -17,11 +17,12 @@ const Signup = ({
           onChange={usernameChange} 
           type="text" 
           value={username}
+          required
         /><br />
         <label>Password: </label><br />
-        <input type="text"/><br /><br />
+        <input type="password"/><br /><br />
 
-        <label>News Categories:</label><br /><br />
+        <label>Select news categories of interest:</label><br /><br />
         <input onChange={checkBoxChange} type="checkbox" id="1" name="Business" value="Business" />
         <label>Business</label><br />
         <input onChange={checkBoxChange} type="checkbox" id="2" name="Entertainment" value="Entertainment" />

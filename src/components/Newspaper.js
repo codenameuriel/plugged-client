@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Nav from './Nav'
+import NewspaperMapper from './NewspaperMapper'
 
 class Newspaper extends Component {
   state = {
     viewForm: false,
     title: '',
     categorySelect: '',
-    categories: [], // select categories
+    categories: [],
     sources: [],
     renderSourceForm: false,
     sourceNames: [],
     topic: '',
-    addedTopics: []
+    addedTopics: [],
+    newspapers: []
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.newspaper !== this.props.newspaper) {
+      const { newspapers } = this.state
+      const { newspaper } = this.props
+
+      this.setState({
+        newspapers: [...newspapers, newspaper]
+      })
+    }
   }
 
   toggleViewForm = () => {
@@ -125,12 +139,33 @@ class Newspaper extends Component {
     })
   }
 
+  handleFormSubmit = event => {
+    event.preventDefault()
+    fetch('http://localhost:4000/newspaper/build-newspaper', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        title: this.state.title,
+        user: this.props.loggedInUser.id,
+        categories: this.state.categories,
+        sources: this.state.sourceNames,
+        topics: this.state.addedTopics
+      })
+    })
+    .then(resp => resp.json())
+    // .then(data => this.props.setNewspaper(data))
+    .then(console.log)
+  }
+
   renderForm = () => {
     return (
       <>
-        <form>
+        <form onSubmit={this.handleFormSubmit} >
           <label>Title: </label>
-          <input onChange={this.handleTitleChange} type="text" value={this.state.title} />
+          <input onChange={this.handleTitleChange} type="text" value={this.state.title} required/>
   
           <fieldset onChange={this.addCategories}>      
               <legend>Select Categories: </legend>      
@@ -172,30 +207,34 @@ class Newspaper extends Component {
           </>
           }
 
-
-
-          <input type="submit" value="Create"/>     
+          <input onClick={() => alert(`You've just created the ${this.state.title} newspaper`)} type="submit" value="Build Newspaper"/>     
         </form>
       </>
     )
   }
 
   renderDisplay = () => {
-    const { loggedInUser } = this.props
+    const { links, loggedInUser, loggedInUsersNewspapers } = this.props
     const { viewForm } = this.state
     let display;
- 
+    let noNewspapers = 
+      <h3>You currently don't have any newspapers</h3>
+  
     if (loggedInUser.username) {
       display = 
       <>
         <h1>Welcome to your Newspaper Collection</h1>
-        <p>Here you can create or view your newspapers</p>
+        <p>Here you can build or view your newspapers</p>
+        <Nav links={links} />
         <button onClick={this.toggleViewForm}>{viewForm ? "Close Form" : "Build a Newspaper"}</button><br /><br />
         {viewForm && this.renderForm()}
+        {loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
+          newspapers={loggedInUsersNewspapers} /> : noNewspapers}
       </>
     } else if (!loggedInUser.username) {
       display = 
         <>
+          <Nav links={links}/>
           <h1><Link to="/login">Log in</Link> to view your newspapers</h1>
         </>
     }

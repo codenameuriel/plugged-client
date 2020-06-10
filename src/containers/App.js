@@ -8,7 +8,17 @@ class App extends Component {
     loggedInUser: {},
     categories: [],
     unsubscribe: [],
-    article: {}
+    article: {},
+    topics: [],
+    sources: [],
+    newspaper: {},
+    loggedInUsersNewspapers: []
+  }
+
+  setNewspaper = data => {
+    this.setState({
+      newspaper: data
+    })
   }
 
   postArticle = article => {
@@ -51,14 +61,20 @@ class App extends Component {
   setLoggedInUser = user => {
     this.setState({
       loggedInUser: user,
-      categories: user.categories
+      categories: user.categories,
+      topics: user.topics,
+      sources: user.sources,
+      loggedInUsersNewspapers: user.get_newspapers
     })
   }
 
   logOutUser = () => {
     this.setState({
       loggedInUser: {},
-      categories: []
+      categories: [],
+      topics: [],
+      sources: [],
+
     })
   }
 
@@ -134,6 +150,9 @@ class App extends Component {
            loggedInUser={this.state.loggedInUser}
            postArticle={this.postArticle}
            subscribeToCategory={this.subscribeToCategory}
+           setNewspaper={this.setNewspaper}
+           newspaper={this.state.newspaper}
+           loggedInUsersNewspapers={this.state.loggedInUsersNewspapers}
         />
         <Auth
           links={links}
