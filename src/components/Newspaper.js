@@ -156,8 +156,8 @@ class Newspaper extends Component {
       })
     })
     .then(resp => resp.json())
-    // .then(data => this.props.setNewspaper(data))
-    .then(console.log)
+    .then(this.props.updateUsersNewspapers)
+    // .then(console.log)
   }
 
   renderForm = () => {

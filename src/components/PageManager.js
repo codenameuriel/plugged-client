@@ -172,9 +172,8 @@ class PageManager extends Component {
             links={newspapersLinks}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
-            setNewspaper={this.props.setNewspaper}
-            newspaper={this.props.newspaper}
             loggedInUsersNewspapers={this.props.loggedInUsersNewspapers}
+            updateUsersNewspapers={this.props.updateUsersNewspapers}
             />
           } 
         />

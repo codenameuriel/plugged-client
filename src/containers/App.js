@@ -11,13 +11,13 @@ class App extends Component {
     article: {},
     topics: [],
     sources: [],
-    newspaper: {},
     loggedInUsersNewspapers: []
   }
 
-  setNewspaper = data => {
+  updateUsersNewspapers = newspaper => {
+    const { loggedInUsersNewspapers } = this.state
     this.setState({
-      newspaper: data
+      loggedInUsersNewspapers: [...loggedInUsersNewspapers, newspaper]
     })
   }
 
@@ -150,9 +150,8 @@ class App extends Component {
            loggedInUser={this.state.loggedInUser}
            postArticle={this.postArticle}
            subscribeToCategory={this.subscribeToCategory}
-           setNewspaper={this.setNewspaper}
-           newspaper={this.state.newspaper}
            loggedInUsersNewspapers={this.state.loggedInUsersNewspapers}
+           updateUsersNewspapers={this.updateUsersNewspapers}
         />
         <Auth
           links={links}
