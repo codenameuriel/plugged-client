@@ -18,13 +18,8 @@ class Newspaper extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.newspaper !== this.props.newspaper) {
-      const { newspapers } = this.state
-      const { newspaper } = this.props
-
-      this.setState({
-        newspapers: [...newspapers, newspaper]
-      })
+    if (prevProps.loggedInUsersNewspapers !== this.props.loggedInUsersNewspapers) {
+      this.toggleViewForm()
     }
   }
 
@@ -100,7 +95,8 @@ class Newspaper extends Component {
     event.preventDefault()
     const { topic, addedTopics } = this.state
     this.setState({
-      addedTopics: [...addedTopics, topic]
+      addedTopics: [...addedTopics, topic],
+      topic: ''
     })
   }
 
@@ -140,6 +136,8 @@ class Newspaper extends Component {
   }
 
   handleFormSubmit = event => {
+    const { title, categories, sourceNames, addedTopics } = this.state
+    const { loggedInUser, updateUsersNewspapers } = this.props
     event.preventDefault()
     fetch('http://localhost:4000/newspaper/build-newspaper', {
       method: 'POST',
@@ -148,16 +146,15 @@ class Newspaper extends Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        title: this.state.title,
-        user: this.props.loggedInUser.id,
-        categories: this.state.categories,
-        sources: this.state.sourceNames,
-        topics: this.state.addedTopics
+        title: title,
+        user: loggedInUser.id,
+        categories: categories,
+        sources: sourceNames,
+        topics: addedTopics
       })
     })
     .then(resp => resp.json())
-    .then(this.props.updateUsersNewspapers)
-    // .then(console.log)
+    .then(data => updateUsersNewspapers(data))
   }
 
   renderForm = () => {
@@ -207,7 +204,10 @@ class Newspaper extends Component {
           </>
           }
 
-          <input onClick={() => alert(`You've just created the ${this.state.title} newspaper`)} type="submit" value="Build Newspaper"/>     
+          <input onClick={() => {
+            alert(`You've just created the ${this.state.title} newspaper`)
+            // this.toggleViewForm()
+            }} type="submit" value="Build Newspaper"/>     
         </form>
       </>
     )
