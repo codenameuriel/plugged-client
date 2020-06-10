@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 class Newspaper extends Component {
   state = {
     viewForm: false,
+    title: '',
     categorySelect: '',
+    categories: [], // select categories
     sources: [],
     renderSourceForm: false,
     sourceNames: [],
@@ -17,6 +19,25 @@ class Newspaper extends Component {
 
     this.setState({
       viewForm: !view
+    })
+  }
+
+  addCategories = event => {
+    const { categories } = this.state
+    if (categories.find(category => category === event.target.value)) {
+      this.setState({
+        categories: [...categories].filter(category => category !== event.target.value)
+      })
+    } else {
+      this.setState({
+        categories: [...categories, event.target.value]
+      })
+    }
+  }
+
+  handleTitleChange = event => {
+    this.setState({
+      title: event.target.value
     })
   }
 
@@ -108,10 +129,10 @@ class Newspaper extends Component {
     return (
       <>
         <form>
-          <label>Title:</label>
-          <input type="text" />
+          <label>Title: </label>
+          <input onChange={this.handleTitleChange} type="text" value={this.state.title} />
   
-          <fieldset>      
+          <fieldset onChange={this.addCategories}>      
               <legend>Select Categories: </legend>      
               <input type="checkbox" name="categories" value="Business" />Business<br />      
               <input type="checkbox" name="categories" value="Entertainment" />Entertainment<br />      
