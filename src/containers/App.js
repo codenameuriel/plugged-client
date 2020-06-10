@@ -123,7 +123,8 @@ class App extends Component {
       <NavLink to="/categories">Categories</NavLink>,
       <NavLink to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</NavLink>,
       <NavLink to={`/${this.state.loggedInUser.username}/account`}>Account</NavLink>,
-      <NavLink to="/sources">Sources</NavLink>
+      <NavLink to="/sources">Sources</NavLink>,
+      <NavLink to="/newspapers">Newspapers</NavLink>
     ]
 
     return (

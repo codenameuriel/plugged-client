@@ -14,6 +14,7 @@ import Dashboard from "./Dashboard"
 import TopicNews from './TopicNews'
 import Sources from './Sources'
 import SourceNews from './SourceNews'
+import Newspaper from './Newspaper'
 
 class PageManager extends Component {
   state = {
@@ -137,7 +138,7 @@ class PageManager extends Component {
   }
 
   render() {
-    const [logout, collection, topNews, login, signup, categories, dashboard, account, sources] = this.props.links
+    const [logout, collection, topNews, login, signup, categories, dashboard, account, sources, newspapers] = this.props.links
     let topNewsLinks;
     let collectionLinks;
     let categoryLinks;
@@ -148,20 +149,30 @@ class PageManager extends Component {
     let sourceNewsLinks;
 
     if (this.props.loggedInUser.username) {
-      topNewsLinks = [dashboard, categories, sources, collection, account, logout]
-      collectionLinks = [dashboard, topNews, categories, sources, account, logout]
-      categoryLinks = [dashboard, topNews, collection, sources, account, logout]
-      categorySelectionLinks = [dashboard, topNews, categories, sources, collection, account, logout]
-      dashboardLinks = [topNews, categories, sources, collection, account, logout]
-      topicNewsLinks = [dashboard, topNews, categories, sources, collection, account, logout]
-      sourceLinks = [dashboard, topNews, categories, collection, account, logout]
-      sourceNewsLinks = [dashboard, topNews, categories, sources, collection, account, logout]
+      topNewsLinks = [dashboard, categories, sources, newspapers, collection, account, logout]
+      collectionLinks = [dashboard, topNews, categories, sources, newspapers, account, logout]
+      categoryLinks = [dashboard, topNews, collection, sources, newspapers, account, logout]
+      categorySelectionLinks = [dashboard, topNews, categories, sources, newspapers, collection, account, logout]
+      dashboardLinks = [topNews, categories, sources, collection, newspapers, account, logout]
+      topicNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
+      sourceLinks = [dashboard, topNews, categories, collection, newspapers, account, logout]
+      sourceNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
     } else {
       topNewsLinks = [login, signup]
     }
 
     return (
       <div>
+        <Route
+          exact path="/newspapers"
+          render={routerProps => <Newspaper
+            {...routerProps}
+            links={null}
+            loggedInUser={this.props.loggedInUser}
+            postArticle={this.props.postArticle}  
+            />
+          } 
+        />
         <Route
           exact path="/categories"
           render={routerProps => <CategorySelector
