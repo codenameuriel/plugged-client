@@ -11,7 +11,16 @@ class App extends Component {
     article: {},
     topics: [],
     sources: [],
-    loggedInUsersNewspapers: []
+    loggedInUsersNewspapers: [],
+    newspaper: {}
+  }
+
+  setNewspaper = title => {
+    const { loggedInUsersNewspapers } = this.state
+    let selectedNewspaper = loggedInUsersNewspapers.find(newspaper => newspaper.title === title)
+    this.setState({
+      newspaper: selectedNewspaper
+    })
   }
 
   updateUsersNewspapers = newspaper => {
@@ -152,6 +161,8 @@ class App extends Component {
            subscribeToCategory={this.subscribeToCategory}
            loggedInUsersNewspapers={this.state.loggedInUsersNewspapers}
            updateUsersNewspapers={this.updateUsersNewspapers}
+           setNewspaper={this.setNewspaper}
+           newspaper={this.state.newspaper}
         />
         <Auth
           links={links}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NewspaperTile = ({newspaper}) => {
+const NewspaperTile = ({ newspaper, setNewspaper, history }) => {
   const renderCategories = () => {
     return newspaper.categories.map(category => {
       return (
@@ -32,7 +32,10 @@ const NewspaperTile = ({newspaper}) => {
   }
 
   return (
-    <div>
+    <div onClick={() => {
+      setNewspaper(newspaper.title)
+      history.push(`/newspapers/${newspaper.title}`)
+      }} >
       <h1>The {newspaper.title} Plug</h1>
       <h3>Categories</h3>
       {renderCategories()}

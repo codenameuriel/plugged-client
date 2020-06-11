@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Nav from './Nav'
 import NewspaperMapper from './NewspaperMapper'
 
-class Newspaper extends Component {
+class NewspaperMenu extends Component {
   state = {
     viewForm: false,
     title: '',
@@ -214,7 +214,7 @@ class Newspaper extends Component {
   }
 
   renderDisplay = () => {
-    const { links, loggedInUser, loggedInUsersNewspapers } = this.props
+    const { links, loggedInUser, loggedInUsersNewspapers, setNewspaper, history } = this.props
     const { viewForm } = this.state
     let display;
     let noNewspapers = 
@@ -229,7 +229,7 @@ class Newspaper extends Component {
         <button onClick={this.toggleViewForm}>{viewForm ? "Close Form" : "Build a Newspaper"}</button><br /><br />
         {viewForm && this.renderForm()}
         {loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
-          newspapers={loggedInUsersNewspapers} /> : noNewspapers}
+          newspapers={loggedInUsersNewspapers} setNewspaper={setNewspaper} history={history} /> : noNewspapers}
       </>
     } else if (!loggedInUser.username) {
       display = 
@@ -250,4 +250,4 @@ class Newspaper extends Component {
   }
 }
 
-export default Newspaper
+export default NewspaperMenu

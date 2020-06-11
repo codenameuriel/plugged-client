@@ -1,11 +1,11 @@
 import React from 'react'
 import NewspaperTile from './NewspaperTile'
 
-const NewspaperMapper = ({ newspapers }) => {
-  console.log(newspapers)
+const NewspaperMapper = ({ newspapers, setNewspaper, history }) => {
+  // console.log(newspapers)
   const renderNewspaperTiles = () => {
     return newspapers.map(newspaper => {
-      return <NewspaperTile newspaper={newspaper}/>
+      return <NewspaperTile newspaper={newspaper} setNewspaper={setNewspaper} history={history} />
     })
   }
 

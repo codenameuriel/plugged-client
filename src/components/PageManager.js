@@ -14,7 +14,8 @@ import Dashboard from "./Dashboard"
 import TopicNews from './TopicNews'
 import Sources from './Sources'
 import SourceNews from './SourceNews'
-import Newspaper from './Newspaper'
+import NewspaperMenu from './NewspaperMenu'
+import NewspaperNews from './NewspaperNews';
 
 class PageManager extends Component {
   state = {
@@ -167,15 +168,23 @@ class PageManager extends Component {
       <div>
         <Route
           exact path="/newspapers"
-          render={routerProps => <Newspaper
+          render={routerProps => <NewspaperMenu
             {...routerProps}
             links={newspapersLinks}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             loggedInUsersNewspapers={this.props.loggedInUsersNewspapers}
             updateUsersNewspapers={this.props.updateUsersNewspapers}
-            />
-          } 
+            setNewspaper={this.props.setNewspaper}
+            />} 
+        />
+        <Route
+          exact path="/newspapers/:title"
+          render={routerProps => <NewspaperNews
+            newspaper={this.props.newspaper}
+            loggedInUser={this.props.loggedInUser}
+            postArticle={this.props.postArticle} 
+            />}
         />
         <Route
           exact path="/categories"
