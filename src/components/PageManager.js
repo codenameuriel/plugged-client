@@ -148,7 +148,8 @@ class PageManager extends Component {
     let topicNewsLinks;
     let sourceLinks;
     let sourceNewsLinks;
-    let newspapersLinks;
+    let newspapersMenuLinks;
+    let newspapersNewsLinks;
 
     if (this.props.loggedInUser.username) {
       topNewsLinks = [dashboard, categories, sources, newspapers, collection, account, logout]
@@ -159,7 +160,8 @@ class PageManager extends Component {
       topicNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
       sourceLinks = [dashboard, topNews, categories, collection, newspapers, account, logout]
       sourceNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
-      newspapersLinks = [dashboard, topNews, categories, sources, collection, account, logout]
+      newspapersMenuLinks = [dashboard, topNews, categories, sources, collection, account, logout]
+      newspapersNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
     } else {
       topNewsLinks = [login, signup]
     }
@@ -170,7 +172,7 @@ class PageManager extends Component {
           exact path="/newspapers"
           render={routerProps => <NewspaperMenu
             {...routerProps}
-            links={newspapersLinks}
+            links={newspapersMenuLinks}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             loggedInUsersNewspapers={this.props.loggedInUsersNewspapers}
@@ -181,6 +183,7 @@ class PageManager extends Component {
         <Route
           exact path="/newspapers/:title"
           render={routerProps => <NewspaperNews
+            links={newspapersNewsLinks}
             newspaper={this.props.newspaper}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle} 

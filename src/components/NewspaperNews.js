@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { apiKey } from '../apiKey'
 import NewsMapper from './NewsMapper'
 import { Link } from 'react-router-dom'
+import Nav from './Nav'
 
 class NewspaperNews extends Component {
   state = {
@@ -13,9 +14,9 @@ class NewspaperNews extends Component {
   componentDidMount() {
     const { categories, sources, topics } = this.props.newspaper
 
-    categories.map(category => this.renderByCategories(category.name))
-    sources.map(source => this.renderBySources(source.name))
-    topics.map(topic => this.renderByTopics(topic.name))
+    categories !== undefined && categories.map(category => this.renderByCategories(category.name))
+    sources !== undefined && sources.map(source => this.renderBySources(source.name))
+    topics !== undefined && topics.map(topic => this.renderByTopics(topic.name))
   }
 
   setCategories = data => {
@@ -74,13 +75,16 @@ class NewspaperNews extends Component {
   }
 
   render() {
-    const { newspaper, loggedInUser, postArticle } = this.props
+    const { newspaper, loggedInUser, postArticle, links } = this.props
     const { categories, sources, topics } = this.state
     let display;
 
-    if (categories.length >= 0 ) {
+    if (categories.length >= 1 || sources.length >= 1 || topics.length >= 1) {
       display = 
         <>
+        <h1>Welcome to your "{newspaper.title}" Newspaper</h1>
+        <Nav links={links} />
+        <hr />
         <h3>Categories</h3>
            {categories.length >= 1 ? <NewsMapper news={categories} loggedInUser={loggedInUser} postArticle={postArticle} /> 
            : <h5>Sorry no news were found for your categories</h5>
@@ -94,15 +98,13 @@ class NewspaperNews extends Component {
            : <h5>Sorry no news were found for your topics</h5>
            }
         </>
-    } else if (!loggedInUser.username) {
+    } else {
       display = 
         <h1><Link to="/login">Log in</Link> to view your newspapers</h1>
     }
 
     return (
       <div>
-        <h1>Welcome to your "{newspaper.title}" Newspaper</h1>
-        <hr />
         {display}
       </div>
     )
