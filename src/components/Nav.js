@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import NavStyles from '../styles/Nav.module.css'
 
 class Nav extends Component {
   renderLinks = props => (
@@ -9,15 +10,13 @@ class Nav extends Component {
     const { links, search, searchBtn } = this.props
 
     return (
-      <header>
-        <nav>
-          <ul className="navbar">
+        <nav className={NavStyles.nav} >
+          <ul>
             {this.renderLinks(links)}
             {search}
             {searchBtn}
           </ul>
         </nav>
-      </header>
     )
   }
 }

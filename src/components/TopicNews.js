@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NewsMapper from './NewsMapper'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
+import TopicNewsStyles from '../styles/TopicNewsStyles.module.css'
 
 class TopicNews extends Component {
   renderDisplay = () => {
@@ -34,7 +35,7 @@ class TopicNews extends Component {
 
   render() {
     return (
-      <div>
+      <div className={TopicNewsStyles.container} >
        {this.renderDisplay()}
       </div>
     )

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { apiKey } from '../apiKey'
 import Nav from './Nav'
 import NewsMapper from './NewsMapper'
+import DashboardStyles from '../styles/Dashboard.module.css'
 
 class Dashboard extends Component {
   state = {
@@ -26,7 +27,7 @@ class Dashboard extends Component {
     const { loggedInUser } = this.props
   
     loggedInUser.categories.forEach(category => {
-      fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category.name.toLowerCase()}&pageSize=5&page=1`, apiKey)
+      fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category.name.toLowerCase()}&pageSize=6&page=1`, apiKey)
       .then(resp => resp.json())
       .then(data => this.setState({
         articles: [...this.state.articles, data.articles]
@@ -52,8 +53,8 @@ class Dashboard extends Component {
 
   render() {
     const { loggedInUser, links, history, handleSearchChange, searchTopic, getTopicNews } = this.props
-    const search = <input onChange={handleSearchChange} type="text" placeholder="Search news by topic" value={searchTopic} />
-    const searchBtn = <button onClick={() => {
+    const search = <input className={DashboardStyles.search} onChange={handleSearchChange} type="text" placeholder="Search news by topic" value={searchTopic} />
+    const searchBtn = <button className={DashboardStyles.submitBtn} onClick={() => {
       getTopicNews(searchTopic)
       history.push("/dashboard/topic-news")
     }}>Search</button>
@@ -100,7 +101,9 @@ class Dashboard extends Component {
       
       dashboardDisplayHeader = 
         <>
-          <h1>Welcome to your Dashboard, {loggedInUser.username}</h1>
+          <header className={DashboardStyles.header} >
+            <h1>Welcome to your Dashboard, {loggedInUser.username}</h1>
+          </header>
           <Nav links={links} search={search} searchBtn={searchBtn} />
         </>
     } else if (!loggedInUser.username) {

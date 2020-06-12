@@ -1,0 +1,55 @@
+.newscard {
+  width: 26%;
+  margin: 50px auto;
+  /* border: 5px solid #e43f5a; */
+  /* box-shadow: 0 2px 3px black; */
+  padding: 15px;
+  text-align: center;
+  background-color: #393e46;
+  color: #eee;
+  border-radius: 30px;
+
+  order: 3;
+  flex-basis: auto; 
+}
+
+.newscard:hover {
+  /* transform: translateY(-60px); */
+  transform: scale(1.15, 1.15);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.img {
+  /* width: 400px; */
+  width: 90%;
+  height: 315px;
+  border-radius: 30px;
+}
+
+.button {
+  background-color: #32e0c4;
+  color: #eee;
+  border: none;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-block;
+  border-radius: 60px;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #1bfad6;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button:active {
+  background-color: #32e0c4;
+  color: #eee;
+  transform: translateY(4px);
+}
+
+/* 1bfad6; - darker turquois*/

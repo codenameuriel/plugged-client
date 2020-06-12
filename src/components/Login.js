@@ -1,30 +1,36 @@
 import React from 'react'
 import Nav from './Nav'
 
+import LoginStyles from '../styles/Login.module.css'
+
 export default function Login({
   history, links, logIn, usernameChange, username
 }) {
   return (
     <div>
-      <h1>Log in</h1>
+      <header className={LoginStyles.header} >
+        <h1>Log in to Plugged</h1>
+      </header>
       <Nav links={links}/>
-      <form onSubmit={event => {
+      <form className={LoginStyles.form} onSubmit={event => {
         logIn(event, username)
         history.push(`/${username}/dashboard`)
         }}>
-        <section>
-          <label>Username: </label>
+  
+          <label>Username:</label><br />
           <input 
+            className={LoginStyles.input}
             onChange={usernameChange} 
             type="text"
             value={username}
           />
-        </section>
+     
         <section>
-          <label>Password: </label>
-          <input type="password"/>
+          <label>Password:</label><br />
+          <input className={LoginStyles.input} type="password"/><br />
+          <br />
         </section>
-        <input type="submit"/>
+        <input className={LoginStyles.submitBtn} type="submit"/>
       </form>
     </div>
   )

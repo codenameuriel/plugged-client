@@ -1,6 +1,8 @@
 import React from 'react'
 import NewsCard from './NewsCard'
 
+import NewsMapperStyles from '../styles/NewsMapper.module.css'
+
 const NewsMapper = ({ news, loggedInUser, postArticle }) => {
   const renderNewsCards = () => {
     console.log('news', news)
@@ -14,7 +16,7 @@ const NewsMapper = ({ news, loggedInUser, postArticle }) => {
   }
 
   return (
-    <div>
+    <div className={NewsMapperStyles.container} >
       {renderNewsCards()}
     </div>
   )

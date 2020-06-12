@@ -152,18 +152,18 @@ class PageManager extends Component {
     let newspapersNewsLinks;
 
     if (this.props.loggedInUser.username) {
-      topNewsLinks = [dashboard, categories, sources, newspapers, collection, account, logout]
-      collectionLinks = [dashboard, topNews, categories, sources, newspapers, account, logout]
-      categoryLinks = [dashboard, topNews, collection, sources, newspapers, account, logout]
+      topNewsLinks = [logout, account, collection, newspapers, sources, categories, dashboard]
+      collectionLinks = [dashboard, topNews, categories, sources, newspapers, account, logout].reverse()
+      categoryLinks = [dashboard, topNews, collection, sources, newspapers, account, logout].reverse()
       categorySelectionLinks = [dashboard, topNews, categories, sources, newspapers, collection, account, logout]
-      dashboardLinks = [topNews, categories, sources, collection, newspapers, account, logout]
-      topicNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
-      sourceLinks = [dashboard, topNews, categories, collection, newspapers, account, logout]
-      sourceNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
-      newspapersMenuLinks = [dashboard, topNews, categories, sources, collection, account, logout]
-      newspapersNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
+      dashboardLinks = [topNews, categories, sources, collection, newspapers, logout, account]
+      topicNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout].reverse()
+      sourceLinks = [dashboard, topNews, categories, collection, newspapers, account, logout].reverse()
+      sourceNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout].reverse()
+      newspapersMenuLinks = [dashboard, topNews, categories, sources, collection, account, logout].reverse()
+      newspapersNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout].reverse()
     } else {
-      topNewsLinks = [login, signup]
+      topNewsLinks = [signup, login]
     }
 
     return (

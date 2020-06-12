@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import Auth from '../components/Auth'
-import PageManager from '../components/PageManager'
+import Auth from './components/Auth'
+import PageManager from './components/PageManager'
+
+import AppStyles from './styles/App.module.css'
 
 class App extends Component {
   state = {
@@ -140,20 +142,20 @@ class App extends Component {
 
   render() {
     const links = [
-      <NavLink onClick={this.logOutUser} to="/top-news">Log out</NavLink>,
-      <NavLink to="/collection">Collection</NavLink>,
-      <NavLink to="/top-news">Top News</NavLink>,
-      <NavLink to="/login">Log in</NavLink>,
-      <NavLink to="/signup">Sign up</NavLink>,
-      <NavLink to="/categories">Categories</NavLink>,
-      <NavLink to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</NavLink>,
-      <NavLink to={`/${this.state.loggedInUser.username}/account`}>Account</NavLink>,
-      <NavLink to="/sources">Sources</NavLink>,
-      <NavLink to="/newspapers">Newspapers</NavLink>
+      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} onClick={this.logOutUser} to="/top-news">Log out</NavLink>,
+      <NavLink className={AppStyles.link} to="/collection">Collection</NavLink>,
+      <NavLink className={AppStyles.link} to="/top-news">Top News</NavLink>,
+      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/login">Log in</NavLink>,
+      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/signup">Sign up</NavLink>,
+      <NavLink className={AppStyles.link} to="/categories">Categories</NavLink>,
+      <NavLink className={AppStyles.link} to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</NavLink>,
+      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to={`/${this.state.loggedInUser.username}/account`}>Account</NavLink>,
+      <NavLink  className={AppStyles.link} to="/sources">Sources</NavLink>,
+      <NavLink className={AppStyles.link} to="/newspapers">Newspapers</NavLink>
     ]
 
     return (
-      <div className="App">
+      <div>
         <PageManager
            links={links}
            loggedInUser={this.state.loggedInUser}

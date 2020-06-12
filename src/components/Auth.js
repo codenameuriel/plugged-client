@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
 import Login from './Login'
 import Signup from './Signup'
 import Account from './Account'
+import AuthStyles from '../styles/Auth.module.css'
 
 class Auth extends Component {
   state = {
@@ -53,11 +54,14 @@ class Auth extends Component {
   }
 
   render() {
+    const authTopNewsLink =
+      <NavLink className={`${AuthStyles.link} ${AuthStyles.right}`} to="/top-news">Top News</NavLink>
+
     const [logout, collection, topNews, login, signup, categories, dashboard, ] = this.props.links
     const { loggedInUser } = this.props
     const accountLinks = [dashboard, topNews, collection, categories, logout]
-    const loginLinks = [topNews, signup]
-    const signUpLinks = [topNews, login]
+    const loginLinks = [signup, authTopNewsLink]
+    const signUpLinks = [login, authTopNewsLink]
 
     return (
       <div>

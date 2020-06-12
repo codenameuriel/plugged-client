@@ -1,0 +1,16 @@
+.nav {
+  background-color: #32e0c4;
+  /* height: 50%; */
+  height: 30%;
+  overflow: hidden;
+  padding: 20px 0px;
+}
+
+li {
+  list-style:none;
+}
+
+/* click down effect */
+li:active {
+  transform: translateY(4px);
+}
