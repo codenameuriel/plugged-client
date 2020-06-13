@@ -29,6 +29,11 @@
   background-color: #eee;
 }
 
+.input[type=text]:hover {
+  background-color: #393e46;
+  border-bottom: 2px solid #32e0c4;
+}
+
 .input[type=text]:focus {
   background-color:  #393e46;
   border-bottom: 2px solid #32e0c4;
@@ -44,6 +49,11 @@
   outline: none; 
   border-radius: 60px;
   background-color: #eee;
+}
+
+.input[type=password]:hover {
+  background-color: #393e46;
+  border-bottom: 2px solid #32e0c4;
 }
 
 .input[type=password]:focus {
@@ -91,6 +101,10 @@
   transition-duration: 0.3s;
   background-color: #eee;
   cursor: pointer;
+}
+
+.checkbox:hover {
+  background-color: #32e0c4;
 }
 
 .checkbox:checked {
