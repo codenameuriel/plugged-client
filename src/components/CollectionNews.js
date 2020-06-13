@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import DBNewsCard from './DBNewsCard'
 import Nav from './Nav'
 
+import CollectionNewsStyles from '../styles/CollectionNews.module.css'
+
 class CollectionNews extends Component {
   state = {
     newsCollection: [],
@@ -136,7 +138,10 @@ class CollectionNews extends Component {
     if (newsCollection.length > 0) {
       collectionDisplay = 
         <>
-          <h1>Here are your saved news, {loggedInUser.username}</h1>
+          <header className={CollectionNewsStyles.header} >
+            <h1>Here are your saved news, {loggedInUser.username}</h1>
+          </header>
+          <Nav links={links}/>
           {/* {showPrevPageButton && 
             <button onClick={prevPage} >Previous Page</button>}
             <button onClick={nextPage} >{nextPageInnerText}</button> */}
@@ -153,9 +158,10 @@ class CollectionNews extends Component {
 
     return (
       <div>
-        <Nav links={links}/>
         {collectionDisplay}
-        {this.renderDBNewsCards()}
+        <div className={CollectionNewsStyles.container} >
+          {this.renderDBNewsCards()}
+        </div>
       </div>
     )
   }
