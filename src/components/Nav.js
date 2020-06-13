@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavStyles from '../styles/Nav.module.css'
+import { Plug } from '../assets/plugging.svg'
 
 class Nav extends Component {
   renderLinks = props => (
@@ -11,7 +12,7 @@ class Nav extends Component {
 
     return (
         <nav className={NavStyles.nav} >
-          <ul>
+          <ul className={NavStyles.ul}>
             {this.renderLinks(links)}
             {search}
             {searchBtn}

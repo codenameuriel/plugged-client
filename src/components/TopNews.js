@@ -3,6 +3,8 @@ import { apiKey } from '../apiKey'
 import Nav from './Nav.js'
 import NewsMapper from './NewsMapper'
 
+import TopNewsStyles from '../styles/TopNews.module.css'
+
 class TopNews extends Component {
   state = {
     topNews: []
@@ -42,11 +44,11 @@ class TopNews extends Component {
       page, loggedInUser, showPrevPageButton, prevPage, nextPage, lastPage
     } = this.props
 
-    let jumbotronMessage = 'Log in or create an account to see your top stories'
+    let jumbotronMessage; 
     let nextPageInnerText = `Go to Page ${page + 1}`
 
-    if (loggedInUser.username) {
-      jumbotronMessage = `Welcome back ${loggedInUser.username}`
+    if (!loggedInUser.username) {
+      jumbotronMessage = 'Log in or create an account to get your news'
     }
 
     if (lastPage) {
@@ -55,17 +57,18 @@ class TopNews extends Component {
 
     return (
       <div>
-          <div className="jumbotron">
+          <header className={TopNewsStyles.header} >
             <h1>Trending Stories</h1>
             <p>{jumbotronMessage}</p>
-          </div>
+          </header>
         <Nav 
           links={this.props.links}
         />
         {showPrevPageButton && 
-          <button onClick={prevPage} >Previous Page</button>
+          <button className={TopNewsStyles.button} onClick={prevPage} >Previous Page</button>
         }
-        <button 
+        <button
+          className={TopNewsStyles.button} 
           onClick={nextPage} >{nextPageInnerText}</button>
         <NewsMapper
           news={this.state.topNews}

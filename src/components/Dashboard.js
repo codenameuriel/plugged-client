@@ -47,7 +47,7 @@ class Dashboard extends Component {
 
   createH1ForCategories = () => {
     let headers = []
-    this.state.categories.forEach(category => headers.push(<h2>Top News in {category}</h2>))
+    this.state.categories.forEach(category => headers.push(<h2 className={DashboardStyles.h2} >Top News in {category}</h2>))
     return headers
   }
 
@@ -84,7 +84,7 @@ class Dashboard extends Component {
 
       dashboardDisplay = 
         <>
-          <h1>Here are your top news</h1>
+          <h1 className={DashboardStyles.h1} >Here are your top news</h1>
           {header1}
           {v1}
           {header2}
@@ -103,6 +103,7 @@ class Dashboard extends Component {
         <>
           <header className={DashboardStyles.header} >
             <h1>Welcome to your Dashboard, {loggedInUser.username}</h1>
+            <p>Check out the news by your subscriptions</p>
           </header>
           <Nav links={links} search={search} searchBtn={searchBtn} />
         </>

@@ -55,7 +55,7 @@ class Auth extends Component {
 
   render() {
     const authTopNewsLink =
-      <NavLink className={`${AuthStyles.link} ${AuthStyles.right}`} to="/top-news">Top News</NavLink>
+      <NavLink className={`${AuthStyles.link} ${AuthStyles.right}`} to="/top-news">TOP NEWS</NavLink>
 
     const [logout, collection, topNews, login, signup, categories, dashboard, ] = this.props.links
     const { loggedInUser } = this.props

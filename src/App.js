@@ -142,16 +142,16 @@ class App extends Component {
 
   render() {
     const links = [
-      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} onClick={this.logOutUser} to="/top-news">Log out</NavLink>,
-      <NavLink className={AppStyles.link} to="/collection">Collection</NavLink>,
-      <NavLink className={AppStyles.link} to="/top-news">Top News</NavLink>,
-      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/login">Log in</NavLink>,
-      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/signup">Sign up</NavLink>,
-      <NavLink className={AppStyles.link} to="/categories">Categories</NavLink>,
-      <NavLink className={AppStyles.link} to={`/${this.state.loggedInUser.username}/dashboard`}>Dashboard</NavLink>,
-      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to={`/${this.state.loggedInUser.username}/account`}>Account</NavLink>,
-      <NavLink  className={AppStyles.link} to="/sources">Sources</NavLink>,
-      <NavLink className={AppStyles.link} to="/newspapers">Newspapers</NavLink>
+      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} onClick={this.logOutUser} to="/top-news">LOG OUT</NavLink>,
+      <NavLink className={AppStyles.link} to="/collection">COLLECTION</NavLink>,
+      <NavLink className={AppStyles.link} to="/top-news">TOP NEWS</NavLink>,
+      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/login">LOG IN</NavLink>,
+      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/signup">SIGN UP</NavLink>,
+      <NavLink className={AppStyles.link} to="/categories">CATEGORIES</NavLink>,
+      <NavLink className={AppStyles.link} to={`/${this.state.loggedInUser.username}/dashboard`}>DASHBOARD</NavLink>,
+      <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to={`/${this.state.loggedInUser.username}/account`}>ACCOUNT</NavLink>,
+      <NavLink  className={AppStyles.link} to="/sources">SOURCES</NavLink>,
+      <NavLink className={AppStyles.link} to="/newspapers">NEWSPAPER</NavLink>
     ]
 
     return (

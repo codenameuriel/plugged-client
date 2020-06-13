@@ -152,12 +152,12 @@ class PageManager extends Component {
     let newspapersNewsLinks;
 
     if (this.props.loggedInUser.username) {
-      topNewsLinks = [logout, account, collection, newspapers, sources, categories, dashboard]
-      collectionLinks = [dashboard, topNews, categories, sources, newspapers, account, logout].reverse()
-      categoryLinks = [dashboard, topNews, collection, sources, newspapers, account, logout].reverse()
+      topNewsLinks = [logout, account, dashboard, categories, sources,collection, newspapers]
+      collectionLinks = [dashboard, topNews, categories, sources, newspapers, account, logout]
+      categoryLinks = [dashboard, topNews, collection, sources, newspapers, account, logout]
       categorySelectionLinks = [dashboard, topNews, categories, sources, newspapers, collection, account, logout]
       dashboardLinks = [topNews, categories, sources, collection, newspapers, logout, account]
-      topicNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout].reverse()
+      topicNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
       sourceLinks = [dashboard, topNews, categories, collection, newspapers, account, logout].reverse()
       sourceNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout].reverse()
       newspapersMenuLinks = [dashboard, topNews, categories, sources, collection, account, logout].reverse()

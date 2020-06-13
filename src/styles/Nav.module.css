@@ -1,9 +1,14 @@
 .nav {
   background-color: #32e0c4;
-  /* height: 50%; */
   height: 30%;
   overflow: hidden;
-  padding: 20px 0px;
+  padding: 15px 10px;
+  margin: 0;
+}
+
+.ul {
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -13,4 +18,12 @@ li {
 /* click down effect */
 li:active {
   transform: translateY(4px);
+}
+
+/* sticky Nav */
+@media (min-height: 300px) {
+  .nav {
+    position: sticky;
+    top: 0;
+  }
 }

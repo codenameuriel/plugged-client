@@ -30,7 +30,7 @@ export default function Login({
           <input className={LoginStyles.input} type="password"/><br />
           <br />
         </section>
-        <input className={LoginStyles.submitBtn} type="submit"/>
+        <input className={LoginStyles.submitBtn} type="submit" value="Log in"/>
       </form>
     </div>
   )
