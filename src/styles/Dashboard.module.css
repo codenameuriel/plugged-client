@@ -14,6 +14,11 @@
   background-color: #eee;
 }
 
+.search[type=text]:hover {
+  background-color: #393e46;
+  border-bottom: 2px solid white;
+}
+
 .search[type=text]:focus {
   background-color:  #393e46;
   color: white;

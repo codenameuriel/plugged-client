@@ -3,6 +3,7 @@ import Plug from '../assets/Plug.png'
 import NewsCardStyles from '../styles/NewsCard.module.css'
 
 function NewsCard({author, content, publishedAt, source, title, description, url, urlToImage, loggedInUser, postArticle}) {
+  
   let article = {
     author: author,
     content: content,

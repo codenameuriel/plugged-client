@@ -110,7 +110,7 @@ class PageManager extends Component {
   }
 
   getTopicNews = search => {
-    fetch(`https://newsapi.org/v2/top-headlines?country=us&q=${search}&pageSize=9&page=1`, apiKey)
+    fetch(`https://newsapi.org/v2/everything?q=${search}&pageSize=9&page=1`, apiKey)
     .then(resp => resp.json())
     .then(data => this.setState({
       topicNews: data.articles

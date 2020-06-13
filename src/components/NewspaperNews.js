@@ -68,7 +68,7 @@ class NewspaperNews extends Component {
 
   renderByTopics = topic => {
     return (
-      fetch(`https://newsapi.org/v2/top-headlines?q=${topic}&pageSize=3&page=1`, apiKey)
+      fetch(`https://newsapi.org/v2/everything?q=${topic}&pageSize=3&page=1`, apiKey)
       .then(resp => resp.json())
       .then(data => this.setTopics(data.articles))  
     ) 
