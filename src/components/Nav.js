@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import NavStyles from '../styles/Nav.module.css'
-import { Plug } from '../assets/plugging.svg'
 
 class Nav extends Component {
   renderLinks = props => (

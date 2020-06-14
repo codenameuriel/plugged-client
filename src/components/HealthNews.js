@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { apiKey } from '../apiKey'
 import Nav from './Nav'
 import NewsMapper from './NewsMapper'
+import CategoryNewsStyles from "../styles/CategoryNews.module.css"
 
 export default class HealthNews extends Component {
   state = {
@@ -51,11 +52,13 @@ export default class HealthNews extends Component {
   
     return (
       <div>
+         <header className={CategoryNewsStyles.header} >
+          <h1>Top stories in Health</h1>
+        </header>
         <Nav links={links}/>
-        <h1>Top stories in Health</h1>
         {showPrevPageButton && 
-          <button onClick={prevPage} >Previous Page</button>}
-        <button onClick={nextPage} >{nextPageInnerText}</button>
+          <button className={CategoryNewsStyles.button} onClick={prevPage} >Previous Page</button>}
+        <button className={CategoryNewsStyles.button} onClick={nextPage} >{nextPageInnerText}</button>
         <NewsMapper 
           news={healthNews}
           loggedInUser={loggedInUser}

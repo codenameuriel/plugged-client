@@ -16,6 +16,9 @@ class Auth extends Component {
     fetch(`http://localhost:4000/users/login/${username}`)
     .then(resp => resp.json())
     .then(this.props.setLoggedInUser)
+    .then(this.setState({
+      username: ''
+    }))
   }
 
   signUp = (event, username, categories) => {
@@ -33,6 +36,9 @@ class Auth extends Component {
     })
     .then(resp => resp.json())
     .then(this.props.setLoggedInUser)
+    .then(this.setState({
+      username: ''
+    }))
   }
 
   usernameChange = event => {
