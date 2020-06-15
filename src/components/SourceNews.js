@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
 import NewsMapper from './NewsMapper'
+import SourceNewsStyles from '../styles/SourceNews.module.css'
 
 class SourceNews extends Component {
   renderDisplay = () => {
@@ -11,7 +12,9 @@ class SourceNews extends Component {
     if (loggedInUser.username) {
       display = 
         <>
-          <h1>Welcome to the source news</h1>
+          <header className={SourceNewsStyles.header} >
+            <h1>Welcome to the source news</h1>
+          </header>
           <Nav links={links}/>
           <NewsMapper news={sourceNews} loggedInUser={loggedInUser} postArticle={postArticle}/>
         </>

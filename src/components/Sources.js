@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Nav from './Nav'
+import SourcesStyles from '../styles/Sources.module.css'
 
 class Sources extends Component {
   state = {
@@ -32,40 +34,69 @@ class Sources extends Component {
   renderSources = category => {
     const { getSourceNews, history } = this.props
 
-    return this.state[category].map(source => {
-      return (
+    return (
+      <div className={SourcesStyles.container} >
+        {this.state[category].map(source => {
+          return (
+            <div className={SourcesStyles.sourceCard} >
+              <div className={SourcesStyles.info} >
+                <h4 
+                  className={SourcesStyles.h4}
+                  onClick={() => {
+                  getSourceNews(source.name)
+                  history.push(`/source-news/${source.name.toLowerCase()}`)
+                  }}>{source.name}</h4>
+                <p>{source.description}</p>
+                <a target="_blank" rel="noopener noreferrer" href={source.url}>{source.url}</a>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  renderDisplay = () => {
+    const { loggedInUser, links } = this.props
+    let display;
+
+    if (loggedInUser.username) {
+      display = 
         <>
-          <h4 onClick={() => {
-            getSourceNews(source.name)
-            history.push(`/source-news/${source.name.toLowerCase()}`)
-            }}>{source.name}</h4>
-          <p>{source.description}</p>
-          <a target="_blank" rel="noopener noreferrer" href={source.url}>{source.url}</a>
+          <header className={SourcesStyles.header} >
+            <h1>Search for your news by Sources</h1>
+          </header>
+          <Nav links={links} />
+          <div>
+            <h2 className={SourcesStyles.h2} >Business</h2>
+            {this.renderSources("business")}
+            <h2 className={SourcesStyles.h2} >Entertainment</h2>
+            {this.renderSources("entertainment")}
+            <h2 className={SourcesStyles.h2} >General</h2>
+            {this.renderSources("general")}
+            <h2 className={SourcesStyles.h2} >Health</h2>
+            {this.renderSources("health")}
+            <h2 className={SourcesStyles.h2} >Science</h2>
+            {this.renderSources("science")}
+            <h2 className={SourcesStyles.h2} >Sports</h2>
+            {this.renderSources("sports")}
+            <h2 className={SourcesStyles.h2} >Technology</h2>
+            {this.renderSources("technology")}
+          </div>
         </>
-      )
-    })
+    } else {
+      display = 
+        <>
+          <h1><Link to="/login">Log in</Link> to see your news by sources</h1>
+        </>
+    }
+    return display
   }
 
   render() {
-    const { links } = this.props
     return (
       <div>
-        <Nav links={links} />
-        <h1>Search for your news by sources</h1>
-        <h2>Business</h2>
-        {this.renderSources("business")}
-        <h2>Entertainment</h2>
-        {this.renderSources("entertainment")}
-        <h2>General</h2>
-        {this.renderSources("general")}
-        <h2>Health</h2>
-        {this.renderSources("health")}
-        <h2>Science</h2>
-        {this.renderSources("science")}
-        <h2>Sports</h2>
-        {this.renderSources("sports")}
-        <h2>Technology</h2>
-        {this.renderSources("technology")}
+        {this.renderDisplay()}
       </div>
     )
   }

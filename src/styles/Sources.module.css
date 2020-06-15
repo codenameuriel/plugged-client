@@ -1,0 +1,48 @@
+.header {
+  font-size: 25px;
+  text-align: center;
+  background-color: #393e46;
+  padding: 1px;
+}
+
+.sourceCard {
+  height: 300px;
+  width: 26%;
+  margin: 50px auto;
+  padding: 15px;
+  text-align: center;
+  background-color: #393e46;
+  color: #eee;
+  border-radius: 30px;
+
+  order: 3;
+  flex-basis: auto; 
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.h2 {
+  text-align: -webkit-center;
+  font-size: 3em;
+}
+
+.info {
+  font-size: larger;
+}
+
+.h4 {
+  font-size: 40px;
+}
+
+.h4:hover {
+  cursor: pointer;
+}
+
+a {
+  text-decoration-line: none;
+}

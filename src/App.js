@@ -139,12 +139,15 @@ class App extends Component {
       unsubscribe: []
     }))
   }
-
+  
   render() {
     const links = [
       <NavLink className={`${AppStyles.link} ${AppStyles.right}`} onClick={this.logOutUser} to="/top-news">LOG OUT</NavLink>,
       <NavLink className={AppStyles.link} to="/collection">COLLECTION</NavLink>,
-      <NavLink className={AppStyles.link} to="/top-news">TOP NEWS</NavLink>,
+      <NavLink 
+        className={AppStyles.link} 
+        to="/top-news" 
+      >TOP NEWS</NavLink>,
       <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/login">LOG IN</NavLink>,
       <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/signup">SIGN UP</NavLink>,
       <NavLink className={AppStyles.link} to="/categories">CATEGORIES</NavLink>,

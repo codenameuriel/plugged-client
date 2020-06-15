@@ -20,6 +20,7 @@ import NewspaperNews from './NewspaperNews';
 class PageManager extends Component {
   state = {
     page: 1,
+    currentPage: '',
     showPrevPageButton: false,
     totalResults: 0,
     lastPage: false,
@@ -28,6 +29,20 @@ class PageManager extends Component {
     displaySearchTopic: '',
     source: '',
     sourceNews: []
+  }
+
+  componentDidUpdate = (prevState) => {
+    // if (this.state.currentPage !== prevState.currentPage) {
+    //   this.setState({
+    //     page: 1
+    //   })
+    // }
+  }
+  
+  setCurrentPage = url => {
+    this.setState({
+      currentPage: url
+    })
   }
 
   setTotalResults = total => {
@@ -158,7 +173,7 @@ class PageManager extends Component {
       categorySelectionLinks = [dashboard, topNews, categories, sources, newspapers, collection, account, logout]
       dashboardLinks = [topNews, categories, sources, collection, newspapers, logout, account]
       topicNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
-      sourceLinks = [dashboard, topNews, categories, collection, newspapers, account, logout].reverse()
+      sourceLinks = [dashboard, topNews, categories, collection, newspapers, logout, account]
       sourceNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout].reverse()
       newspapersMenuLinks = [dashboard, topNews, categories, sources, collection, account, logout].reverse()
       newspapersNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, logout, account].reverse()
@@ -203,6 +218,7 @@ class PageManager extends Component {
           render={routerProps => <Sources
             {...routerProps}
             links={sourceLinks}
+            loggedInUser={this.props.loggedInUser}
             getSourceNews={this.getSourceNews}
             setSource={this.setSource}
           />}
@@ -222,6 +238,7 @@ class PageManager extends Component {
           render={routerProps => <Dashboard
             {...routerProps}
             links={dashboardLinks}
+            setCurrentPage={this.setCurrentPage}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             handleSearchChange={this.handleSearchChange}
