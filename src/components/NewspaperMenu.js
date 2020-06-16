@@ -236,7 +236,7 @@ class NewspaperMenu extends Component {
       display = 
       <>
         <header className={NewspaperMenuStyles.header} >
-          <h1>Welcome to your Newspaper Collection</h1>
+          <h1>Newspaper Collection</h1>
           <p>Build or view your newspapers</p>
         </header>
         <Nav links={links} />

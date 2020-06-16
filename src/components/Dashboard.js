@@ -103,7 +103,7 @@ class Dashboard extends Component {
         <>
           <header className={DashboardStyles.header} >
             <h1>Dashboard</h1>
-            <p>Welcome back, {loggedInUser.username}</p>
+            <p>Welcome back <span className={DashboardStyles.span} >{loggedInUser.username}</span></p>
           </header>
           <Nav links={links} search={search} searchBtn={searchBtn} />
         </>

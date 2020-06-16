@@ -139,7 +139,8 @@ class CollectionNews extends Component {
       collectionDisplay = 
         <>
           <header className={CollectionNewsStyles.header} >
-            <h1>Here are your saved news, {loggedInUser.username}</h1>
+            <h1>Collection News</h1>
+            <p>Here are your saved news <span className={CollectionNewsStyles.span} >{loggedInUser.username}</span></p>
           </header>
           <Nav links={links}/>
           {/* {showPrevPageButton && 

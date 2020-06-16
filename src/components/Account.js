@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SubscribedCategoryCard from './SubscribedCategoryCard'
 import Nav from './Nav'
 import { Link } from 'react-router-dom'
+import AccountStyles from "../styles/Account.module.css"
 
 class Account extends Component {
   renderCategories = () => {
@@ -19,8 +20,11 @@ class Account extends Component {
     if (loggedInUser.username && loggedInUser.categories.length > 0) {
       accountView = 
         <>
+          <header className={AccountStyles.header} >
+            <h1><span className={AccountStyles.span} >{loggedInUser.username}'s </span>Account</h1>
+            <p>You can edit your subscriptions and newspapers</p>
+          </header>
           <Nav links={links} />
-          <h1>Welcome to your Account, {loggedInUser.username}</h1>
           <form onSubmit={event => {
             unsubscribeSubmit(event)
             alert("You're all up to date!")

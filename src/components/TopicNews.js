@@ -12,8 +12,10 @@ class TopicNews extends Component {
     if (topicNews.length > 0) {
     display = 
       <>
+        <header className={TopicNewsStyles.header} >
+          <h1>Here's the latest on "{searchTopic}"</h1>
+        </header>
         <Nav links={links} />
-        <h1>Here's the latest on "{searchTopic}"</h1>
         <NewsMapper 
           news={topicNews} 
           postArticle={postArticle} 

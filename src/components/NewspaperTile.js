@@ -39,7 +39,7 @@ const NewspaperTile = ({ newspaper, setNewspaper, history }) => {
         setNewspaper(newspaper.title)
         history.push(`/newspapers/${newspaper.title}`)
       }} >
-      <h1 className={NewspaperTileStyles.h1} >The {newspaper.title} Plug</h1>
+      <h1 className={NewspaperTileStyles.h1} >The {newspaper.title} Newspaper</h1>
       <h2>Categories</h2>
       {renderCategories()}
       <h2>Sources</h2>

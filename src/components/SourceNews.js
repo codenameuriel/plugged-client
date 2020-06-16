@@ -13,7 +13,8 @@ class SourceNews extends Component {
       display = 
         <>
           <header className={SourceNewsStyles.header} >
-            <h1>Welcome to the source news</h1>
+            <h1>Source news</h1>
+            {sourceNews.length >0 && <p>News by {sourceNews[0].source.name}</p>}
           </header>
           <Nav links={links}/>
           <NewsMapper news={sourceNews} loggedInUser={loggedInUser} postArticle={postArticle}/>

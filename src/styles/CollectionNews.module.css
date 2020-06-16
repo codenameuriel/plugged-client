@@ -12,3 +12,7 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
+.span {
+  color: #32e0c4;
+}

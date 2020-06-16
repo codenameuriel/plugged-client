@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
 import SourcesStyles from '../styles/Sources.module.css'
+import Plug from '../assets/Plug.png'
 
 class Sources extends Component {
   state = {
@@ -52,7 +53,7 @@ class Sources extends Component {
                       history.push(`/source-news/${source.name.toLowerCase()}`)
                     }} 
                     className={SourcesStyles.img} 
-                    src={source.image_url} />
+                    src={source.image_url || Plug} />
                 <p>{source.description}</p>
                 <a className={SourcesStyles.a} target="_blank" rel="noopener noreferrer" href={source.url}>{source.url}</a>
               </div>

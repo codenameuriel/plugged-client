@@ -26,6 +26,7 @@
   width: 90%;
   height: 315px;
   border-radius: 30px;
+  background-color: #17191c;
 }
 
 .button {
@@ -55,3 +56,22 @@
 }
 
 /* 1bfad6; - darker turquois*/
+.tweet {
+  background-color: #1DA1F2;
+  border: none;
+  border-radius: 30px;
+  padding: 10px;
+  margin-left: 5px;
+  color: #eee;
+}
+
+.tweet:hover {
+  /* background-color: #1f9ff0; */
+  color: white;
+  background-color: #059dff;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.a {
+  color: white;
+}

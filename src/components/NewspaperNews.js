@@ -84,7 +84,8 @@ class NewspaperNews extends Component {
       display = 
         <>
         <header className={NewspaperNewsStyles.header} >
-          <h1>Welcome to your "{newspaper.title}" Newspaper</h1>
+          <h1>The {newspaper.title} Newspaper</h1>
+          <p>View your created newspaper</p>
         </header>
         <Nav links={links} />
         <h3 className={NewspaperNewsStyles.h3} >Categories</h3>
