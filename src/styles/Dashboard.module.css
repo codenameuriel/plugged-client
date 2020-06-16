@@ -1,7 +1,8 @@
 .header {
   font-size: 25px;
   text-align: center;
-  background-color: #393e46;
+  /* background-color: #393e46; */
+  background-color: #26292e;
   padding: 1px;
 }
 
@@ -15,17 +16,20 @@
 }
 
 .search[type=text]:hover {
-  background-color: #393e46;
+  /* background-color: #393e46; */
+  background-color: #26292e;
   border-bottom: 2px solid white;
 }
 
 .search[type=text]:focus {
-  background-color:  #393e46;
+  /* background-color:  #393e46; */
+  background-color: #26292e;
   color: white;
 }
 
 .submitBtn {
-  background-color: #393e46;
+  /* background-color: #393e46; */
+  background-color: #26292e;
   color: #eee;
   border: none;
   padding: 10px;

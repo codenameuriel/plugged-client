@@ -4,7 +4,7 @@
   margin: 50px auto;
   padding: 15px;
   text-align: center;
-  background-color: #393e46;
+  /* background-color: #393e46; */
   color: #eee;
   border-radius: 30px;
 
@@ -18,7 +18,8 @@
 .categoryCard:hover {
   /* transform: translateY(-60px); */
   /* transform: scale(1.15, 1.15); */
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+  box-shadow: 0 8px 16px 0 black;
 }
 
 .h3 {

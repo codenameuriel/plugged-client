@@ -46,8 +46,15 @@ class Sources extends Component {
                   getSourceNews(source.name)
                   history.push(`/source-news/${source.name.toLowerCase()}`)
                   }}>{source.name}</h4>
+                  <img
+                    onClick={() => {
+                      getSourceNews(source.name)
+                      history.push(`/source-news/${source.name.toLowerCase()}`)
+                    }} 
+                    className={SourcesStyles.img} 
+                    src={source.image_url} />
                 <p>{source.description}</p>
-                <a target="_blank" rel="noopener noreferrer" href={source.url}>{source.url}</a>
+                <a className={SourcesStyles.a} target="_blank" rel="noopener noreferrer" href={source.url}>{source.url}</a>
               </div>
             </div>
           )

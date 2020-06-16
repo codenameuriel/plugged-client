@@ -1,7 +1,8 @@
 .header {
   font-size: 25px;
   text-align: center;
-  background-color: #393e46;
+  /* background-color: #393e46; */
+  background-color: #26292e;
   padding: 1px;
 }
 
@@ -23,19 +24,22 @@
   width: 200px;
   padding: 12px 20px;
   margin: 8px 0;
-  border: 1px solid #393e46;
+  /* border: 1px solid #393e46; */
+  border: 1px solid #17191c;
   outline: none; 
   border-radius: 60px;
   background-color: #eee;
 }
 
 .input[type=text]:hover {
-  background-color: #393e46;
+  /* background-color: #393e46; */
+  background-color: #26292e;
   border-bottom: 2px solid #32e0c4;
 }
 
 .input[type=text]:focus {
-  background-color:  #393e46;
+  /* background-color:  #393e46; */
+  background-color: #26292e;
   border-bottom: 2px solid #32e0c4;
   color: white; 
   font-size: large;
@@ -46,19 +50,22 @@
   width: 200px;
   padding: 12px 20px;
   margin: 8px 0;
-  border: 1px solid #393e46;
+  /* border: 1px solid #393e46; */
+  border: 1px solid #17191c;
   outline: none; 
   border-radius: 60px;
   background-color: #eee;
 }
 
 .input[type=password]:hover {
-  background-color: #393e46;
+  /* background-color: #393e46; */
+  background-color: #26292e;
   border-bottom: 2px solid #32e0c4;
 }
 
 .input[type=password]:focus {
-  background-color:  #393e46;
+  /* background-color:  #393e46; */
+  background-color: #26292e;
   border-bottom: 2px solid #32e0c4;
   color: white;
   font-size: large;
