@@ -46,7 +46,7 @@ class NewspaperNews extends Component {
 
   renderByCategories = category => {
     return (
-      fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=3&page=1`, apiKey)
+      fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=6&page=1`, apiKey)
       .then(resp => resp.json())
       .then(data => this.setCategories(data.articles))  
     ) 
@@ -61,7 +61,7 @@ class NewspaperNews extends Component {
     }
 
     return (
-      fetch(`https://newsapi.org/v2/top-headlines?sources=${parsedSource}&pageSize=3&page=1`, apiKey)
+      fetch(`https://newsapi.org/v2/top-headlines?sources=${parsedSource}&pageSize=6&page=1`, apiKey)
       .then(resp => resp.json())
       .then(data => this.setSources(data.articles))  
     ) 
@@ -69,7 +69,7 @@ class NewspaperNews extends Component {
 
   renderByTopics = topic => {
     return (
-      fetch(`https://newsapi.org/v2/everything?q=${topic}&pageSize=3&page=1`, apiKey)
+      fetch(`https://newsapi.org/v2/everything?q=${topic}&pageSize=6&page=1`, apiKey)
       .then(resp => resp.json())
       .then(data => this.setTopics(data.articles))  
     ) 
