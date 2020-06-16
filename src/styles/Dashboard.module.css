@@ -11,14 +11,14 @@
   margin: 12px 8px 10px 245px;
   border: none;
   outline: none; 
-  border-radius: 60px;
+  border-radius: 30px;
   background-color: #eee;
 }
 
 .search[type=text]:hover {
   /* background-color: #393e46; */
   background-color: #26292e;
-  border-bottom: 2px solid white;
+  /* border-bottom: 2px solid white; */
 }
 
 .search[type=text]:focus {
@@ -37,7 +37,7 @@
   text-decoration: none;
   font-size: 13px;
   display: inline-block;
-  border-radius: 60px;
+  border-radius: 30px;
   cursor: pointer;
   outline: none;
 /* 

@@ -1,5 +1,6 @@
 import React from 'react'
 import NewspaperTile from './NewspaperTile'
+import NewspaperMapperStyles from "../styles/NewspaperMapper.module.css"
 
 const NewspaperMapper = ({ newspapers, setNewspaper, history }) => {
   // console.log(newspapers)
@@ -10,7 +11,7 @@ const NewspaperMapper = ({ newspapers, setNewspaper, history }) => {
   }
 
   return (
-    <div>
+    <div className={NewspaperMapperStyles.container} >
       {renderNewspaperTiles()}
     </div>
   )

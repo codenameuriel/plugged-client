@@ -58,7 +58,7 @@ class TopNews extends Component {
     return (
       <div>
           <header className={TopNewsStyles.header} >
-            <h1>Trending Stories</h1>
+            <h1>Top Headlines</h1>
             <p>{jumbotronMessage}</p>
           </header>
         <Nav 

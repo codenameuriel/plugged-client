@@ -3,6 +3,7 @@ import { apiKey } from '../apiKey'
 import NewsMapper from './NewsMapper'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
+import NewspaperNewsStyles from "../styles/NewspaperNews.module.css"
 
 class NewspaperNews extends Component {
   state = {
@@ -82,18 +83,19 @@ class NewspaperNews extends Component {
     if (categories.length >= 1 || sources.length >= 1 || topics.length >= 1) {
       display = 
         <>
-        <h1>Welcome to your "{newspaper.title}" Newspaper</h1>
+        <header className={NewspaperNewsStyles.header} >
+          <h1>Welcome to your "{newspaper.title}" Newspaper</h1>
+        </header>
         <Nav links={links} />
-        <hr />
-        <h3>Categories</h3>
+        <h3 className={NewspaperNewsStyles.h3} >Categories</h3>
            {categories.length >= 1 ? <NewsMapper news={categories} loggedInUser={loggedInUser} postArticle={postArticle} /> 
            : <h5>Sorry no news were found for your categories</h5>
            }
-        <h3>Sources</h3>
+        <h3 className={NewspaperNewsStyles.h3} >Sources</h3>
            {sources.length >= 1 ? <NewsMapper news={sources} loggedInUser={loggedInUser} postArticle={postArticle} /> 
            : <h5>Sorry no news were found for your sources</h5>
            }
-        <h3>Topics</h3>
+        <h3 className={NewspaperNewsStyles.h3} >Topics</h3>
            {topics.length >= 1 ? <NewsMapper news={topics} loggedInUser={loggedInUser} postArticle={postArticle} />
            : <h5>Sorry no news were found for your topics</h5>
            }

@@ -1,11 +1,12 @@
 import React from 'react'
+import NewspaperTileStyles from "../styles/NewspaperTile.module.css"
 
 const NewspaperTile = ({ newspaper, setNewspaper, history }) => {
   const renderCategories = () => {
     return newspaper.categories.map(category => {
       return (
         <>
-          <p>{category.name}</p>
+          <p className={NewspaperTileStyles.p} >{category.name}</p>
         </>
       )
     })
@@ -15,7 +16,7 @@ const NewspaperTile = ({ newspaper, setNewspaper, history }) => {
     return newspaper.sources.map(source => {
       return (
         <>
-          <p>{source.name}</p>
+          <p className={NewspaperTileStyles.p} >{source.name}</p>
         </>
       )
     })
@@ -25,25 +26,27 @@ const NewspaperTile = ({ newspaper, setNewspaper, history }) => {
     return newspaper.topics.map(topic => {
       return (
         <>
-          <p>{topic.name}</p>
+          <p className={NewspaperTileStyles.p} >{topic.name}</p>
         </>
       )
     })
   }
 
   return (
-    <div onClick={() => {
-      setNewspaper(newspaper.title)
-      history.push(`/newspapers/${newspaper.title}`)
+    <div
+      className={NewspaperTileStyles.newspaperCard} 
+      onClick={() => {
+        setNewspaper(newspaper.title)
+        history.push(`/newspapers/${newspaper.title}`)
       }} >
-      <h1>The {newspaper.title} Plug</h1>
-      <h3>Categories</h3>
+      <h1 className={NewspaperTileStyles.h1} >The {newspaper.title} Plug</h1>
+      <h2>Categories</h2>
       {renderCategories()}
-      <h3>Sources</h3>
+      <h2>Sources</h2>
       {renderSources()}
-      <h3>Topics</h3>
+      <h2>Topics</h2>
       {renderTopics()}
-      <h5>Published: {newspaper.created_at}</h5>
+      {/* <h5>Published: {(date.getMonth() + 1) (newspaper.created_at.slice(0, 10).getDay() + 1), (newspaper.created_at.slice(0, 10).getFullYear())}</h5> */}
     </div>
   )
 }

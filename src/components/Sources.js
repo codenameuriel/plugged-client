@@ -71,7 +71,8 @@ class Sources extends Component {
       display = 
         <>
           <header className={SourcesStyles.header} >
-            <h1>Search for your news by Sources</h1>
+            <h1>Sources</h1>
+            <p>Search your news by sources</p>
           </header>
           <Nav links={links} />
           <div>

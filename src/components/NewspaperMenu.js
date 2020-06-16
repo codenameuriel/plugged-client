@@ -113,12 +113,11 @@ class NewspaperMenu extends Component {
     return addedTopics.map(t => {
       return (
         <>
-          <p onClick={() => this.removeFromAddedTopics(t)} >"{t}"</p>
+          <p className={NewspaperMenuStyles.topics} onClick={() => this.removeFromAddedTopics(t)} >"{t}"</p>
         </>
       )  
     })
   }
-
 
   renderSourcesForm = () => {
     const { sources, sourceNames } = this.state
@@ -126,11 +125,13 @@ class NewspaperMenu extends Component {
       return (
         <>
           <input
+            className={NewspaperMenuStyles.checkbox}
             onChange={this.handleSourcesFormCheck}
             checked={sourceNames.find(sn => sn === source.name) && "checked"}
             type="checkbox" 
             name="sources" 
-            value={source.name} />{source.name}<br />
+            value={source.name} />
+          <label className={NewspaperMenuStyles.sourceOption} >{source.name}</label><br />
         </>
       )
     })
@@ -161,22 +162,29 @@ class NewspaperMenu extends Component {
   renderForm = () => {
     return (
       <>
-        <form onSubmit={this.handleFormSubmit} >
-          <label>Title: </label>
-          <input onChange={this.handleTitleChange} type="text" value={this.state.title} required/>
+        <form className={NewspaperMenuStyles.form} onSubmit={this.handleFormSubmit} >
+          <label className={NewspaperMenuStyles.label} >Title: </label><br />
+          <input className={NewspaperMenuStyles.input} onChange={this.handleTitleChange} type="text" value={this.state.title} required/>
+          <br />
   
           <fieldset onChange={this.addCategories}>      
-              <legend>Select Categories: </legend>      
-              <input type="checkbox" name="categories" value="Business" />Business<br />      
-              <input type="checkbox" name="categories" value="Entertainment" />Entertainment<br />      
-              <input type="checkbox" name="categories" value="Health" />Health<br />       
-              <input type="checkbox" name="categories" value="Science" />Science<br />         
-              <input type="checkbox" name="categories" value="Sports" />Sports<br />       
-              <input type="checkbox" name="categories" value="Technology" />Technology<br />         
-          </fieldset> 
+              <label className={NewspaperMenuStyles.label}>Select Categories: </label><br /><br />      
+              <input className={NewspaperMenuStyles.checkbox} type="checkbox" name="categories" value="Business" />
+              <label className={NewspaperMenuStyles.business} >Business</label><br />      
+              <input className={NewspaperMenuStyles.checkbox} type="checkbox" name="categories" value="Entertainment" />
+              <label className={NewspaperMenuStyles.entertainment} >Entertainment</label><br />      
+              <input className={NewspaperMenuStyles.checkbox} type="checkbox" name="categories" value="Health" />
+              <label className={NewspaperMenuStyles.health} >Health</label><br />       
+              <input className={NewspaperMenuStyles.checkbox} type="checkbox" name="categories" value="Science" />
+              <label className={NewspaperMenuStyles.science} >Science</label><br />         
+              <input className={NewspaperMenuStyles.checkbox} type="checkbox" name="categories" value="Sports" />
+              <label className={NewspaperMenuStyles.sports} >Sports</label><br />       
+              <input className={NewspaperMenuStyles.checkbox} type="checkbox" name="categories" value="Technology" />
+              <label className={NewspaperMenuStyles.technology} >Technology</label><br />         
+          </fieldset><br />
 
-          <label>Select Sources by Category: </label>
-          <select onChange={this.handleCategoryChange} >
+          <label className={NewspaperMenuStyles.label} >Select Sources by Category: </label><br /><br />
+          <select className={NewspaperMenuStyles.select} onChange={this.handleCategoryChange} >
             <option value="Select" >Select Category</option>
             <option value="Business" >Business</option>
             <option value="Entertainment" >Entertainment</option>
@@ -187,16 +195,19 @@ class NewspaperMenu extends Component {
           </select>
 
         
-          {this.state.renderSourceForm && 
-          <fieldset>
-            {this.renderSourcesForm()}
-          </fieldset>
+          {this.state.renderSourceForm &&
+          <>
+            <br /><br />
+            <fieldset>
+              {this.renderSourcesForm()}
+            </fieldset>
+          </>
           }    
          
-
-          <label>Add a Topic</label>
-          <input onChange={this.handleTopicChange} type="text" value={this.state.topic} />
-          <button onClick={this.addTopic} >Add</button><br /><br />
+          <br /><br/>
+          <label className={NewspaperMenuStyles.label} >Add a Topic: </label><br />
+          <input className={NewspaperMenuStyles.input} onChange={this.handleTopicChange} type="text" value={this.state.topic} />
+          <button className={NewspaperMenuStyles.addBtn} onClick={this.addTopic} >Add</button><br />
 
           {this.state.addedTopics.length > 0 &&
           <> 
@@ -205,7 +216,7 @@ class NewspaperMenu extends Component {
           </>
           }
 
-          <input onClick={() => {
+          <input className={NewspaperMenuStyles.build} onClick={() => {
             alert(`You've just created the ${this.state.title} newspaper`)
             // this.toggleViewForm()
             }} type="submit" value="Build Newspaper"/>     
@@ -226,11 +237,13 @@ class NewspaperMenu extends Component {
       <>
         <header className={NewspaperMenuStyles.header} >
           <h1>Welcome to your Newspaper Collection</h1>
-          <p>Here you can build or view your newspapers</p>
+          <p>Build or view your newspapers</p>
         </header>
         <Nav links={links} />
         <button className={NewspaperMenuStyles.button} onClick={this.toggleViewForm}>{viewForm ? "Close Form" : "Build a Newspaper"}</button><br /><br />
         {viewForm && this.renderForm()}
+      
+        
         {loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
           newspapers={loggedInUsersNewspapers} setNewspaper={setNewspaper} history={history} /> : noNewspapers}
       </>

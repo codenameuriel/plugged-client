@@ -1,0 +1,29 @@
+.newspaperCard {
+  width: 26%;
+  margin: 50px auto;
+  padding: 15px;
+  text-align: center;
+  /* background-color: #393e46; */
+  background-color: #26292e;
+  color: #eee;
+  border-radius: 30px;
+
+  order: 3;
+  flex-basis: auto; 
+}
+
+.newspaperCard:hover {
+  /* transform: translateY(-60px); */
+  /* transform: scale(1.15, 1.15); */
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+  box-shadow: 0 8px 16px 0 black;
+  cursor: pointer;
+}
+
+.p {
+  color: #32e0c4;
+}
+
+.h1 {
+  font-size: 38px;
+}
