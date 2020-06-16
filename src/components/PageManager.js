@@ -175,7 +175,7 @@ class PageManager extends Component {
       topicNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout]
       sourceLinks = [dashboard, topNews, categories, collection, newspapers, logout, account]
       sourceNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, account, logout].reverse()
-      newspapersMenuLinks = [dashboard, topNews, categories, sources, collection, account, logout].reverse()
+      newspapersMenuLinks = [dashboard, topNews, categories, sources, collection, logout, account]
       newspapersNewsLinks = [dashboard, topNews, categories, sources, collection, newspapers, logout, account].reverse()
     } else {
       topNewsLinks = [signup, login]

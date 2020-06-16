@@ -30,6 +30,9 @@ function NewsCard({author, content, publishedAt, source, title, description, url
       <a target="_blank" rel="noopener noreferrer" href={url}><img className={NewsCardStyles.img} src={urlToImage || Plug} alt={title}/></a>
       <p>{description}</p>
       {button}
+      <button><a target="_blank" rel="noopener noreferrer" href={`https://twitter.com/intent/tweet?text=I just want to share this article I just read ${url}`} class="twitter-share-button" data-show-count="false"
+      data-size="large" data-text="I just want to share this article" data-via="codenameuriel" data-lang="en"
+      >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></button>
     </div>
   )
 }

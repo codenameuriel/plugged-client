@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
 import NewspaperMapper from './NewspaperMapper'
+import NewspaperMenuStyles from '../styles/NewspaperMenu.module.css'
 
 class NewspaperMenu extends Component {
   state = {
@@ -223,10 +224,12 @@ class NewspaperMenu extends Component {
     if (loggedInUser.username) {
       display = 
       <>
-        <h1>Welcome to your Newspaper Collection</h1>
-        <p>Here you can build or view your newspapers</p>
+        <header className={NewspaperMenuStyles.header} >
+          <h1>Welcome to your Newspaper Collection</h1>
+          <p>Here you can build or view your newspapers</p>
+        </header>
         <Nav links={links} />
-        <button onClick={this.toggleViewForm}>{viewForm ? "Close Form" : "Build a Newspaper"}</button><br /><br />
+        <button className={NewspaperMenuStyles.button} onClick={this.toggleViewForm}>{viewForm ? "Close Form" : "Build a Newspaper"}</button><br /><br />
         {viewForm && this.renderForm()}
         {loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
           newspapers={loggedInUsersNewspapers} setNewspaper={setNewspaper} history={history} /> : noNewspapers}
@@ -234,7 +237,6 @@ class NewspaperMenu extends Component {
     } else if (!loggedInUser.username) {
       display = 
         <>
-          <Nav links={links}/>
           <h1><Link to="/login">Log in</Link> to view your newspapers</h1>
         </>
     }
