@@ -125,30 +125,30 @@
 
 .business {
   position: fixed;
-  top: 212px;
+  top: 216px;
 } 
 
 .entertainment {
   position: fixed;
-  top: 243px;
+  top: 246px;
 }
 
 .health {
   position: fixed;
-  top: 273px;
+  top: 276px;
 }
 
 .science {
   position: fixed;
-  top: 302px;
+  top: 306px;
 }
 
 .sports {
   position: fixed;
-  top: 332px;
+  top: 336px;
 }
 
 .technology {
   position: fixed;
-  top: 365px;
+  top: 366px;
 }

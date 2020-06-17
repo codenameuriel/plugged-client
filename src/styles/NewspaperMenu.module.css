@@ -178,32 +178,32 @@ fieldset {
 }
 
 .business {
-  top: 165px;
+  top: 168px;
   position: fixed;
 }
 
 .entertainment {
   position: fixed;
-  top: 195px;
+  top: 198px;
 }
 
 .health {
-  top: 225px;
+  top: 228px;
   position: fixed;
 }
 
 .science {
-  top: 255px;
+  top: 258px;
   position: fixed;
 }
 
 .sports {
-  top: 285px;
+  top: 288px;
   position: fixed;
 }
 
 .technology {
-  top: 315px;
+  top: 318px;
   position: fixed;
 }
 

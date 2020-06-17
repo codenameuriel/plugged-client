@@ -163,7 +163,7 @@ class NewspaperMenu extends Component {
     return (
       <>
         <form className={NewspaperMenuStyles.form} onSubmit={this.handleFormSubmit} >
-          <label className={NewspaperMenuStyles.label} >Title: </label><br />
+          <label className={NewspaperMenuStyles.label} >Newspaper Title: </label><br />
           <input className={NewspaperMenuStyles.input} onChange={this.handleTitleChange} type="text" value={this.state.title} required/>
           <br />
   
