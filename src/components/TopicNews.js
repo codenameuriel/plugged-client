@@ -13,7 +13,8 @@ class TopicNews extends Component {
     display = 
       <>
         <header className={TopicNewsStyles.header} >
-          <h1>Here's the latest on "{searchTopic}"</h1>
+          <h1>Topic News</h1>
+          {/* <p>Here's the latest on "{searchTopic}"</p> */}
         </header>
         <Nav links={links} />
         <NewsMapper 
@@ -24,7 +25,7 @@ class TopicNews extends Component {
       </>
     } else if (!loggedInUser.username) {
       display = 
-        <h1><Link to="/login">Log in</Link> to search for news</h1>
+        <h3 className={TopicNewsStyles.h3} ><Link className={TopicNewsStyles.link} to="/login">Log in</Link> to search for news</h3>
     } else if (topicNews.length < 1) {
       display = 
         <>

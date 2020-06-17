@@ -21,7 +21,7 @@ class Account extends Component {
       accountView = 
         <>
           <header className={AccountStyles.header} >
-            <h1><span className={AccountStyles.span} >{loggedInUser.username}'s </span>Account</h1>
+            <h1><span className={AccountStyles.span} >{loggedInUser.username}</span>'s Account</h1>
             <p>You can edit your subscriptions and newspapers</p>
           </header>
           <Nav links={links} />
@@ -32,21 +32,30 @@ class Account extends Component {
           }}>
             {/* <label>Change your password: </label>
             <input type="password" /> */}
-            <h3>Current category subscriptions</h3>
-            <h5>Select to unsubscribe</h5>
-            {this.renderCategories()}
-            <input type="submit" />
+            <h3 className={AccountStyles.h3} >Current subscriptions</h3>
+            <div className={AccountStyles.div} >
+              <h5 className={AccountStyles.h5} >Select to unsubscribe:</h5>
+              <fieldset className={AccountStyles.accountFieldset} >
+                <h6 className={AccountStyles.h6} >Categories</h6>
+                {this.renderCategories()}
+              </fieldset><br />
+              <input className={AccountStyles.unsubscribe} type="submit" value="Unsubscribe" />
+            </div>
+            
           </form>
         </>
     } else if (loggedInUser.username && loggedInUser.categories.length === 0) {
       accountView = 
         <>
+          <header className={AccountStyles.header} >
+            <h1><span className={AccountStyles.span} >{loggedInUser.username}</span>'s Account</h1>
+            <p>You can edit your subscriptions and newspapers</p>
+          </header>
           <Nav links={links} />
-          <h1>Welcome to your Account, {loggedInUser.username}</h1>
-          <h3>You're not currently subscribed to any Categories</h3>
+          <h3 className={AccountStyles.h3} >You're not currently subscribed to any news</h3>
         </>
     } else {
-      accountView = <h1><Link to="/login">Log in</Link> to edit your Account</h1>
+      accountView = <h1 className={AccountStyles.h1} ><Link className={AccountStyles.link} to="/login">Log in</Link> to edit your Account</h1>
     }
     return accountView
   }

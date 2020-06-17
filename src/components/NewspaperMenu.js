@@ -244,13 +244,13 @@ class NewspaperMenu extends Component {
         {viewForm && this.renderForm()}
       
         
-        {loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
+        {loggedInUsersNewspapers !== undefined || loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
           newspapers={loggedInUsersNewspapers} setNewspaper={setNewspaper} history={history} /> : noNewspapers}
       </>
     } else if (!loggedInUser.username) {
       display = 
         <>
-          <h1><Link to="/login">Log in</Link> to view your newspapers</h1>
+          <h3 className={NewspaperMenuStyles.h3} ><Link className={NewspaperMenuStyles.link} to="/login">Log in</Link> to view your newspapers</h3>
         </>
     }
     return display

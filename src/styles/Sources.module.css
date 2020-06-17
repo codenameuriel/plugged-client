@@ -75,3 +75,12 @@ a {
 .a:visited {
   color: #32e0c4;
 }
+
+.h3 {
+  text-align: -webkit-center;
+  font-size: 40px;
+}
+
+.link {
+  color: #32e0c4;
+}

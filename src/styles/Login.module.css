@@ -42,7 +42,7 @@
   background-color: #26292e;
   border-bottom: 2px solid #32e0c4;
   color: white; 
-  font-size: large;
+  /* font-size: large; */
 }
 
 .input[type=password] {
@@ -68,7 +68,7 @@
   background-color: #26292e;
   border-bottom: 2px solid #32e0c4;
   color: white;
-  font-size: large;
+  /* font-size: large; */
 }
 
 .submitBtn {

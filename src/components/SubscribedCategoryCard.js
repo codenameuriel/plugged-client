@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SubscribedCategoryCardStyles from "../styles/SubscribedCategoryCard.module.css"
 
 class SubscribedCategoryCard extends Component {
   state = {
@@ -26,7 +27,7 @@ class SubscribedCategoryCard extends Component {
 
     return (
       <div>
-         <p 
+         <p className={SubscribedCategoryCardStyles.p}
           onClick={this.toggleStrike}>{strike ?  <s>{category}</s> : category}
         </p>
       </div>

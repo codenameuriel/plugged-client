@@ -108,13 +108,16 @@ class Dashboard extends Component {
           <Nav links={links} search={search} searchBtn={searchBtn} />
         </>
     } else if (!loggedInUser.username) {
-      dashboardDisplay = <h1><Link to="/login">Log in</Link> to see your top news</h1>
+      dashboardDisplay = <h1 className={DashboardStyles.h1} ><Link className={DashboardStyles.link} to="/login">Log in</Link> to see your top news</h1>
     } else {
       dashboardDisplay = 
         <>
+          <header className={DashboardStyles.header} >
+            <h1>Dashboard</h1>
+            <p>You are not subscribed to any news <span className={DashboardStyles.span} >{loggedInUser.username}</span></p>
+          </header>
           <Nav links={links} search={search} searchBtn={searchBtn} />
-          <h1>You are not subscribed to any news categories</h1>
-          <p><Link to="/categories">Subscribe</Link> to categories here!</p>
+          <h3 className={DashboardStyles.h3} ><Link className={DashboardStyles.link} to="/categories">Subscribe</Link> to news here</h3>
         </>
     }
     

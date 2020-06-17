@@ -130,6 +130,7 @@ class PageManager extends Component {
     .then(data => this.setState({
       topicNews: data.articles
     }))
+    .then(this.clearSearch())
   }
 
   getSourceNews = source => {

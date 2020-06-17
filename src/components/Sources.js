@@ -96,7 +96,7 @@ class Sources extends Component {
     } else {
       display = 
         <>
-          <h1><Link to="/login">Log in</Link> to see your news by sources</h1>
+          <h3 className={SourcesStyles.h3} ><Link className={SourcesStyles.link} to="/login">Log in</Link> to see your news by sources</h3>
         </>
     }
     return display

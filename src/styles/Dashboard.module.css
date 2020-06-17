@@ -63,8 +63,18 @@
 
 .h2 {
   text-align: -webkit-center;
+  /* font-size: 40px; */
 }
 
 .span {
+  color: #32e0c4;
+}
+
+.h3{
+  text-align: -webkit-center;
+  font-size: 30px;
+}
+
+.link {
   color: #32e0c4;
 }

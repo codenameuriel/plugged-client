@@ -48,7 +48,9 @@ class TopNews extends Component {
     let nextPageInnerText = `Go to Page ${page + 1}`
 
     if (!loggedInUser.username) {
-      jumbotronMessage = 'Log in or create an account to get your news'
+      jumbotronMessage = 'Log in or sign up to get your news'
+    } else if (loggedInUser.username) {
+      jumbotronMessage = 'Live and breaking headlines'
     }
 
     if (lastPage) {

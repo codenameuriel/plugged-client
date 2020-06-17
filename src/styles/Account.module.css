@@ -9,3 +9,66 @@
 .span {
   color: #32e0c4;
 }
+
+.h3 {
+  text-align: center;
+  font-size: 30px;
+}
+
+.h5 {
+  text-align: center;
+  font-size: 25px;
+}
+
+.div {
+  text-align: center;
+}
+
+.accountFieldset {
+  border-color: #32e0c4;
+  /* width: 150px; */
+  width: 250px;
+  /* margin-left: 810px; */
+  margin-left: 750px;
+  background-color: #1f2225;
+}
+
+.h6 {
+  font-size: 28px;
+  margin-top: 25px;
+}
+
+.unsubscribe {
+  background-color: #32e0c4;
+  color: #eee;
+  border: none;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-block;
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+}
+
+.unsubscribe:hover {
+  background-color: #1bfad6;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.unsubscribe:active {
+  background-color: #32e0c4;
+  color: #eee;
+  transform: translateY(4px);
+}
+
+.h1 {
+  text-align: -webkit-center;
+  font-size: 40px;
+}
+
+.link {
+  color: #32e0c4;
+}
