@@ -8,7 +8,7 @@
 
 .search[type=text] {
   padding: 10px 15px;
-  margin: 12px 8px 10px 245px;
+  margin: 12px 8px 10px 220px;
   border: none;
   outline: none; 
   border-radius: 30px;
@@ -77,4 +77,9 @@
 
 .link {
   color: #32e0c4;
+}
+
+.h5 {
+  text-align: -webkit-center;
+  font-size: 50px;
 }

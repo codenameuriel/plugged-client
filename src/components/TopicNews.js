@@ -25,7 +25,7 @@ class TopicNews extends Component {
       </>
     } else if (!loggedInUser.username) {
       display = 
-        <h3 className={TopicNewsStyles.h3} ><Link className={TopicNewsStyles.link} to="/login">Log in</Link> to search for news</h3>
+        <h5 className={TopicNewsStyles.h5} ><Link className={TopicNewsStyles.link} to="/login">Log in</Link> to search for news</h5>
     } else if (topicNews.length < 1) {
       display = 
         <>

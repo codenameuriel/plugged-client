@@ -25,3 +25,8 @@
 .link {
   color: #32e0c4;
 }
+
+.h5 {
+  text-align: -webkit-center;
+  font-size: 50px;
+}

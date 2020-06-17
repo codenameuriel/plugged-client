@@ -230,7 +230,7 @@ class NewspaperMenu extends Component {
     const { viewForm } = this.state
     let display;
     let noNewspapers = 
-      <h3>You currently don't have any newspapers</h3>
+      <h3 className={NewspaperMenuStyles.h3} >You currently don't have any newspapers</h3>
   
     if (loggedInUser.username) {
       display = 
@@ -243,14 +243,13 @@ class NewspaperMenu extends Component {
         <button className={NewspaperMenuStyles.button} onClick={this.toggleViewForm}>{viewForm ? "Close Form" : "Build a Newspaper"}</button><br /><br />
         {viewForm && this.renderForm()}
       
-        
-        {loggedInUsersNewspapers !== undefined || loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
+        {loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
           newspapers={loggedInUsersNewspapers} setNewspaper={setNewspaper} history={history} /> : noNewspapers}
       </>
     } else if (!loggedInUser.username) {
       display = 
         <>
-          <h3 className={NewspaperMenuStyles.h3} ><Link className={NewspaperMenuStyles.link} to="/login">Log in</Link> to view your newspapers</h3>
+          <h5 className={NewspaperMenuStyles.h5} ><Link className={NewspaperMenuStyles.link} to="/login">Log in</Link> to view your newspapers</h5>
         </>
     }
     return display

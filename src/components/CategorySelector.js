@@ -33,7 +33,7 @@ const CategorySelector = ({history, links, loggedInUser, subscribeToCategory}) =
           </div>
         </React.Fragment>
     } else {
-      display = <h3 className={CategorySelectorStyles.h3} ><Link className={CategorySelectorStyles.link} to="/login">Log in</Link> to see the news by category</h3>
+      display = <h5 className={CategorySelectorStyles.h5} ><Link className={CategorySelectorStyles.link} to="/login">Log in</Link> to see the news by category</h5>
     }
     return display
   }

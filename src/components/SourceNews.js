@@ -22,7 +22,7 @@ class SourceNews extends Component {
     } else {
       display = 
         <>
-          <h1><Link to="/login">Log in</Link> to view your source news</h1>
+          <h5 className={SourceNewsStyles.h5} ><Link className={SourceNewsStyles.link} to="/login">Log in</Link> to view your source news</h5>
         </>
     }
     return display

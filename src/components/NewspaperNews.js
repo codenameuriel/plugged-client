@@ -103,7 +103,7 @@ class NewspaperNews extends Component {
         </>
     } else {
       display = 
-        <h1><Link to="/login">Log in</Link> to view your newspapers</h1>
+        <h5 className={NewspaperNewsStyles.h5} ><Link className={NewspaperNewsStyles.link} to="/login">Log in</Link> to view your newspapers</h5>
     }
 
     return (

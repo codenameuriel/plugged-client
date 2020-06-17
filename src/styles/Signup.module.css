@@ -29,6 +29,7 @@
   outline: none; 
   border-radius: 30px;
   background-color: #eee;
+  border: 2px solid #eee;
 }
 
 .input[type=text]:hover {
@@ -55,6 +56,7 @@
   outline: none; 
   border-radius: 30px;
   background-color: #eee;
+  border: 2px solid #eee;
 }
 
 .input[type=password]:hover {
@@ -123,30 +125,30 @@
 
 .business {
   position: fixed;
-  top: 208px;
+  top: 212px;
 } 
 
 .entertainment {
   position: fixed;
-  top: 237px;
+  top: 243px;
 }
 
 .health {
   position: fixed;
-  top: 266px;
+  top: 273px;
 }
 
 .science {
   position: fixed;
-  top: 295px;
+  top: 302px;
 }
 
 .sports {
   position: fixed;
-  top: 324px;
+  top: 332px;
 }
 
 .technology {
   position: fixed;
-  top: 353px;
+  top: 365px;
 }

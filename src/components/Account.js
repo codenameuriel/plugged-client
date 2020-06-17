@@ -55,7 +55,7 @@ class Account extends Component {
           <h3 className={AccountStyles.h3} >You're not currently subscribed to any news</h3>
         </>
     } else {
-      accountView = <h1 className={AccountStyles.h1} ><Link className={AccountStyles.link} to="/login">Log in</Link> to edit your Account</h1>
+      accountView = <h5 className={AccountStyles.h5} ><Link className={AccountStyles.link} to="/login">Log in</Link> to edit your Account</h5>
     }
     return accountView
   }

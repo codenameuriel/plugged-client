@@ -76,6 +76,7 @@
   outline: none; 
   border-radius: 30px;
   background-color: #eee;
+  border: 2px solid #eee;
 }
 
 .input[type=text]:hover {
@@ -102,6 +103,7 @@
   outline: none; 
   border-radius: 30px;
   background-color: #eee;
+  border: 2px solid #eee;
 }
 
 .input[type=password]:hover {
@@ -176,32 +178,32 @@ fieldset {
 }
 
 .business {
-  top: 163px;
+  top: 165px;
   position: fixed;
 }
 
 .entertainment {
   position: fixed;
-  top: 192px;
+  top: 195px;
 }
 
 .health {
-  top: 221px;
+  top: 225px;
   position: fixed;
 }
 
 .science {
-  top: 250px;
+  top: 255px;
   position: fixed;
 }
 
 .sports {
-  top: 279px;
+  top: 285px;
   position: fixed;
 }
 
 .technology {
-  top: 308px;
+  top: 315px;
   position: fixed;
 }
 
@@ -320,9 +322,23 @@ fieldset {
 
 .h3 {
   text-align: -webkit-center;
+  font-size: 30px;
+}
+
+.link {
+  color: #32e0c4;
+}
+
+.h1 {
+  text-align: -webkit-center;
   font-size: 40px;
 }
 
 .link {
   color: #32e0c4;
+}
+
+.h5 {
+  text-align: -webkit-center;
+  font-size: 50px;
 }

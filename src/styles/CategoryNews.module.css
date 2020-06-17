@@ -32,3 +32,12 @@
   color: #eee;
   transform: translateY(4px);
 }
+
+.h5 {
+  text-align: -webkit-center;
+  font-size: 50px;
+}
+
+.link {
+  color: #32e0c4;
+}

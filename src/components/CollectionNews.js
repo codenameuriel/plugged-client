@@ -148,7 +148,7 @@ class CollectionNews extends Component {
             <button onClick={nextPage} >{nextPageInnerText}</button> */}
         </>
     } else if (!loggedInUser.username) {
-      collectionDisplay = <h3 className={CollectionNewsStyles.h3} ><Link className={CollectionNewsStyles.link} to="/login">Log in</Link> to see your saved news</h3>
+      collectionDisplay = <h5 className={CollectionNewsStyles.h5} ><Link className={CollectionNewsStyles.link} to="/login">Log in</Link> to see your saved news</h5>
     } else {
       collectionDisplay = 
         <>
