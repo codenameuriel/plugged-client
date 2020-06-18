@@ -31,19 +31,19 @@ class PageManager extends Component {
     sourceNews: []
   }
 
-  componentDidUpdate = (prevState) => {
-    // if (this.state.currentPage !== prevState.currentPage) {
-    //   this.setState({
-    //     page: 1
-    //   })
-    // }
-  }
+  // componentDidUpdate = (prevState) => {
+  //   // if (this.state.currentPage !== prevState.currentPage) {
+  //   //   this.setState({
+  //   //     page: 1
+  //   //   })
+  //   // }
+  // }
   
-  setCurrentPage = url => {
-    this.setState({
-      currentPage: url
-    })
-  }
+  // setCurrentPage = url => {
+  //   this.setState({
+  //     currentPage: url
+  //   })
+  // }
 
   setTotalResults = total => {
     this.setState({
@@ -101,6 +101,38 @@ class PageManager extends Component {
     }
   }
 
+  topicNextPage = () => {
+    const { page, totalResults } = this.state
+    let lastPage;
+    
+    if (totalResults % 9 === 0) {
+      lastPage = totalResults / 9
+    } else if (totalResults % 9 !== 0) {
+      lastPage = Math.ceil(totalResults / 9)
+    }
+
+    if (page === lastPage) {
+      this.setState({
+        page: 1
+      }, () => {
+        this.togglePrevPageButton()
+        this.toggleLastPage()
+      })
+    } else {
+      this.setState({
+        page: page + 1
+      }, () => {
+        this.togglePrevPageButton()
+      })
+    }
+
+    if (page === lastPage - 1) {
+      this.toggleLastPage()
+    }
+
+    this.getTopicNews()
+  }
+
   prevPage = () => {
     let page = this.state.page
     if (page !== 1) {
@@ -110,6 +142,19 @@ class PageManager extends Component {
         this.togglePrevPageButton()
       })
     }
+  }
+
+  topicPrevPage = () => {
+    let page = this.state.page
+    if (page !== 1) {
+      this.setState({
+        page: page - 1
+      }, () => {
+        this.togglePrevPageButton()
+      })
+    }
+
+    this.getTopicNews()
   }
 
   handleSearchChange = event => {
@@ -125,11 +170,13 @@ class PageManager extends Component {
   }
 
   getTopicNews = search => {
-    fetch(`https://newsapi.org/v2/everything?q=${search}&pageSize=9&page=1`, apiKey)
+    const { page } = this.state
+
+    fetch(`https://newsapi.org/v2/everything?q=${search}&language=en&pageSize=9&page=${page}`, apiKey)
     .then(resp => resp.json())
     .then(data => this.setState({
       topicNews: data.articles
-    }))
+    }, () => this.setTotalResults(data.totalResults)))
     .then(this.clearSearch())
   }
 
@@ -254,8 +301,14 @@ class PageManager extends Component {
             links={topicNewsLinks}
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
-            topicNews={this.state.topicNews}
             searchTopic={this.state.searchTopic}
+            topicNews={this.state.topicNews}
+            page={this.state.page}
+            lastPage={this.state.lastPage}
+            setTotalResults={this.setTotalResults}
+            showPrevPageButton={this.state.showPrevPageButton}
+            nextPage={this.topicNextPage}
+            prevPage={this.topicPrevPage}
             />} 
         />
         <Route 
