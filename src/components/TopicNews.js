@@ -30,14 +30,14 @@ class TopicNews extends Component {
 
     const { topicNews } = this.state 
 
-    const { page, showPrevPageButton, prevPage, nextPage, lastPage } = this.props
+    // const { page, showPrevPageButton, prevPage, nextPage, lastPage } = this.props
     let display;
 
-    let nextPageInnerText = `Go to Page ${page + 1}`
+    // let nextPageInnerText = `Go to Page ${page + 1}`
 
-    if (lastPage) {
-      nextPageInnerText = 'Back to Page 1'
-    }
+    // if (lastPage) {
+    //   nextPageInnerText = 'Back to Page 1'
+    // }
 
     if (topicNews.length > 0) {
     display = 

@@ -125,7 +125,8 @@ class CollectionNews extends Component {
   }
 
   render() {
-    const { newsCollection, showPrevPageButton, page, lastPage } = this.state
+    const { newsCollection } = this.state
+    // const { showPrevPageButton, page, lastPage } = this.state
     const { links, loggedInUser } = this.props
     // const { prevPage, nextPage } = this
     let collectionDisplay;
