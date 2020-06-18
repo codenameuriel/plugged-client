@@ -26,6 +26,7 @@ class PageManager extends Component {
     lastPage: false,
     topicNews: [],
     searchTopic: '',
+    topicHeader: '',
     displaySearchTopic: '',
     source: '',
     sourceNews: []
@@ -96,37 +97,37 @@ class PageManager extends Component {
     }
   }
 
-  topicNextPage = () => {
-    const { page, totalResults } = this.state
-    let lastPage;
+  // topicNextPage = () => {
+  //   const { page, totalResults } = this.state
+  //   let lastPage;
     
-    if (totalResults % 9 === 0) {
-      lastPage = totalResults / 9
-    } else if (totalResults % 9 !== 0) {
-      lastPage = Math.ceil(totalResults / 9)
-    }
+  //   if (totalResults % 9 === 0) {
+  //     lastPage = totalResults / 9
+  //   } else if (totalResults % 9 !== 0) {
+  //     lastPage = Math.ceil(totalResults / 9)
+  //   }
 
-    if (page === lastPage) {
-      this.setState({
-        page: 1
-      }, () => {
-        this.togglePrevPageButton()
-        this.toggleLastPage()
-      })
-    } else {
-      this.setState({
-        page: page + 1
-      }, () => {
-        this.togglePrevPageButton()
-      })
-    }
+  //   if (page === lastPage) {
+  //     this.setState({
+  //       page: 1
+  //     }, () => {
+  //       this.togglePrevPageButton()
+  //       this.toggleLastPage()
+  //     })
+  //   } else {
+  //     this.setState({
+  //       page: page + 1
+  //     }, () => {
+  //       this.togglePrevPageButton()
+  //     })
+  //   }
 
-    if (page === lastPage - 1) {
-      this.toggleLastPage()
-    }
+  //   if (page === lastPage - 1) {
+  //     this.toggleLastPage()
+  //   }
 
-    this.getTopicNews()
-  }
+  //   this.getTopicNews()
+  // }
 
   prevPage = () => {
     let page = this.state.page
@@ -139,18 +140,18 @@ class PageManager extends Component {
     }
   }
 
-  topicPrevPage = () => {
-    let page = this.state.page
-    if (page !== 1) {
-      this.setState({
-        page: page - 1
-      }, () => {
-        this.togglePrevPageButton()
-      })
-    }
+  // topicPrevPage = () => {
+  //   let page = this.state.page
+  //   if (page !== 1) {
+  //     this.setState({
+  //       page: page - 1
+  //     }, () => {
+  //       this.togglePrevPageButton()
+  //     })
+  //   }
 
-    this.getTopicNews()
-  }
+  //   this.getTopicNews()
+  // }
 
   handleSearchChange = event => {
     this.setState({
@@ -172,6 +173,9 @@ class PageManager extends Component {
     .then(data => this.setState({
       topicNews: data.articles
     }, () => this.setTotalResults(data.totalResults)))
+    .then(this.setState({
+      topicHeader: searchTopic
+    }))
     .then(this.clearSearch())
   }
 
@@ -298,6 +302,7 @@ class PageManager extends Component {
             loggedInUser={this.props.loggedInUser}
             postArticle={this.props.postArticle}
             searchTopic={this.state.searchTopic}
+            topicHeader={this.state.topicHeader}
             topicNews={this.state.topicNews}
             page={this.state.page}
             lastPage={this.state.lastPage}

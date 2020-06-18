@@ -27,7 +27,7 @@ class Account extends Component {
           <Nav links={links} />
           <form onSubmit={event => {
             unsubscribeSubmit(event)
-            alert("You're all up to date!")
+            // alert("You're all up to date!")
             // history.push(`/${loggedInUser.username}/dashboard`)
           }}>
             {/* <label>Change your password: </label>

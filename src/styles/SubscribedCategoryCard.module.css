@@ -4,6 +4,7 @@
 }
 
 .p:hover {
+  color: #1bfad6;
   cursor: pointer;
   transform: scale(1.15, 1.15);
 }

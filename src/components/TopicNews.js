@@ -26,7 +26,7 @@ class TopicNews extends Component {
   }
 
   renderDisplay = () => {
-    const { searchTopic, postArticle, loggedInUser, links } = this.props
+    const { searchTopic, topicHeader, postArticle, loggedInUser, links } = this.props
 
     const { topicNews } = this.state 
 
@@ -44,7 +44,7 @@ class TopicNews extends Component {
       <>
         <header className={TopicNewsStyles.header} >
           <h1>Topic News</h1>
-          {/* <p>Here's the latest on "<span className={TopicNewsStyles.span} >{searchTopic}</span>"</p> */}
+          <p>Here's the latest on "<span className={TopicNewsStyles.span} >{topicHeader}</span>"</p>
         </header>
         <Nav links={links} />
         {/* {showPrevPageButton && 

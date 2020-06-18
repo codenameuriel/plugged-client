@@ -6,14 +6,14 @@ class SubscribedCategoryCard extends Component {
     strike: false
   }
 
-  componentDidMount() {
-    this.setState({
-      strike: false
-    })
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     strike: false
+  //   })
+  // }
 
   toggleStrike = () => {
-    const {category, unsubscribeFromCategory} = this.props
+    const { category, unsubscribeFromCategory } = this.props
     let strike = this.state.strike
 
     this.setState({
