@@ -16,9 +16,9 @@ class TopicNews extends Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    // console.log(this.props.topicNews)
-    // console.log(this.prevProps.topicNews)
     if (prevProps.topicNews[0] !== this.props.topicNews[0]) {
+      console.log(prevProps.topicNews)
+      console.log(this.props.topicNews)
       this.setState({
         topicNews: this.props.topicNews
       })
@@ -44,11 +44,12 @@ class TopicNews extends Component {
       <>
         <header className={TopicNewsStyles.header} >
           <h1>Topic News</h1>
+          {/* <p>Here's the latest on "<span className={TopicNewsStyles.span} >{searchTopic}</span>"</p> */}
         </header>
         <Nav links={links} />
-        {showPrevPageButton && 
+        {/* {showPrevPageButton && 
           <button className={TopicNewsStyles.button} onClick={prevPage} >Previous Page</button>}
-          <button className={TopicNewsStyles.button} onClick={nextPage} >{nextPageInnerText}</button>
+          <button className={TopicNewsStyles.button} onClick={nextPage} >{nextPageInnerText}</button> */}
         <NewsMapper 
           news={topicNews} 
           postArticle={postArticle} 

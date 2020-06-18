@@ -1,7 +1,7 @@
 import React from 'react'
 import NewspaperTileStyles from "../styles/NewspaperTile.module.css"
 
-const NewspaperTile = ({ newspaper, setNewspaper, history }) => {
+const NewspaperTile = ({ newspaper, setNewspaper, history, deleteNewspaper, loggedInUser }) => {
   const renderCategories = () => {
     return newspaper.categories.map(category => {
       return (
@@ -33,13 +33,11 @@ const NewspaperTile = ({ newspaper, setNewspaper, history }) => {
   }
 
   return (
-    <div
-      className={NewspaperTileStyles.newspaperCard} 
-      onClick={() => {
+    <div className={NewspaperTileStyles.newspaperCard} >
+      <h1 onClick={() => {
         setNewspaper(newspaper.title)
         history.push(`/newspapers/${newspaper.title}`)
-      }} >
-      <h1 className={NewspaperTileStyles.h1} >The {newspaper.title} Newspaper</h1>
+      }} className={NewspaperTileStyles.h1} >The {newspaper.title} Newspaper</h1>
       <h2>Categories</h2>
       {renderCategories()}
       <h2>Sources</h2>
@@ -47,6 +45,9 @@ const NewspaperTile = ({ newspaper, setNewspaper, history }) => {
       <h2>Topics</h2>
       {renderTopics()}
       {/* <h5>Published: {(date.getMonth() + 1) (newspaper.created_at.slice(0, 10).getDay() + 1), (newspaper.created_at.slice(0, 10).getFullYear())}</h5> */}
+      <button 
+        className={NewspaperTileStyles.button} 
+        onClick={() => deleteNewspaper(newspaper, loggedInUser)} >Remove Newspaper</button>
     </div>
   )
 }

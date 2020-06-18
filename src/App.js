@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Auth from './components/Auth'
 import PageManager from './components/PageManager'
-
 import AppStyles from './styles/App.module.css'
 
 class App extends Component {
@@ -20,6 +19,7 @@ class App extends Component {
   setNewspaper = title => {
     const { loggedInUsersNewspapers } = this.state
     let selectedNewspaper = loggedInUsersNewspapers.find(newspaper => newspaper.title === title)
+
     this.setState({
       newspaper: selectedNewspaper
     })
@@ -27,9 +27,29 @@ class App extends Component {
 
   updateUsersNewspapers = newspaper => {
     const { loggedInUsersNewspapers } = this.state
+
     this.setState({
       loggedInUsersNewspapers: [...loggedInUsersNewspapers, newspaper]
     })
+  }
+
+  deleteNewspaper = (newspaper, user) => {
+    fetch(`http://localhost:4000/newspaper/${newspaper.title}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        title: newspaper.title,
+        user: user.id
+      })
+    })
+    .then(resp => resp.json())
+    // .then(console.log)
+    .then(this.setState({
+      loggedInUsersNewspapers: [...this.state.loggedInUsersNewspapers].filter(n => n.title !== newspaper.title)
+    }))
   }
 
   postArticle = article => {
@@ -65,8 +85,6 @@ class App extends Component {
       },
       body: JSON.stringify(collectionObj)
     })
-    .then(resp => resp.json())
-    .then(console.log)
   }
 
   setLoggedInUser = user => {
@@ -84,8 +102,7 @@ class App extends Component {
       loggedInUser: {},
       categories: [],
       topics: [],
-      sources: [],
-
+      sources: []
     })
   }
 
@@ -103,6 +120,7 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then(this.setLoggedInUser)
+    // .then(console.log)
   }
 
   unsubscribeFromCategory = category => {
@@ -168,6 +186,7 @@ class App extends Component {
            updateUsersNewspapers={this.updateUsersNewspapers}
            setNewspaper={this.setNewspaper}
            newspaper={this.state.newspaper}
+           deleteNewspaper={this.deleteNewspaper}
         />
         <Auth
           links={links}

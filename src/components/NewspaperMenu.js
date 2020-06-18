@@ -19,7 +19,7 @@ class NewspaperMenu extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.loggedInUsersNewspapers !== this.props.loggedInUsersNewspapers) {
+    if (prevProps.loggedInUsersNewspapers.length < this.props.loggedInUsersNewspapers.length) {
       this.toggleViewForm()
     }
   }
@@ -140,6 +140,7 @@ class NewspaperMenu extends Component {
   handleFormSubmit = event => {
     const { title, categories, sourceNames, addedTopics } = this.state
     const { loggedInUser, updateUsersNewspapers } = this.props
+
     event.preventDefault()
     fetch('http://localhost:4000/newspaper/build-newspaper', {
       method: 'POST',
@@ -218,7 +219,6 @@ class NewspaperMenu extends Component {
 
           <input className={NewspaperMenuStyles.build} onClick={() => {
             alert(`You've just created the ${this.state.title} newspaper`)
-            // this.toggleViewForm()
             }} type="submit" value="Build Newspaper"/>     
         </form>
       </>
@@ -226,13 +226,20 @@ class NewspaperMenu extends Component {
   }
 
   renderDisplay = () => {
-    const { links, loggedInUser, loggedInUsersNewspapers, setNewspaper, history } = this.props
+    const { 
+      links, loggedInUser, loggedInUsersNewspapers, setNewspaper, history, deleteNewspaper
+    } = this.props
     const { viewForm } = this.state
     let display;
     let noNewspapers = 
-      <h3 className={NewspaperMenuStyles.h3} >You currently don't have any newspapers</h3>
+      <h3 
+        className={NewspaperMenuStyles.h3}>
+          You currently don't have any newspapers
+      </h3>
+    let hasNewspapers = (loggedInUsersNewspapers.length > 0);
+    let isLoggedIn = loggedInUser.username;
   
-    if (loggedInUser.username) {
+    if (isLoggedIn) {
       display = 
       <>
         <header className={NewspaperMenuStyles.header} >
@@ -243,10 +250,10 @@ class NewspaperMenu extends Component {
         <button className={NewspaperMenuStyles.button} onClick={this.toggleViewForm}>{viewForm ? "Close Form" : "Build a Newspaper"}</button><br /><br />
         {viewForm && this.renderForm()}
       
-        {loggedInUsersNewspapers.length > 0 ? <NewspaperMapper 
-          newspapers={loggedInUsersNewspapers} setNewspaper={setNewspaper} history={history} /> : noNewspapers}
+        {hasNewspapers ? <NewspaperMapper 
+          newspapers={loggedInUsersNewspapers} setNewspaper={setNewspaper} history={history} deleteNewspaper={deleteNewspaper} loggedInUser={loggedInUser} /> : noNewspapers}
       </>
-    } else if (!loggedInUser.username) {
+    } else if (!isLoggedIn) {
       display = 
         <>
           <h5 className={NewspaperMenuStyles.h5} ><Link className={NewspaperMenuStyles.link} to="/login">Log in</Link> to view your newspapers</h5>

@@ -55,7 +55,7 @@ class Dashboard extends Component {
     const { loggedInUser, links, history, handleSearchChange, searchTopic, getTopicNews } = this.props
     const search = <input className={DashboardStyles.search} onChange={handleSearchChange} type="text" placeholder="Search news by topic" value={searchTopic} />
     const searchBtn = <button className={DashboardStyles.submitBtn} onClick={() => {
-      getTopicNews(searchTopic)
+      getTopicNews()
       history.push("/dashboard/topic-news")
     }}>Search</button>
 

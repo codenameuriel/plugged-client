@@ -34,7 +34,7 @@ class Account extends Component {
             <input type="password" /> */}
             <h3 className={AccountStyles.h3} >Current subscriptions</h3>
             <div className={AccountStyles.div} >
-              <h5 className={AccountStyles.h5} >Select to unsubscribe:</h5>
+              <h4 className={AccountStyles.h4} >Select to unsubscribe</h4>
               <fieldset className={AccountStyles.accountFieldset} >
                 <h6 className={AccountStyles.h6} >Categories</h6>
                 {this.renderCategories()}

@@ -34,7 +34,8 @@ class PageManager extends Component {
   componentDidUpdate = (prevProps) => {
     if (prevProps.loggedInUser !== this.props.loggedInUser) {
       this.setState({
-        page: 1
+        page: 1,
+        searchTopic: ''
       })
     }
   }
@@ -163,10 +164,10 @@ class PageManager extends Component {
     })
   }
 
-  getTopicNews = search => {
-    const { page } = this.state
+  getTopicNews = () => {
+    const { page, searchTopic } = this.state
 
-    fetch(`https://newsapi.org/v2/everything?q=${search}&language=en&pageSize=9&page=${page}`, apiKey)
+    fetch(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en&pageSize=9&page=${page}`, apiKey)
     .then(resp => resp.json())
     .then(data => this.setState({
       topicNews: data.articles
@@ -235,6 +236,7 @@ class PageManager extends Component {
             loggedInUsersNewspapers={this.props.loggedInUsersNewspapers}
             updateUsersNewspapers={this.props.updateUsersNewspapers}
             setNewspaper={this.props.setNewspaper}
+            deleteNewspaper={this.props.deleteNewspaper}
             />} 
         />
         <Route
