@@ -31,19 +31,13 @@ class PageManager extends Component {
     sourceNews: []
   }
 
-  // componentDidUpdate = (prevState) => {
-  //   // if (this.state.currentPage !== prevState.currentPage) {
-  //   //   this.setState({
-  //   //     page: 1
-  //   //   })
-  //   // }
-  // }
-  
-  // setCurrentPage = url => {
-  //   this.setState({
-  //     currentPage: url
-  //   })
-  // }
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.loggedInUser !== this.props.loggedInUser) {
+      this.setState({
+        page: 1
+      })
+    }
+  }
 
   setTotalResults = total => {
     this.setState({
