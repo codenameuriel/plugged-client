@@ -36,7 +36,8 @@ class PageManager extends Component {
     if (prevProps.loggedInUser !== this.props.loggedInUser) {
       this.setState({
         page: 1,
-        searchTopic: ''
+        searchTopic: '',
+        topicHeader: ''
       })
     }
   }
