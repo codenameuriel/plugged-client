@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { NavLink } from 'react-router-dom';
-import { Switch, Route, Redirect } from 'react-route-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // import Auth from './components/Auth'
 // import PageManager from './components/PageManager'
@@ -8,7 +8,7 @@ import AppStyles from './styles/App.module.css'
 
 import Login from './components/Login';
 import Signup from './components/Signup';
-import TopNews from './components/TopNews';
+import TopNews from './containers/TopNews/TopNews';
 import Dashboard from './components/Dashboard';
 import Collection from './components/CollectionNews'; // change to Collection
 import Category from './components/CategorySelector'; // change to Category
@@ -24,164 +24,159 @@ class App extends Component {
     topics: [],
     sources: [],
     loggedInUsersNewspapers: [],
-    newspaper: {}
+    newspaper: {},
+    isAuthenticated: false
   }
 
-  setNewspaper = title => {
-    const { loggedInUsersNewspapers } = this.state
-    let selectedNewspaper = loggedInUsersNewspapers.find(newspaper => newspaper.title === title)
+  // setNewspaper = title => {
+  //   const { loggedInUsersNewspapers } = this.state
+  //   let selectedNewspaper = loggedInUsersNewspapers.find(newspaper => newspaper.title === title)
 
-    this.setState({
-      newspaper: selectedNewspaper
-    })
-  }
+  //   this.setState({
+  //     newspaper: selectedNewspaper
+  //   })
+  // }
 
-  updateUsersNewspapers = newspaper => {
-    const { loggedInUsersNewspapers } = this.state
+  // updateUsersNewspapers = newspaper => {
+  //   const { loggedInUsersNewspapers } = this.state
 
-    this.setState({
-      loggedInUsersNewspapers: [...loggedInUsersNewspapers, newspaper]
-    })
-  }
+  //   this.setState({
+  //     loggedInUsersNewspapers: [...loggedInUsersNewspapers, newspaper]
+  //   })
+  // }
 
-  deleteNewspaper = (newspaper, user) => {
-    fetch(`http://localhost:4000/newspaper/${newspaper.title}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        title: newspaper.title,
-        user: user.id
-      })
-    })
-    .then(resp => resp.json())
-    // .then(console.log)
-    .then(this.setState({
-      loggedInUsersNewspapers: [...this.state.loggedInUsersNewspapers].filter(n => n.title !== newspaper.title)
-    }))
-  }
+  // deleteNewspaper = (newspaper, user) => {
+  //   fetch(`http://localhost:4000/newspaper/${newspaper.title}`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       title: newspaper.title,
+  //       user: user.id
+  //     })
+  //   })
+  //   .then(resp => resp.json())
+  //   .then(this.setState({
+  //     loggedInUsersNewspapers: [...this.state.loggedInUsersNewspapers].filter(n => n.title !== newspaper.title)
+  //   }))
+  // }
 
-  postArticle = article => {
-    fetch('http://localhost:4000/articles', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(article)
-    })
-    .then(resp => resp.json())
-    .then(this.setArticle)
-  }
+  // postArticle = article => {
+  //   fetch('http://localhost:4000/articles', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     },
+  //     body: JSON.stringify(article)
+  //   })
+  //   .then(resp => resp.json())
+  //   .then(this.setArticle)
+  // }
 
-  setArticle = article => {
-    this.setState({
-      article: article
-    }, () => this.addToCollection(this.state.article))
-  }
+  // setArticle = article => {
+  //   this.setState({
+  //     article: article
+  //   }, () => this.addToCollection(this.state.article))
+  // }
 
-  addToCollection = article => {
-    let collectionObj = {
-      user_id: this.state.loggedInUser.id,
-      article_id: this.state.article.id
-    }
+  // addToCollection = article => {
+  //   let collectionObj = {
+  //     user_id: this.state.loggedInUser.id,
+  //     article_id: this.state.article.id
+  //   }
 
-    fetch('http://localhost:4000/collections', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(collectionObj)
-    })
-  }
+  //   fetch('http://localhost:4000/collections', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     },
+  //     body: JSON.stringify(collectionObj)
+  //   })
+  // }
 
-  setLoggedInUser = user => {
-    this.setState({
-      loggedInUser: user,
-      categories: user.categories,
-      topics: user.topics,
-      sources: user.sources,
-      loggedInUsersNewspapers: user.get_newspapers
-    })
-  }
+  // setLoggedInUser = user => {
+  //   this.setState({
+  //     loggedInUser: user,
+  //     categories: user.categories,
+  //     topics: user.topics,
+  //     sources: user.sources,
+  //     loggedInUsersNewspapers: user.get_newspapers
+  //   })
+  // }
 
-  logOutUser = () => {
-    this.setState({
-      loggedInUser: {},
-      categories: [],
-      topics: [],
-      sources: []
-    })
-  }
+  // logOutUser = () => {
+  //   this.setState({
+  //     loggedInUser: {},
+  //     categories: [],
+  //     topics: [],
+  //     sources: []
+  //   })
+  // }
 
-  subscribeToCategory = (userID, category) => {
-    fetch('http://localhost:4000/user_categories', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id: userID,
-        category_name: category
-      })
-    })
-    .then(resp => resp.json())
-    .then(this.setLoggedInUser)
-    // .then(console.log)
-  }
+  // subscribeToCategory = (userID, category) => {
+  //   fetch('http://localhost:4000/user_categories', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       user_id: userID,
+  //       category_name: category
+  //     })
+  //   })
+  //   .then(resp => resp.json())
+  //   .then(this.setLoggedInUser)
+  //   // .then(console.log)
+  // }
 
-  unsubscribeFromCategory = category => {
-    let list = this.state.unsubscribe
+  // unsubscribeFromCategory = category => {
+  //   let list = this.state.unsubscribe
 
-    if (!list.find(c => c === category)){
-      this.setState({
-        unsubscribe: [...list, category]
-      })
-    } else {
-      this.setState({
-        unsubscribe: [...list.filter(c => c !== category)]
-      })
-    }
-  }
+  //   if (!list.find(c => c === category)){
+  //     this.setState({
+  //       unsubscribe: [...list, category]
+  //     })
+  //   } else {
+  //     this.setState({
+  //       unsubscribe: [...list.filter(c => c !== category)]
+  //     })
+  //   }
+  // }
 
-  unsubscribeSubmit = event => {
-    event.preventDefault()
+  // unsubscribeSubmit = event => {
+  //   event.preventDefault()
 
-    fetch('http://localhost:4000/user_categories/unsubscribe', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id: this.state.loggedInUser.id,
-        categories: this.state.unsubscribe
-      })
-    })
-    .then(resp => resp.json())
-    .then(this.setLoggedInUser)
-    .then(this.setState({
-      unsubscribe: []
-    }))
-  }
+  //   fetch('http://localhost:4000/user_categories/unsubscribe', {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       user_id: this.state.loggedInUser.id,
+  //       categories: this.state.unsubscribe
+  //     })
+  //   })
+  //   .then(resp => resp.json())
+  //   .then(this.setLoggedInUser)
+  //   .then(this.setState({
+  //     unsubscribe: []
+  //   }))
+  // }
   
   render() {
-    let routes;
-
-    if (!isAuthenticated) {
-      routes = (
-        <>
-          <Route path="/login" component={Login}/>
-          <Route path="/signup" component={Signup}/>
-          <Route path="/top_news" component={TopNews}/>
-        </>
-      );
-    }
-
+    const { isAuthenticated } = this.state;
+    let routes = (
+      <>
+        <Route path="/login" component={Login}/>
+        <Route path="/signup" component={Signup}/>
+      </>
+    );
     if (isAuthenticated) {
       routes = (
         <>
@@ -235,8 +230,9 @@ class App extends Component {
 
     return (
       <Switch>
+        <Route path="/top-news" component={TopNews}/>
         {routes}
-        <Redirect exact from="/" to="/top_news"/>
+        <Redirect exact from="/" to="/top-news"/>
       </Switch>
     );
   }
