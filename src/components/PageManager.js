@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Route } from 'react-router-dom';
-import { apiKey } from '../apiKey'
+import React, { Component } from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { apiKey } from '../apiKey';
 import CategorySelector from './CategorySelector'
 import TopNews from './TopNews'
 import CollectionNews from './CollectionNews'
@@ -231,6 +231,8 @@ class PageManager extends Component {
 
     return (
       <div>
+        {/* going to be in the root path "/" when PageManager is rendered by the App component */}
+        <Redirect to="/top-news" />
         <Route
           exact path="/newspapers"
           render={routerProps => <NewspaperMenu

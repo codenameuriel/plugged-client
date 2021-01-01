@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import Auth from './components/Auth'
 import PageManager from './components/PageManager'
 import AppStyles from './styles/App.module.css'
 
 class App extends Component {
   state = {
-    loggedInUser: {},
+    loggedInUser: {}, 
     categories: [],
     unsubscribe: [],
     article: {},
