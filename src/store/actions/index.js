@@ -1,1 +1,2 @@
-export { nextPage, setTotalArticles } from './pageManager';
+export { calculateNextPage } from './pageManager';
+export { fetchArticles } from './articles';

@@ -9,7 +9,7 @@ class Content extends Component {
     let content = <Spinner />;
 
     if (articles) {
-      const articlesPerPage = articles.slice(prevLastArticleIndex || 0, lastArticleIndex);
+      const articlesPerPage = articles.slice(prevLastArticleIndex, lastArticleIndex);
       content = (
         articlesPerPage.map((article, index) => {
           // return <ArticleCard {...article} key={index}/>;
@@ -23,6 +23,7 @@ class Content extends Component {
 
 const mapStateToProps = state => {
   return {
+    articles: state.articles.articles,
     prevLastArticleIndex: state.pageManager.prevLastArticleIndex,
     lastArticleIndex: state.pageManager.lastArticleIndex
   };

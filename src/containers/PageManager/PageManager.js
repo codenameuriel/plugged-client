@@ -36,16 +36,51 @@ class PageManager extends Component {
   //   sourceNews: []
   // }
 
-  // revamp code
-  // nextPage = () => {
-  //   this.setState(prevState => {
-  //     return {
-  //       page: prevState.page + 1,
-  //       prevLastArticle: prevState.lastArticle,
-  //       lastArticle: prevState.lastArticle + 9
-  //     };
-  //   });
+  // setTotalPages() {
+  //   const { totalArticles } = this.props;
+  //   const { articlesPerPage } = this.state;
+
+  //   if (totalArticles % 9 !== 0) {
+  //     this.setState({ 
+  //       totalPages: Math.ceil(totalArticles / articlesPerPage)
+  //     });
+  //   } else {
+  //     this.setState({ totalPages: totalArticles / articlesPerPage });
+  //   }
   // }
+
+  // setLastArticleIndex() {
+  //   const { totalArticles } = this.props;
+  //   if (totalArticles > 9) {
+  //     this.setState({ lastArticleIndex: 8 });
+  //   } else if (totalArticles <= 9) {
+  //     this.setState({ lastArticleIndex: totalArticles });
+  //   } 
+  // }
+
+  renderButtons() {
+    const { onNextPage, page, lastPage, totalArticles } = this.props;
+    let buttons = null;
+    if (lastPage !== 1) {
+      buttons = (
+        <button onClick={onNextPage}>Next Page</button>
+      );
+    }
+    if (page !== 1) {
+      buttons = (
+        <>
+          <button onClick={null}>Previous Page</button>
+          <button onClick={onNextPage}>Next Page</button>
+        </>
+      );
+    }
+    if (page === lastPage) {
+      buttons = (
+        <button onClick={null}>Previous Page</button>
+      );
+    }
+    return buttons;
+  }
 
   // componentDidUpdate = (prevProps) => {
   //   if (prevProps.loggedInUser !== this.props.loggedInUser) {
@@ -244,35 +279,10 @@ class PageManager extends Component {
     //   topNewsLinks = [signup, login]
     // }
 
-  renderButtons() {
-    const { onNextPage, totalArticles, prevLastArticleIndex, lastArticleIndex } = this.props;
-    let buttons = null;
-    if (totalArticles > 9) {
-      buttons = (
-        <button onClick={onNextPage}>Next Page</button>
-      );
-    }
-    if (prevLastArticleIndex) {
-      buttons = (
-        <>
-          <button onClick={null}>Previous Page</button>
-          <button onClick={onNextPage}>Next Page</button>
-        </>
-      );
-    }
-    if (lastArticleIndex + 1 === totalArticles) {
-      buttons = (
-        <button onClick={null}>Previous Page</button>
-      );
-    }
-    return buttons;
-  }
-
   render() {
-    console.log('inside PageManager');
-      return (
-        <div className={PageManagerStyles.PageManager}>
-          {this.renderButtons()}
+    return (
+      <div className={PageManagerStyles.PageManager}>
+        {this.renderButtons()}
 
           {/* <Redirect to="/top-news" />
           <Route
@@ -482,14 +492,15 @@ class PageManager extends Component {
 const mapStateToProps = state => {
   return {
     page: state.pageManager.page,
+    lastPage: state.pageManager.lastPage,
     prevLastArticleIndex: state.pageManager.prevLastArticleIndex,
     lastArticleIndex: state.pageManager.lastArticleIndex
   };
 };
 
-const mapDispatchToProps = dispatch => {  
+const mapDispatchToProps = dispatch => {
   return {
-    onNextPage: () => dispatch(actionCreators.nextPage())
+    onNextPage: () => dispatch(actionCreators.calculateNextPage())
   };
 };
 

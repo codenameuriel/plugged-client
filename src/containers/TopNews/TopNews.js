@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { apiKey } from '../../apiKey';
+
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
 // import Nav from '../../components/Nav.js'
@@ -14,13 +14,12 @@ import PageManager from '../PageManager/PageManager';
 
 class TopNews extends Component {
   state = {
-    topNews: null,
     title: "Top Headlines",
     subtitle: "Live and breaking headlines"
   }
 
   componentDidMount() {
-    this.getTopNews();
+    this.props.onFetchArticles();
   }
 
   // componentDidUpdate(prevProps) {
@@ -38,14 +37,6 @@ class TopNews extends Component {
   //        topNews: data.articles 
   //      }, () => setTotalResults(data.totalResults)))
   // }
-  getTopNews = () => {
-    fetch("https://newsapi.org/v2/top-headlines?country=us", apiKey)
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({ topNews: data.articles });
-        this.props.onSetTotalArticles(data.articles.length);
-      });
-  }
 
   render() {
     // const { 
@@ -65,7 +56,7 @@ class TopNews extends Component {
     //   nextPageInnerText = 'Back to Page 1'
     // }
 
-    const { topNews, title, subtitle } = this.state;
+   const { title, subtitle } = this.state;
 
     return (
       // create TopNews styling
@@ -90,17 +81,23 @@ class TopNews extends Component {
         /> */}
         <Layout title={title} subtitle={subtitle}>
           <PageManager/>
-          <Content articles={topNews}/>
+          <Content/>
         </Layout>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    onSetTotalArticles: totalArticles => dispatch(actionCreators.setTotalArticles(totalArticles))
+    articles: state.articles.articles
   };
 };
 
-export default connect(null, mapDispatchToProps)(TopNews);
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchArticles: () => dispatch(actionCreators.fetchArticles())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopNews);

@@ -9,14 +9,16 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import pageManagerReducer from './store/reducers/pageManager';
+import pageManagerReducer from './store/reducers/pageManager'; 
+import articlesReducer from './store/reducers/articles';
 
 const composeEnhancers = (
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 );
 
 const rootReducer = combineReducers({
-  pageManager: pageManagerReducer
+  pageManager: pageManagerReducer,
+  articles: articlesReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
