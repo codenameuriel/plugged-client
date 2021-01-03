@@ -1,0 +1,2 @@
+export const NEXT_PAGE = "NEXT_PAGE";
+export const SET_TOTAL_ARTICLES = "SET_TOTAL_ARTICLES";

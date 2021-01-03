@@ -1,0 +1,1 @@
+export { nextPage, setTotalArticles } from './pageManager';

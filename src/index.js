@@ -6,10 +6,27 @@ import App from './App';
 import './index.module.css';
 import * as serviceWorker from './serviceWorker';
 
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import pageManagerReducer from './store/reducers/pageManager';
+
+const composeEnhancers = (
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+);
+
+const rootReducer = combineReducers({
+  pageManager: pageManagerReducer
+});
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+
 const app = (
-  <Router>
-    <App />
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 );
 
 ReactDOM.render(app, document.getElementById('root'));

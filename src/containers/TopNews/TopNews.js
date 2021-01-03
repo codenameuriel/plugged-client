@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import { apiKey } from '../../apiKey'
+import React, { Component } from 'react';
+import { apiKey } from '../../apiKey';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../store/actions/index';
 // import Nav from '../../components/Nav.js'
 // import NewsMapper from '../../components/NewsMapper'
 
@@ -8,11 +10,11 @@ import TopNewsStyles from './TopNews.module.css';
 
 import Layout from '../../hoc/Layout/Layout';
 import Content from '../../components/Content/Content';
+import PageManager from '../PageManager/PageManager';
 
 class TopNews extends Component {
   state = {
     topNews: null,
-    totalResults: 0,
     title: "Top Headlines",
     subtitle: "Live and breaking headlines"
   }
@@ -39,12 +41,12 @@ class TopNews extends Component {
   getTopNews = () => {
     fetch("https://newsapi.org/v2/top-headlines?country=us", apiKey)
       .then(resp => resp.json())
-      .then(data => this.setState({
-         topNews: data.articles,
-         topResults: data.totalResults }
-      ));
+      .then(data => {
+        this.setState({ topNews: data.articles });
+        this.props.onSetTotalArticles(data.articles.length);
+      });
   }
-  
+
   render() {
     // const { 
     //   page, loggedInUser, showPrevPageButton, prevPage, nextPage, lastPage
@@ -63,7 +65,7 @@ class TopNews extends Component {
     //   nextPageInnerText = 'Back to Page 1'
     // }
 
-    const { page, totalResults, title, subtitle } = this.state;
+    const { topNews, title, subtitle } = this.state;
 
     return (
       // create TopNews styling
@@ -87,12 +89,18 @@ class TopNews extends Component {
           postArticle={this.props.postArticle}
         /> */}
         <Layout title={title} subtitle={subtitle}>
-          {/* <PageManager page={page} totalResults={totalResults}/> */}
-          <Content articles={this.state.topNews}/>
+          <PageManager/>
+          <Content articles={topNews}/>
         </Layout>
       </div>
-    )
+    );
   }
 }
 
-export default TopNews
+const mapDispatchToProps = dispatch => {
+  return {
+    onSetTotalArticles: totalArticles => dispatch(actionCreators.setTotalArticles(totalArticles))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(TopNews);

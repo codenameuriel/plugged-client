@@ -16,6 +16,10 @@
 // import SourceNews from './SourceNews'
 // import NewspaperMenu from './NewspaperMenu'
 // import NewspaperNews from './NewspaperNews';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../store/actions/index';
+import PageManagerStyles from './PageManager.module.css';
 
 class PageManager extends Component {
   // state = {
@@ -31,21 +35,17 @@ class PageManager extends Component {
   //   source: '',
   //   sourceNews: []
   // }
-  state = {
-    page: 1,
-    prevLastArticle: null,
-    lastArticle: 8
-  }
 
-  nextPage = () => {
-    this.setState(prevState => {
-      return {
-        page: prevState.page + 1,
-        prevLastArticle: prevState.lastArticle,
-        lastArticle: prevState.lastArticle + 9
-      };
-    });
-  }
+  // revamp code
+  // nextPage = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       page: prevState.page + 1,
+  //       prevLastArticle: prevState.lastArticle,
+  //       lastArticle: prevState.lastArticle + 9
+  //     };
+  //   });
+  // }
 
   // componentDidUpdate = (prevProps) => {
   //   if (prevProps.loggedInUser !== this.props.loggedInUser) {
@@ -244,11 +244,36 @@ class PageManager extends Component {
     //   topNewsLinks = [signup, login]
     // }
 
+  renderButtons() {
+    const { onNextPage, totalArticles, prevLastArticleIndex, lastArticleIndex } = this.props;
+    let buttons = null;
+    if (totalArticles > 9) {
+      buttons = (
+        <button onClick={onNextPage}>Next Page</button>
+      );
+    }
+    if (prevLastArticleIndex) {
+      buttons = (
+        <>
+          <button onClick={null}>Previous Page</button>
+          <button onClick={onNextPage}>Next Page</button>
+        </>
+      );
+    }
+    if (lastArticleIndex + 1 === totalArticles) {
+      buttons = (
+        <button onClick={null}>Previous Page</button>
+      );
+    }
+    return buttons;
+  }
+
   render() {
+    console.log('inside PageManager');
       return (
         <div className={PageManagerStyles.PageManager}>
-          <button onClick={this.nextPage}>Next Page</button>
-          {/* going to be in the root path "/" when PageManager is rendered by the App component */}
+          {this.renderButtons()}
+
           {/* <Redirect to="/top-news" />
           <Route
             exact path="/newspapers"
@@ -454,5 +479,18 @@ class PageManager extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    page: state.pageManager.page,
+    prevLastArticleIndex: state.pageManager.prevLastArticleIndex,
+    lastArticleIndex: state.pageManager.lastArticleIndex
+  };
+};
 
-export default pageManager;
+const mapDispatchToProps = dispatch => {  
+  return {
+    onNextPage: () => dispatch(actionCreators.nextPage())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageManager);
