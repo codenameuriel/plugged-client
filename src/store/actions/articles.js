@@ -8,7 +8,7 @@ export const fetchArticles = () => {
       const resp = await fetch("https://newsapi.org/v2/top-headlines?country=us", apiKey);
       const articles = (await resp.json()).articles;
       dispatch(setArticles(articles));
-      dispatch(setLastArticleIndex(articles));
+      dispatch(setLastArticleIndex(articles, articlesPerPage));
       dispatch(setLastPage(articles, articlesPerPage));
     } catch(error) {
       dispatch(fetchArticlesFailed());
@@ -16,9 +16,9 @@ export const fetchArticles = () => {
   };
 };
 
-const setLastArticleIndex = articles => {
+const setLastArticleIndex = (articles, articlesPerPage) => {
   let lastArticleIndex = null;
-  lastArticleIndex = articles.length > 9 ? 8 : articles.length - 1;
+  lastArticleIndex = articles.length > articlesPerPage ? articlesPerPage : articles.length;
   return {
     type: actionTypes.SET_LAST_ARTICLE_INDEX,
     lastArticleIndex

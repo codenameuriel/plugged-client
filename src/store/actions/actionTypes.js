@@ -1,3 +1,4 @@
+export const PREV_PAGE = "PREV_PAGE";
 export const NEXT_PAGE = "NEXT_PAGE";
 export const SET_ARTICLES = "SET_ARTICLES";
 export const FETCH_ARTICLES_FAILED = "FETCH_ARTICLES_FAILED";

@@ -20,6 +20,14 @@ const reducer = (state=initialState, action) => {
         ...state,
         lastPage: action.lastPage
       };
+    case actionTypes.PREV_PAGE:
+      const prevLastArticleIndex = state.prevLastArticleIndex - state.articlesPerPage;
+      return {
+        ...state,
+        page: state.page - 1,
+        prevLastArticleIndex,
+        lastArticleIndex: state.prevLastArticleIndex
+      };
     case actionTypes.NEXT_PAGE:
       return {
         ...state,

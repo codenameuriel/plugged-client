@@ -36,30 +36,8 @@ class PageManager extends Component {
   //   sourceNews: []
   // }
 
-  // setTotalPages() {
-  //   const { totalArticles } = this.props;
-  //   const { articlesPerPage } = this.state;
-
-  //   if (totalArticles % 9 !== 0) {
-  //     this.setState({ 
-  //       totalPages: Math.ceil(totalArticles / articlesPerPage)
-  //     });
-  //   } else {
-  //     this.setState({ totalPages: totalArticles / articlesPerPage });
-  //   }
-  // }
-
-  // setLastArticleIndex() {
-  //   const { totalArticles } = this.props;
-  //   if (totalArticles > 9) {
-  //     this.setState({ lastArticleIndex: 8 });
-  //   } else if (totalArticles <= 9) {
-  //     this.setState({ lastArticleIndex: totalArticles });
-  //   } 
-  // }
-
   renderButtons() {
-    const { onNextPage, page, lastPage, totalArticles } = this.props;
+    const { onNextPage, onPrevPage, page, lastPage } = this.props;
     let buttons = null;
     if (lastPage !== 1) {
       buttons = (
@@ -69,14 +47,14 @@ class PageManager extends Component {
     if (page !== 1) {
       buttons = (
         <>
-          <button onClick={null}>Previous Page</button>
+          <button onClick={onPrevPage}>Previous Page</button>
           <button onClick={onNextPage}>Next Page</button>
         </>
       );
     }
     if (page === lastPage) {
       buttons = (
-        <button onClick={null}>Previous Page</button>
+        <button onClick={onPrevPage}>Previous Page</button>
       );
     }
     return buttons;
@@ -500,7 +478,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onNextPage: () => dispatch(actionCreators.calculateNextPage())
+    onNextPage: () => dispatch(actionCreators.changePage("next")),
+    onPrevPage: () => dispatch(actionCreators.changePage("previous"))
   };
 };
 
