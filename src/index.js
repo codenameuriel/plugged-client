@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import pageManagerReducer from './store/reducers/pageManager'; 
 import articlesReducer from './store/reducers/articles';
+import authReducer from './store/reducers/auth';
 
 const composeEnhancers = (
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -18,7 +19,8 @@ const composeEnhancers = (
 
 const rootReducer = combineReducers({
   pageManager: pageManagerReducer,
-  articles: articlesReducer
+  articles: articlesReducer,
+  auth: authReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

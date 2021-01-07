@@ -14,12 +14,14 @@ import PageManager from '../PageManager/PageManager';
 
 class TopNews extends Component {
   state = {
+    type: "top-news",
     title: "Top Headlines",
     subtitle: "Live and breaking headlines"
   }
 
   componentDidMount() {
     this.props.onFetchArticles();
+    console.log(window);
   }
 
   // componentDidUpdate(prevProps) {
@@ -56,7 +58,7 @@ class TopNews extends Component {
     //   nextPageInnerText = 'Back to Page 1'
     // }
 
-   const { title, subtitle } = this.state;
+   const { type, title, subtitle } = this.state;
 
     return (
       // create TopNews styling
@@ -79,9 +81,10 @@ class TopNews extends Component {
           loggedInUser={this.props.loggedInUser}
           postArticle={this.props.postArticle}
         /> */}
-        <Layout title={title} subtitle={subtitle}>
+        <Layout title={title} subtitle={subtitle} type={type}>
           <PageManager/>
           <Content/>
+          <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
         </Layout>
       </div>
     );

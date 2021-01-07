@@ -1,12 +1,13 @@
 import React from 'react';
-// import NavManager from '../../containers/NavManager';
+import NavManager from '../../containers/NavManager/NavManager';
 
 const header = props => {
+  const { type } = props;
   return (
     <header>
       <h1>{props.title}</h1>
       <p>{props.subtitle ? props.subtitle : null}</p>
-      {/* <NavManager /> */}
+      <NavManager type={type}/>
     </header>
   );
 };
