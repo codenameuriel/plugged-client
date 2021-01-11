@@ -1,3 +1,3 @@
 export { changePage } from './pageManager';
-export { fetchArticles } from './articles';
+export { fetchArticles, fetchCategoryArticles, saveArticle, fetchCollectionArticles } from './articles';
 export { login } from './auth';

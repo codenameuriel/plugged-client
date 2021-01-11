@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actionCreators from '../store/actions/index';
 // import { Link } from 'react-router-dom'
-import { apiKey } from '../apiKey'
+// import { apiKey } from '../apiKey'
 // import Nav from './Nav'
 import NewsMapper from './NewsMapper'
 import DashboardStyles from '../styles/Dashboard.module.css'
 
+import Layout from '../hoc/Layout/Layout';
+import Content from './Content/Content';
+
 class Dashboard extends Component {
   state = {
-    articles: [],
-    categories: []
+    type: "dashboard",
+    title: "Dashboard",
+    subtitle: `All your news in one place. Welcome back ${this.props.user.username}`
   }
 
   componentDidMount() {
     // if (this.props.loggedInUser.categories) {
       // this.getUsersCategoryNews();
-      console.log(this.props.user);
+      // console.log(this.props.user);
     // }
+    const { onFetchCategoryArticles } = this.props;
+    onFetchCategoryArticles();
   }
 
   // componentDidUpdate(prevProps) {
@@ -25,34 +32,34 @@ class Dashboard extends Component {
   //   }
   // }
 
-  getUsersCategoryNews = () => {
-    // const { loggedInUser } = this.props
-    const { user } = this.props;
+  // getUsersCategoryNews = () => {
+  //   // const { loggedInUser } = this.props
+  //   const { user } = this.props;
 
-    user.categories.forEach(category => {
-      fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category.name.toLowerCase()}&pageSize=6&page=1`, apiKey)
-      .then(resp => resp.json())
-      .then(data => this.setState({
-        articles: [...this.state.articles, data.articles]
-      }, this.setState({
-        categories: [...this.state.categories, category.name]
-        })
-      ))
-    })
-  }
+  //   user.categories.forEach(category => {
+  //     fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category.name.toLowerCase()}&pageSize=6&page=1`, apiKey)
+  //     .then(resp => resp.json())
+  //     .then(data => this.setState({
+  //       articles: [...this.state.articles, data.articles]
+  //     }, this.setState({
+  //       categories: [...this.state.categories, category.name]
+  //       })
+  //     ))
+  //   })
+  // }
 
-  passDownToNewsMapper = () => {
-    let views = []
-    this.state.articles.forEach((articles, index) => views.push(<NewsMapper 
-    key={index} news={articles} loggedInUser={this.props.loggedInUser} postArticle={this.props.postArticle} />))
-    return views
-  }
+  // passDownToNewsMapper = () => {
+  //   let views = []
+  //   this.state.articles.forEach((articles, index) => views.push(<NewsMapper 
+  //   key={index} news={articles} loggedInUser={this.props.loggedInUser} postArticle={this.props.postArticle} />))
+  //   return views
+  // }
 
-  createH1ForCategories = () => {
-    let headers = []
-    this.state.categories.forEach(category => headers.push(<h2 className={DashboardStyles.h2} >Top News in <span className={DashboardStyles.span} >{category}</span></h2>))
-    return headers
-  }
+  // createH1ForCategories = () => {
+  //   let headers = []
+  //   this.state.categories.forEach(category => headers.push(<h2 className={DashboardStyles.h2} >Top News in <span className={DashboardStyles.span} >{category}</span></h2>))
+  //   return headers
+  // }
 
   render() {
     // const { loggedInUser, links, history, handleSearchChange, searchTopic, getTopicNews } = this.props
@@ -123,14 +130,20 @@ class Dashboard extends Component {
     //       <h3 className={DashboardStyles.h3} ><Link className={DashboardStyles.link} to="/categories">Subscribe</Link> to news here</h3>
     //     </>
     // }
+
+    const { type, title, subtitle } = this.state;
     
     return (
-      <div>
-        {/* {dashboardDisplayHeader} */}
-        {/* {dashboardDisplay} */}
-        <h1>Dashboard</h1>
-      </div>
-    )
+      // <div>
+      //   {/* {dashboardDisplayHeader} */}
+      //   {/* {dashboardDisplay} */}
+      //   <h1>Dashboard</h1>
+      // </div>
+      <Layout title={title} subtitle={subtitle} type={type}>
+        <Content type={type}/>
+        <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
+      </Layout>
+    );
   }
 }
 
@@ -140,4 +153,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchCategoryArticles: () => dispatch(actionCreators.fetchCategoryArticles())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -47,3 +47,85 @@ const fetchArticlesFailed = () => {
     type: actionTypes.FETCH_ARTICLES_FAILED
   };
 };
+
+export const fetchCategoryArticles = () => {
+  return (dispatch, getState) => {
+    const categories = getState().auth.user.categories.map(category => category.name.toLowerCase());
+
+    categories.forEach(async category => {
+      try {
+        const resp = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=6&page=1`, apiKey);
+        const articles = (await resp.json()).articles;
+        const categoryArticles = { [category]: articles };
+
+        dispatch(setCategoryArticles(categoryArticles));
+      } catch (error) {
+        dispatch(fetchCategoryArticlesFailed());
+      }
+    });
+  };
+};
+
+const setCategoryArticles = articles => {
+  return {
+    type: actionTypes.SET_CATEGORY_ARTICLES,
+    articles
+  };
+};
+
+const fetchCategoryArticlesFailed = () => {
+  return {
+    type: actionTypes.FETCH_CATEGORY_ARTICLES_FAILED
+  };
+};
+
+export const saveArticle = article => {
+  return async (dispatch, getState) => {
+    const { user } = getState().auth.user;
+    const postedArticle = await postArticle(article);
+    saveToUserCollection(postedArticle, user);
+  };
+};
+
+const postArticle = async article => {
+  const resp = await fetch('http://localhost:4000/articles', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+      },
+    body: JSON.stringify(article)
+    });
+  const savedArticle = await resp.json();
+  console.log(savedArticle);
+  return savedArticle;
+};
+
+const saveToUserCollection = (article, user) => {
+  let collectionInstance = {
+    user_id: user.id,
+    article_id: article.id
+  };
+
+  fetch('http://localhost:4000/collections', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(collectionInstance)
+  });
+};
+
+export const fetchCollectionArticles = () => {
+  return async (dispatch, getState) => {
+    const { user } = getState().auth.user;
+    const { articlesPerPage } = getState().pageManager;
+    const resp = await fetch(`http://localhost:4000/collections/${user.id}`);
+    const collectionArticles = await resp.json();
+    console.log(collectionArticles);
+    dispatch(setArticles(collectionArticles));
+    dispatch(setLastArticleIndex(collectionArticles, articlesPerPage));
+    dispatch(setLastPage(collectionArticles, articlesPerPage));
+  };
+};

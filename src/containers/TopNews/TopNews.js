@@ -21,7 +21,6 @@ class TopNews extends Component {
 
   componentDidMount() {
     this.props.onFetchArticles();
-    console.log(window);
   }
 
   // componentDidUpdate(prevProps) {
@@ -83,7 +82,7 @@ class TopNews extends Component {
         /> */}
         <Layout title={title} subtitle={subtitle} type={type}>
           <PageManager/>
-          <Content/>
+          <Content type={type}/>
           <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
         </Layout>
       </div>

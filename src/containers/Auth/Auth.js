@@ -19,13 +19,6 @@ class Auth extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.authRedirect !== this.props.authRedirect) {
-      console.log(this.props.authRedirect);
-    }
-  }
-  
-
   renderLoginPage() {
     const { login } = this.state;
     const { type, title, subtitle } = login;
