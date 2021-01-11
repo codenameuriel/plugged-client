@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { NavLink, Route } from 'react-router-dom';
-import Login from './Login'
-import Signup from './Signup'
-import Account from './Account'
-import AuthStyles from '../styles/Auth.module.css'
+import React, { Component } from 'react';
+import { NavLink, Route } from 'react-router-dom';;
+import Login from './Login';
+import Signup from './Signup';
+import Account from './Account';
+import AuthStyles from '../styles/Auth.module.css';
 
 class Auth extends Component {
   state = {
