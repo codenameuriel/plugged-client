@@ -183,7 +183,7 @@ class CollectionNews extends Component {
       //     {this.renderDBNewsCards()}
       //   </div>
       // </div>
-      <Layout type={title} title={title} subtitle={subtitle}>
+      <Layout type={type} title={title} subtitle={subtitle}>
         {/* <PageManager/> */}
         <Content type={type}/>
       </Layout>

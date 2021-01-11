@@ -117,15 +117,26 @@ const saveToUserCollection = (article, user) => {
   });
 };
 
+const setCollectionArticles = articles => {
+  return {
+    type: actionTypes.SET_COLLECTION_ARTICLES,
+    articles,
+    totalCollectionArticles: articles.length
+  };
+};
+
 export const fetchCollectionArticles = () => {
   return async (dispatch, getState) => {
+    const { collectionArticles: stateCollectionArticles } = getState().articles;
     const { user } = getState().auth.user;
     const { articlesPerPage } = getState().pageManager;
     const resp = await fetch(`http://localhost:4000/collections/${user.id}`);
     const collectionArticles = await resp.json();
-    console.log(collectionArticles);
-    dispatch(setArticles(collectionArticles));
-    dispatch(setLastArticleIndex(collectionArticles, articlesPerPage));
-    dispatch(setLastPage(collectionArticles, articlesPerPage));
+ 
+    if (!stateCollectionArticles || stateCollectionArticles.length !== collectionArticles.length) {
+      dispatch(setCollectionArticles(collectionArticles));
+      dispatch(setLastArticleIndex(collectionArticles, articlesPerPage));
+      dispatch(setLastPage(collectionArticles, articlesPerPage));
+    }
   };
 };
