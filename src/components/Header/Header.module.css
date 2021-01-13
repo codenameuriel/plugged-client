@@ -1,0 +1,28 @@
+.Header {
+  background: blue;
+  text-align: center;
+}
+
+.Header h1 {
+  margin-bottom: 0;
+}
+
+/* mobile view */
+@media (max-width: 749px) {
+  .Header h1 {
+    font-size: 200%;
+  }
+  .Header p {
+    font-size: 110%;
+  }
+}
+
+/* desktop view */
+@media (min-width: 750px) {
+  .Header h1 {
+    font-size: 250%;
+  }
+  .Header p {
+    font-size: 150%;
+  }
+}

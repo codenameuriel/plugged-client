@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
 // import Nav from '../../components/Nav.js'
@@ -57,11 +56,18 @@ class TopNews extends Component {
     //   nextPageInnerText = 'Back to Page 1'
     // }
 
-   const { type, title, subtitle } = this.state;
-
+    const { type, title, subtitle } = this.state;
     return (
-      // create TopNews styling
       <div className={TopNewsStyles.TopNews}>
+        <Layout title={title} subtitle={subtitle} type={type}>
+          <PageManager/>
+          <Content type={type}/>
+          <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
+        </Layout>
+      </div>
+    );
+      // create TopNews styling
+   
           {/* <header className={TopNewsStyles.header} >
             <h1>Top Headlines</h1>
             <p>{jumbotronMessage}</p>
@@ -80,13 +86,6 @@ class TopNews extends Component {
           loggedInUser={this.props.loggedInUser}
           postArticle={this.props.postArticle}
         /> */}
-        <Layout title={title} subtitle={subtitle} type={type}>
-          <PageManager/>
-          <Content type={type}/>
-          <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
-        </Layout>
-      </div>
-    );
   }
 }
 

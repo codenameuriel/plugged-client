@@ -139,14 +139,15 @@ class Dashboard extends Component {
       //   {/* {dashboardDisplay} */}
       //   <h1>Dashboard</h1>
       // </div>
-      <Layout 
-        className={DashboardStyles.Dashboard} 
-        title={title} 
-        subtitle={subtitle} 
-        type={type}>
-          <Content type={type}/>
-          <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
-      </Layout>
+      <div className={DashboardStyles.Dashboard}>
+        <Layout
+          title={title} 
+          subtitle={subtitle} 
+          type={type}>
+            <Content type={type}/>
+            <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
+        </Layout>
+      </div>
     );
   }
 }
