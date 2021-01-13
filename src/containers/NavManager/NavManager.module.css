@@ -1,0 +1,30 @@
+.Nav {
+  background: #32e0c4;
+  padding: 10px;
+}
+
+/* desktop view */
+@media (min-width: 750px) {
+  .NavLinks {
+    margin: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    /* background: red; */
+    justify-content: right;
+    padding: 1rem;
+  }
+
+  .ListItem a {
+    text-decoration: none;
+    font-size: 125%;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .ListItem a:hover {
+    border: 3px solid white;
+    color: #26292e;
+    border-radius: 30px;
+  }
+}

@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
+import NavManagerStyles from './NavManager.module.css';
+
 class NavManager extends Component {
   state = {
     links: [
-      { page: "top-news", auth: false, link: <NavLink to="/top-news">TOP NEWS</NavLink> },
       { page: "collection", auth: true, link: <NavLink to="/collection">COLLECTION</NavLink> },
-      { page: "login", auth: false, link: <NavLink to="/login">LOG IN</NavLink> },
       { page: "signup", auth: false, link: <NavLink to="/signup">SIGN UP</NavLink> },
-      { page: "dashboard", auth: true, link: <NavLink to="/dashboard">DASHBOARD</NavLink> }
+      { page: "login", auth: false, link: <NavLink to="/login">LOG IN</NavLink> },
+      { page: "dashboard", auth: true, link: <NavLink to="/dashboard">DASHBOARD</NavLink> },
+      { page: "top-news", auth: false, link: <NavLink to="/top-news">TOP NEWS</NavLink> }
     ]
   }
 
@@ -22,14 +24,14 @@ class NavManager extends Component {
     if (!!user) renderedLinks = links.filter(link => (link.page !== type && link.auth === !!user)).concat(topNewsLink);
   
     return renderedLinks.map((link, index) => {
-      return <li key={index}>{link.link}</li>;
+      return <li className={NavManagerStyles.ListItem} key={index}>{link.link}</li>;
     });
   }
 
   render() {
     return (
-      <nav>
-        <ul>
+      <nav className={NavManagerStyles.Nav}>
+        <ul className={NavManagerStyles.NavLinks}>
           {this.renderLinks()}
         </ul>
       </nav>
