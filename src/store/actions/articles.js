@@ -132,7 +132,7 @@ export const fetchCollectionArticles = () => {
     const { articlesPerPage } = getState().pageManager;
     const resp = await fetch(`http://localhost:4000/collections/${user.id}`);
     const collectionArticles = await resp.json();
- 
+    
     if (!stateCollectionArticles || stateCollectionArticles.length !== collectionArticles.length) {
       dispatch(setCollectionArticles(collectionArticles));
       dispatch(setLastArticleIndex(collectionArticles, articlesPerPage));

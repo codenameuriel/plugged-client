@@ -1,27 +1,22 @@
 import React from 'react';
 import Plug from '../../assets/Plug.png';
+import ArticleCardStyles from './ArticleCard.module.css';
 
 const ArticleCard = props => {
   const { inCollection } = props;
   if (inCollection) {
     const { id, title, description, url, url_to_image, removeCollection } = props;
 
-    let button;
     // () => removeFromCollection(id)
-    if (title !== undefined) {
-      button = <button onClick={null}>Remove from collection</button>;
-    }
-    
     return (
       <div>
         <h2>{title}</h2>
         <a 
           target="_blank" 
           rel="noopener noreferrer" 
-          href={url}><img src={url_to_image || Plug} alt={title}/>
-        </a>
+          href={url}><img src={url_to_image || Plug} alt={title}/></a>
         <p>{description}</p>
-        {button}
+        <button onClick={null}>Remove from collection</button>
       </div>
     );
   } else {
@@ -38,7 +33,7 @@ const ArticleCard = props => {
       url_to_image: urlToImage
     };
       
-    let button;
+    let button = null;
     
     if (isAuthenticated) {
       button = (
@@ -51,14 +46,13 @@ const ArticleCard = props => {
     }
     
     return (
-      <div>
+      <div className={ArticleCardStyles.ArticleCard}>
         <h2>{title}</h2>
         <a 
           target="_blank" 
           rel="noopener noreferrer" 
-          href={url}><img 
-          src={urlToImage || Plug} alt={title}/></a>
-        <p>{description}</p>
+          href={url}><img src={urlToImage || Plug} alt={title}/></a>
+        <p>{description || content}</p>
         {button}
         {/* {
         loggedInUser.username && <button className={NewsCardStyles.tweet} ><a className={NewsCardStyles.a} target="_blank" rel="noopener noreferrer" href={`https://twitter.com/intent/tweet?text=Just checked this out ${url}`} data-show-count="false" >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></button>

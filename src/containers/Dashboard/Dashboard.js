@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../store/actions/index';
+import * as actionCreators from '../../store/actions/index';
 // import { Link } from 'react-router-dom'
 // import { apiKey } from '../apiKey'
 // import Nav from './Nav'
 // import NewsMapper from './NewsMapper'
 // import DashboardStyles from '../styles/Dashboard.module.css'
-
-import Layout from '../hoc/Layout/Layout';
-import Content from './Content/Content';
+import DashboardStyles from './Dashboard.module.css';
+import Layout from '../../hoc/Layout/Layout';
+import Content from '../../components/Content/Content';
 
 class Dashboard extends Component {
   state = {
@@ -139,9 +139,13 @@ class Dashboard extends Component {
       //   {/* {dashboardDisplay} */}
       //   <h1>Dashboard</h1>
       // </div>
-      <Layout className={DashboardStyles.Dashboard} title={title} subtitle={subtitle} type={type}>
-        <Content type={type}/>
-        <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
+      <Layout 
+        className={DashboardStyles.Dashboard} 
+        title={title} 
+        subtitle={subtitle} 
+        type={type}>
+          <Content type={type}/>
+          <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
       </Layout>
     );
   }

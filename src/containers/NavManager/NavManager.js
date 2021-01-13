@@ -21,8 +21,8 @@ class NavManager extends Component {
 
     if (!!user) renderedLinks = links.filter(link => (link.page !== type && link.auth === !!user)).concat(topNewsLink);
   
-    return renderedLinks.map(link => {
-      return <li>{link.link}</li>;
+    return renderedLinks.map((link, index) => {
+      return <li key={index}>{link.link}</li>;
     });
   }
 

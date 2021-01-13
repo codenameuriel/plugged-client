@@ -5,9 +5,9 @@ import * as actionCreators from '../store/actions/index';
 import Layout from '../hoc/Layout/Layout';
 import Content from './Content/Content';
 
-import { Link } from 'react-router-dom'
-import DBNewsCard from './DBNewsCard'
-import Nav from './Nav'
+// import { Link } from 'react-router-dom'
+// import DBNewsCard from './DBNewsCard'
+// import Nav from './Nav'
 
 // import CollectionNewsStyles from '../styles/CollectionNews.module.css'
 

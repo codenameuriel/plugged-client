@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
+
 import Spinner from '../../components/Spinner/Spinner';
 import ArticleCard from '../ArticleCard/ArticleCard';
 
@@ -26,7 +27,7 @@ class Content extends Component {
             <>
               <h1>{category}</h1>
               {categoryArticles[category].map((article, index) => {
-                return <ArticleCard {...article} key={index} isAuthenticated={!!user} inCollection={false} onPostArticle={saveArticle}/>;
+                return <ArticleCard {...article} key={`${index}${article.url}`} isAuthenticated={!!user} inCollection={false} onPostArticle={saveArticle}/>;
               })}
             </> 
           );
@@ -35,10 +36,11 @@ class Content extends Component {
       case "collection":
         const { collectionArticles } = this.props;
         if (collectionArticles) {
-          return collectionArticles.map(({article}, index) => {
-            return <ArticleCard {...article} key={index} isAuthenticated={!!user} inCollection={true}/>;
+          return collectionArticles.map(({ article }, index) => {
+            return <ArticleCard {...article} key={`${index}${article.id}`} isAuthenticated={!!user} inCollection={true}/>;
           });
         }
+        break;
       default: return null;
     }
   }
