@@ -13,8 +13,8 @@ const Header = props => {
     <header className={HeaderStyles.Header}>
       <h1>{props.title}</h1>
       <p>{props.subtitle ? props.subtitle : null}</p>
-      <SideDrawer show={showSideDrawer}/>
-      <NavManager type={type}/>
+      <SideDrawer show={showSideDrawer} closeSideDrawer={setShowSideDrawer}/>
+      <NavManager type={type} openSideDrawer={setShowSideDrawer}/>
     </header>
   );
 };

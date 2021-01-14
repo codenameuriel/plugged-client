@@ -7,10 +7,11 @@ const SideDrawer = props => {
 
   if (props.show) sideDrawerStyles = [ SideDrawerStyles.SideDrawer, SideDrawerStyles.Show ];
 
+  const { closeSideDrawer } = props;
   return (
     <>
       <div className={sideDrawerStyles.join(" ")}>
-      <Backdrop show={props.show}/>
+      <Backdrop show={props.show} closeSideDrawer={closeSideDrawer}/>
       </div>
     </>
     
