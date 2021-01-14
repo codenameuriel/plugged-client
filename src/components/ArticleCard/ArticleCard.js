@@ -3,6 +3,11 @@ import Plug from '../../assets/Plug.png';
 import ArticleCardStyles from './ArticleCard.module.css';
 
 const ArticleCard = props => {
+  const formatContent = content => {
+    if (content && content.includes("[")) {
+      return content.split("[")[0];
+    }
+  };
   const { inCollection } = props;
   if (inCollection) {
     const { id, title, description, url, url_to_image, removeCollection } = props;
@@ -24,7 +29,7 @@ const ArticleCard = props => {
 
     const article = {
       author: author,
-      content: content,
+      content: formatContent(content),
       description: description,
       published_at: publishedAt,
       source: source.name,
@@ -54,7 +59,7 @@ const ArticleCard = props => {
           rel="noopener noreferrer" 
           href={url}><img src={urlToImage || Plug} alt={title}/></a>
         </div>
-        <p>{description || content}</p>
+        <p>{description || formatContent(content)}</p>
         {button}
         {/* {
         loggedInUser.username && <button className={NewsCardStyles.tweet} ><a className={NewsCardStyles.a} target="_blank" rel="noopener noreferrer" href={`https://twitter.com/intent/tweet?text=Just checked this out ${url}`} data-show-count="false" >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></button>
