@@ -9,6 +9,7 @@
 
 .Header p {
   color: #32e0c4;
+  margin-top: 5px;
 }
 
 /* mobile view */
@@ -17,7 +18,7 @@
     font-size: 200%;
   }
   .Header p {
-    font-size: 110%;
+    font-size: 100%;
   }
 }
 
@@ -27,6 +28,6 @@
     font-size: 250%;
   }
   .Header p {
-    font-size: 150%;
+    font-size: 130%;
   }
 }
