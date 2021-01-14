@@ -20,6 +20,13 @@ export const changePage = changeType => {
         };
         dispatch(goToLastPage(updates));
         break;
+      case "first":
+        const stateUpdates = {
+          page: 1,
+          prevLastArticleIndex: 0,
+          lastArticleIndex: articlesPerPage
+        };
+        dispatch(goToFirstPage(stateUpdates));
       default: break;
     }
   };
@@ -41,6 +48,15 @@ const prevPage = () => {
 const goToLastPage = ({ prevLastArticleIndex, lastArticleIndex }) => {
   return {
     type: actionTypes.LAST_PAGE,
+    prevLastArticleIndex,
+    lastArticleIndex
+  };
+};
+
+const goToFirstPage = ({ page, prevLastArticleIndex, lastArticleIndex }) => {
+  return {
+    type: actionTypes.FIRST_PAGE,
+    page,
     prevLastArticleIndex,
     lastArticleIndex
   };

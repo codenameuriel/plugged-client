@@ -37,7 +37,7 @@ class PageManager extends Component {
   // }
 
   renderButtons() {
-    const { onNextPage, onPrevPage, onLastPage, page, lastPage } = this.props;
+    const { onNextPage, onPrevPage, onLastPage, onFirstPage, page, lastPage } = this.props;
     let buttons = null;
     if (lastPage !== 1) {
       buttons = (
@@ -59,7 +59,7 @@ class PageManager extends Component {
       buttons = (
         <>
           <button onClick={onPrevPage}>Previous Page</button>
-          <button>First Page</button>
+          <button onClick={onFirstPage}>First Page</button>
         </>
       );
     }
@@ -486,7 +486,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onNextPage: () => dispatch(actionCreators.changePage("next")),
     onPrevPage: () => dispatch(actionCreators.changePage("previous")),
-    onLastPage: () => dispatch(actionCreators.changePage("last"))
+    onLastPage: () => dispatch(actionCreators.changePage("last")),
+    onFirstPage: () => dispatch(actionCreators.changePage("first"))
   };
 };
 
