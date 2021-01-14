@@ -28,3 +28,11 @@
     border-radius: 30px;
   }
 }
+
+/* mobile view */
+@media (max-width: 749px) {
+  .Nav {
+    display: flex;
+    flex-direction: column;
+  }
+}

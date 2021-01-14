@@ -10,3 +10,10 @@
   background-color: white;
   margin-bottom: 5px;
 }
+
+/* desktop view */
+@media (min-width: 750px) {
+  .DrawerToggle {
+    display: none;
+  }
+}
