@@ -5,6 +5,8 @@ import * as actionCreators from '../../store/actions/index';
 import Spinner from '../../components/Spinner/Spinner';
 import ArticleCard from '../ArticleCard/ArticleCard';
 
+import ContentStyles from './Content.module.css';
+
 class Content extends Component {
   renderContent() {
     const { type, user } = this.props;
@@ -48,7 +50,11 @@ class Content extends Component {
   render() {
     let content = <Spinner />;
     if (this.renderContent()) {
-      content = this.renderContent();
+      content = (
+        <div className={ContentStyles.Content}>
+          {this.renderContent()}
+        </div>
+      );
     }
     return content;
   }

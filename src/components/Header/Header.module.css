@@ -7,6 +7,10 @@
   margin-bottom: 0;
 }
 
+.Header p {
+  color: #32e0c4;
+}
+
 /* mobile view */
 @media (max-width: 749px) {
   .Header h1 {

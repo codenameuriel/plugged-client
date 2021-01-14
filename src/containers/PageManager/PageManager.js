@@ -37,11 +37,14 @@ class PageManager extends Component {
   // }
 
   renderButtons() {
-    const { onNextPage, onPrevPage, page, lastPage } = this.props;
+    const { onNextPage, onPrevPage, onLastPage, page, lastPage } = this.props;
     let buttons = null;
     if (lastPage !== 1) {
       buttons = (
-        <button onClick={onNextPage}>Next Page</button>
+        <>
+          {page === 1 ? <button onClick={onLastPage}>Last Page</button> : null}
+          <button onClick={onNextPage}>Next Page</button>
+        </>
       );
     }
     if (page !== 1) {
@@ -54,7 +57,10 @@ class PageManager extends Component {
     }
     if (page === lastPage) {
       buttons = (
-        <button onClick={onPrevPage}>Previous Page</button>
+        <>
+          <button onClick={onPrevPage}>Previous Page</button>
+          <button>First Page</button>
+        </>
       );
     }
     return buttons;
@@ -479,7 +485,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onNextPage: () => dispatch(actionCreators.changePage("next")),
-    onPrevPage: () => dispatch(actionCreators.changePage("previous"))
+    onPrevPage: () => dispatch(actionCreators.changePage("previous")),
+    onLastPage: () => dispatch(actionCreators.changePage("last"))
   };
 };
 

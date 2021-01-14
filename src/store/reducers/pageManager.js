@@ -35,6 +35,13 @@ const reducer = (state=initialState, action) => {
         prevLastArticleIndex: state.lastArticleIndex,
         lastArticleIndex: action.lastArticleIndex
       };
+    case actionTypes.LAST_PAGE:
+      return {
+        ...state,
+        page: state.lastPage,
+        prevLastArticleIndex: action.prevLastArticleIndex,
+        lastArticleIndex: action.lastArticleIndex
+      };
     default: return state;
   }
 };

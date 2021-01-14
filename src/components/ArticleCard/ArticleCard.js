@@ -48,10 +48,12 @@ const ArticleCard = props => {
     return (
       <div className={ArticleCardStyles.ArticleCard}>
         <h2>{title}</h2>
-        <a 
+        <div className={ArticleCardStyles.Image}>
+          <a 
           target="_blank" 
           rel="noopener noreferrer" 
           href={url}><img src={urlToImage || Plug} alt={title}/></a>
+        </div>
         <p>{description || content}</p>
         {button}
         {/* {

@@ -1,34 +1,41 @@
 .ArticleCard {
-  /* width: 26%; */
-  width: 35%;
-  margin: 50px auto;
-  padding: 15px 35px;
+  width: 30%;
+  margin-bottom: 25px;
   text-align: center;
-  /* background-color: #393e46; */
-  /* background-color: #222831; */
-  /* background-color: #191d24; */
-  background-color: #26292e;
-  color: #eee;
+  background-color: #2e343f;
+  color: white;
   border-radius: 30px;
+}
 
-  order: 3;
-  flex-basis: auto; 
+.ArticleCard h2 {
+  font-size: 125%;
+  width: 75%;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.ArticleCard p {
+  font-size: 95%;
+  width: 75%;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.Image {
+  /* width: 75%; */
+  margin: 0 auto;
 }
 
 .ArticleCard:hover {
   /* transform: translateY(-60px); */
-  /* transform: scale(1.15, 1.15); */
+  transform: scale(1.02, 1.02);
   /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
   box-shadow: 0 8px 16px 0 black;
 }
 
 .ArticleCard img {
-  /* width: 400px; */
-  /* width: 90%;
-  height: 315px; */
-  width: auto;
-  height: 200px;
-  border-radius: 30px;
+  width: 100%;
+  height: 350px;
   background-color: #17191c;
 }
 

@@ -1,6 +1,7 @@
 // PAGEMANAGER ACTION TYPES
 export const PREV_PAGE = "PREV_PAGE";
 export const NEXT_PAGE = "NEXT_PAGE";
+export const LAST_PAGE = "LAST_PAGE";
 
 // ARTICLES ACTION TYPES
 export const SET_ARTICLES = "SET_ARTICLES";
