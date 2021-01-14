@@ -5,7 +5,7 @@ import ArticleCardStyles from './ArticleCard.module.css';
 const ArticleCard = props => {
   const formatContent = content => {
     if (content && content.includes("[")) {
-      return content.split("[")[0];
+      return content.split("[")[0].trim();
     }
   };
   const { inCollection } = props;
