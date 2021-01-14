@@ -1,3 +1,12 @@
 .SideDrawer {
-
+  display: none;
 }
+
+.Show {
+  transform: translateX(0);
+}
+
+.Hide {
+  transform: translateX(-100%);
+}
+

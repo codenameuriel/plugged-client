@@ -1,16 +1,22 @@
 import React from 'react';
+import { useState } from 'react';
 import NavManager from '../../containers/NavManager/NavManager';
+import SideDrawer from '../../containers/SideDrawer/SideDrawer';
+
 import HeaderStyles from './Header.module.css';
 
-const header = props => {
+const Header = props => {
+  const [ showSideDrawer, setShowSideDrawer ] = useState(false);
+
   const { type } = props;
   return (
     <header className={HeaderStyles.Header}>
       <h1>{props.title}</h1>
       <p>{props.subtitle ? props.subtitle : null}</p>
+      <SideDrawer show={showSideDrawer}/>
       <NavManager type={type}/>
     </header>
   );
 };
 
-export default header;
+export default Header;
