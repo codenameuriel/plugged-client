@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import DrawerToggle from '../../components/DrawerToggle/DrawerToggle';
 
 import NavManagerStyles from './NavManager.module.css';
 
@@ -31,6 +32,7 @@ class NavManager extends Component {
   render() {
     return (
       <nav className={NavManagerStyles.Nav}>
+        <DrawerToggle/>
         <ul className={NavManagerStyles.NavLinks}>
           {this.renderLinks()}
         </ul>
