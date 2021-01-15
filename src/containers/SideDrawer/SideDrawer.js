@@ -11,7 +11,7 @@ const SideDrawer = props => {
   return (
     <>
       <div className={sideDrawerStyles.join(" ")}>
-      <Backdrop show={props.show} closeSideDrawer={closeSideDrawer}/>
+        <Backdrop show={props.show} closeSideDrawer={closeSideDrawer}/>
       </div>
     </>
     

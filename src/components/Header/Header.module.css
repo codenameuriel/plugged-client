@@ -14,6 +14,10 @@
 
 /* mobile view */
 @media (max-width: 749px) {
+  nav:last-of-type {
+    display: none;
+  }
+  
   .Header h1 {
     font-size: 200%;
   }
