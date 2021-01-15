@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import DrawerToggle from '../../components/DrawerToggle/DrawerToggle';
 
 import NavManagerStyles from './NavManager.module.css';
 
@@ -30,13 +29,9 @@ class NavManager extends Component {
   }
 
   render() {
-    const { openSideDrawer } = this.props;
     return (
-      <nav className={NavManagerStyles.Nav}>
-        <DrawerToggle openSideDrawer={openSideDrawer}/>
-        <ul className={NavManagerStyles.NavLinks}>
-          {this.renderLinks()}
-        </ul>
+      <nav className={NavManagerStyles.Nav}> 
+        {this.props.children}
       </nav>
     );
   }
