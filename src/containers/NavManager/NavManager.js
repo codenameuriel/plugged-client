@@ -31,11 +31,19 @@ class NavManager extends Component {
   }
 
   render() {
-    const { openSideDrawer } = this.props;
+    const { openSideDrawer, fromSideDrawer } = this.props;
+    let navStyles = NavManagerStyles.Nav;
+    let navLinksStyles = NavManagerStyles.NavLinks;
+
+    if (fromSideDrawer) {
+      navStyles = NavManagerStyles.SideDrawerNav;
+      navLinksStyles = NavManagerStyles.SideDrawerNavLinks;
+    }
+  
     return (
-      <nav className={NavManagerStyles.Nav}> 
-        <DrawerToggle openSideDrawer={openSideDrawer}/>
-        <ul className={NavManagerStyles.NavLinks}>
+      <nav className={navStyles}> 
+        {fromSideDrawer ? null : <DrawerToggle openSideDrawer={openSideDrawer}/>}
+        <ul className={navLinksStyles}>
           {this.renderLinks()}
         </ul>
       </nav>

@@ -3,6 +3,12 @@
   padding: 10px;
 }
 
+.ListItem a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
 /* desktop view */
 @media (min-width: 750px) {
   .NavLinks {
@@ -14,13 +20,10 @@
   }
 
   .ListItem a {
-    text-decoration: none;
     font-size: 125%;
     padding: 10px 20px;
-    color: white;
-    cursor: pointer;
   }
-  
+
   .ListItem a:hover {
     border: 3px solid white;
     color: #26292e;
@@ -30,8 +33,26 @@
 
 /* mobile view */
 @media (max-width: 749px) {
-  .Nav {
+  .SideDrawerNav {
+    width: 100%;
+  }
+
+  .SideDrawerNavLinks {
+    display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    margin: 0;
+    /* background-color: blue; */
+    padding: 15px;
+    height: 40%;
+  }
+
+  .ListItem a {
+    font-size: 115%;
+    background-color: transparent;
+    border: 3px solid #32e0c4;
+    padding: 15px;
+    border-radius: 30px;
   }
 
   .NavLinks {

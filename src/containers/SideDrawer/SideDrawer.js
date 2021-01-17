@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Backdrop from '../../components/Backdrop/Backdrop';
-// import NavManager from '../NavManager/NavManager';
+import NavManager from '../NavManager/NavManager';
 
 import SideDrawerStyles from './SideDrawer.module.css';
 
@@ -17,7 +17,7 @@ const SideDrawer = props => {
         showSideDrawer={showSideDrawer} 
         closeSideDrawer={closeSideDrawer} />
       <div className={sideDrawerStyles.join(" ")}>
-        {/* <NavManager/> */}
+        <NavManager fromSideDrawer={true}/>
       </div>
     </>
   );
