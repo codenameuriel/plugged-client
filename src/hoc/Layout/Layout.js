@@ -10,12 +10,14 @@ const Layout = props => {
   const { type, title, subtitle } = props;
   return (
     <>
-      <SideDrawer show={showSideDrawer} closeSideDrawer={setShowSideDrawer}/>
+      <SideDrawer 
+        showSideDrawer={showSideDrawer} 
+        closeSideDrawer={setShowSideDrawer} />
       <Header 
         type={type} 
         title={title} 
         subtitle={subtitle} 
-        openSideDrawer={setShowSideDrawer}/>
+        openSideDrawer={setShowSideDrawer} />
       <main className={LayoutStyles.Main}>
         {props.children}
       </main>

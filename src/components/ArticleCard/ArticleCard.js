@@ -14,7 +14,7 @@ const ArticleCard = props => {
 
     // () => removeFromCollection(id)
     return (
-      <div>
+      <article>
         <h2>{title}</h2>
         <a 
           target="_blank" 
@@ -22,7 +22,7 @@ const ArticleCard = props => {
           href={url}><img src={url_to_image || Plug} alt={title}/></a>
         <p>{description}</p>
         <button onClick={null}>Remove from collection</button>
-      </div>
+      </article>
     );
   } else {
     const { author, content, publishedAt, source, title, description, url, urlToImage, isAuthenticated, onPostArticle } = props;
@@ -51,7 +51,7 @@ const ArticleCard = props => {
     }
     
     return (
-      <div className={ArticleCardStyles.ArticleCard}>
+      <article className={ArticleCardStyles.ArticleCard}>
         <h2>{title}</h2>
         <div className={ArticleCardStyles.Image}>
           <a 
@@ -64,7 +64,7 @@ const ArticleCard = props => {
         {/* {
         loggedInUser.username && <button className={NewsCardStyles.tweet} ><a className={NewsCardStyles.a} target="_blank" rel="noopener noreferrer" href={`https://twitter.com/intent/tweet?text=Just checked this out ${url}`} data-show-count="false" >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></button>
         } */}
-      </div>
+      </article>
     );
   }
 };

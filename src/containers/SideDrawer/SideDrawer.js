@@ -1,20 +1,25 @@
 import React from 'react';
+
 import Backdrop from '../../components/Backdrop/Backdrop';
-import SideDrawerStyles from './SideDrawer.moduel.css';
+// import NavManager from '../NavManager/NavManager';
+
+import SideDrawerStyles from './SideDrawer.module.css';
 
 const SideDrawer = props => {
-  let sideDrawerStyles = [ SideDrawerStyles.SideDrawer, SideDrawerStyles.Hide];
+  const { showSideDrawer, closeSideDrawer } = props;
+  let sideDrawerStyles = [SideDrawerStyles.SideDrawer, SideDrawerStyles.Hide];
 
-  if (props.show) sideDrawerStyles = [ SideDrawerStyles.SideDrawer, SideDrawerStyles.Show ];
+  if (showSideDrawer) sideDrawerStyles = [SideDrawerStyles.SideDrawer, SideDrawerStyles.Show];
 
-  const { closeSideDrawer } = props;
   return (
     <>
+      <Backdrop 
+        showSideDrawer={showSideDrawer} 
+        closeSideDrawer={closeSideDrawer} />
       <div className={sideDrawerStyles.join(" ")}>
-        <Backdrop show={props.show} closeSideDrawer={closeSideDrawer}/>
+        {/* <NavManager/> */}
       </div>
     </>
-    
   );
 };
 

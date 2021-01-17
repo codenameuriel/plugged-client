@@ -11,10 +11,7 @@ const Header = props => {
       <h1>{title}</h1>
       <p>{subtitle || null}</p>
       <NavManager type={type} openSideDrawer={openSideDrawer}>
-        <DrawerToggle openSideDrawer={openSideDrawer}/>
-          {/* <ul className={NavManagerStyles.NavLinks}>
-            {this.renderLinks()}
-          </ul> */}
+        <DrawerToggle />
       </NavManager>
     </header>
   );

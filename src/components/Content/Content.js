@@ -51,9 +51,9 @@ class Content extends Component {
     let content = <Spinner />;
     if (this.renderContent()) {
       content = (
-        <div className={ContentStyles.Content}>
+        <section className={ContentStyles.Content}>
           {this.renderContent()}
-        </div>
+        </section>
       );
     }
     return content;

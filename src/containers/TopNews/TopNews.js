@@ -4,9 +4,6 @@ import * as actionCreators from '../../store/actions/index';
 // import Nav from '../../components/Nav.js'
 // import NewsMapper from '../../components/NewsMapper'
 
-// import TopNewsStyles from '../styles/TopNews.module.css'\
-import TopNewsStyles from './TopNews.module.css';
-
 import Layout from '../../hoc/Layout/Layout';
 import Content from '../../components/Content/Content';
 import PageManager from '../PageManager/PageManager';
@@ -55,37 +52,35 @@ class TopNews extends Component {
     // if (lastPage) {
     //   nextPageInnerText = 'Back to Page 1'
     // }
+   
+    {/* <header className={TopNewsStyles.header} >
+      <h1>Top Headlines</h1>
+      <p>{jumbotronMessage}</p>
+    </header>
+  <Nav 
+    links={this.props.links}
+  />
+  {showPrevPageButton && 
+    <button className={TopNewsStyles.button} onClick={prevPage} >Previous Page</button>
+  }
+  <button
+    className={TopNewsStyles.button} 
+    onClick={nextPage} >{nextPageInnerText}</button>
+  <NewsMapper
+    news={this.state.topNews}
+    loggedInUser={this.props.loggedInUser}
+    postArticle={this.props.postArticle}
+  /> */}
 
     const { type, title, subtitle } = this.state;
     return (
-      <div className={TopNewsStyles.TopNews}>
-        <Layout title={title} subtitle={subtitle} type={type}>
-          <PageManager/>
-          <Content type={type}/>
-          <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
-        </Layout>
-      </div>
+      <Layout title={title} subtitle={subtitle} type={type}>
+        <PageManager/>
+        <Content type={type}/>
+        <button 
+          onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
+      </Layout>
     );
-      // create TopNews styling
-   
-          {/* <header className={TopNewsStyles.header} >
-            <h1>Top Headlines</h1>
-            <p>{jumbotronMessage}</p>
-          </header>
-        <Nav 
-          links={this.props.links}
-        />
-        {showPrevPageButton && 
-          <button className={TopNewsStyles.button} onClick={prevPage} >Previous Page</button>
-        }
-        <button
-          className={TopNewsStyles.button} 
-          onClick={nextPage} >{nextPageInnerText}</button>
-        <NewsMapper
-          news={this.state.topNews}
-          loggedInUser={this.props.loggedInUser}
-          postArticle={this.props.postArticle}
-        /> */}
   }
 }
 

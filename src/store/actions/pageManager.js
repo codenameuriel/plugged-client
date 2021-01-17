@@ -27,6 +27,7 @@ export const changePage = changeType => {
           lastArticleIndex: articlesPerPage
         };
         dispatch(goToFirstPage(stateUpdates));
+        break;
       default: break;
     }
   };

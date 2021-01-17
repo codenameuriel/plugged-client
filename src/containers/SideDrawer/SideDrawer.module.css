@@ -1,0 +1,28 @@
+.SideDrawer {
+  display: none;
+}
+
+.Show {
+  transform: translateX(0);
+}
+
+.Hide {
+  transform: translateX(-100%);
+}
+
+/* mobile view */ 
+@media (max-width: 749px) {
+  .SideDrawer {
+    display: flex;
+    position: fixed;
+    width: 190px;
+    max-width: 70%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 200;
+    background-color: #2e343f;
+    padding: 20px;
+    transition: transform 0.3s ease-out;
+  }
+}
