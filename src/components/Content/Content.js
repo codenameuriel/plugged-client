@@ -13,28 +13,35 @@ class Content extends Component {
     switch (type) {
       case "top-news":
         const { articles, prevLastArticleIndex, lastArticleIndex, onPostArticle } = this.props;
+        let topNewsContent = null;
         if (articles) {
           const articlesPerPage = articles.slice(prevLastArticleIndex, lastArticleIndex);
 
-          return articlesPerPage.map((article, index) => {
+          topNewsContent = articlesPerPage.map((article, index) => {
             return <ArticleCard {...article} key={index} isAuthenticated={!!user} inCollection={false} onPostArticle={onPostArticle}/>;
           });
+
+          return (
+            <section className={ContentStyles.Articles}>{topNewsContent}</section>
+          );
         }
         break;
       case "dashboard":
         const { categoryArticles, onPostArticle: saveArticle } = this.props;
-        let content = [];
+        let dashboardContent = [];
         for (let category in categoryArticles) {
-          content.push(
-            <>
-              <h1>{category}</h1>
-              {categoryArticles[category].map((article, index) => {
-                return <ArticleCard {...article} key={`${index}${article.url}`} isAuthenticated={!!user} inCollection={false} onPostArticle={saveArticle}/>;
-              })}
-            </> 
+          dashboardContent.push(
+            <section className={ContentStyles.Dashboard}>
+              <h1><span><hr/></span>{category}<span><hr/></span></h1>
+              <div className={ContentStyles.Articles}>
+                {categoryArticles[category].map((article, index) => {
+                  return <ArticleCard {...article} key={`${index}${article.url}`} isAuthenticated={!!user} inCollection={false} onPostArticle={saveArticle}/>;
+                })}
+              </div>
+            </section> 
           );
         }
-        return content;
+        return dashboardContent;
       case "collection":
         const { collectionArticles } = this.props;
         if (collectionArticles) {
@@ -50,11 +57,7 @@ class Content extends Component {
   render() {
     let content = <Spinner />;
     if (this.renderContent()) {
-      content = (
-        <section className={ContentStyles.Content}>
-          {this.renderContent()}
-        </section>
-      );
+      content = this.renderContent();
     }
     return content;
   }

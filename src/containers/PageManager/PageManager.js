@@ -66,7 +66,11 @@ class PageManager extends Component {
         </>
       );
     }
-    return buttons;
+    return (
+      <div className={PageManagerStyles.PageManager}>
+        {buttons}
+      </div>
+    );
   }
 
   // componentDidUpdate = (prevProps) => {

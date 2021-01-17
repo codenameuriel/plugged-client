@@ -5,8 +5,7 @@ import * as actionCreators from '../../store/actions/index';
 // import { apiKey } from '../apiKey'
 // import Nav from './Nav'
 // import NewsMapper from './NewsMapper'
-// import DashboardStyles from '../styles/Dashboard.module.css'
-import DashboardStyles from './Dashboard.module.css';
+
 import Layout from '../../hoc/Layout/Layout';
 import Content from '../../components/Content/Content';
 
@@ -139,15 +138,13 @@ class Dashboard extends Component {
       //   {/* {dashboardDisplay} */}
       //   <h1>Dashboard</h1>
       // </div>
-      <div className={DashboardStyles.Dashboard}>
-        <Layout
-          title={title} 
-          subtitle={subtitle} 
-          type={type}>
-            <Content type={type}/>
-            <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
-        </Layout>
-      </div>
+      <Layout
+        title={title} 
+        subtitle={subtitle} 
+        type={type}>
+          <Content type={type}/>
+          <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
+      </Layout>
     );
   }
 }
