@@ -1,24 +1,6 @@
 .PageManager {
   display: flex;
-  height: 75px;
-  margin-bottom: 5px;
-  /* background: yellow; */
   justify-content: center;
-}
-
-.PageManager button {
-  align-self: center;
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 30px;
-  border: 3px solid white;
-  background-color: #26292e;
-  color: #eee;
-  padding: 10px 20px;
-  font-size: 105%;
-  cursor: pointer;
-  outline: none;
-}
-.PageManager button:hover {
-  border: 3px solid #32e0c4;
+  margin-bottom: 5px;
+  height: 75px;
 }

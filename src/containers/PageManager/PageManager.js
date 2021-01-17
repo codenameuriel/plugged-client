@@ -19,6 +19,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
+
+import Button from '../../components/UI/Button/Button';
+
 import PageManagerStyles from './PageManager.module.css';
 
 class PageManager extends Component {
@@ -42,24 +45,24 @@ class PageManager extends Component {
     if (lastPage !== 1) {
       buttons = (
         <>
-          {page === 1 ? <button onClick={onLastPage}>Last Page</button> : null}
-          <button onClick={onNextPage}>Next Page</button>
+          {page === 1 ? <Button type={"pageManager"} onClick={onLastPage} description={"Last Page"} />: null}
+          <Button type={"pageManager"} onClick={onNextPage} description={"Next Page"} />
         </>
       );
     }
     if (page !== 1) {
       buttons = (
         <>
-          <button onClick={onPrevPage}>Previous Page</button>
-          <button onClick={onNextPage}>Next Page</button>
+          <Button type={"pageManager"} onClick={onPrevPage} description={"Previous Page"} />
+          <Button type={"pageManager"} onClick={onNextPage} description={"Next Page"} />
         </>
       );
     }
     if (page === lastPage) {
       buttons = (
         <>
-          <button onClick={onPrevPage}>Previous Page</button>
-          <button onClick={onFirstPage}>First Page</button>
+          <Button type={"pageManager"} onClick={onPrevPage} description={"Previous Page"} />
+          <Button type={"pageManager"} onClick={onFirstPage} description={"First Page"} />
         </>
       );
     }
