@@ -37,14 +37,16 @@
     font-size: 120%;
     width: 75%;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 0 10px 0;
+    height: 90px;
   }
 
   .ArticleCard p {
-    font-size: 80%;
+    font-size: 85%;
     width: 75%;
     margin: 0 auto;
     padding: 25px 15px 35px 15px;
+    height: 75px;
   }
 
   .ArticleCard img {
