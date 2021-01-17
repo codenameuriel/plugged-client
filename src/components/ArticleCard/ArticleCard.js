@@ -42,7 +42,8 @@ const ArticleCard = props => {
     
     if (isAuthenticated) {
       button = (
-        <button 
+        <button
+          className={ArticleCardStyles.Collection}
           onClick={() => {
             onPostArticle(article);
             alert('article was added to your collection!');
@@ -53,17 +54,25 @@ const ArticleCard = props => {
     return (
       <article className={ArticleCardStyles.ArticleCard}>
         <h2>{title}</h2>
-        <div className={ArticleCardStyles.Image}>
-          <a 
+        <a 
           target="_blank" 
           rel="noopener noreferrer" 
           href={url}><img src={urlToImage || Plug} alt={title}/></a>
-        </div>
         <p>{description || formatContent(content)}</p>
         {button}
-        {/* {
-        loggedInUser.username && <button className={NewsCardStyles.tweet} ><a className={NewsCardStyles.a} target="_blank" rel="noopener noreferrer" href={`https://twitter.com/intent/tweet?text=Just checked this out ${url}`} data-show-count="false" >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></button>
-        } */}
+        {isAuthenticated && 
+          <button 
+            className={ArticleCardStyles.Tweet}>
+              <a className={ArticleCardStyles.a} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                href={`https://twitter.com/intent/tweet?text=Just checked this out ${url}`} 
+                data-show-count="false">Tweet</a>
+                <script 
+                  async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+                </script>
+          </button>
+        }
       </article>
     );
   }
