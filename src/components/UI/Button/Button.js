@@ -3,19 +3,19 @@ import ButtonStyles from './Button.module.css';
 
 const Button = ({ type, description, onClick }) => {
   // onClick prop will contain click event
-  let buttonStyles = null;
+  let buttonStyles = [ButtonStyles.Button]
   switch (type) {
     case "collection":
-      buttonStyles = ButtonStyles.Collection;
+      buttonStyles = [ButtonStyles.Button, ButtonStyles.Collection];
       break;
     case "pageManager":
-      buttonStyles = ButtonStyles.PageManager;
+      buttonStyles = [ButtonStyles.Button, ButtonStyles.PageManager];
       break;
     default: break;
   }
 
   return (
-    <button className={buttonStyles} onClick={onClick}>{description}</button>
+    <button className={buttonStyles.join(" ")} onClick={onClick}>{description}</button>
   );
 };
 
