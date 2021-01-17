@@ -1,8 +1,10 @@
 import React from 'react';
-
+import { FaTwitter } from "react-icons/fa";
 import Button from '../UI/Button/Button';
+
 import Plug from '../../assets/Plug.png';
 import ArticleCardStyles from './ArticleCard.module.css';
+import IconStyles from '../UI/Icon/Icon.module.css';
 
 const ArticleCard = props => {
   const formatContent = content => {
@@ -54,7 +56,7 @@ const ArticleCard = props => {
           type={"collection"} />
       );
     }
-    
+
     return (
       <article className={ArticleCardStyles.ArticleCard}>
         <h2>{title}</h2>
@@ -63,20 +65,24 @@ const ArticleCard = props => {
           rel="noopener noreferrer" 
           href={url}><img src={urlToImage || Plug} alt={title}/></a>
         <p>{description || formatContent(content)}</p>
-        {button}
-        {isAuthenticated && 
-          <button 
-            className={ArticleCardStyles.Tweet}>
-              <a className={ArticleCardStyles.a} 
+        <div className={ArticleCardStyles.Actions}>
+          {button}
+          {isAuthenticated && 
+            <>
+              <a 
+                className={ArticleCardStyles.a} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 href={`https://twitter.com/intent/tweet?text=Just checked this out ${url}`} 
-                data-show-count="false">Tweet</a>
-                <script 
-                  async src="https://platform.twitter.com/widgets.js" charset="utf-8">
-                </script>
-          </button>
-        }
+                data-show-count="false">
+                  <FaTwitter className={IconStyles.Tweet}/>
+              </a>
+              <script 
+                async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+              </script>
+            </>
+          }
+        </div>
       </article>
     );
   }

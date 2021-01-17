@@ -1,0 +1,11 @@
+.Tweet {
+  margin-left: 5px;
+  color: #1DA1F2;
+  height: 30px;
+  width: 40px;
+  margin-bottom: 15px;
+}
+
+.Tweet:hover {
+  color: #64bdf5;
+}

@@ -1,7 +1,7 @@
 .Collection {
   color: #eee;
   background-color: #2e343f;
-  border: 3px solid #32e0c4;
+  border: 3px solid white;
   text-align: center;
   text-decoration: none;
   border-radius: 30px;
@@ -10,42 +10,22 @@
   margin-bottom: 20px;
 }
 
-.Tweet {
-  background-color: #2e343f;
-  border: 3px solid #1DA1F2;
-  border-radius: 30px;
-  margin-left: 10px;
-  color: #eee;
-  margin-bottom: 20px;
-}
-
 /* desktop view */
 @media (min-width: 750px) {
-  .Collection, .Tweet {
+  .Collection {
     padding: 10px 20px;
-    font-size: 100%;
+    font-size: 90%;
   }
 
   .Collection:hover {
-    background-color: #5cfae0;
     color: white;
-  }
-
-  .Collection:active {
-    background-color: #32e0c4;
-    color: #eee;
-    transform: translateY(2px);
-  }
-
-  .Tweet:hover {
-    color: white;
-    background-color: #49b6ff;
+    border: 3px solid #32e0c4;
   }
 }
 
 /* mobile view */
 @media (max-width: 749px) {
-  .Collection, .Tweet {
+  .Collection {
     margin-bottom: 20px;
     padding: 10px 15px;
     font-size: 80%;
