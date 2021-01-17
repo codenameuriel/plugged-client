@@ -1,6 +1,18 @@
 .PageManager {
   display: flex;
   justify-content: center;
-  margin-bottom: 5px;
-  height: 75px;
+}
+
+/* desktop view */ 
+@media (min-width: 750px) {
+  .PageManager {
+    height: 100px;
+  }
+}
+
+/* mobile view */
+@media (max-width: 749px) {
+  .PageManager {
+    height: 75px;
+  }
 }
