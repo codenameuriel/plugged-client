@@ -1,4 +1,6 @@
 import React from 'react';
+
+import Button from '../UI/Button/Button';
 import Plug from '../../assets/Plug.png';
 import ArticleCardStyles from './ArticleCard.module.css';
 
@@ -19,9 +21,9 @@ const ArticleCard = props => {
         <a 
           target="_blank" 
           rel="noopener noreferrer" 
-          href={url}><img src={url_to_image || Plug} alt={title}/></a>
+          href={url}><img src={url_to_image || Plug} alt={title} /></a>
         <p>{description}</p>
-        <button onClick={null}>Remove from collection</button>
+        <Button onClick={null} description={"Remove from collection"} />
       </article>
     );
   } else {
@@ -39,15 +41,17 @@ const ArticleCard = props => {
     };
       
     let button = null;
-    
     if (isAuthenticated) {
+      const addToCollection = () => {
+        onPostArticle(article);
+        alert("article was added to your collection!");
+      };
+
       button = (
-        <button
-          className={ArticleCardStyles.Collection}
-          onClick={() => {
-            onPostArticle(article);
-            alert('article was added to your collection!');
-          }}>Add to collection</button>
+        <Button 
+          onClick={addToCollection}
+          description={"Add to collection"} 
+          type={"collection"} />
       );
     }
     
