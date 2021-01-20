@@ -42,18 +42,30 @@ const ArticleCard = props => {
       url_to_image: urlToImage
     };
       
-    let button = null;
+    let authenticatedActions = null;
     if (isAuthenticated) {
       const addToCollection = () => {
         onPostArticle(article);
         alert("article was added to your collection!");
       };
 
-      button = (
-        <Button 
-          onClick={addToCollection}
-          description={"Add to collection"} 
-          type={"collection"} />
+      authenticatedActions = (
+        <div className={ArticleCardStyles.Actions}>
+          <Button 
+            onClick={addToCollection}
+            description={"Add to collection"} 
+            type={"collection"} />
+          <a
+            target="_blank" 
+            rel="noopener noreferrer" 
+            href={`https://twitter.com/intent/tweet?text=Just checked this out ${url}`} 
+            data-show-count="false">
+              <FaTwitter className={IconStyles.Tweet}/>
+          </a>
+          <script 
+            async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+          </script>
+        </div>
       );
     }
 
@@ -65,24 +77,7 @@ const ArticleCard = props => {
           rel="noopener noreferrer" 
           href={url}><img src={urlToImage || Plug} alt={title}/></a>
         <p>{description || formatContent(content)}</p>
-        <div className={ArticleCardStyles.Actions}>
-          {button}
-          {isAuthenticated && 
-            <>
-              <a 
-                className={ArticleCardStyles.a} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                href={`https://twitter.com/intent/tweet?text=Just checked this out ${url}`} 
-                data-show-count="false">
-                  <FaTwitter className={IconStyles.Tweet}/>
-              </a>
-              <script 
-                async src="https://platform.twitter.com/widgets.js" charset="utf-8">
-              </script>
-            </>
-          }
-        </div>
+        {authenticatedActions}
       </article>
     );
   }
