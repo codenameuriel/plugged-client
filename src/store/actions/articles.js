@@ -10,7 +10,7 @@ export const fetchArticles = () => {
       dispatch(setArticles(articles));
       dispatch(setLastArticleIndex(articles, articlesPerPage));
       dispatch(setLastPage(articles, articlesPerPage));
-    } catch(error) {
+    } catch (error) {
       dispatch(fetchArticlesFailed());
     }
   };
@@ -137,6 +137,39 @@ export const fetchCollectionArticles = () => {
       dispatch(setCollectionArticles(collectionArticles));
       dispatch(setLastArticleIndex(collectionArticles, articlesPerPage));
       dispatch(setLastPage(collectionArticles, articlesPerPage));
+    }
+  };
+};
+
+const setTopicArticles = articles => {
+  return {
+    type: actionTypes.SET_TOPIC_ARTICLES,
+    articles
+  };
+};
+
+// getTopicNews = () => {
+  //   const { page, searchTopic } = this.state
+
+  //   fetch(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en&pageSize=9&page=${page}`, apiKey)
+  //   .then(resp => resp.json())
+  //   .then(data => this.setState({
+  //     topicNews: data.articles
+  //   }, () => this.setTotalResults(data.totalResults)))
+  //   .then(this.setState({
+  //     topicHeader: searchTopic
+  //   }))
+  //   .then(this.clearSearch())
+  // }
+
+export const fetchTopicArticles = searchTopic => { 
+  return async (dispatch) => {
+    try {
+      const resp = await fetch(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
+      const articles = await (await resp.json()).articles;
+      dispatch(setTopicArticles(articles));
+    } catch (error) {
+      dispatch(fetchArticlesFailed());
     }
   };
 };

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchTopicArticles } from '../../store/actions/articles';
 
 import Button from '../UI/Button/Button';
 
@@ -21,6 +23,7 @@ class Search extends Component {
 
   render() {
     const { inputValue } = this.state;
+    const { onFetchTopicArticles } = this.props;
     return (
       <div className={SearchStyles.Search}>
         <input 
@@ -28,10 +31,19 @@ class Search extends Component {
           value={inputValue} 
           onChange={this.inputChange}
           placeholder="Search by topic" />
-        <Button type={"search"} onClick={null} description={"Search"} />
+        <Button 
+          type={"search"} 
+          onClick={() => onFetchTopicArticles(inputValue)} 
+          description={"Search"} />
       </div>
     );
   }
 }
 
-export default Search;
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchTopicArticles: topic => dispatch(fetchTopicArticles(topic))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Search);

@@ -4,6 +4,7 @@ const initialState = {
   articles: null,
   categoryArticles: null,
   collectionArticles: null,
+  topicArticles: null,
   totalArticles: null,
   totalCollectionArticles: null
 };
@@ -30,6 +31,14 @@ const reducer = (state=initialState, action)=> {
         articles: state.articles ? [...state.articles] : null,
         categoryArticles: state.categoryArticles ? {...state.categoryArticles} : null,
         collectionArticles: state.collectionArticles ? [...state.collectionArticles, ...action.articles] : action.articles
+      };
+    case actionTypes.SET_TOPIC_ARTICLES:
+      return {
+        ...state,
+        articles: state.articles ? [...state.articles] : null,
+        categoryArticles: state.catergoryArticles ? {...state.categoryArticles} : null,
+        collectionArticles: state.collectionArticles ? [...state.collectionArticles] : null,
+        topicArticles: state.topicArticles ? [...state.topicArticles] : action.articles
       };
     default: return state;
   }
