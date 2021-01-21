@@ -5,8 +5,11 @@
 
 .ListItem a {
   text-decoration: none;
+  border: 3px solid #32e0c4;
+  border-radius: 30px;
   color: white;
   cursor: pointer;
+  transition: border 0.3s;
 }
 
 /* desktop view */
@@ -27,7 +30,6 @@
   .ListItem a:hover {
     border: 3px solid white;
     color: #26292e;
-    border-radius: 30px;
   }
 }
 
@@ -42,7 +44,6 @@
     flex-direction: column;
     justify-content: space-around;
     margin: 0;
-    /* background-color: blue; */
     padding: 15px;
     height: 40%;
   }
