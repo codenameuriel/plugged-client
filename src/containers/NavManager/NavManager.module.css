@@ -1,6 +1,13 @@
 .Nav {
+  display: flex;
   background: #32e0c4;
   padding: 10px;
+  align-items: center;
+}
+
+/* Search */
+.Nav div {
+  margin-left: 45%;
 }
 
 .ListItem a {
@@ -17,8 +24,8 @@
   .NavLinks {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: right;
     margin: 0;
+    margin-left: auto;
     padding: 1rem;
   }
 

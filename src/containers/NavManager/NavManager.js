@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import DrawerToggle from '../../components/DrawerToggle/DrawerToggle';
+import Search from '../../components/Search/Search';
 
 import NavManagerStyles from './NavManager.module.css';
 
@@ -32,6 +33,7 @@ class NavManager extends Component {
 
   render() {
     const { openSideDrawer, fromSideDrawer } = this.props;
+    const onDashboardPage = window.location.pathname === "/dashboard";
     let navStyles = NavManagerStyles.Nav;
     let navLinksStyles = NavManagerStyles.NavLinks;
 
@@ -43,6 +45,7 @@ class NavManager extends Component {
     return (
       <nav className={navStyles}> 
         {fromSideDrawer ? null : <DrawerToggle openSideDrawer={openSideDrawer}/>}
+        {onDashboardPage && <Search />}
         <ul className={navLinksStyles}>
           {this.renderLinks()}
         </ul>

@@ -11,6 +11,9 @@ const Button = ({ type, description, onClick }) => {
     case "pageManager":
       buttonStyles = [ButtonStyles.Button, ButtonStyles.PageManager];
       break;
+    case "search":
+      buttonStyles = [ButtonStyles.Button, ButtonStyles.Search];
+      break;
     default: break;
   }
 

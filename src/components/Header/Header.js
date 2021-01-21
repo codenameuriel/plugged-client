@@ -10,8 +10,10 @@ const Header = props => {
     <header className={HeaderStyles.Header}>
       <h1>{title}</h1>
       <p>{subtitle || null}</p>
-      <NavManager type={type} openSideDrawer={openSideDrawer}>
-        <DrawerToggle />
+      <NavManager 
+        type={type} 
+        openSideDrawer={openSideDrawer}>
+          <DrawerToggle />
       </NavManager>
     </header>
   );
