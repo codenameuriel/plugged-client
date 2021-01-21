@@ -4,7 +4,7 @@
 }
 
 .Search input {
-  padding: 15px;
+  padding: 10px 20px;
   width: 50%;
   border: none;
   outline: none; 
@@ -13,6 +13,11 @@
   color: #32e0c4;
   font-size: 100%;
   transition: background 0.3s;
+}
+
+.Search input:placeholder-shown {
+  color: #eee;
+  font-size: 100%;
 }
 
 .Search input:hover {

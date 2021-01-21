@@ -7,7 +7,7 @@ import SearchStyles from './Search.module.css';
 const Search = props => {
   return (
     <div className={SearchStyles.Search}>
-      <input type="text"/>
+      <input type="text" placeholder="Search by topic" />
       <Button type={"search"} onClick={null} description={"Search"} />
     </div>
   );
