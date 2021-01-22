@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
-// import { Link } from 'react-router-dom'
-// import { apiKey } from '../apiKey'
-// import Nav from './Nav'
-// import NewsMapper from './NewsMapper'
 
 import Layout from '../../hoc/Layout/Layout';
 import Content from '../../components/Content/Content';
+import TopicNews from '../../components/TopicNews';
 
 class Dashboard extends Component {
   state = {
@@ -17,10 +15,6 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    // if (this.props.loggedInUser.categories) {
-      // this.getUsersCategoryNews();
-      // console.log(this.props.user);
-    // }
     const { onFetchCategoryArticles } = this.props;
     onFetchCategoryArticles();
   }
@@ -129,15 +123,8 @@ class Dashboard extends Component {
     //       <h3 className={DashboardStyles.h3} ><Link className={DashboardStyles.link} to="/categories">Subscribe</Link> to news here</h3>
     //     </>
     // }
-
     const { type, title, subtitle } = this.state;
-    
     return (
-      // <div>
-      //   {/* {dashboardDisplayHeader} */}
-      //   {/* {dashboardDisplay} */}
-      //   <h1>Dashboard</h1>
-      // </div>
       <Layout
         title={title} 
         subtitle={subtitle} 
@@ -151,7 +138,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    topicArticles: state.articles.topicArticles
   };
 };
 

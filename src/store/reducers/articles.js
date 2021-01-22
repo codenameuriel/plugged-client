@@ -5,6 +5,7 @@ const initialState = {
   categoryArticles: null,
   collectionArticles: null,
   topicArticles: null,
+  searchTopic: null,
   totalArticles: null,
   totalCollectionArticles: null
 };
@@ -38,7 +39,8 @@ const reducer = (state=initialState, action)=> {
         articles: state.articles ? [...state.articles] : null,
         categoryArticles: state.catergoryArticles ? {...state.categoryArticles} : null,
         collectionArticles: state.collectionArticles ? [...state.collectionArticles] : null,
-        topicArticles: state.topicArticles ? [...state.topicArticles] : action.articles
+        topicArticles: state.topicArticles ? [...state.topicArticles] : action.articles,
+        searchTopic: action.searchTopic
       };
     default: return state;
   }

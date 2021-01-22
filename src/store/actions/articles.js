@@ -141,10 +141,11 @@ export const fetchCollectionArticles = () => {
   };
 };
 
-const setTopicArticles = articles => {
+const setTopicArticles = (articles, searchTopic) => {
   return {
     type: actionTypes.SET_TOPIC_ARTICLES,
-    articles
+    articles,
+    searchTopic
   };
 };
 
@@ -167,7 +168,7 @@ export const fetchTopicArticles = searchTopic => {
     try {
       const resp = await fetch(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
       const articles = await (await resp.json()).articles;
-      dispatch(setTopicArticles(articles));
+      dispatch(setTopicArticles(articles, searchTopic));
     } catch (error) {
       dispatch(fetchArticlesFailed());
     }

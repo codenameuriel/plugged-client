@@ -17,6 +17,7 @@ import Source from './components/SourceNews'; // change to Source
 import Newspaper from './components/NewspaperMenu'; // change to Newspaper
 
 import Auth from './containers/Auth/Auth';
+import TopicNews from './components/TopicNews';
 
 class App extends Component {
   // state = {
@@ -176,23 +177,24 @@ class App extends Component {
     const { user } = this.props;
     let routes = (
       <Switch>
-        <Route path="/login" component={Auth}/>
-        <Route path="/signup" component={Auth}/>
-        <Route path="/top-news" component={TopNews}/>
-        <Redirect from="/" to="/top-news"/>
+        <Route path="/login" component={Auth} />
+        <Route path="/signup" component={Auth} />
+        <Route path="/top-news" component={TopNews} />
+        <Redirect from="/" to="/top-news" />
       </Switch>
     );
     if (user) {
       routes = (
         <Switch>
-          <Route path="/login" component={Auth}/>
-          <Route path="/signup" component={Auth}/>
-          <Route path="/top-news" component={TopNews}/>
-          <Route path="/dashboard" component={Dashboard}/>
-          <Route path="/collection" component={Collection}/>
-          <Route path="/categories" component={Category}/>
-          <Route path="/sources" component={Source}/>
-          <Route path="/newspapers" component={Newspaper}/>
+          <Route path="/login" component={Auth} />
+          <Route path="/signup" component={Auth} />
+          <Route path="/top-news" component={TopNews} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/topic-news" component={TopicNews} />
+          <Route path="/collection" component={Collection} />
+          <Route path="/categories" component={Category} />
+          <Route path="/sources" component={Source} />
+          <Route path="/newspapers" component={Newspaper} />
           {/* <Redirect from="/" to="/top-news"/> */}
         </Switch>
       );

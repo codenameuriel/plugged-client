@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchTopicArticles } from '../../store/actions/articles';
 
@@ -21,9 +22,15 @@ class Search extends Component {
     this.setState({ inputValue: event.target.value });
   }
 
+  enterSearch = () => {
+    const { inputValue } = this.state;
+    const { onFetchTopicArticles, history } = this.props;
+    onFetchTopicArticles(inputValue);
+    history.push("/topic-news");
+  }
+
   render() {
     const { inputValue } = this.state;
-    const { onFetchTopicArticles } = this.props;
     return (
       <div className={SearchStyles.Search}>
         <input 
@@ -33,7 +40,7 @@ class Search extends Component {
           placeholder="Search by topic" />
         <Button 
           type={"search"} 
-          onClick={() => onFetchTopicArticles(inputValue)} 
+          onClick={this.enterSearch} 
           description={"Search"} />
       </div>
     );
@@ -46,4 +53,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Search);
+export default withRouter(connect(null, mapDispatchToProps)(Search));
