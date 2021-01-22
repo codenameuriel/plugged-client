@@ -12,17 +12,29 @@ class Content extends Component {
     const { type, user } = this.props;
     switch (type) {
       case "top-news":
-        const { articles, prevLastArticleIndex, lastArticleIndex, onPostArticle } = this.props;
+        const { 
+          articles, prevLastArticleIndex, lastArticleIndex, onPostArticle 
+        } = this.props;
         let topNewsContent = null;
         if (articles) {
           const articlesPerPage = articles.slice(prevLastArticleIndex, lastArticleIndex);
 
-          topNewsContent = articlesPerPage.map((article, index) => {
-            return <ArticleCard {...article} key={index} isAuthenticated={!!user} inCollection={false} onPostArticle={onPostArticle}/>;
-          });
-
+          topNewsContent = (
+            articlesPerPage.map((article, index) => {
+              return (
+                <ArticleCard 
+                  {...article} 
+                  key={index} 
+                  isAuthenticated={!!user} 
+                  inCollection={false} 
+                  onPostArticle={onPostArticle} />
+              );
+            })
+          );
           return (
-            <section className={ContentStyles.Articles}>{topNewsContent}</section>
+            <section 
+              className={ContentStyles.Articles}>{topNewsContent}
+            </section>
           );
         }
         break;
@@ -35,7 +47,14 @@ class Content extends Component {
               <h1><span><hr/></span>{category}<span><hr/></span></h1>
               <div className={ContentStyles.Articles}>
                 {categoryArticles[category].map((article, index) => {
-                  return <ArticleCard {...article} key={`${index}${article.url}`} isAuthenticated={!!user} inCollection={false} onPostArticle={saveArticle}/>;
+                  return (
+                    <ArticleCard 
+                      {...article} 
+                      key={`${index}${article.url}`} 
+                      isAuthenticated={!!user} 
+                      inCollection={false} 
+                      onPostArticle={saveArticle}/>
+                  );
                 })}
               </div>
             </section> 
@@ -45,8 +64,30 @@ class Content extends Component {
       case "collection":
         const { collectionArticles } = this.props;
         if (collectionArticles) {
-          return collectionArticles.map(({ article }, index) => {
-            return <ArticleCard {...article} key={`${index}${article.id}`} isAuthenticated={!!user} inCollection={true}/>;
+          return (
+            collectionArticles.map(({ article }, index) => {
+              return (
+                <ArticleCard 
+                  {...article} 
+                  key={`${index}${article.id}`} 
+                  isAuthenticated={!!user} 
+                  inCollection={true} />
+              );
+            })
+          );
+        }
+        break;
+      case "topic-news":
+        const { topicArticles } = this.props;
+        if (topicArticles) {
+          return topicArticles.map((article, index) => {
+            return (
+              <ArticleCard 
+                {...article} 
+                key={`${index}${article.id}`}
+                isAuthenticated={!!user}
+                inCollection={false} />
+            );
           });
         }
         break;
@@ -69,6 +110,7 @@ const mapStateToProps = state => {
     articles: state.articles.articles,
     categoryArticles: state.articles.categoryArticles,
     collectionArticles: state.articles.collectionArticles,
+    topicArticles: state.articles.topicArticles,
     prevLastArticleIndex: state.pageManager.prevLastArticleIndex,
     lastArticleIndex: state.pageManager.lastArticleIndex
   };
