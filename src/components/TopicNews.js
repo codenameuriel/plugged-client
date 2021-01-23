@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import NewsMapper from './NewsMapper'
-// import { Link } from 'react-router-dom'
-// import Nav from './Nav'
+
 import Layout from '../hoc/Layout/Layout';
 import Content from './Content/Content';
 
@@ -12,7 +10,7 @@ class TopicNews extends Component {
   state = {
     type: "topic-news",
     title: "Topic-News",
-    subtitle: "Here's the latest on "/<span className={TopicNewsStyles.span}>{this.props.searchTopic}</span>/""
+    subtitle: `Here's the latest on ${this.props.searchTopic}`
   }
 
   // state = {
@@ -82,9 +80,6 @@ class TopicNews extends Component {
   render() {
     const { type, title, subtitle } = this.state;
     return (
-      // <div className={TopicNewsStyles.container} >
-      //  {this.renderDisplay()}
-      // </div>
       <Layout
         title={title} 
         subtitle={subtitle} 

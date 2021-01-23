@@ -6,7 +6,10 @@ export const fetchArticles = () => {
     try {
       const { articlesPerPage } = getState().pageManager;
       const resp = await fetch("https://newsapi.org/v2/top-headlines?country=us", apiKey);
-      const articles = (await resp.json()).articles;
+      const parsedResp = await resp.json();
+      const articles = parsedResp.articles;
+      console.log(parsedResp); // object
+
       dispatch(setArticles(articles));
       dispatch(setLastArticleIndex(articles, articlesPerPage));
       dispatch(setLastPage(articles, articlesPerPage));
@@ -55,7 +58,8 @@ export const fetchCategoryArticles = () => {
     categories.forEach(async category => {
       try {
         const resp = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=6&page=1`, apiKey);
-        const articles = (await resp.json()).articles;
+        const parsedResp = await resp.json();
+        const articles = parsedResp.articles;
         const categoryArticles = { [category]: articles };
 
         dispatch(setCategoryArticles(categoryArticles));
@@ -97,7 +101,6 @@ const postArticle = async article => {
     body: JSON.stringify(article)
     });
   const savedArticle = await resp.json();
-  console.log(savedArticle);
   return savedArticle;
 };
 
@@ -167,7 +170,8 @@ export const fetchTopicArticles = searchTopic => {
   return async (dispatch) => {
     try {
       const resp = await fetch(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
-      const articles = await (await resp.json()).articles;
+      const parsedResp = await resp.json();
+      const articles = await parsedResp.articles;
       dispatch(setTopicArticles(articles, searchTopic));
     } catch (error) {
       dispatch(fetchArticlesFailed());
