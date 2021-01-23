@@ -16,7 +16,7 @@ class TopNews extends Component {
   }
 
   componentDidMount() {
-    this.props.onFetchArticles();
+    this.props.onGetTopNews();
   }
 
   // componentDidUpdate(prevProps) {
@@ -92,7 +92,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchArticles: () => dispatch(actionCreators.fetchArticles())
+    onGetTopNews: () => dispatch(actionCreators.getTopNews())
   };
 };
 

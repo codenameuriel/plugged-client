@@ -1,39 +1,61 @@
 import * as actionTypes from './actionTypes';
 import { apiKey } from '../../apiKey';
 
-export const fetchArticles = () => {
+const getData = async (url='', apiKey=null) => {
+  const response = await fetch(url, apiKey);
+  return response.json();
+};
+
+const postData = async (url='', data={}) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  return response.json();
+};
+
+const setPaginationData = (cb, articles, articlesPerPage) => {
+  cb(setLastArticleIndex(articles, articlesPerPage));
+  cb(setLastPage(articles, articlesPerPage));
+};
+
+export const getTopNews = () => {
   return async(dispatch, getState) => {
+    const { articlesPerPage } = getState().pageManager;
     try {
-      const { articlesPerPage } = getState().pageManager;
-      const resp = await fetch("https://newsapi.org/v2/top-headlines?country=us", apiKey);
-      const parsedResp = await resp.json();
-      const articles = parsedResp.articles;
-      console.log(parsedResp); // object
+      const data = await getData("https://newsapi.org/v2/top-headlines?country=us", apiKey);
+      const articles = data.articles;
 
       dispatch(setArticles(articles));
-      dispatch(setLastArticleIndex(articles, articlesPerPage));
-      dispatch(setLastPage(articles, articlesPerPage));
+      setPaginationData(dispatch, articles, articlesPerPage);
     } catch (error) {
-      dispatch(fetchArticlesFailed());
+      dispatch(fetchArticlesFailed(error));
     }
   };
 };
 
 const setLastArticleIndex = (articles, articlesPerPage) => {
-  let lastArticleIndex = null;
-  lastArticleIndex = articles.length > articlesPerPage ? articlesPerPage : articles.length;
+  let lastArticleIndex = articles.length > articlesPerPage ? articlesPerPage : articles.length;
   return {
     type: actionTypes.SET_LAST_ARTICLE_INDEX,
     lastArticleIndex
   };
 };
 
+const calculateLastPage = (articles, articlesPerPage) => {
+  return (
+    articles.length % articlesPerPage === 0 ? (articles.length / articlesPerPage) : Math.ceil((articles.length / articlesPerPage))
+  );
+};
+
 const setLastPage = (articles, articlesPerPage) => {
-  let lastPage = null;
-  lastPage = articles.length % articlesPerPage === 0 ? (articles.length / articlesPerPage) : Math.ceil((articles.length / articlesPerPage));
   return {
     type: actionTypes.SET_LAST_PAGE,
-    lastPage
+    lastPage: calculateLastPage(articles, articlesPerPage)
   };
 };
 
@@ -45,28 +67,29 @@ const setArticles = articles => {
   };
 };
 
-const fetchArticlesFailed = () => {
+const fetchArticlesFailed = error => {
   return {
-    type: actionTypes.FETCH_ARTICLES_FAILED
+    type: actionTypes.FETCH_ARTICLES_FAILED,
+    error
   };
 };
 
-export const fetchCategoryArticles = () => {
+export const getDashboardNews = () => {
   return (dispatch, getState) => {
-    const categories = getState().auth.user.categories.map(category => category.name.toLowerCase());
+    const { user } = getState().auth;
+    const userSubscribedNewsCategories = user.categories.map(category => category.name.toLowerCase());
 
-    categories.forEach(async category => {
-      try {
-        const resp = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=6&page=1`, apiKey);
-        const parsedResp = await resp.json();
-        const articles = parsedResp.articles;
-        const categoryArticles = { [category]: articles };
+    try {
+      userSubscribedNewsCategories.forEach(async category => {
+        const data = await getData(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=6&page=1`, apiKey);
+        const articles = data.articles;
+        const articlesPerCategory = { [category]: articles };
 
-        dispatch(setCategoryArticles(categoryArticles));
-      } catch (error) {
-        dispatch(fetchCategoryArticlesFailed());
-      }
-    });
+        dispatch(setCategoryArticles(articlesPerCategory));
+      });
+    } catch (error) {
+      dispatch(fetchArticlesFailed(error));
+    }
   };
 };
 
@@ -77,47 +100,25 @@ const setCategoryArticles = articles => {
   };
 };
 
-const fetchCategoryArticlesFailed = () => {
-  return {
-    type: actionTypes.FETCH_CATEGORY_ARTICLES_FAILED
-  };
-};
-
 export const saveArticle = article => {
   return async (dispatch, getState) => {
     const { user } = getState().auth.user;
-    const postedArticle = await postArticle(article);
-    saveToUserCollection(postedArticle, user);
+    try {
+      const savedArticle = await postData("http://localhost:4000/articles", article);
+      saveToUserCollection(savedArticle, user);
+    } catch (error) {
+      dispatch(fetchArticlesFailed(error));
+    }
   };
 };
 
-const postArticle = async article => {
-  const resp = await fetch('http://localhost:4000/articles', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-      },
-    body: JSON.stringify(article)
-    });
-  const savedArticle = await resp.json();
-  return savedArticle;
-};
-
 const saveToUserCollection = (article, user) => {
-  let collectionInstance = {
+  let collectionObject = {
     user_id: user.id,
     article_id: article.id
   };
 
-  fetch('http://localhost:4000/collections', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(collectionInstance)
-  });
+  postData("http://localhost:4000/collections", collectionObject);
 };
 
 const setCollectionArticles = articles => {
@@ -128,18 +129,20 @@ const setCollectionArticles = articles => {
   };
 };
 
-export const fetchCollectionArticles = () => {
+export const getCollectionNews = () => {
   return async (dispatch, getState) => {
-    const { collectionArticles: stateCollectionArticles } = getState().articles;
     const { user } = getState().auth.user;
+    const { collectionArticles } = getState().articles;
     const { articlesPerPage } = getState().pageManager;
-    const resp = await fetch(`http://localhost:4000/collections/${user.id}`);
-    const collectionArticles = await resp.json();
-    
-    if (!stateCollectionArticles || stateCollectionArticles.length !== collectionArticles.length) {
-      dispatch(setCollectionArticles(collectionArticles));
-      dispatch(setLastArticleIndex(collectionArticles, articlesPerPage));
-      dispatch(setLastPage(collectionArticles, articlesPerPage));
+    try {
+      const userSavedNews = await getData(`http://localhost:4000/collections/${user.id}`);
+
+      if (!collectionArticles || userSavedNews.length > collectionArticles.length) {
+        dispatch(setCollectionArticles(userSavedNews));
+        setPaginationData(dispatch, userSavedNews, articlesPerPage);
+      }
+    } catch (error) {
+      dispatch(fetchArticlesFailed(error));
     }
   };
 };
@@ -152,27 +155,15 @@ const setTopicArticles = (articles, searchTopic) => {
   };
 };
 
-// getTopicNews = () => {
-  //   const { page, searchTopic } = this.state
-
-  //   fetch(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en&pageSize=9&page=${page}`, apiKey)
-  //   .then(resp => resp.json())
-  //   .then(data => this.setState({
-  //     topicNews: data.articles
-  //   }, () => this.setTotalResults(data.totalResults)))
-  //   .then(this.setState({
-  //     topicHeader: searchTopic
-  //   }))
-  //   .then(this.clearSearch())
-  // }
-
-export const fetchTopicArticles = searchTopic => { 
-  return async (dispatch) => {
+export const getTopicNews = searchTopic => {
+  return async (dispatch, getState) => {
+    const { articlesPerPage } = getState().pageManager;
     try {
-      const resp = await fetch(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
-      const parsedResp = await resp.json();
-      const articles = await parsedResp.articles;
+      const data = await getData(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
+      const articles = data.articles;
+
       dispatch(setTopicArticles(articles, searchTopic));
+      setPaginationData(dispatch, articles, articlesPerPage);
     } catch (error) {
       dispatch(fetchArticlesFailed());
     }

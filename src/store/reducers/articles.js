@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
+  error: null,
   articles: null,
   categoryArticles: null,
   collectionArticles: null,
@@ -31,7 +32,8 @@ const reducer = (state=initialState, action)=> {
         ...state,
         articles: state.articles ? [...state.articles] : null,
         categoryArticles: state.categoryArticles ? {...state.categoryArticles} : null,
-        collectionArticles: state.collectionArticles ? [...state.collectionArticles, ...action.articles] : action.articles
+        // collectionArticles: state.collectionArticles ? [...state.collectionArticles, ...action.articles] : action.articles
+        collectionArticles: action.articles
       };
     case actionTypes.SET_TOPIC_ARTICLES:
       return {
@@ -42,6 +44,15 @@ const reducer = (state=initialState, action)=> {
         topicArticles: state.topicArticles ? [...state.topicArticles] : action.articles,
         searchTopic: action.searchTopic
       };
+    case actionTypes.FETCH_ARTICLES_FAILED:
+      return {
+        ...state,
+        error: action.error,
+        articles: state.articles ? [...state.articles] : null,
+        categoryArticles: state.catergoryArticles ? {...state.categoryArticles} : null,
+        collectionArticles: state.collectionArticles ? [...state.collectionArticles] : null,
+        topicArticles: state.topicArticles ? [...state.topicArticles] : action.articles
+      }
     default: return state;
   }
 };

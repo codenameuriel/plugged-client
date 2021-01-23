@@ -39,8 +39,7 @@ class CollectionNews extends Component {
 
   componentDidMount() {
     // this.getNewsCollection()
-    const { onFetchCollectionArticles } = this.props;
-    onFetchCollectionArticles();
+    this.props.onGetCollectionNews();
   }
 
   // renderDBNewsCards = () => {
@@ -193,7 +192,7 @@ class CollectionNews extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchCollectionArticles: () => dispatch(actionCreators.fetchCollectionArticles())
+    onGetCollectionNews: () => dispatch(actionCreators.getCollectionNews())
   };
 };
 

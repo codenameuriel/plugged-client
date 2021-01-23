@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import * as actionCreators from '../../store/actions/index';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { fetchTopicArticles } from '../../store/actions/articles';
 
 import Button from '../UI/Button/Button';
 
@@ -24,8 +24,8 @@ class Search extends Component {
 
   enterSearch = () => {
     const { inputValue } = this.state;
-    const { onFetchTopicArticles, history } = this.props;
-    onFetchTopicArticles(inputValue);
+    const { onGetTopicNews, history } = this.props;
+    onGetTopicNews(inputValue);
     history.push("/topic-news");
   }
 
@@ -49,7 +49,7 @@ class Search extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchTopicArticles: topic => dispatch(fetchTopicArticles(topic))
+    onGetTopicNews: topic => dispatch(actionCreators.getTopicNews(topic))
   };
 };
 

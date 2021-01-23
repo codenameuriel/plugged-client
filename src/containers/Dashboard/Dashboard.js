@@ -15,8 +15,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const { onFetchCategoryArticles } = this.props;
-    onFetchCategoryArticles();
+    this.props.onGetDashboardNews();
   }
 
   // componentDidUpdate(prevProps) {
@@ -145,7 +144,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchCategoryArticles: () => dispatch(actionCreators.fetchCategoryArticles())
+    onGetDashboardNews: () => dispatch(actionCreators.getDashboardNews())
   };
 };
 
