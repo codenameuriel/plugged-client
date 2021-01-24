@@ -8,90 +8,101 @@ import ArticleCard from '../ArticleCard/ArticleCard';
 import ContentStyles from './Content.module.css';
 
 class Content extends Component {
-  renderContent() {
-    const { type, user } = this.props;
-    switch (type) {
-      case "top-news":
-        const { 
-          news, prevLastArticleIndex, lastArticleIndex, onPostNewsStory
-        } = this.props;
-        let topNewsContent = null;
-        if (news) {
-          const newsPerPage = news.slice(prevLastArticleIndex, lastArticleIndex);
+  renderTopNews() {
+    const { news, user, prevLastArticleIndex, lastArticleIndex, onPostNewsStory } = this.props;
+    let topNewsContent = null;
+    if (news) {
+      const newsPerPage = news.slice(prevLastArticleIndex, lastArticleIndex);
+      topNewsContent = (
+        newsPerPage.map((newsStory, index) => {
+          return (
+            <ArticleCard 
+              {...newsStory} 
+              key={index} 
+              isAuthenticated={!!user} 
+              inCollection={false} 
+              onPostNewsStory={onPostNewsStory} />
+          );
+        })
+      );
 
-          topNewsContent = (
-            newsPerPage.map((newsStory, index) => {
+      return (
+        <section className={ContentStyles.Articles}>
+          {topNewsContent}
+        </section>
+      );
+    }
+  }
+
+  renderDashboardNews() {
+    const { user, categoryNews, onPostNewsStory } = this.props;
+    let dashboardContent = [];
+    for (let category in categoryNews) {
+      dashboardContent.push(
+        <section className={ContentStyles.Dashboard}>
+          <h1><span><hr/></span>{category}<span><hr/></span></h1>
+          <div className={ContentStyles.Articles}>
+            {categoryNews[category].map((newsStory, index) => {
               return (
                 <ArticleCard 
                   {...newsStory} 
-                  key={index} 
+                  key={`${index}${newsStory.url}`} 
                   isAuthenticated={!!user} 
                   inCollection={false} 
-                  onPostNewsStory={onPostNewsStory} />
+                  onPostNewsStory={onPostNewsStory}/>
               );
-            })
-          );
+            })}
+          </div>
+        </section> 
+      );
+    }
+    return dashboardContent;
+  }
+
+  renderCollectionNews() {
+    const { user, collectionNews } = this.props;
+    if (collectionNews) {
+      return (
+        collectionNews.map(({ article }, index) => {
           return (
-            <section 
-              className={ContentStyles.Articles}>{topNewsContent}
-            </section>
+            <ArticleCard 
+              {...article} 
+              key={`${index}${article.id}`} 
+              isAuthenticated={!!user} 
+              inCollection={true} />
           );
-        }
-        break;
+        })
+      );
+    }
+  }
+
+  renderTopicNews() {
+    const { user, topicNews } = this.props;
+    if (topicNews) {
+      return topicNews.map((newsStory, index) => {
+        return (
+          <ArticleCard 
+            {...newsStory} 
+            key={`${index}${newsStory.id}`}
+            isAuthenticated={!!user}
+            inCollection={false} />
+        );
+      });
+    }
+  }
+
+  renderContent() {
+    const { type } = this.props;
+    switch (type) {
+      case "top-news":
+        return this.renderTopNews();
       case "dashboard":
-        const { categoryNews, onPostNewsStory } = this.props;
-        let dashboardContent = [];
-        for (let category in categoryNews) {
-          dashboardContent.push(
-            <section className={ContentStyles.Dashboard}>
-              <h1><span><hr/></span>{category}<span><hr/></span></h1>
-              <div className={ContentStyles.Articles}>
-                {categoryNews[category].map((newsStory, index) => {
-                  return (
-                    <ArticleCard 
-                      {...newsStory} 
-                      key={`${index}${newsStory.url}`} 
-                      isAuthenticated={!!user} 
-                      inCollection={false} 
-                      onPostNewsStory={onPostNewsStory}/>
-                  );
-                })}
-              </div>
-            </section> 
-          );
-        }
-        return dashboardContent;
+        return this.renderDashboardNews();
       case "collection":
-        const { collectionNews } = this.props;
-        if (collectionNews) {
-          return (
-            collectionNews.map(({ article }, index) => {
-              return (
-                <ArticleCard 
-                  {...article} 
-                  key={`${index}${article.id}`} 
-                  isAuthenticated={!!user} 
-                  inCollection={true} />
-              );
-            })
-          );
-        }
-        break;
+        return this.renderCollectionNews();
       case "topic-news":
-        const { topicNews } = this.props;
-        if (topicNews) {
-          return topicNews.map((newsStory, index) => {
-            return (
-              <ArticleCard 
-                {...newsStory} 
-                key={`${index}${newsStory.id}`}
-                isAuthenticated={!!user}
-                inCollection={false} />
-            );
-          });
-        }
-        break;
-      default: return null;
+        return this.renderTopicNews();
+      default: return null; // error page
     }
   }
 

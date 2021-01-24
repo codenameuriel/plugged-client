@@ -75,8 +75,8 @@ class TopNews extends Component {
     const { type, title, subtitle } = this.state;
     return (
       <Layout title={title} subtitle={subtitle} type={type}>
-        <PageManager/>
-        <Content type={type}/>
+        <PageManager />
+        <Content type={type} />
         <button 
           onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
       </Layout>
@@ -86,7 +86,7 @@ class TopNews extends Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.articles.articles
+    news: state.news.news
   };
 };
 

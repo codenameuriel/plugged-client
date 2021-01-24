@@ -10,7 +10,7 @@ const initialState = {
 
 const reducer = (state=initialState, action) => {
   switch(action.type) {
-    case actionTypes.SET_LAST_ARTICLE_INDEX:
+    case actionTypes.SET_LAST_NEWS_INDEX:
       return {
         ...state,
         lastArticleIndex: action.lastArticleIndex

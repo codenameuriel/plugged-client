@@ -138,7 +138,7 @@ class Dashboard extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    topicArticles: state.articles.topicArticles
+    topicNews: state.news.topicNews
   };
 };
 

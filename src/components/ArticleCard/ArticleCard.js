@@ -29,9 +29,9 @@ const ArticleCard = props => {
       </article>
     );
   } else {
-    const { author, content, publishedAt, source, title, description, url, urlToImage, isAuthenticated, onPostArticle } = props;
+    const { author, content, publishedAt, source, title, description, url, urlToImage, isAuthenticated, onPostNewsStory } = props;
 
-    const article = {
+    const newsStory = {
       author: author,
       content: formatContent(content),
       description: description,
@@ -45,8 +45,8 @@ const ArticleCard = props => {
     let authenticatedActions = null;
     if (isAuthenticated) {
       const addToCollection = () => {
-        onPostArticle(article);
-        alert("article was added to your collection!");
+        onPostNewsStory(newsStory);
+        alert("News story was added to your collection!");
       };
 
       authenticatedActions = (

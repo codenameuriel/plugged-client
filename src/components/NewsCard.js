@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actionCreators from '../store/actions/index';
 import Plug from '../assets/Plug.png'
 import NewsCardStyles from '../styles/NewsCard.module.css'
 
@@ -47,10 +45,4 @@ class NewsCard extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onPostArticle: article => dispatch(actionCreators.saveArticle(article))
-  };
-};
-
-export default connect(null, mapDispatchToProps)(NewsCard);
+export default NewsCard;

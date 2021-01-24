@@ -10,7 +10,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import pageManagerReducer from './store/reducers/pageManager'; 
-import articlesReducer from './store/reducers/articles';
+import newsReducer from './store/reducers/news';
 import authReducer from './store/reducers/auth';
 
 const composeEnhancers = (
@@ -19,7 +19,7 @@ const composeEnhancers = (
 
 const rootReducer = combineReducers({
   pageManager: pageManagerReducer,
-  articles: articlesReducer,
+  news: newsReducer,
   auth: authReducer
 });
 
