@@ -136,8 +136,10 @@ export const getCollectionNews = () => {
     const { articlesPerPage } = getState().pageManager;
     try {
       const userSavedNews = await getData(`http://localhost:4000/collections/${user.id}`);
-
-      if (!collectionArticles || userSavedNews.length > collectionArticles.length) {
+      const initialPageLoad = !(Boolean(collectionArticles));
+      const hasSavedMoreNews = collectionArticles && Boolean(userSavedNews.length > collectionArticles.length);
+ 
+      if (initialPageLoad || hasSavedMoreNews) {
         dispatch(setCollectionArticles(userSavedNews));
         setPaginationData(dispatch, userSavedNews, articlesPerPage);
       }
