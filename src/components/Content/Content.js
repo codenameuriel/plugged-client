@@ -13,21 +13,21 @@ class Content extends Component {
     switch (type) {
       case "top-news":
         const { 
-          articles, prevLastArticleIndex, lastArticleIndex, onPostArticle 
+          news, prevLastArticleIndex, lastArticleIndex, onPostNewsStory
         } = this.props;
         let topNewsContent = null;
-        if (articles) {
-          const articlesPerPage = articles.slice(prevLastArticleIndex, lastArticleIndex);
+        if (news) {
+          const newsPerPage = news.slice(prevLastArticleIndex, lastArticleIndex);
 
           topNewsContent = (
-            articlesPerPage.map((article, index) => {
+            newsPerPage.map((newsStory, index) => {
               return (
                 <ArticleCard 
-                  {...article} 
+                  {...newsStory} 
                   key={index} 
                   isAuthenticated={!!user} 
                   inCollection={false} 
-                  onPostArticle={onPostArticle} />
+                  onPostNewsStory={onPostNewsStory} />
               );
             })
           );
@@ -39,21 +39,21 @@ class Content extends Component {
         }
         break;
       case "dashboard":
-        const { categoryArticles, onPostArticle: saveArticle } = this.props;
+        const { categoryNews, onPostNewsStory } = this.props;
         let dashboardContent = [];
-        for (let category in categoryArticles) {
+        for (let category in categoryNews) {
           dashboardContent.push(
             <section className={ContentStyles.Dashboard}>
               <h1><span><hr/></span>{category}<span><hr/></span></h1>
               <div className={ContentStyles.Articles}>
-                {categoryArticles[category].map((article, index) => {
+                {categoryNews[category].map((newsStory, index) => {
                   return (
                     <ArticleCard 
-                      {...article} 
-                      key={`${index}${article.url}`} 
+                      {...newsStory} 
+                      key={`${index}${newsStory.url}`} 
                       isAuthenticated={!!user} 
                       inCollection={false} 
-                      onPostArticle={saveArticle}/>
+                      onPostNewsStory={onPostNewsStory}/>
                   );
                 })}
               </div>
@@ -62,10 +62,10 @@ class Content extends Component {
         }
         return dashboardContent;
       case "collection":
-        const { collectionArticles } = this.props;
-        if (collectionArticles) {
+        const { collectionNews } = this.props;
+        if (collectionNews) {
           return (
-            collectionArticles.map(({ article }, index) => {
+            collectionNews.map(({ article }, index) => {
               return (
                 <ArticleCard 
                   {...article} 
@@ -78,13 +78,13 @@ class Content extends Component {
         }
         break;
       case "topic-news":
-        const { topicArticles } = this.props;
-        if (topicArticles) {
-          return topicArticles.map((article, index) => {
+        const { topicNews } = this.props;
+        if (topicNews) {
+          return topicNews.map((newsStory, index) => {
             return (
               <ArticleCard 
-                {...article} 
-                key={`${index}${article.id}`}
+                {...newsStory} 
+                key={`${index}${newsStory.id}`}
                 isAuthenticated={!!user}
                 inCollection={false} />
             );
@@ -107,10 +107,10 @@ class Content extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    articles: state.articles.articles,
-    categoryArticles: state.articles.categoryArticles,
-    collectionArticles: state.articles.collectionArticles,
-    topicArticles: state.articles.topicArticles,
+    news: state.news.news,
+    categoryNews: state.news.categoryNews,
+    collectionNews: state.news.collectionNews,
+    topicNews: state.news.topicNews,
     prevLastArticleIndex: state.pageManager.prevLastArticleIndex,
     lastArticleIndex: state.pageManager.lastArticleIndex
   };
@@ -118,7 +118,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPostArticle: article => dispatch(actionCreators.saveArticle(article))
+    onPostNewsStory: newsStory => dispatch(actionCreators.saveNewsStory(newsStory))
   };
 };
 
