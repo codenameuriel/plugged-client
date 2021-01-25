@@ -27,7 +27,7 @@ class Content extends Component {
       );
 
       return (
-        <section className={ContentStyles.Articles}>
+        <section className={ContentStyles.News}>
           {topNewsContent}
         </section>
       );
@@ -41,7 +41,7 @@ class Content extends Component {
       dashboardContent.push(
         <section className={ContentStyles.Dashboard}>
           <h1><span><hr/></span>{category}<span><hr/></span></h1>
-          <div className={ContentStyles.Articles}>
+          <div className={ContentStyles.News}>
             {categoryNews[category].map((newsStory, index) => {
               return (
                 <ArticleCard 
@@ -78,16 +78,25 @@ class Content extends Component {
 
   renderTopicNews() {
     const { user, topicNews } = this.props;
+    let topicNewsContent = null;
     if (topicNews) {
-      return topicNews.map((newsStory, index) => {
-        return (
-          <ArticleCard 
-            {...newsStory} 
-            key={`${index}${newsStory.id}`}
-            isAuthenticated={!!user}
-            inCollection={false} />
-        );
-      });
+      topicNewsContent = (
+        topicNews.map((newsStory, index) => {
+          return (
+            <ArticleCard 
+              {...newsStory} 
+              key={`${index}${newsStory.id}`}
+              isAuthenticated={!!user}
+              inCollection={false} />
+          );
+        })
+      );
+
+      return (
+        <section className={ContentStyles.News}>
+          {topicNewsContent}
+        </section>
+      );
     }
   }
 

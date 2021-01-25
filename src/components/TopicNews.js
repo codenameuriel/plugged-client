@@ -93,7 +93,7 @@ class TopicNews extends Component {
 
 const mapStateToProps = state => {
   return {
-    searchTopic: state.articles.searchTopic
+    searchTopic: state.news.searchTopic
   };
 };
 
