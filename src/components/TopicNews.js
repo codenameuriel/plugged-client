@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actionCreators from '../store/actions/index';
 
 import Layout from '../hoc/Layout/Layout';
+import PageManager from '../containers/PageManager/PageManager';
 import Content from './Content/Content';
-
-import TopicNewsStyles from '../styles/TopicNewsStyles.module.css'
 
 class TopicNews extends Component {
   state = {
@@ -13,25 +13,11 @@ class TopicNews extends Component {
     subtitle: `Here's the latest on ${this.props.searchTopic}`
   }
 
-  // state = {
-  //   topicNews: []
-  // }
-
-  // componentDidMount = () => {
-  //   this.setState({
-  //     topicNews: this.props.topicNews
-  //   })
-  // }
-
-  // componentDidUpdate = (prevProps) => {
-  //   if (prevProps.topicNews[0] !== this.props.topicNews[0]) {
-  //     console.log(prevProps.topicNews)
-  //     console.log(this.props.topicNews)
-  //     this.setState({
-  //       topicNews: this.props.topicNews
-  //     })
-  //   }
-  // }
+  componentWillUnmount() {
+    // set topicNews to null
+    this.props.onClearTopicNews();
+  }
+  
 
   // renderDisplay = () => {
   //   const { searchTopic, topicHeader, postArticle, loggedInUser, links } = this.props
@@ -84,6 +70,7 @@ class TopicNews extends Component {
         title={title} 
         subtitle={subtitle} 
         type={type}>
+          <PageManager />
           <Content type={type}/>
           <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
       </Layout>
@@ -97,4 +84,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(TopicNews);
+const mapDispatchToProps = dispatch => {
+  return {
+    onClearTopicNews: () => dispatch(actionCreators.clearTopicNews())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopicNews);

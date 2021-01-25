@@ -19,7 +19,7 @@ const postData = async (url='', data={}) => {
 };
 
 const setPaginationData = (cb, news, articlesPerPage) => {
-  cb(setLastNewsIndex(news, articlesPerPage));
+  cb(setLastNewsStoryIndex(news, articlesPerPage));
   cb(setLastPage(news, articlesPerPage));
 };
 
@@ -46,11 +46,11 @@ export const getTopNews = () => {
   };
 };
 
-const setLastNewsIndex = (news, articlesPerPage) => {
-  let lastNewsIndex = news.length > articlesPerPage ? articlesPerPage : news.length;
+const setLastNewsStoryIndex = (news, articlesPerPage) => {
+  let lastNewsStoryIndex = news.length > articlesPerPage ? articlesPerPage : news.length;
   return {
-    type: actionTypes.SET_LAST_NEWS_INDEX,
-    lastNewsIndex
+    type: actionTypes.SET_LAST_NEWS_STORY_INDEX,
+    lastNewsStoryIndex
   };
 };
 
@@ -149,11 +149,18 @@ export const getCollectionNews = () => {
   };
 };
 
-const setTopicNews = (news, searchTopic) => {
+export const clearTopicNews = () => {
+  return {
+    type: actionTypes.CLEAR_TOPIC_NEWS
+  }; 
+}
+
+const setTopicNews = (news, searchTopic, totalNews) => {
   return {
     type: actionTypes.SET_TOPIC_NEWS,
     news,
-    searchTopic
+    searchTopic,
+    totalNews
   };
 };
 
@@ -164,7 +171,9 @@ export const getTopicNews = searchTopic => {
       const data = await getData(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
       const news = data.articles;
 
-      dispatch(setTopicNews(news, searchTopic));
+      console.log(searchTopic, news);
+
+      dispatch(setTopicNews(news, searchTopic, news.length));
       setPaginationData(dispatch, news, articlesPerPage);
     } catch (error) {
       dispatch(fetchNewsFailed());

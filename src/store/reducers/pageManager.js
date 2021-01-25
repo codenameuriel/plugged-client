@@ -5,15 +5,15 @@ const initialState = {
   lastPage: null,
   articlesPerPage: 9,
   prevLastArticleIndex: 0,
-  lastArticleIndex: null,
+  lastNewsStoryIndex: null,
 };
 
 const reducer = (state=initialState, action) => {
   switch(action.type) {
-    case actionTypes.SET_LAST_NEWS_INDEX:
+    case actionTypes.SET_LAST_NEWS_STORY_INDEX:
       return {
         ...state,
-        lastArticleIndex: action.lastArticleIndex
+        lastNewsStoryIndex: action.lastNewsStoryIndex
       };
     case actionTypes.SET_LAST_PAGE:
       return {
@@ -26,28 +26,28 @@ const reducer = (state=initialState, action) => {
         ...state,
         page: state.page - 1,
         prevLastArticleIndex,
-        lastArticleIndex: state.prevLastArticleIndex
+        lastNewsStoryIndex: state.prevLastArticleIndex
       };
     case actionTypes.NEXT_PAGE:
       return {
         ...state,
         page: state.page + 1,
-        prevLastArticleIndex: state.lastArticleIndex,
-        lastArticleIndex: action.lastArticleIndex
+        prevLastArticleIndex: state.lastNewsStoryIndex,
+        lastNewsStoryIndex: action.lastNewsStoryIndex
       };
     case actionTypes.LAST_PAGE:
       return {
         ...state,
         page: state.lastPage,
         prevLastArticleIndex: action.prevLastArticleIndex,
-        lastArticleIndex: action.lastArticleIndex
+        lastNewsStoryIndex: action.lastNewsStoryIndex
       };
     case actionTypes.FIRST_PAGE:
       return {
         ...state,
         page: action.page,
         prevLastArticleIndex: action.prevLastArticleIndex,
-        lastArticleIndex: action.lastArticleIndex
+        lastNewsStoryIndex: action.lastNewsStoryIndex
       };
     default: return state;
   }

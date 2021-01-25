@@ -40,8 +40,17 @@ const reducer = (state=initialState, action)=> {
         news: state.news ? [...state.news] : null,
         categoryNews: state.catergoryNews ? {...state.categoryNews} : null,
         collectionNews: state.collectionNews ? [...state.collectionNews] : null,
-        topicNews: state.topicNews ? [...state.topicNews] : action.news,
-        searchTopic: action.searchTopic
+        topicNews: action.news,
+        searchTopic: action.searchTopic,
+        totalNews: action.totalNews
+      };
+    case actionTypes.CLEAR_TOPIC_NEWS:
+      return {
+        ...state,
+        topicNews: null,
+        news: state.news ? [...state.news] : null,
+        categoryNews: state.categoryNews ? {...state.categoryNews} : null,
+        collectionNews: state.collectionNews ? [...state.collectionNews] : null
       };
     case actionTypes.FETCH_NEWS_FAILED:
       return {
@@ -51,7 +60,7 @@ const reducer = (state=initialState, action)=> {
         categoryNews: state.catergoryNews ? {...state.categoryNews} : null,
         collectionNews: state.collectionNews ? [...state.collectionNews] : null,
         topicNews: state.topicNews ? [...state.topicNews] : action.news
-      }
+      };
     default: return state;
   }
 };

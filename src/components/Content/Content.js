@@ -9,10 +9,10 @@ import ContentStyles from './Content.module.css';
 
 class Content extends Component {
   renderTopNews() {
-    const { news, user, prevLastArticleIndex, lastArticleIndex, onPostNewsStory } = this.props;
+    const { news, user, prevLastArticleIndex, lastNewsStoryIndex, onPostNewsStory } = this.props;
     let topNewsContent = null;
     if (news) {
-      const newsPerPage = news.slice(prevLastArticleIndex, lastArticleIndex);
+      const newsPerPage = news.slice(prevLastArticleIndex, lastNewsStoryIndex);
       topNewsContent = (
         newsPerPage.map((newsStory, index) => {
           return (
@@ -77,11 +77,12 @@ class Content extends Component {
   }
 
   renderTopicNews() {
-    const { user, topicNews } = this.props;
+    const { user, topicNews, prevLastArticleIndex, lastNewsStoryIndex } = this.props;
     let topicNewsContent = null;
     if (topicNews) {
+      const newsPerPage = topicNews.slice(prevLastArticleIndex, lastNewsStoryIndex);
       topicNewsContent = (
-        topicNews.map((newsStory, index) => {
+        newsPerPage.map((newsStory, index) => {
           return (
             <ArticleCard 
               {...newsStory} 
@@ -132,7 +133,7 @@ const mapStateToProps = state => {
     collectionNews: state.news.collectionNews,
     topicNews: state.news.topicNews,
     prevLastArticleIndex: state.pageManager.prevLastArticleIndex,
-    lastArticleIndex: state.pageManager.lastArticleIndex
+    lastNewsStoryIndex: state.pageManager.lastNewsStoryIndex
   };
 };
 

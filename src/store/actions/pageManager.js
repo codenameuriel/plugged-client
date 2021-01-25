@@ -2,12 +2,12 @@ import * as actionTypes from './actionTypes';
 
 export const changePage = changeType => {
   return (dispatch, getState) => {
-    const { totalArticles } = getState().articles;
-    const { lastArticleIndex, articlesPerPage, lastPage } = getState().pageManager;
+    const { totalNews } = getState().news;
+    const { lastNewsStoryIndex, articlesPerPage, lastPage } = getState().pageManager;
     switch (changeType) {
       case "next":
-        const remainingArticles = totalArticles - lastArticleIndex;
-        let index = remainingArticles > articlesPerPage ? lastArticleIndex + articlesPerPage : lastArticleIndex + remainingArticles;
+        const remainingArticles = totalNews - lastNewsStoryIndex;
+        let index = remainingArticles > articlesPerPage ? lastNewsStoryIndex + articlesPerPage : lastNewsStoryIndex + remainingArticles;
         dispatch(nextPage(index));
         break;
       case "previous":
@@ -16,7 +16,7 @@ export const changePage = changeType => {
       case "last":
         const updates = {
           prevLastArticleIndex: articlesPerPage * (lastPage - 1),
-          lastArticleIndex: totalArticles
+          lastNewsStoryIndex: totalNews
         };
         dispatch(goToLastPage(updates));
         break;
@@ -24,7 +24,7 @@ export const changePage = changeType => {
         const stateUpdates = {
           page: 1,
           prevLastArticleIndex: 0,
-          lastArticleIndex: articlesPerPage
+          lastNewsStoryIndex: articlesPerPage
         };
         dispatch(goToFirstPage(stateUpdates));
         break;
@@ -33,10 +33,10 @@ export const changePage = changeType => {
   };
 };
 
-const nextPage = lastArticleIndex => {
+const nextPage = lastNewsStoryIndex => {
   return {
     type: actionTypes.NEXT_PAGE,
-    lastArticleIndex
+    lastNewsStoryIndex
   };
 };
 
@@ -46,19 +46,19 @@ const prevPage = () => {
   };
 };
 
-const goToLastPage = ({ prevLastArticleIndex, lastArticleIndex }) => {
+const goToLastPage = ({ prevLastArticleIndex, lastNewsStoryIndex }) => {
   return {
     type: actionTypes.LAST_PAGE,
     prevLastArticleIndex,
-    lastArticleIndex
+    lastNewsStoryIndex
   };
 };
 
-const goToFirstPage = ({ page, prevLastArticleIndex, lastArticleIndex }) => {
+const goToFirstPage = ({ page, prevLastArticleIndex, lastNewsStoryIndex }) => {
   return {
     type: actionTypes.FIRST_PAGE,
     page,
     prevLastArticleIndex,
-    lastArticleIndex
+    lastNewsStoryIndex
   };
 };
