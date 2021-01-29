@@ -34,6 +34,7 @@ class NavManager extends Component {
   render() {
     const { openSideDrawer, fromSideDrawer } = this.props;
     const onDashboardPage = window.location.pathname === "/dashboard";
+    const onTopicNewsPage = window.location.pathname === "/topic-news";
     let navStyles = NavManagerStyles.Nav;
     let navLinksStyles = NavManagerStyles.NavLinks;
 
@@ -45,7 +46,7 @@ class NavManager extends Component {
     return (
       <nav className={navStyles}> 
         {fromSideDrawer ? null : <DrawerToggle openSideDrawer={openSideDrawer}/>}
-        {onDashboardPage && <Search />}
+        {(onDashboardPage || onTopicNewsPage) && <Search />}
         <ul className={navLinksStyles}>
           {this.renderLinks()}
         </ul>
