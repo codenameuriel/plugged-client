@@ -1,7 +1,7 @@
 .Button {
   color: #eee;
   background-color: #2e343f;
-  border: 3px solid#eee;
+  border: 2px solid#eee;
   cursor: pointer;
   outline: none;
   border-radius: 30px;
@@ -20,12 +20,12 @@
 
 .Search {
   background-color: #32e0c4;
-  border: 3px solid#eee;
+  border: 2px solid transparent;
   text-decoration: none;
   font-size: 85%;
   margin-left: 10px;
   color: #eee;
-  transition: border 0.3s;
+  transition: border color 0.3s;
 }
 
 /* desktop view */
@@ -39,11 +39,12 @@
   }
 
   .Collection:hover, .PageManager:hover {
-    border: 3px solid #32e0c4;
+    border: 2px solid #32e0c4;
   }
 
   .Search:hover {
-    border: 3px solid #2e343f;
+    color: #2e343f;
+    border: 2px solid #eee;
   }
 }
 
