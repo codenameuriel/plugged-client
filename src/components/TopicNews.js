@@ -9,8 +9,8 @@ import Content from './Content/Content';
 class TopicNews extends Component {
   state = {
     type: "topic-news",
-    title: "Topic-News",
-    subtitle: `Here's the latest on ${this.props.searchTopic}`
+    title: "Topic News",
+    subtitle: <>Here's the latest on <span>"{this.props.searchTopic}"</span></>
   }
 
   componentDidMount() {
@@ -22,7 +22,7 @@ class TopicNews extends Component {
     if (prevProps.searchTopic !== searchTopic) {
       this.props.onGetTopicNews();
       this.setState({
-        subtitle: `Here's the latest on ${searchTopic}`
+        subtitle: <>Here's the latest on <span>"{this.props.searchTopic}"</span></>
       });
     }
   }

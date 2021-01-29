@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
 
 import Layout from '../../hoc/Layout/Layout';
 import Content from '../../components/Content/Content';
-import TopicNews from '../../components/TopicNews';
 
 class Dashboard extends Component {
   state = {

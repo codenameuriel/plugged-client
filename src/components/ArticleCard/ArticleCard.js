@@ -63,7 +63,7 @@ const ArticleCard = props => {
               <FaTwitter className={IconStyles.Tweet}/>
           </a>
           <script 
-            async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+            async src="https://platform.twitter.com/widgets.js" charSet="utf-8">
           </script>
         </div>
       );
