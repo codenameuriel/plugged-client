@@ -28,8 +28,12 @@ class Search extends Component {
 
   handleEnterInput = event => {
     if (event.key === "Enter") {
-      this.enterSearch();
+      this.handleEmptyInput(event.target.value);
     }
+  }
+
+  handleEmptyInput = input => {
+    input ? this.enterSearch() : alert("Must enter a topic!");
   }
 
   enterSearch = () => {
@@ -52,7 +56,7 @@ class Search extends Component {
           placeholder="Search by topic" />
         <Button 
           type={"search"} 
-          onClick={this.enterSearch} 
+          onClick={() => this.handleEmptyInput(inputValue)} 
           description={"Search"} />
       </div>
     );
