@@ -18,6 +18,10 @@ class Search extends Component {
     inputValue: ""
   }
 
+  clearInput = () => {
+    this.setState({ inputValue: "" });
+  }
+
   inputChange = event => {
     this.setState({ inputValue: event.target.value });
   }
@@ -32,6 +36,7 @@ class Search extends Component {
     const { inputValue } = this.state;
     const { onGetTopicNews, history } = this.props;
     onGetTopicNews(inputValue);
+    this.clearInput();
     history.push("/topic-news");
   }
 
