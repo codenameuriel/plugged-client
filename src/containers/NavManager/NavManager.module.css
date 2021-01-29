@@ -12,7 +12,7 @@
 
 .ListItem a {
   text-decoration: none;
-  border: 3px solid #32e0c4;
+  border: 2px solid #32e0c4;
   border-radius: 30px;
   color: white;
   cursor: pointer;
@@ -35,7 +35,7 @@
   }
 
   .ListItem a:hover {
-    border: 3px solid white;
+    border: 2px solid white;
     color: #26292e;
   }
 }
@@ -58,7 +58,7 @@
   .ListItem a {
     font-size: 115%;
     background-color: transparent;
-    border: 3px solid #32e0c4;
+    border: 2px solid #32e0c4;
     padding: 15px;
     border-radius: 30px;
   }
