@@ -41,6 +41,7 @@ export const getTopNews = () => {
       dispatch(setNews(news));
       setPaginationData(dispatch, news, articlesPerPage);
     } catch (error) {
+      console.error(error);
       dispatch(fetchNewsFailed(error));
     }
   };
@@ -88,6 +89,7 @@ export const getDashboardNews = () => {
         dispatch(setCategoryNews(newsByCategory));
       });
     } catch (error) {
+      console.error(error);
       dispatch(fetchNewsFailed(error));
     }
   };
@@ -107,6 +109,7 @@ export const saveNewsStory = newsStory => {
       const savedNewsStory = await postData("http://localhost:4000/articles", newsStory);
       saveToUserCollection(savedNewsStory, user);
     } catch (error) {
+      console.error(error);
       dispatch(fetchNewsFailed(error));
     }
   };
@@ -144,6 +147,7 @@ export const getCollectionNews = () => {
         setPaginationData(dispatch, userSavedNews, articlesPerPage);
       }
     } catch (error) {
+      console.error(error);
       dispatch(fetchNewsFailed(error));
     }
   };
@@ -171,12 +175,11 @@ export const getTopicNews = searchTopic => {
       const data = await getData(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
       const news = data.articles;
 
-      console.log(searchTopic, news);
-
       dispatch(setTopicNews(news, searchTopic, news.length));
       setPaginationData(dispatch, news, articlesPerPage);
     } catch (error) {
-      dispatch(fetchNewsFailed());
+      console.error(error);
+      dispatch(fetchNewsFailed(error));
     }
   };
 };

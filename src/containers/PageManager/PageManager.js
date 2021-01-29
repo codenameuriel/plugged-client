@@ -58,7 +58,7 @@ class PageManager extends Component {
         </>
       );
     }
-    if (page === lastPage) {
+    if (page !== 1 && page === lastPage) {
       buttons = (
         <>
           <Button type={"pageManager"} onClick={onPrevPage} description={"Previous Page"} />
