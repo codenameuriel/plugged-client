@@ -22,6 +22,12 @@ class Search extends Component {
     this.setState({ inputValue: event.target.value });
   }
 
+  handleEnterInput = event => {
+    if (event.key === "Enter") {
+      this.enterSearch();
+    }
+  }
+
   enterSearch = () => {
     const { inputValue } = this.state;
     const { onGetTopicNews, history } = this.props;
@@ -37,6 +43,7 @@ class Search extends Component {
           type="text" 
           value={inputValue} 
           onChange={this.inputChange}
+          onKeyDown={this.handleEnterInput}
           placeholder="Search by topic" />
         <Button 
           type={"search"} 
