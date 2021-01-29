@@ -159,23 +159,30 @@ export const clearTopicNews = () => {
   }; 
 }
 
-const setTopicNews = (news, searchTopic, totalNews) => {
+export const setSearchTopic = searchTopic => {
+  return {
+    type: actionTypes.SET_SEARCH_TOPIC,
+    searchTopic
+  };
+};
+
+const setTopicNews = (news, totalNews) => {
   return {
     type: actionTypes.SET_TOPIC_NEWS,
     news,
-    searchTopic,
     totalNews
   };
 };
 
-export const getTopicNews = searchTopic => {
+export const getTopicNews = () => {
   return async (dispatch, getState) => {
     const { articlesPerPage } = getState().pageManager;
+    const { searchTopic } = getState().news;
     try {
       const data = await getData(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
       const news = data.articles;
 
-      dispatch(setTopicNews(news, searchTopic, news.length));
+      dispatch(setTopicNews(news, news.length));
       setPaginationData(dispatch, news, articlesPerPage);
     } catch (error) {
       console.error(error);

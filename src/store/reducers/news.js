@@ -52,11 +52,19 @@ const reducer = (state=initialState, action)=> {
       return {
         ...state,
         topicNews: action.news,
-        searchTopic: action.searchTopic,
         totalNews: action.totalNews,
         news: updateState(state.news),
         categoryNews: updateState(state.categoryNews),
         collectionNews: updateState(state.collectionNews)
+      };
+    case actionTypes.SET_SEARCH_TOPIC:
+      return {
+        ...state,
+        searchTopic: action.searchTopic,
+        news: updateState(state.news),
+        categoryNews: updateState(state.categoryNews),
+        collectionNews: updateState(state.collectionNews),
+        topicNew: updateState(state.topicNews)
       };
     case actionTypes.CLEAR_TOPIC_NEWS:
       return {

@@ -13,11 +13,23 @@ class TopicNews extends Component {
     subtitle: `Here's the latest on ${this.props.searchTopic}`
   }
 
-  componentWillUnmount() {
-    // set topicNews to null
-    this.props.onClearTopicNews();
+  componentDidMount() {
+    this.props.onGetTopicNews();
   }
   
+  componentDidUpdate(prevProps) {
+    const { searchTopic } = this.props;
+    if (prevProps.searchTopic !== searchTopic) {
+      this.props.onGetTopicNews();
+      this.setState({
+        subtitle: `Here's the latest on ${searchTopic}`
+      });
+    }
+  }
+  
+  componentWillUnmount() {
+    this.props.onClearTopicNews();
+  }
 
   // renderDisplay = () => {
   //   const { searchTopic, topicHeader, postArticle, loggedInUser, links } = this.props
@@ -86,6 +98,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onGetTopicNews: () => dispatch(actionCreators.getTopicNews()),
     onClearTopicNews: () => dispatch(actionCreators.clearTopicNews())
   };
 };
