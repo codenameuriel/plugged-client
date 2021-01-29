@@ -7,12 +7,6 @@ import Button from '../UI/Button/Button';
 
 import SearchStyles from './Search.module.css';
 
-// const search = <input className={DashboardStyles.search} onChange={handleSearchChange} type="text" placeholder="Search news by topic" value={searchTopic} />
-    // const searchBtn = <button className={DashboardStyles.submitBtn} onClick={() => {
-    //   getTopicNews()
-    //   history.push("/dashboard/topic-news")
-    // }}>Search</button>
-
 class Search extends Component {
   state = {
     inputValue: ""
