@@ -32,14 +32,32 @@ const setNews = news => {
   };
 };
 
-export const getTopNews = () => {
-  return async(dispatch, getState) => {
-    // const { articlesPerPage } = getState().pageManager;
+const initializeTopNewsPage = userParams => {
+  return async (dispatch, getState) => {
     try {
-      const news = await getData("top-news");
-      console.log(news);
 
-      dispatch(setNews(news));
+    } catch (error) {
+
+    }
+  };
+};
+
+const setTotalPages = totalPages => {
+  return {
+    type: actionTypes.SET_TOTAL_PAGES,
+    totalPages
+  };
+};
+
+export const getTopNews = userParams => {
+  return async(dispatch, getState) => {
+    try {
+      const data = await getData("top-news", userParams);
+      const { articles, totalPages } = data;
+      console.log(data);
+
+      dispatch(setNews(articles));
+      dispatch(setTotalPages(totalPages));
       // setPaginationData(dispatch, news, articlesPerPage);
     } catch (error) {
       console.error(error);

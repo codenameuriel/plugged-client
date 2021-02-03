@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   page: 1,
+  totalPages: null,
   lastPage: null,
   articlesPerPage: 9,
   prevLastArticleIndex: 0,
@@ -10,6 +11,11 @@ const initialState = {
 
 const reducer = (state=initialState, action) => {
   switch(action.type) {
+    case actionTypes.SET_TOTAL_PAGES:
+      return {
+        ...state,
+        totalPages: action.totalPages
+      };
     case actionTypes.SET_LAST_NEWS_STORY_INDEX:
       return {
         ...state,

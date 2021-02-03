@@ -9,12 +9,11 @@ import ContentStyles from './Content.module.css';
 
 class Content extends Component {
   renderTopNews() {
-    const { news, user, prevLastArticleIndex, lastNewsStoryIndex, onPostNewsStory } = this.props;
+    const { news, user, onPostNewsStory } = this.props;
     let topNewsContent = null;
     if (news) {
-      const newsPerPage = news.slice(prevLastArticleIndex, lastNewsStoryIndex);
       topNewsContent = (
-        newsPerPage.map((newsStory, index) => {
+        news.map((newsStory, index) => {
           return (
             <ArticleCard 
               {...newsStory} 
