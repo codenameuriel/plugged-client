@@ -40,14 +40,14 @@ class PageManager extends Component {
   // }
 
   renderButtons() {
-    const { onNextPage, onPrevPage, onFirstPage, page, totalPages } = this.props;
+    const { onNextPage, onPrevPage, onFirstPage, page, totalPages: lastPage } = this.props;
     let buttons = null;
     if (page === 1) {
       buttons = <Button 
                   type={"pageManager"} 
                   onClick={onNextPage} 
                   description={"Next Page"} />;
-    } else if (page !== 1 && page !== totalPages) {
+    } else if (page !== 1 && page !== lastPage) {
       buttons = (
         <>
           <Button 

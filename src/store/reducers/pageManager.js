@@ -27,19 +27,14 @@ const reducer = (state=initialState, action) => {
         lastPage: action.lastPage
       };
     case actionTypes.PREV_PAGE:
-      const prevLastArticleIndex = state.prevLastArticleIndex - state.articlesPerPage;
       return {
         ...state,
-        page: state.page - 1,
-        prevLastArticleIndex,
-        lastNewsStoryIndex: state.prevLastArticleIndex
+        page: state.page - 1
       };
     case actionTypes.NEXT_PAGE:
       return {
         ...state,
-        page: state.page + 1,
-        prevLastArticleIndex: state.lastNewsStoryIndex,
-        lastNewsStoryIndex: action.lastNewsStoryIndex
+        page: state.page + 1
       };
     case actionTypes.LAST_PAGE:
       return {
@@ -51,9 +46,7 @@ const reducer = (state=initialState, action) => {
     case actionTypes.FIRST_PAGE:
       return {
         ...state,
-        page: action.page,
-        prevLastArticleIndex: action.prevLastArticleIndex,
-        lastNewsStoryIndex: action.lastNewsStoryIndex
+        page: 1
       };
     default: return state;
   }
