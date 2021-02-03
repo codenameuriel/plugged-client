@@ -1,8 +1,8 @@
 import * as actionTypes from "./actionTypes";
 import { createURLString } from "../../serverURLs";
 
-const getData = async (pathName, origin, userParams) => {
-  let url = createURLString(pathName, origin, userParams);
+const getData = async (pathName, userParams) => {
+  let url = createURLString(pathName, userParams);
   const response = await fetch(url);
   return response.json();
 };
@@ -50,7 +50,7 @@ const setTotalPages = totalPages => {
 };
 
 export const getTopNews = userParams => {
-  return async(dispatch, getState) => {
+  return async dispatch => {
     try {
       const data = await getData("top-news", userParams);
       const { articles, totalPages } = data;

@@ -17,10 +17,19 @@ class TopNews extends Component {
     this.props.onGetTopNews();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.page !== this.props.page) {
-      this.props.onGetTopNews();
+  componentDidUpdate(prevProps) {
+    const { onGetTopNews, params } = this.props;
+    const { params: prevParams } = prevProps;
+    let paramsHaveChanged = false;
+    if (Object.keys(params).length > 0) {
+      
+      for (let param in params) {
+        if (!(param in prevParams) || prevParams[param] !== params[param]) {
+          paramsHaveChanged = true;
+        }
+      }
     }
+    if (paramsHaveChanged) onGetTopNews(params);
   }
   
 
@@ -47,13 +56,13 @@ class TopNews extends Component {
 const mapStateToProps = state => {
   return {
     news: state.news.news,
-    page: state.pageManager.page
+    params: state.params.params
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetTopNews: () => dispatch(actionCreators.getTopNews()),
+    onGetTopNews: params => dispatch(actionCreators.getTopNews(params)),
     onClearTotalNews: () => dispatch(actionCreators.clearTotalNews())
   };
 };

@@ -1,6 +1,6 @@
 export const localhost = "http://localhost:8000";
 
-export const createURL = origin => {
+export const createURL = (origin=localhost) => {
   return new URL(origin);
 };
 
@@ -21,8 +21,8 @@ export const appendParams = (userParams, urlObj) => {
   return urlObj;
 };
 
-export const createURLString = (pathName, origin=localhost, userParams) => {
-  const url = createURL(origin);
+export const createURLString = (pathName, userParams) => {
+  const url = createURL();
   appendPath(pathName, url);
   appendParams(userParams, url);
   return url.toString();
