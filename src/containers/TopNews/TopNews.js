@@ -17,6 +17,13 @@ class TopNews extends Component {
     this.props.onGetTopNews();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.page !== this.props.page) {
+      this.props.onGetTopNews();
+    }
+  }
+  
+
   componentWillUnmount() {
     this.props.onClearTotalNews();
   }

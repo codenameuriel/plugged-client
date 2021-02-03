@@ -12,6 +12,7 @@ import thunk from 'redux-thunk';
 import pageManagerReducer from './store/reducers/pageManager'; 
 import newsReducer from './store/reducers/news';
 import authReducer from './store/reducers/auth';
+import paramsReducer from "./store/reducers/params";
 
 const composeEnhancers = (
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -20,7 +21,8 @@ const composeEnhancers = (
 const rootReducer = combineReducers({
   pageManager: pageManagerReducer,
   news: newsReducer,
-  auth: authReducer
+  auth: authReducer,
+  params: paramsReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

@@ -58,17 +58,28 @@ const firstPage = () => {
   };
 };
 
+const setPageParams = page => {
+  return {
+    type: actionTypes.SET_PAGE_PARAMS,
+    page
+  };
+};
+
 export const changePage = type => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { page } = getState().pageManager;
     switch (type) {
       case "next":
         dispatch(nextPage());
+        dispatch(setPageParams(page + 1));
         break;
       case "prev":
         dispatch(prevPage());
+        dispatch(setPageParams(page - 1));
         break;
       case "first":
         dispatch(firstPage());
+        dispatch(setPageParams(1));
         break;
     }
   };

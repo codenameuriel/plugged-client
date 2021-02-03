@@ -1,5 +1,6 @@
 // PAGEMANAGER ACTION TYPES
 export const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
+export const SET_PAGE_PARAMS = "SET_PAGE_PARAMS";
 export const PREV_PAGE = "PREV_PAGE";
 export const NEXT_PAGE = "NEXT_PAGE";
 export const LAST_PAGE = "LAST_PAGE";
