@@ -77,7 +77,7 @@ class Content extends Component {
   }
 
   renderTopicNews() {
-    const { user, topicNews, prevLastArticleIndex, lastNewsStoryIndex } = this.props;
+    const { user, topicNews, totalNews, searchTopic, prevLastArticleIndex, lastNewsStoryIndex } = this.props;
     let topicNewsContent = null;
     if (topicNews) {
       const newsPerPage = topicNews.slice(prevLastArticleIndex, lastNewsStoryIndex);
@@ -92,12 +92,14 @@ class Content extends Component {
           );
         })
       );
-
       return (
         <section className={ContentStyles.News}>
           {topicNewsContent}
         </section>
       );
+    } 
+    if (totalNews) {
+      return <p>Sorry, couldn't find any news on {searchTopic}</p>;
     }
   }
 
@@ -132,6 +134,8 @@ const mapStateToProps = state => {
     categoryNews: state.news.categoryNews,
     collectionNews: state.news.collectionNews,
     topicNews: state.news.topicNews,
+    totalNews: state.news.totalNews,
+    searchTopic: state.news.searchTopic,
     prevLastArticleIndex: state.pageManager.prevLastArticleIndex,
     lastNewsStoryIndex: state.pageManager.lastNewsStoryIndex
   };

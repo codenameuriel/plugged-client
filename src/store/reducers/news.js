@@ -74,6 +74,14 @@ const reducer = (state=initialState, action)=> {
         categoryNews: updateState(state.categoryNews),
         collectionNews: updateState(state.collectionNews)
       };
+    case actionTypes.CLEAR_TOTAL_NEWS:
+      return {
+        ...state,
+        totalNews: null,
+        news: updateState(state.news),
+        categoryNews: updateState(state.categoryNews),
+        collectionNews: updateState(state.collectionNews)
+      };
     case actionTypes.FETCH_NEWS_FAILED:
       return {
         ...state,

@@ -1,8 +1,9 @@
-import * as actionTypes from './actionTypes';
-import { apiKey } from '../../apiKey';
+import * as actionTypes from "./actionTypes";
+import { createURLString } from "../../serverURLs";
 
-const getData = async (url='', apiKey=null) => {
-  const response = await fetch(url, apiKey);
+const getData = async (pathName, origin, userParams) => {
+  let url = createURLString(pathName, origin, userParams);
+  const response = await fetch(url);
   return response.json();
 };
 
@@ -33,13 +34,13 @@ const setNews = news => {
 
 export const getTopNews = () => {
   return async(dispatch, getState) => {
-    const { articlesPerPage } = getState().pageManager;
+    // const { articlesPerPage } = getState().pageManager;
     try {
-      const data = await getData("https://newsapi.org/v2/top-headlines?country=us", apiKey);
-      const news = data.articles;
+      const news = await getData("top-news");
+      console.log(news);
 
       dispatch(setNews(news));
-      setPaginationData(dispatch, news, articlesPerPage);
+      // setPaginationData(dispatch, news, articlesPerPage);
     } catch (error) {
       console.error(error);
       dispatch(fetchNewsFailed(error));
@@ -82,11 +83,11 @@ export const getDashboardNews = () => {
 
     try {
       userSubscribedNewsCategories.forEach(async category => {
-        const data = await getData(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=6&page=1`, apiKey);
-        const news = data.articles;
-        const newsByCategory = { [category]: news };
+        // const data = await getData(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=6&page=1`, apiKey);
+        // const news = data.articles;
+        // const newsByCategory = { [category]: news };
 
-        dispatch(setCategoryNews(newsByCategory));
+        // dispatch(setCategoryNews(newsByCategory));
       });
     } catch (error) {
       console.error(error);
@@ -159,6 +160,12 @@ export const clearTopicNews = () => {
   }; 
 }
 
+export const clearTotalNews = () => {
+  return {
+    type: actionTypes.CLEAR_TOTAL_NEWS
+  };
+}
+
 export const setSearchTopic = searchTopic => {
   return {
     type: actionTypes.SET_SEARCH_TOPIC,
@@ -179,11 +186,11 @@ export const getTopicNews = () => {
     const { articlesPerPage } = getState().pageManager;
     const { searchTopic } = getState().news;
     try {
-      const data = await getData(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
-      const news = data.articles;
+      // const data = await getData(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en`, apiKey);
+      // const news = data.articles;
 
-      dispatch(setTopicNews(news, news.length));
-      setPaginationData(dispatch, news, articlesPerPage);
+      // dispatch(setTopicNews(news, news.length));
+      // setPaginationData(dispatch, news, articlesPerPage);
     } catch (error) {
       console.error(error);
       dispatch(fetchNewsFailed(error));

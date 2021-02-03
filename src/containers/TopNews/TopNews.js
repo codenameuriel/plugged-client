@@ -17,6 +17,10 @@ class TopNews extends Component {
     this.props.onGetTopNews();
   }
 
+  componentWillUnmount() {
+    this.props.onClearTotalNews();
+  }
+
   render() {
     const { type, title, subtitle } = this.state;
     return (
@@ -41,7 +45,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetTopNews: () => dispatch(actionCreators.getTopNews())
+    onGetTopNews: () => dispatch(actionCreators.getTopNews()),
+    onClearTotalNews: () => dispatch(actionCreators.clearTotalNews())
   };
 };
 
