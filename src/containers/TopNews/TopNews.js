@@ -39,7 +39,8 @@ class TopNews extends Component {
 
 const mapStateToProps = state => {
   return {
-    news: state.news.news
+    news: state.news.news,
+    page: state.pageManager.page
   };
 };
 

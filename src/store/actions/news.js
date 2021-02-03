@@ -54,11 +54,9 @@ export const getTopNews = userParams => {
     try {
       const data = await getData("top-news", userParams);
       const { articles, totalPages } = data;
-      console.log(data);
 
       dispatch(setNews(articles));
       dispatch(setTotalPages(totalPages));
-      // setPaginationData(dispatch, news, articlesPerPage);
     } catch (error) {
       console.error(error);
       dispatch(fetchNewsFailed(error));

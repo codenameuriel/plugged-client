@@ -40,37 +40,42 @@ class PageManager extends Component {
   // }
 
   renderButtons() {
-    const { onNextPage, onPrevPage, onLastPage, onFirstPage, page, lastPage } = this.props;
+    const { onNextPage, onPrevPage, onFirstPage, page, totalPages } = this.props;
     let buttons = null;
-    if (lastPage !== 1) {
+    if (page === 1) {
+      buttons = <Button 
+                  type={"pageManager"} 
+                  onClick={onNextPage} 
+                  description={"Next Page"} />;
+    } else if (page !== 1 && page !== totalPages) {
       buttons = (
         <>
-          {page === 1 ? <Button type={"pageManager"} onClick={onLastPage} description={"Last Page"} />: null}
-          <Button type={"pageManager"} onClick={onNextPage} description={"Next Page"} />
+          <Button 
+            type={"pageManager"} 
+            onClick={onPrevPage} 
+            description={"Previous Page"} />
+          <Button 
+            type={"pageManager"} 
+            onClick={onNextPage} 
+            description={"Next Page"} />
+        </>
+      );
+    } else {
+      buttons = (
+        <>
+          <Button 
+            type={"pageManager"} 
+            onClick={onPrevPage} 
+            description={"Previous Page"} />
+          <Button 
+            type={"pageManager"} 
+            onClick={onFirstPage} 
+            description={"First Page"} />
         </>
       );
     }
-    if (page !== 1) {
-      buttons = (
-        <>
-          <Button type={"pageManager"} onClick={onPrevPage} description={"Previous Page"} />
-          <Button type={"pageManager"} onClick={onNextPage} description={"Next Page"} />
-        </>
-      );
-    }
-    if (page !== 1 && page === lastPage) {
-      buttons = (
-        <>
-          <Button type={"pageManager"} onClick={onPrevPage} description={"Previous Page"} />
-          <Button type={"pageManager"} onClick={onFirstPage} description={"First Page"} />
-        </>
-      );
-    }
-    return (
-      <div className={PageManagerStyles.PageManager}>
-        {buttons}
-      </div>
-    );
+
+    return buttons;
   }
 
   // componentDidUpdate = (prevProps) => {
@@ -483,17 +488,14 @@ class PageManager extends Component {
 const mapStateToProps = state => {
   return {
     page: state.pageManager.page,
-    lastPage: state.pageManager.lastPage,
-    prevLastArticleIndex: state.pageManager.prevLastArticleIndex,
-    lastArticleIndex: state.pageManager.lastArticleIndex
+    totalPages: state.pageManager.totalPages
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onNextPage: () => dispatch(actionCreators.changePage("next")),
-    onPrevPage: () => dispatch(actionCreators.changePage("previous")),
-    onLastPage: () => dispatch(actionCreators.changePage("last")),
+    onPrevPage: () => dispatch(actionCreators.changePage("prev")),
     onFirstPage: () => dispatch(actionCreators.changePage("first"))
   };
 };
