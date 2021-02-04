@@ -1,23 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import { createURLString } from "../../utils/serverURLs";
-
-const getData = async (pathName, userParams) => {
-  let url = createURLString(pathName, userParams);
-  const response = await fetch(url);
-  return response.json();
-};
-
-const postData = async (url='', data={}) => {
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(data)
-  });
-  return response.json();
-};
+import { getData, postData } from "../../utils/fetch";
 
 const setPaginationData = (cb, news, articlesPerPage) => {
   cb(setLastNewsStoryIndex(news, articlesPerPage));

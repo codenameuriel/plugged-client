@@ -5,6 +5,8 @@ export const createURL = (origin=localhost) => {
 };
 
 export const appendPath = (pathName, urlObj) => {
+  if (!pathName) return urlObj;
+
   urlObj.pathname = pathName;
   return urlObj;
 };
