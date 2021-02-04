@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
+import { checkParamsForUpdate } from "../../utils/params";
 
 import Layout from '../../hoc/Layout/Layout';
 import PageManager from '../PageManager/PageManager';
@@ -18,21 +19,12 @@ class TopNews extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { onGetTopNews, params } = this.props;
+    const { onGetTopNews, params: currParams } = this.props;
     const { params: prevParams } = prevProps;
-    let paramsHaveChanged = false;
-    if (Object.keys(params).length > 0) {
-      
-      for (let param in params) {
-        if (!(param in prevParams) || prevParams[param] !== params[param]) {
-          paramsHaveChanged = true;
-        }
-      }
-    }
-    if (paramsHaveChanged) onGetTopNews(params);
+    let paramsHaveChanged = checkParamsForUpdate(prevParams, currParams);
+    if (paramsHaveChanged) onGetTopNews(currParams);
   }
   
-
   componentWillUnmount() {
     this.props.onClearTotalNews();
   }

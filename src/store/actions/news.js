@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import { createURLString } from "../../serverURLs";
+import { createURLString } from "../../utils/serverURLs";
 
 const getData = async (pathName, userParams) => {
   let url = createURLString(pathName, userParams);
