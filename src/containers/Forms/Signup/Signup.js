@@ -1,13 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 
 class Signup extends Component {
+  state = {
+    username: "",
+    password: ""
+  }
+
+  handleInputChange = ({ target: { value, name }}) => {
+    console.log(name, value);
+    this.setState({ [name]: value });
+  }
+
   render() {
     return (
       <form onSubmit={null}>
         <label>Username: </label><br/>
-        <input type="text" required/><br/>
+        <input 
+          type="text" 
+          name="username" 
+          onChange={this.handleInputChange} 
+          required />
+        <br/>
+
         <label>Password: </label><br/>
-        <input type="password"/><br/><br/>
+        <input 
+          type="password" 
+          name="password" 
+          onChange={this.handleInputChange} 
+          required />
+        <br/><br/>
+
         <label>Select news categories of interest:</label><br/>
         <input type="checkbox" id="1" name="Business" value="Business"/>
         <label>Business</label><br/>
@@ -27,4 +50,8 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+const mapDispatchToProps = dispatch => {
+  return;
+};
+
+export default connect()(Signup);

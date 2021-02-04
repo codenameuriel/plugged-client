@@ -49,13 +49,13 @@ class Auth extends Component {
       case "login": 
         return (
           <Layout type={type} title={loginTitle} subtitle={loginSubtitle}>
-            <Login/>
+            <Login />
           </Layout>
         );
       case "signup":
         return (
           <Layout type={type} title={signupTitle} subtitle={signupSubtitle}>
-            <Signup/>
+            <Signup />
           </Layout>
         );
       default: return;
