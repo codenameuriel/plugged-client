@@ -4,15 +4,16 @@ import * as actionCreators from '../../../store/actions/index';
 
 class Login extends Component {
   state = {
-    username: ""
+    username: "",
+    password: ""
   }
 
-  usernameChange = event => {
-    this.setState({ username: event.target.value });
+  handleInputChange = ({ target: { name, value }}) => {
+    this.setState({ [name]: value });
   }
 
   render() {
-    const { username } = this.state;
+    const { username, password } = this.state;
     const { onLogin } = this.props;
     const formHandler = event => {
       event.preventDefault();
@@ -22,9 +23,22 @@ class Login extends Component {
     return (
       <form onSubmit={formHandler}>
         <label>Username:</label><br/>
-        <input type="text" value={username} onChange={this.usernameChange}/><br/>
+        <input 
+          type="text"
+          name="username"
+          value={username} 
+          onChange={this.usernameChange} 
+          required />
+        <br/>
+
         <label>Password:</label><br/>
-        <input type="password"/><br/>
+        <input 
+          type="password"
+          name="password"
+          value={password}
+          onChange={this.handleInputChange} />
+        <br/>
+
         <input type="submit" value="Log in"/>
       </form>
     );

@@ -8,7 +8,6 @@ class Signup extends Component {
   }
 
   handleInputChange = ({ target: { value, name }}) => {
-    console.log(name, value);
     this.setState({ [name]: value });
   }
 
