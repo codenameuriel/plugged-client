@@ -13,13 +13,25 @@ class Signup extends Component {
     this.setState({ [name]: value });
   }
 
+  handleCheckboxChange = ({ target: { checked, name }}) => {
+    if (checked) {
+      this.setState({
+        categories: [...this.state.categories, name]
+      })
+    } else {
+      this.setState({
+        categories: [...this.state.categories].filter(category => category !== name)
+      });
+    }
+  }
+
   formHandler = event => {
     event.preventDefault();
     const { onSignup } = this.props;
     const { username, password } = this.state;
     const newUserData = { username, password };
     onSignup(newUserData);
-  };
+  }
 
   generateCategoryCheckboxes() {
     const categories = ["Business", "Entertainment", "General", "Health", "Science", "Sports", "Technology"];
@@ -27,12 +39,12 @@ class Signup extends Component {
     return categories.map((category, idx) => {
       return (
         <>
-          <label for={`${category}`} key={idx}>
+          <label for={category} key={idx}>
             <input 
               type="checkbox"
-              id={`${idx + 1}`}
-              name={`${category}`}
-              value={`${category}`}
+              name={category}
+              value={category}
+              onChange={this.handleCheckboxChange}
             />
             {category}
           </label>
