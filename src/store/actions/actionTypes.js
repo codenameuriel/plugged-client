@@ -23,3 +23,5 @@ export const LOG_IN = "LOG_IN";
 export const SET_USER = "SET_USER";
 export const SET_AUTH_REDIRECT = "SET_AUTH_REDIRECT";
 export const AUTHENTICATE_USER_FAILED = "AUTHENTICATE_USER_FAILED";
+export const LOGIN_FAILED = "LOGIN_FAILED";
+export const SIGNUP_FAILED = "SIGNUP_FAILED";

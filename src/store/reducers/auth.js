@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   user: null,
-  authRedirect: null
+  authRedirect: null,
+  error: null
 };
 
 const reducer = (state=initialState, action) => {
@@ -16,7 +17,17 @@ const reducer = (state=initialState, action) => {
       return {
         ...state,
         authRedirect: action.authRedirect
-      }; 
+      };
+    case actionTypes.LOGIN_FAILED:
+      return {
+        ...state,
+        error: action.error
+      };
+    case actionTypes.SIGNUP_FAILED:
+      return {
+        ...state,
+        error: action.error
+      };
     default: return state;
   }
 };
