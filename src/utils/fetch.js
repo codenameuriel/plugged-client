@@ -27,4 +27,4 @@ export const postData = async (pathName, data={}) => {
   }
 };
 
-export const error = "Error: check your credentials"
+export const error = "Error: check your credentials";

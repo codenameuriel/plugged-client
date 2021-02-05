@@ -5,7 +5,8 @@ import * as actionCreators from "../../../store/actions/index";
 class Signup extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    categories: []
   }
 
   handleInputChange = ({ target: { value, name }}) => {
@@ -20,42 +21,65 @@ class Signup extends Component {
     onSignup(newUserData);
   };
 
+  generateCategoryCheckboxes() {
+    const categories = ["Business", "Entertainment", "General", "Health", "Science", "Sports", "Technology"];
+
+    return categories.map((category, idx) => {
+      return (
+        <>
+          <label for={`${category}`} key={idx}>
+            <input 
+              type="checkbox"
+              id={`${idx + 1}`}
+              name={`${category}`}
+              value={`${category}`}
+            />
+            {category}
+          </label>
+          <br />
+        </>
+      );
+    });
+  }
+
   render() {
     const { username, password } = this.state;
     return (
       <form onSubmit={this.formHandler}>
-        <label>Username: </label><br/>
-        <input 
-          type="text" 
-          name="username"
-          value={username}
-          onChange={this.handleInputChange} 
-          required />
-        <br/>
-
-        <label>Password: </label><br/>
-        <input 
-          type="password" 
-          name="password"
-          value={password} 
-          onChange={this.handleInputChange} 
-          required />
-        <br/><br/>
-
-        <label>Select news categories of interest:</label><br/>
-        <input type="checkbox" id="1" name="Business" value="Business"/>
-        <label>Business</label><br/>
-        <input type="checkbox" id="2" name="Entertainment" value="Entertainment"/>
-        <label>Entertainment</label><br/>
-        <input type="checkbox" id="4" name="Health" value="Health"/>
-        <label>Health</label><br/>
-        <input type="checkbox" id="5" name="Science" value="Science"/>
-        <label>Science</label><br/>
-        <input type="checkbox" id="6" name="Sports" value="Sports"/>
-        <label>Sports</label><br/>
-        <input type="checkbox" id="7" name="Technology" value="Technology"/>
-        <label>Technology</label><br/><br/>
-        <input type="submit" value="Sign up"/>
+        <fieldset>
+          <legend>Create a Username and Password</legend>
+            <br />
+            <label for="username">
+              Username:
+              <br />
+              <input
+                id="username"
+                type="text" 
+                name="username"
+                placeholder="Enter username"
+                value={username}
+                onChange={this.handleInputChange}
+                required />
+            </label>
+            <br />
+            <label for="password">
+              Password:
+              <br />
+              <input 
+                id="password"
+                type="password" 
+                name="password"
+                placeholder="Enter password"
+                value={password} 
+                onChange={this.handleInputChange} 
+                required />
+            </label>
+        </fieldset>
+        <fieldset>
+          <legend>Select news categories of interest</legend>
+          {this.generateCategoryCheckboxes()}
+        </fieldset>
+        <input type="submit" value="Sign up" />
       </form>
     );
   }
