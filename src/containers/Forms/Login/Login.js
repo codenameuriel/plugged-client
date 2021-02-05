@@ -12,22 +12,24 @@ class Login extends Component {
     this.setState({ [name]: value });
   }
 
+  formHandler = event  => {
+    event.preventDefault();
+    const { onLogin } = this.props;
+    const { username, password } = this.state;
+    const userData = { username, password };
+    onLogin(userData);
+  }
+
   render() {
     const { username, password } = this.state;
-    const { onLogin } = this.props;
-    const formHandler = event => {
-      event.preventDefault();
-      onLogin(username);
-    };
-
     return (
-      <form onSubmit={formHandler}>
+      <form onSubmit={this.formHandler}>
         <label>Username:</label><br/>
         <input 
           type="text"
           name="username"
           value={username} 
-          onChange={this.usernameChange} 
+          onChange={this.handleInputChange} 
           required />
         <br/>
 
@@ -53,7 +55,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: username => dispatch(actionCreators.login(username))
+    onLogin: userData => dispatch(actionCreators.login(userData))
   };
 };
 

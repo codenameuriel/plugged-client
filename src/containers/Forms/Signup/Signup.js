@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import * as actionCreators from "../../../store/actions/index";
 
 class Signup extends Component {
   state = {
@@ -11,13 +12,23 @@ class Signup extends Component {
     this.setState({ [name]: value });
   }
 
+  formHandler = event => {
+    event.preventDefault();
+    const { onSignup } = this.props;
+    const { username, password } = this.state;
+    const newUserData = { username, password };
+    onSignup(newUserData);
+  };
+
   render() {
+    const { username, password } = this.state;
     return (
-      <form onSubmit={null}>
+      <form onSubmit={this.formHandler}>
         <label>Username: </label><br/>
         <input 
           type="text" 
-          name="username" 
+          name="username"
+          value={username}
           onChange={this.handleInputChange} 
           required />
         <br/>
@@ -25,7 +36,8 @@ class Signup extends Component {
         <label>Password: </label><br/>
         <input 
           type="password" 
-          name="password" 
+          name="password"
+          value={password} 
           onChange={this.handleInputChange} 
           required />
         <br/><br/>
@@ -50,7 +62,9 @@ class Signup extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return;
+  return {
+    onSignup: newUserData => dispatch(actionCreators.signup(newUserData))
+  };
 };
 
-export default connect()(Signup);
+export default connect(null, mapDispatchToProps)(Signup);

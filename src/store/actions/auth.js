@@ -1,16 +1,20 @@
 import * as actionTypes from "./actionTypes";
 import { getData, postData } from "../../utils/fetch";
 
-export const login = username => {
-  return dispatch => {
-    authenticateUser(dispatch, username);
+export const login = userData => {
+  return async dispatch => {
+    try {
+      // some code
+    } catch (error) {
+      // dispatch an action to handle issues with logging in an user
+    }
   };
 };
 
-export const signup = credentials => {
+export const signup = newUserData => {
   return async dispatch => {
     try {
-      let newUser = await postData("/signup", credentials);
+      let newUser = await postData("/signup", newUserData);
       console.log(newUser);
       dispatch(setUser(newUser));
     } catch (error) {
