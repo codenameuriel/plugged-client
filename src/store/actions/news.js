@@ -77,7 +77,9 @@ const fetchNewsFailed = error => {
 export const getDashboardNews = () => {
   return (dispatch, getState) => {
     const { user } = getState().auth;
-    const userSubscribedNewsCategories = user.categories.map(category => category.name.toLowerCase());
+    const userSubscribedNewsCategories = user.categories.map(category => category.toLowerCase());
+
+    console.log(userSubscribedNewsCategories);
 
     try {
       userSubscribedNewsCategories.forEach(async category => {

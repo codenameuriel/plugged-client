@@ -28,8 +28,8 @@ class Signup extends Component {
   formHandler = event => {
     event.preventDefault();
     const { onSignup } = this.props;
-    const { username, password } = this.state;
-    const newUserData = { username, password };
+    const { username, password, categories } = this.state;
+    const newUserData = { username, password, categories };
     onSignup(newUserData);
   }
 
@@ -39,7 +39,7 @@ class Signup extends Component {
     return categories.map((category, idx) => {
       return (
         <>
-          <label for={category} key={idx}>
+          <label key={idx} htmlFor={category}>
             <input 
               type="checkbox"
               name={category}
@@ -61,7 +61,7 @@ class Signup extends Component {
         <fieldset>
           <legend>Create a Username and Password</legend>
             <br />
-            <label for="username">
+            <label htmlFor="username">
               Username:
               <br />
               <input
@@ -74,7 +74,7 @@ class Signup extends Component {
                 required />
             </label>
             <br />
-            <label for="password">
+            <label htmlFor="password">
               Password:
               <br />
               <input 

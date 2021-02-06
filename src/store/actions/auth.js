@@ -4,6 +4,7 @@ import { postData, error } from "../../utils/fetch";
 export const login = userData => {
   return async dispatch => {
     const { user } = await postData("/login", userData);
+    console.log(user);
     if (!user.username) {
       dispatch(loginFailed(error));
     } else {
@@ -15,7 +16,8 @@ export const login = userData => {
 
 export const signup = newUserData => {
   return async dispatch => {
-    const { user: newUser } = await postData("/signup", newUserData);
+    const { returnedUser: newUser } = await postData("/signup", newUserData);
+    console.log(newUser);
 
     if (!newUser.username) {
       dispatch(signupFailed(error));
