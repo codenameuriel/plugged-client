@@ -3,7 +3,7 @@ import { postData, error } from "../../utils/fetch";
 
 export const login = userData => {
   return async dispatch => {
-    const { user } = await postData("/login", userData);
+    const { returnedUser: user } = await postData("/login", userData);
     console.log(user);
     if (!user.username) {
       dispatch(loginFailed(error));

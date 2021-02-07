@@ -82,13 +82,14 @@ export const getDashboardNews = () => {
     console.log(userSubscribedNewsCategories);
 
     try {
-      userSubscribedNewsCategories.forEach(async category => {
+      // userSubscribedNewsCategories.forEach(async category => {
         // const data = await getData(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=6&page=1`, apiKey);
         // const news = data.articles;
         // const newsByCategory = { [category]: news };
 
         // dispatch(setCategoryNews(newsByCategory));
-      });
+      // });
+      
     } catch (error) {
       console.error(error);
       dispatch(fetchNewsFailed(error));
