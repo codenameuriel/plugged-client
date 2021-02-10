@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actionCreators from '../store/actions/index';
+/** @format */
 
-import Layout from '../hoc/Layout/Layout';
-import Content from './Content/Content';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actionCreators from '../store/actions/index'
+
+import Layout from '../hoc/Layout/Layout'
+import Content from './Content/Content'
 
 // import { Link } from 'react-router-dom'
 // import DBNewsCard from './DBNewsCard'
@@ -11,7 +13,7 @@ import Content from './Content/Content';
 
 // import CollectionNewsStyles from '../styles/CollectionNews.module.css'
 
-class CollectionNews extends Component {
+class Collection extends Component {
   // state = {
   //   newsCollection: [],
   //   page: 1,
@@ -21,9 +23,9 @@ class CollectionNews extends Component {
   // }
 
   state = {
-    type: "collection",
-    title: "Collection News",
-    subtitle: "Here are your saved news articles"
+    type: 'collection',
+    title: 'Collection',
+    subtitle: 'Here are your saved news articles',
   }
 
   // getNewsCollection = () => {
@@ -39,7 +41,7 @@ class CollectionNews extends Component {
 
   componentDidMount() {
     // this.getNewsCollection()
-    this.props.onGetCollectionNews();
+    this.props.onGetCollection()
   }
 
   // renderDBNewsCards = () => {
@@ -47,9 +49,9 @@ class CollectionNews extends Component {
   //   const { loggedInUser }  = this.props
 
   //   return newsCollection.map(article => (
-  //     <DBNewsCard 
-  //       key={article.article.id} 
-  //       {...article.article} 
+  //     <DBNewsCard
+  //       key={article.article.id}
+  //       {...article.article}
   //       loggedInUser={loggedInUser}
   //       removeFromCollection={this.removeFromCollection}
   //     />
@@ -99,7 +101,7 @@ class CollectionNews extends Component {
   //   const { page, totalNews } = this.state
 
   //   let lastPage;
-    
+
   //   if (totalNews % 9 === 0) {
   //     lastPage = totalNews / 9
   //   } else if (totalNews % 9 !== 0) {
@@ -150,21 +152,21 @@ class CollectionNews extends Component {
     // }
 
     // if (newsCollection.length > 0) {
-    //   collectionDisplay = 
+    //   collectionDisplay =
     //     <>
     //       <header className={CollectionNewsStyles.header} >
     //         <h1>Collection News</h1>
     //         <p>Here are your saved news <span className={CollectionNewsStyles.span} >{loggedInUser.username}</span></p>
     //       </header>
     //       <Nav links={links}/>
-    //       {/* {showPrevPageButton && 
+    //       {/* {showPrevPageButton &&
     //         <button onClick={prevPage} >Previous Page</button>}
     //         <button onClick={nextPage} >{nextPageInnerText}</button> */}
     //     </>
     // } else if (!loggedInUser.username) {
     //   collectionDisplay = <h5 className={CollectionNewsStyles.h5} ><Link className={CollectionNewsStyles.link} to="/login">Log in</Link> to see your saved news</h5>
     // } else {
-    //   collectionDisplay = 
+    //   collectionDisplay =
     //     <>
     //       <header className={CollectionNewsStyles.header} >
     //         <h1>Collection News</h1>
@@ -174,7 +176,7 @@ class CollectionNews extends Component {
     //       <h3 className={CollectionNewsStyles.h3} ><Link className={CollectionNewsStyles.link} to="/categories">Add</Link> some news to your collection!</h3>
     //     </>
     // }
-    const { type, title, subtitle } = this.state;
+    const { type, title, subtitle } = this.state
     return (
       // <div>
       //   {collectionDisplay}
@@ -184,7 +186,7 @@ class CollectionNews extends Component {
       // </div>
       <Layout type={type} title={title} subtitle={subtitle}>
         {/* <PageManager/> */}
-        <Content type={type}/>
+        <Content type={type} />
       </Layout>
     )
   }
@@ -192,8 +194,8 @@ class CollectionNews extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetCollectionNews: () => dispatch(actionCreators.getCollectionNews())
-  };
-};
+    onGetCollection: () => dispatch(actionCreators.getCollectionNews()),
+  }
+}
 
-export default connect(null, mapDispatchToProps)(CollectionNews);
+export default connect(null, mapDispatchToProps)(Collection)

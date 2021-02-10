@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 // import components
 import TopNews from './containers/TopNews/TopNews'
 import Dashboard from './containers/Dashboard/Dashboard'
-import Collection from './components/CollectionNews' // change to Collection
+import Collection from './components/Collection' // change to Collection
 import Category from './components/CategorySelector' // change to Category
 import Source from './components/SourceNews' // change to Source
 import Newspaper from './components/NewspaperMenu' // change to Newspaper

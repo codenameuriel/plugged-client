@@ -121,7 +121,7 @@ const setCollectionNews = news => {
   }
 }
 
-export const getCollectionNews = () => {
+export const getCollection = () => {
   return async (dispatch, getState) => {
     const { user } = getState().auth.user
     const { collectionNews } = getState().news

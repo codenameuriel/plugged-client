@@ -5,7 +5,7 @@ export {
   getTopNews,
   getDashboardNews,
   saveNewsStory,
-  getCollectionNews,
+  getCollection,
   getTopicNews,
   setSearchTopic,
   clearTopicNews,
