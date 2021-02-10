@@ -1,173 +1,182 @@
-import * as actionTypes from "./actionTypes";
-import { getData, postData } from "../../utils/fetch";
+/** @format */
+
+import * as actionTypes from './actionTypes'
+import { getData, postData } from '../../utils/fetch'
 
 const setPaginationData = (cb, news, articlesPerPage) => {
-  cb(setLastNewsStoryIndex(news, articlesPerPage));
-  cb(setLastPage(news, articlesPerPage));
-};
+  cb(setLastNewsStoryIndex(news, articlesPerPage))
+  cb(setLastPage(news, articlesPerPage))
+}
 
 const setNews = news => {
   return {
     type: actionTypes.SET_NEWS,
     news,
-    totalNews: news.length
-  };
-};
+    totalNews: news.length,
+  }
+}
 
 const setTotalPages = totalPages => {
   return {
     type: actionTypes.SET_TOTAL_PAGES,
-    totalPages
-  };
-};
+    totalPages,
+  }
+}
 
 export const getTopNews = userParams => {
   return async dispatch => {
-    const data = await getData("top-news", userParams);
-    const { articles, totalPages, message: error } = data;
+    const data = await getData('top-news', userParams)
+    const { articles, totalPages, message: error } = data
 
     // error object is captured here
     if (error) {
-      dispatch(fetchNewsFailed(error));
+      dispatch(fetchNewsFailed(error))
     } else {
-      dispatch(setNews(articles));
-      dispatch(setTotalPages(totalPages));
+      dispatch(setNews(articles))
+      dispatch(setTotalPages(totalPages))
     }
-  };
-};
+  }
+}
 
 const setLastNewsStoryIndex = (news, articlesPerPage) => {
-  let lastNewsStoryIndex = news.length > articlesPerPage ? articlesPerPage : news.length;
+  let lastNewsStoryIndex =
+    news.length > articlesPerPage ? articlesPerPage : news.length
   return {
     type: actionTypes.SET_LAST_NEWS_STORY_INDEX,
-    lastNewsStoryIndex
-  };
-};
+    lastNewsStoryIndex,
+  }
+}
 
 const calculateLastPage = (news, articlesPerPage) => {
-  return (
-    news.length % articlesPerPage === 0 ? (news.length / articlesPerPage) : Math.ceil((news.length / articlesPerPage))
-  );
-};
+  return news.length % articlesPerPage === 0
+    ? news.length / articlesPerPage
+    : Math.ceil(news.length / articlesPerPage)
+}
 
 const setLastPage = (news, articlesPerPage) => {
   return {
     type: actionTypes.SET_LAST_PAGE,
-    lastPage: calculateLastPage(news, articlesPerPage)
-  };
-};
+    lastPage: calculateLastPage(news, articlesPerPage),
+  }
+}
 
 const fetchNewsFailed = error => {
   return {
     type: actionTypes.FETCH_NEWS_FAILED,
-    error
-  };
-};
+    error,
+  }
+}
 
 export const getDashboardNews = () => {
   return async (dispatch, getState) => {
-    try {    
-      const { user } = getState().auth;
-      const categoryParam = { categories: user.categories.join(",") };
-      const data = await getData("dashboard-news", categoryParam);
-      dispatch(setCategoryNews(data));
+    try {
+      const { user } = getState().auth
+      const categoryParam = { categories: user.categories.join(',') }
+      const data = await getData('dashboard-news', categoryParam)
+      dispatch(setCategoryNews(data))
     } catch (error) {
-      console.error(error);
-      dispatch(fetchNewsFailed(error));
+      console.error(error)
+      dispatch(fetchNewsFailed(error))
     }
-  };
-};
+  }
+}
 
 const setCategoryNews = news => {
   return {
     type: actionTypes.SET_CATEGORY_NEWS,
-    news
-  };
-};
+    news,
+  }
+}
 
 export const saveNewsStory = newsStory => {
   return async (dispatch, getState) => {
-    const { user } = getState().auth.user;
+    const { user } = getState().auth.user
     try {
-      const savedNewsStory = await postData("http://localhost:4000/articles", newsStory);
-      saveToUserCollection(savedNewsStory, user);
+      const savedNewsStory = await postData(
+        'http://localhost:4000/articles',
+        newsStory
+      )
+      saveToUserCollection(savedNewsStory, user)
     } catch (error) {
-      console.error(error);
-      dispatch(fetchNewsFailed(error));
+      console.error(error)
+      dispatch(fetchNewsFailed(error))
     }
-  };
-};
+  }
+}
 
 const saveToUserCollection = (newsStory, user) => {
   let collectionObject = {
     user_id: user.id,
-    article_id: newsStory.id
-  };
+    article_id: newsStory.id,
+  }
 
-  postData("http://localhost:4000/collections", collectionObject);
-};
+  postData('http://localhost:4000/collections', collectionObject)
+}
 
 const setCollectionNews = news => {
   return {
     type: actionTypes.SET_COLLECTION_NEWS,
     news,
-    totalCollectionNews: news.length
-  };
-};
+    totalCollectionNews: news.length,
+  }
+}
 
 export const getCollectionNews = () => {
   return async (dispatch, getState) => {
-    const { user } = getState().auth.user;
-    const { collectionNews } = getState().news;
-    const { articlesPerPage } = getState().pageManager;
+    const { user } = getState().auth.user
+    const { collectionNews } = getState().news
+    const { articlesPerPage } = getState().pageManager
     try {
-      const userSavedNews = await getData(`http://localhost:4000/collections/${user.id}`);
-      const initialPageLoad = !(Boolean(collectionNews));
-      const hasSavedMoreNews = collectionNews && Boolean(userSavedNews.length > collectionNews.length);
- 
+      const userSavedNews = await getData(
+        `http://localhost:4000/collections/${user.id}`
+      )
+      const initialPageLoad = !Boolean(collectionNews)
+      const hasSavedMoreNews =
+        collectionNews && Boolean(userSavedNews.length > collectionNews.length)
+
       if (initialPageLoad || hasSavedMoreNews) {
-        dispatch(setCollectionNews(userSavedNews));
-        setPaginationData(dispatch, userSavedNews, articlesPerPage);
+        dispatch(setCollectionNews(userSavedNews))
+        setPaginationData(dispatch, userSavedNews, articlesPerPage)
       }
     } catch (error) {
-      console.error(error);
-      dispatch(fetchNewsFailed(error));
+      console.error(error)
+      dispatch(fetchNewsFailed(error))
     }
-  };
-};
+  }
+}
 
 export const clearTopicNews = () => {
   return {
-    type: actionTypes.CLEAR_TOPIC_NEWS
-  }; 
+    type: actionTypes.CLEAR_TOPIC_NEWS,
+  }
 }
 
 export const setSearchTopic = searchTopic => {
   return {
     type: actionTypes.SET_SEARCH_TOPIC,
-    searchTopic
-  };
-};
+    searchTopic,
+  }
+}
 
 const setTopicNews = news => {
   return {
     type: actionTypes.SET_TOPIC_NEWS,
-    news
-  };
-};
+    news,
+  }
+}
 
 export const getTopicNews = userParams => {
   return async dispatch => {
     try {
-      const data = await getData("topic-news", userParams);
-      const { articles, totalPages } = data;
-      console.log(data);
+      const data = await getData('topic-news', userParams)
+      const { articles, totalPages } = data
+      console.log(data)
 
-      dispatch(setTopicNews(articles));
-      dispatch(setTotalPages(totalPages));
+      dispatch(setTopicNews(articles))
+      dispatch(setTotalPages(totalPages))
     } catch (error) {
-      console.error(error);
-      dispatch(fetchNewsFailed(error));
+      console.error(error)
+      dispatch(fetchNewsFailed(error))
     }
-  };
-};
+  }
+}

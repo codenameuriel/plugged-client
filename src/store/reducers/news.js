@@ -1,4 +1,6 @@
-import * as actionTypes from '../actions/actionTypes';
+/** @format */
+
+import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
   error: null,
@@ -7,55 +9,57 @@ const initialState = {
   collectionNews: null,
   topicNews: null,
   searchTopic: null,
-  totalCollectionNews: null
-};
+  totalCollectionNews: null,
+}
 
 const updateState = state => {
-  if (typeof state === "object" && Array.isArray(state)) {
-    return state ? [...state] : null;
+  if (typeof state === 'object' && Array.isArray(state)) {
+    return state ? [...state] : null
   } else {
-    return state ? {...state} : null;
+    return state ? { ...state } : null
   }
 }
 
-const reducer = (state=initialState, action)=> {
-  switch(action.type) {
-    case actionTypes.SET_NEWS: 
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actionTypes.SET_NEWS:
       return {
         ...state,
         news: action.news,
         totalNews: action.totalNews,
         categoryNews: updateState(state.categoryNews),
         collectionNews: updateState(state.collectionNews),
-        topicNews: updateState(state.topicNews)
-      };
+        topicNews: updateState(state.topicNews),
+      }
     case actionTypes.SET_CATEGORY_NEWS:
-      const updatedCategoryNews = state.categoryNews ? {...state.categoryNews, ...action.news} : action.news;
+      const updatedCategoryNews = state.categoryNews
+        ? { ...state.categoryNews, ...action.news }
+        : action.news
       return {
         ...state,
         categoryNews: updatedCategoryNews,
         news: updateState(state.news),
         collectionNews: updateState(state.collectionNews),
-        topicNews: updateState(state.topicNews)
-      };
+        topicNews: updateState(state.topicNews),
+      }
     case actionTypes.SET_COLLECTION_NEWS:
       return {
         ...state,
         collectionNews: action.news,
         news: updateState(state.news),
         categoryNews: updateState(state.categoryNews),
-        topicNews: updateState(state.topicNews)
-      };
+        topicNews: updateState(state.topicNews),
+      }
     case actionTypes.SET_TOPIC_NEWS:
-      console.log(action.news);
+      console.log(action.news)
       return {
         ...state,
         topicNews: action.news,
         totalNews: action.totalNews,
         news: updateState(state.news),
         categoryNews: updateState(state.categoryNews),
-        collectionNews: updateState(state.collectionNews)
-      };
+        collectionNews: updateState(state.collectionNews),
+      }
     // case actionTypes.SET_SEARCH_TOPIC:
     //   return {
     //     ...state,
@@ -71,8 +75,8 @@ const reducer = (state=initialState, action)=> {
         topicNews: null,
         news: updateState(state.news),
         categoryNews: updateState(state.categoryNews),
-        collectionNews: updateState(state.collectionNews)
-      };
+        collectionNews: updateState(state.collectionNews),
+      }
     case actionTypes.FETCH_NEWS_FAILED:
       return {
         ...state,
@@ -80,10 +84,11 @@ const reducer = (state=initialState, action)=> {
         news: updateState(state.news),
         categoryNews: updateState(state.categoryNews),
         collectionNews: updateState(state.collectionNews),
-        topicNews: updateState(state.topicNews)
-      };
-    default: return state;
+        topicNews: updateState(state.topicNews),
+      }
+    default:
+      return state
   }
-};
+}
 
-export default reducer;
+export default reducer

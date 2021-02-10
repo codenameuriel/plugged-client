@@ -1,7 +1,9 @@
-import * as actionTypes from "../actions/actionTypes";
+/** @format */
+
+import * as actionTypes from '../actions/actionTypes'
 
 export const clearParams = () => {
   return {
-    type: actionTypes.CLEAR_PARAMS
-  };
-};
+    type: actionTypes.CLEAR_PARAMS,
+  }
+}

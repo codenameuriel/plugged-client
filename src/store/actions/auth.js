@@ -1,32 +1,34 @@
-import * as actionTypes from "./actionTypes";
-import { postData } from "../../utils/fetch";
+/** @format */
+
+import * as actionTypes from './actionTypes'
+import { postData } from '../../utils/fetch'
 
 export const login = userData => {
   return async dispatch => {
-    const { returnedUser: user } = await postData("/login", userData);
-    console.log(user);
+    const { returnedUser: user } = await postData('/login', userData)
+    console.log(user)
     if (!user.username) {
-      dispatch(loginFailed());
+      dispatch(loginFailed())
     } else {
-      dispatch(setUser(user));
-      dispatch(setAuthRedirect());
+      dispatch(setUser(user))
+      dispatch(setAuthRedirect())
     }
-  };
-};
+  }
+}
 
 export const signup = newUserData => {
   return async dispatch => {
-    const { returnedUser: newUser } = await postData("/signup", newUserData);
-    console.log(newUser);
+    const { returnedUser: newUser } = await postData('/signup', newUserData)
+    console.log(newUser)
 
     if (!newUser.username) {
-      dispatch(signupFailed());
+      dispatch(signupFailed())
     } else {
-      dispatch(setUser(newUser));
-      dispatch(setAuthRedirect());
+      dispatch(setUser(newUser))
+      dispatch(setAuthRedirect())
     }
-  };
-};
+  }
+}
 
 // const authenticateUser = async(dispatch, username) => {
 //   try {
@@ -50,27 +52,27 @@ export const signup = newUserData => {
 const setUser = user => {
   return {
     type: actionTypes.SET_USER,
-    user
-  };
-};
+    user,
+  }
+}
 
 const setAuthRedirect = () => {
   return {
     type: actionTypes.SET_AUTH_REDIRECT,
-    authRedirect: "/dashboard"
-  };
-};
+    authRedirect: '/dashboard',
+  }
+}
 
-const loginFailed = error => { 
+const loginFailed = error => {
   return {
     type: actionTypes.LOGIN_FAILED,
-    error
-  };
-};
+    error,
+  }
+}
 
 const signupFailed = error => {
   return {
     type: actionTypes.SIGNUP_FAILED,
-    error
-  };
-};
+    error,
+  }
+}

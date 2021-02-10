@@ -1,3 +1,5 @@
+/** @format */
+
 import * as actionTypes from './actionTypes'
 
 // export const changePage = changeType => {
@@ -42,26 +44,26 @@ import * as actionTypes from './actionTypes'
 
 const nextPage = () => {
   return {
-    type: actionTypes.NEXT_PAGE
+    type: actionTypes.NEXT_PAGE,
   }
 }
 
 const prevPage = () => {
   return {
-    type: actionTypes.PREV_PAGE
+    type: actionTypes.PREV_PAGE,
   }
 }
 
 export const firstPage = () => {
   return {
-    type: actionTypes.FIRST_PAGE 
+    type: actionTypes.FIRST_PAGE,
   }
 }
 
 const setPageParams = page => {
   return {
     type: actionTypes.SET_PAGE_PARAMS,
-    page
+    page,
   }
 }
 
@@ -69,19 +71,20 @@ export const changePage = type => {
   return (dispatch, getState) => {
     const { page } = getState().pageManager
     switch (type) {
-      case "next":
-        dispatch(nextPage());
+      case 'next':
+        dispatch(nextPage())
         dispatch(setPageParams(page + 1))
         break
-      case "prev":
-        dispatch(prevPage());
+      case 'prev':
+        dispatch(prevPage())
         dispatch(setPageParams(page - 1))
         break
-      case "first":
-        dispatch(firstPage());
+      case 'first':
+        dispatch(firstPage())
         dispatch(setPageParams(1))
         break
-      default: return
+      default:
+        return
     }
   }
 }
