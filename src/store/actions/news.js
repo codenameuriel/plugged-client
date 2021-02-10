@@ -23,15 +23,15 @@ const setTotalPages = totalPages => {
 
 export const getTopNews = userParams => {
   return async dispatch => {
-    try {
-      const data = await getData("top-news", userParams);
-      const { articles, totalPages } = data;
+    const data = await getData("top-news", userParams);
+    const { articles, totalPages, message: error } = data;
 
+    // error object is captured here
+    if (error) {
+      dispatch(fetchNewsFailed(error));
+    } else {
       dispatch(setNews(articles));
       dispatch(setTotalPages(totalPages));
-    } catch (error) {
-      console.error(error);
-      dispatch(fetchNewsFailed(error));
     }
   };
 };
@@ -140,12 +140,6 @@ export const clearTopicNews = () => {
   return {
     type: actionTypes.CLEAR_TOPIC_NEWS
   }; 
-}
-
-export const clearTotalNews = () => {
-  return {
-    type: actionTypes.CLEAR_TOTAL_NEWS
-  };
 }
 
 export const setSearchTopic = searchTopic => {

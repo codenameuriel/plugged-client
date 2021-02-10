@@ -1,12 +1,12 @@
 import * as actionTypes from "./actionTypes";
-import { postData, error } from "../../utils/fetch";
+import { postData } from "../../utils/fetch";
 
 export const login = userData => {
   return async dispatch => {
     const { returnedUser: user } = await postData("/login", userData);
     console.log(user);
     if (!user.username) {
-      dispatch(loginFailed(error));
+      dispatch(loginFailed());
     } else {
       dispatch(setUser(user));
       dispatch(setAuthRedirect());
@@ -20,7 +20,7 @@ export const signup = newUserData => {
     console.log(newUser);
 
     if (!newUser.username) {
-      dispatch(signupFailed(error));
+      dispatch(signupFailed());
     } else {
       dispatch(setUser(newUser));
       dispatch(setAuthRedirect());

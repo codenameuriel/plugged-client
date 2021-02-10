@@ -1,55 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actionCreators from '../../store/actions/index';
+/** @format */
 
-import Layout from '../../hoc/Layout/Layout';
-import Content from '../../components/Content/Content';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actionCreators from '../../store/actions/index'
+
+import Layout from '../../hoc/Layout/Layout'
+import Content from '../../components/Content/Content'
 
 class Dashboard extends Component {
   state = {
-    type: "dashboard",
-    title: "Dashboard",
-    subtitle: `All your news in one place. Welcome back ${this.props.user.username}`
+    type: 'dashboard',
+    title: 'Dashboard',
+    subtitle: `All your news in one place. Welcome back ${this.props.user.username}`,
   }
 
   componentDidMount() {
-    this.props.onGetDashboardNews();
+    this.props.onGetDashboardNews()
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps !== this.props) {
-  //     this.getUsersCategoryNews()
-  //   }
-  // }
-
-  // getUsersCategoryNews = () => {
-  //   // const { loggedInUser } = this.props
-  //   const { user } = this.props;
-
-  //   user.categories.forEach(category => {
-  //     fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category.name.toLowerCase()}&pageSize=6&page=1`, apiKey)
-  //     .then(resp => resp.json())
-  //     .then(data => this.setState({
-  //       articles: [...this.state.articles, data.articles]
-  //     }, this.setState({
-  //       categories: [...this.state.categories, category.name]
-  //       })
-  //     ))
-  //   })
-  // }
-
-  // passDownToNewsMapper = () => {
-  //   let views = []
-  //   this.state.articles.forEach((articles, index) => views.push(<NewsMapper 
-  //   key={index} news={articles} loggedInUser={this.props.loggedInUser} postArticle={this.props.postArticle} />))
-  //   return views
-  // }
-
-  // createH1ForCategories = () => {
-  //   let headers = []
-  //   this.state.categories.forEach(category => headers.push(<h2 className={DashboardStyles.h2} >Top News in <span className={DashboardStyles.span} >{category}</span></h2>))
-  //   return headers
-  // }
 
   render() {
     // const { loggedInUser, links, history, handleSearchChange, searchTopic, getTopicNews } = this.props
@@ -82,7 +49,7 @@ class Dashboard extends Component {
     //   header5 = h5
     //   header6 = h6
 
-    //   dashboardDisplay = 
+    //   dashboardDisplay =
     //     <>
     //       <h1 className={DashboardStyles.h1} >Here are your top news</h1>
     //       {header1}
@@ -98,8 +65,8 @@ class Dashboard extends Component {
     //       {header6}
     //       {v6}
     //     </>
-      
-    //   dashboardDisplayHeader = 
+
+    //   dashboardDisplayHeader =
     //     <>
     //       <header className={DashboardStyles.header} >
     //         <h1>Dashboard</h1>
@@ -110,7 +77,7 @@ class Dashboard extends Component {
     // } else if (!loggedInUser.username) {
     //   dashboardDisplay = <h5 className={DashboardStyles.h5} ><Link className={DashboardStyles.link} to="/login">Log in</Link> to see your top news</h5>
     // } else {
-    //   dashboardDisplay = 
+    //   dashboardDisplay =
     //     <>
     //       <header className={DashboardStyles.header} >
     //         <h1>Dashboard</h1>
@@ -120,30 +87,33 @@ class Dashboard extends Component {
     //       <h3 className={DashboardStyles.h3} ><Link className={DashboardStyles.link} to="/categories">Subscribe</Link> to news here</h3>
     //     </>
     // }
-    const { type, title, subtitle } = this.state;
+    const { type, title, subtitle } = this.state
     return (
-      <Layout
-        title={title} 
-        subtitle={subtitle} 
-        type={type}>
-          <Content type={type}/>
-          <button onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}>Scroll Top</button>
+      <Layout title={title} subtitle={subtitle} type={type}>
+        <Content type={type} />
+        <button
+          onClick={() =>
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+          }
+        >
+          Scroll Top
+        </button>
       </Layout>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    topicNews: state.news.topicNews
-  };
-};
+    topicNews: state.news.topicNews,
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetDashboardNews: () => dispatch(actionCreators.getDashboardNews())
-  };
-};
+    onGetDashboardNews: () => dispatch(actionCreators.getDashboardNews()),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

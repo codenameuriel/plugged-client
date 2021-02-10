@@ -7,7 +7,6 @@ const initialState = {
   collectionNews: null,
   topicNews: null,
   searchTopic: null,
-  totalNews: null,
   totalCollectionNews: null
 };
 
@@ -70,14 +69,6 @@ const reducer = (state=initialState, action)=> {
       return {
         ...state,
         topicNews: null,
-        news: updateState(state.news),
-        categoryNews: updateState(state.categoryNews),
-        collectionNews: updateState(state.collectionNews)
-      };
-    case actionTypes.CLEAR_TOTAL_NEWS:
-      return {
-        ...state,
-        totalNews: null,
         news: updateState(state.news),
         categoryNews: updateState(state.categoryNews),
         collectionNews: updateState(state.collectionNews)

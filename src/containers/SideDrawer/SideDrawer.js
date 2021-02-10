@@ -1,26 +1,30 @@
-import React from 'react';
+/** @format */
 
-import Backdrop from '../../components/Backdrop/Backdrop';
-import NavManager from '../NavManager/NavManager';
+import React from 'react'
 
-import SideDrawerStyles from './SideDrawer.module.css';
+import Backdrop from '../../components/Backdrop/Backdrop'
+import NavManager from '../NavManager/NavManager'
+
+import SideDrawerStyles from './SideDrawer.module.css'
 
 const SideDrawer = props => {
-  const { showSideDrawer, closeSideDrawer } = props;
-  let sideDrawerStyles = [SideDrawerStyles.SideDrawer, SideDrawerStyles.Hide];
+  const { showSideDrawer, closeSideDrawer } = props
+  let sideDrawerStyles = [SideDrawerStyles.SideDrawer, SideDrawerStyles.Hide]
 
-  if (showSideDrawer) sideDrawerStyles = [SideDrawerStyles.SideDrawer, SideDrawerStyles.Show];
+  if (showSideDrawer)
+    sideDrawerStyles = [SideDrawerStyles.SideDrawer, SideDrawerStyles.Show]
 
   return (
     <>
-      <Backdrop 
-        showSideDrawer={showSideDrawer} 
-        closeSideDrawer={closeSideDrawer} />
-      <div className={sideDrawerStyles.join(" ")}>
-        <NavManager fromSideDrawer={true}/>
+      <Backdrop
+        showSideDrawer={showSideDrawer}
+        closeSideDrawer={closeSideDrawer}
+      />
+      <div className={sideDrawerStyles.join(' ')}>
+        <NavManager fromSideDrawer={true} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SideDrawer;
+export default SideDrawer

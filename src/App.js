@@ -1,27 +1,22 @@
-import React, { Component } from 'react';
-// import { NavLink } from 'react-router-dom';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+/** @format */
 
-// import Auth from './components/Auth'
-// import PageManager from './components/PageManager'
-// import AppStyles from './styles/App.module.css'
+import React from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-// import Login from './components/Login';
-// import Signup from './components/Signup';
-import TopNews from './containers/TopNews/TopNews';
-import Dashboard from './containers/Dashboard/Dashboard';
-import Collection from './components/CollectionNews'; // change to Collection
-import Category from './components/CategorySelector'; // change to Category
-import Source from './components/SourceNews'; // change to Source
-import Newspaper from './components/NewspaperMenu'; // change to Newspaper
+// import components
+import TopNews from './containers/TopNews/TopNews'
+import Dashboard from './containers/Dashboard/Dashboard'
+import Collection from './components/CollectionNews' // change to Collection
+import Category from './components/CategorySelector' // change to Category
+import Source from './components/SourceNews' // change to Source
+import Newspaper from './components/NewspaperMenu' // change to Newspaper
+import Auth from './containers/Auth/Auth'
+import TopicNews from './containers/TopicNews/TopicNews'
 
-import Auth from './containers/Auth/Auth';
-import TopicNews from './components/TopicNews';
-
-class App extends Component {
+class App extends React.Component {
   // state = {
-  //   loggedInUser: {}, 
+  //   loggedInUser: {},
   //   categories: [],
   //   unsubscribe: [],
   //   article: {},
@@ -31,7 +26,7 @@ class App extends Component {
   //   newspaper: {},
   //   isAuthenticated: false
   // }
-  
+
   // setNewspaper = title => {
   //   const { loggedInUsersNewspapers } = this.state
   //   let selectedNewspaper = loggedInUsersNewspapers.find(newspaper => newspaper.title === title)
@@ -172,40 +167,43 @@ class App extends Component {
   //     unsubscribe: []
   //   }))
   // }
-  
+
   render() {
-    const { user } = this.props;
+    const { user: isAuthenticated } = this.props
+
+    // base routes, no user authentication needed
     let routes = (
       <Switch>
-        <Route path="/login" component={Auth} />
-        <Route path="/signup" component={Auth} />
-        <Route path="/top-news" component={TopNews} />
-        <Redirect from="/" to="/top-news" />
+        <Route path='/login' component={Auth} />
+        <Route path='/signup' component={Auth} />
+        <Route path='/top-news' component={TopNews} />
+        <Redirect from='/' to='/top-news' />
       </Switch>
-    );
-    if (user) {
+    )
+
+    // routes only available when a user is authenticated
+    if (isAuthenticated) {
       routes = (
         <Switch>
-          <Route path="/login" component={Auth} />
-          <Route path="/signup" component={Auth} />
-          <Route path="/top-news" component={TopNews} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/topic-news" component={TopicNews} />
-          <Route path="/collection" component={Collection} />
-          <Route path="/categories" component={Category} />
-          <Route path="/sources" component={Source} />
-          <Route path="/newspapers" component={Newspaper} />
-          {/* <Redirect from="/" to="/top-news"/> */}
+          <Route path='/login' component={Auth} />
+          <Route path='/signup' component={Auth} />
+          <Route path='/top-news' component={TopNews} />
+          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/topic-news' component={TopicNews} />
+          <Route path='/collection' component={Collection} />
+          <Route path='/categories' component={Category} />
+          <Route path='/sources' component={Source} />
+          <Route path='/newspapers' component={Newspaper} />
         </Switch>
-      );
+      )
     }
 
     // const links = [
     //   <NavLink className={`${AppStyles.link} ${AppStyles.right}`} onClick={this.logOutUser} to="/top-news">LOG OUT</NavLink>,
     //   <NavLink className={AppStyles.link} to="/collection">COLLECTION</NavLink>,
-    //   <NavLink 
-    //     className={AppStyles.link} 
-    //     to="/top-news" 
+    //   <NavLink
+    //     className={AppStyles.link}
+    //     to="/top-news"
     //   >TOP NEWS</NavLink>,
     //   <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/login">LOG IN</NavLink>,
     //   <NavLink className={`${AppStyles.link} ${AppStyles.right}`} to="/signup">SIGN UP</NavLink>,
@@ -239,14 +237,14 @@ class App extends Component {
     //   </div>
     // );
 
-    return routes;
+    return routes
   }
 }
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user
-  };
-};
+    user: state.auth.user,
+  }
+}
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)

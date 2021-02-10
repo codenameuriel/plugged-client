@@ -19,6 +19,10 @@ const reducer = (state=initialState, action) => {
           q: action.searchTopic
         }
       };
+    case actionTypes.CLEAR_PARAMS:
+      return {
+        params: {}
+      };
     default: return state;
   }
 };
