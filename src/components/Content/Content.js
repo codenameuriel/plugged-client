@@ -76,12 +76,11 @@ class Content extends Component {
   }
 
   renderTopicNews() {
-    const { user, topicNews, totalNews, searchTopic, prevLastArticleIndex, lastNewsStoryIndex } = this.props;
+    const { user, topicNews, totalNews, searchTopic } = this.props;
     let topicNewsContent = null;
     if (topicNews) {
-      const newsPerPage = topicNews.slice(prevLastArticleIndex, lastNewsStoryIndex);
       topicNewsContent = (
-        newsPerPage.map((newsStory, index) => {
+        topicNews.map((newsStory, index) => {
           return (
             <ArticleCard 
               {...newsStory} 

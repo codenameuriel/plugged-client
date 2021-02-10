@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../store/actions/index';
+import { checkParamsForUpdate } from "../utils/params";
 
 import Layout from '../hoc/Layout/Layout';
 import PageManager from '../containers/PageManager/PageManager';
@@ -14,13 +15,15 @@ class TopicNews extends Component {
   }
 
   componentDidMount() {
-    this.props.onGetTopicNews();
+    this.props.onGetTopicNews(this.props.params);
   }
   
   componentDidUpdate(prevProps) {
-    const { searchTopic } = this.props;
-    if (prevProps.searchTopic !== searchTopic) {
-      this.props.onGetTopicNews();
+    const { onGetTopicNews, searchTopic, params: currParams } = this.props;
+    const { params: prevParams } = prevProps;
+    let paramsHaveChanged = checkParamsForUpdate(prevParams, currParams);
+    if (prevProps.searchTopic !== searchTopic || paramsHaveChanged) {
+      onGetTopicNews(currParams);
       this.setState({
         subtitle: <>Here's the latest on <span>"{this.props.searchTopic}"</span></>
       });
@@ -92,13 +95,14 @@ class TopicNews extends Component {
 
 const mapStateToProps = state => {
   return {
-    searchTopic: state.news.searchTopic
+    // searchTopic: state.news.searchTopic,
+    params: state.params.params
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetTopicNews: () => dispatch(actionCreators.getTopicNews()),
+    onGetTopicNews: params => dispatch(actionCreators.getTopicNews(params)),
     onClearTopicNews: () => dispatch(actionCreators.clearTopicNews())
   };
 };
