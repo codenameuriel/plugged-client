@@ -26,11 +26,14 @@ const setTotalPages = totalPages => {
 export const getTopNews = userParams => {
   return async dispatch => {
     const data = await getData('top-news', userParams)
-    const { articles, totalPages, message: error } = data
+    
+    // destructure for potential error message
+    const { articles, totalPages, message: errorMsg } = data
 
-    // error object is captured here
-    if (error) {
-      dispatch(fetchNewsFailed(error))
+    // server-side catches potential errors and sends an error object with a message property
+    // in that case, data object will represent error object with a message property
+    if (errorMsg) {
+      dispatch(fetchNewsFailed(errorMsg))
     } else {
       dispatch(setNews(articles))
       dispatch(setTotalPages(totalPages))

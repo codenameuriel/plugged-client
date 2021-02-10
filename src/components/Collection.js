@@ -194,7 +194,7 @@ class Collection extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetCollection: () => dispatch(actionCreators.getCollectionNews()),
+    onGetCollection: () => dispatch(actionCreators.getCollection()),
   }
 }
 

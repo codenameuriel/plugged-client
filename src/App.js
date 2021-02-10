@@ -214,29 +214,6 @@ class App extends React.Component {
     //   <NavLink className={AppStyles.link} to="/newspapers">NEWSPAPER</NavLink>
     // ]
 
-    // return (
-    //   <div>
-    //     <PageManager
-    //        links={links}
-    //        loggedInUser={this.state.loggedInUser}
-    //        postArticle={this.postArticle}
-    //        subscribeToCategory={this.subscribeToCategory}
-    //        loggedInUsersNewspapers={this.state.loggedInUsersNewspapers}
-    //        updateUsersNewspapers={this.updateUsersNewspapers}
-    //        setNewspaper={this.setNewspaper}
-    //        newspaper={this.state.newspaper}
-    //        deleteNewspaper={this.deleteNewspaper}
-    //     />
-    //     <Auth
-    //       links={links}
-    //       loggedInUser={this.state.loggedInUser}
-    //       setLoggedInUser={this.setLoggedInUser}
-    //       unsubscribeFromCategory={this.unsubscribeFromCategory}
-    //       unsubscribeSubmit={this.unsubscribeSubmit}
-    //     />
-    //   </div>
-    // );
-
     return routes
   }
 }
