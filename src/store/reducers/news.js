@@ -5,7 +5,7 @@ import * as actionTypes from '../actions/actionTypes'
 const initialState = {
   error: null,
   news: null,
-  categoryNews: null,
+  dashboardNews: null,
   collectionNews: null,
   topicNews: null,
   searchTopic: null,
@@ -26,21 +26,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         news: action.news,
-        totalNews: action.totalNews,
-        categoryNews: updateState(state.categoryNews),
+        dashboardNews: updateState(state.dashboardNews),
         collectionNews: updateState(state.collectionNews),
         topicNews: updateState(state.topicNews),
       }
-    case actionTypes.SET_CATEGORY_NEWS:
-      const updatedCategoryNews = state.categoryNews
-        ? { ...state.categoryNews, ...action.news }
-        : action.news
+    case actionTypes.SET_DASHBOARD_NEWS:
+      // collectionNews requires updating to new state
       return {
         ...state,
-        categoryNews: updatedCategoryNews,
-        news: updateState(state.news),
+        dashboardNews: action.news,
         collectionNews: updateState(state.collectionNews),
-        topicNews: updateState(state.topicNews),
       }
     case actionTypes.SET_COLLECTION_NEWS:
       return {
