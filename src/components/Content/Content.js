@@ -10,24 +10,28 @@ import ArticleCard from '../ArticleCard/ArticleCard'
 import ContentStyles from './Content.module.css'
 
 class Content extends Component {
+  createArticleCards(news, user, onPostNewsStory) {
+    return news.map((newsStory, index) => (
+      <ArticleCard
+        {...newsStory}
+        key={index}
+        isAuthenticated={!!user}
+        inCollection={false}
+        onPostNewsStory={onPostNewsStory}
+      />
+    ))
+  }
+
   renderTopNews() {
     const { news, user, onPostNewsStory } = this.props
-    let topNewsContent = null
     if (news) {
-      topNewsContent = news.map((newsStory, index) => {
-        return (
-          <ArticleCard
-            {...newsStory}
-            key={index}
-            isAuthenticated={!!user}
-            inCollection={false}
-            onPostNewsStory={onPostNewsStory}
-          />
-        )
-      })
-
-      return <section className={ContentStyles.News}>{topNewsContent}</section>
+      return (
+        <section className={ContentStyles.News}>
+          {this.createArticleCards(news, user, onPostNewsStory)}
+        </section>
+      )
     }
+    return
   }
 
   renderDashboardNews() {
@@ -81,26 +85,15 @@ class Content extends Component {
   }
 
   renderTopicNews() {
-    const { user, topicNews, totalNews, searchTopic } = this.props
-    let topicNewsContent = null
-    if (topicNews) {
-      topicNewsContent = topicNews.map((newsStory, index) => {
-        return (
-          <ArticleCard
-            {...newsStory}
-            key={`${index}${newsStory.id}`}
-            isAuthenticated={!!user}
-            inCollection={false}
-          />
-        )
-      })
+    const { user, news } = this.props
+    if (news) {
       return (
-        <section className={ContentStyles.News}>{topicNewsContent}</section>
+        <section className={ContentStyles.News}>
+          {this.createArticleCards(news, user)}
+        </section>
       )
     }
-    if (totalNews) {
-      return <p>Sorry, couldn't find any news on {searchTopic}</p>
-    }
+    return
   }
 
   renderContent() {
