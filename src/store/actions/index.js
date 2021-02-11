@@ -3,6 +3,7 @@
 export { changePage, firstPage } from './pageManager'
 export {
   getTopNews,
+  clearNews,
   getDashboardNews,
   saveNewsStory,
   getCollection,

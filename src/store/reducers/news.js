@@ -30,6 +30,12 @@ const reducer = (state = initialState, action) => {
         collectionNews: updateState(state.collectionNews),
         topicNews: updateState(state.topicNews),
       }
+    case actionTypes.CLEAR_NEWS:
+      return {
+        ...state,
+        news: null,
+        collectioNews: updateState(state.collectionNews)
+      }
     case actionTypes.SET_DASHBOARD_NEWS:
       // collectionNews requires updating to new state
       return {

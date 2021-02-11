@@ -3,5 +3,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.jsxSingleQuote": true,
-  "prettier.arrowParens": "avoid"
+  "prettier.arrowParens": "avoid",
+  "prettier.trailingComma": "none"
 }

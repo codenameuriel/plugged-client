@@ -47,7 +47,7 @@ class PageManager extends Component {
       onPrevPage,
       onFirstPage,
       page,
-      totalPages: lastPage,
+      totalPages: lastPage
     } = this.props
     let buttons = null
     if (page === 1) {
@@ -503,15 +503,24 @@ class PageManager extends Component {
 const mapStateToProps = state => {
   return {
     page: state.pageManager.page,
-    totalPages: state.pageManager.totalPages,
+    totalPages: state.pageManager.totalPages
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onNextPage: () => dispatch(actionCreators.changePage('next')),
-    onPrevPage: () => dispatch(actionCreators.changePage('prev')),
-    onFirstPage: () => dispatch(actionCreators.changePage('first')),
+    onNextPage: () => {
+      dispatch(actionCreators.clearNews())
+      dispatch(actionCreators.changePage('next'))
+    },
+    onPrevPage: () => {
+      dispatch(actionCreators.clearNews())
+      dispatch(actionCreators.changePage('prev'))
+    },
+    onFirstPage: () => {
+      dispatch(actionCreators.clearNews())
+      dispatch(actionCreators.changePage('first'))
+    }
   }
 }
 

@@ -16,6 +16,12 @@ const setNews = news => {
   }
 }
 
+export const clearNews = () => {
+  return {
+    type: actionTypes.CLEAR_NEWS
+  }
+}
+
 const setTotalPages = totalPages => {
   return {
     type: actionTypes.SET_TOTAL_PAGES,
