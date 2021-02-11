@@ -17,7 +17,7 @@ class TopNews extends Component {
   }
 
   componentDidMount() {
-    this.props.onGetTopNews()
+    // this.props.onGetTopNews()
   }
 
   componentDidUpdate(prevProps) {
