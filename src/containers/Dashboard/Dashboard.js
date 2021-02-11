@@ -11,7 +11,9 @@ class Dashboard extends Component {
   state = {
     type: 'dashboard',
     title: 'Dashboard',
-    subtitle: `All your news in one place. Welcome back ${this.props.user.username}`,
+    subtitle: this.props.userLoggedIn
+      ? `All your news in one place. Welcome back ${this.props.user.username}`
+      : `All your news in one place. Welcome to Plugged, ${this.props.user.username}`
   }
 
   componentDidMount() {
@@ -106,13 +108,14 @@ class Dashboard extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    topicNews: state.news.topicNews,
+    userLoggedIn: state.auth.userLoggedIn,
+    topicNews: state.news.topicNews
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetDashboardNews: () => dispatch(actionCreators.getDashboardNews()),
+    onGetDashboardNews: () => dispatch(actionCreators.getDashboardNews())
   }
 }
 

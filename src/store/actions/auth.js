@@ -11,6 +11,7 @@ export const login = userData => {
       dispatch(loginFailed())
     } else {
       dispatch(setUser(user))
+      dispatch(setUserLoggedIn())
       dispatch(setAuthRedirect())
     }
   }
@@ -30,6 +31,11 @@ export const signup = newUserData => {
   }
 }
 
+const setUserLoggedIn = () => {
+  return {
+    type: actionTypes.SET_USER_LOGGED_IN
+  }
+}
 // const authenticateUser = async(dispatch, username) => {
 //   try {
 //     const resp = await fetch(`http://localhost:4000/users/login/${username}`);
