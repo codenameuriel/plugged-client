@@ -34,14 +34,14 @@ class Content extends Component {
   }
 
   renderDashboardNews() {
-    const { user, categoryNews, onPostNewsStory } = this.props;
+    const { user, dashboardNews, onPostNewsStory } = this.props;
     let dashboardContent = [];
-    for (let category in categoryNews) {
+    for (let category in dashboardNews) {
       dashboardContent.push(
         <section className={ContentStyles.Dashboard}>
           <h1><span><hr/></span>{category}<span><hr/></span></h1>
           <div className={ContentStyles.News}>
-            {categoryNews[category].map((newsStory, index) => {
+            {dashboardNews[category].map((newsStory, index) => {
               return (
                 <ArticleCard 
                   {...newsStory} 
@@ -129,7 +129,7 @@ const mapStateToProps = state => {
   return {
     user: state.auth.user,
     news: state.news.news,
-    categoryNews: state.news.categoryNews,
+    dashboardNews: state.news.dashboardNews,
     collectionNews: state.news.collectionNews,
     topicNews: state.news.topicNews,
     totalNews: state.news.totalNews,

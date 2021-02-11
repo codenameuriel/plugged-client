@@ -6,10 +6,7 @@ const initialState = {
   error: null,
   news: null,
   dashboardNews: null,
-  collectionNews: null,
-  topicNews: null,
-  searchTopic: null,
-  totalCollectionNews: null,
+  collectionNews: null
 }
 
 const updateState = state => {
@@ -26,9 +23,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         news: action.news,
-        dashboardNews: updateState(state.dashboardNews),
         collectionNews: updateState(state.collectionNews),
-        topicNews: updateState(state.topicNews),
       }
     case actionTypes.CLEAR_NEWS:
       return {
@@ -50,33 +45,6 @@ const reducer = (state = initialState, action) => {
         news: updateState(state.news),
         categoryNews: updateState(state.categoryNews),
         topicNews: updateState(state.topicNews),
-      }
-    case actionTypes.SET_TOPIC_NEWS:
-      console.log(action.news)
-      return {
-        ...state,
-        topicNews: action.news,
-        totalNews: action.totalNews,
-        news: updateState(state.news),
-        categoryNews: updateState(state.categoryNews),
-        collectionNews: updateState(state.collectionNews),
-      }
-    // case actionTypes.SET_SEARCH_TOPIC:
-    //   return {
-    //     ...state,
-    //     searchTopic: action.searchTopic,
-    //     news: updateState(state.news),
-    //     categoryNews: updateState(state.categoryNews),
-    //     collectionNews: updateState(state.collectionNews),
-    //     topicNew: updateState(state.topicNews)
-    //   };
-    case actionTypes.CLEAR_TOPIC_NEWS:
-      return {
-        ...state,
-        topicNews: null,
-        news: updateState(state.news),
-        categoryNews: updateState(state.categoryNews),
-        collectionNews: updateState(state.collectionNews),
       }
     case actionTypes.FETCH_NEWS_FAILED:
       return {

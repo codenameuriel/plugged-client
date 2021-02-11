@@ -3,16 +3,10 @@
 import * as actionTypes from './actionTypes'
 import { getData, postData } from '../../utils/fetch'
 
-const setPaginationData = (cb, news, articlesPerPage) => {
-  cb(setLastNewsStoryIndex(news, articlesPerPage))
-  cb(setLastPage(news, articlesPerPage))
-}
-
 const setNews = news => {
   return {
     type: actionTypes.SET_NEWS,
-    news,
-    totalNews: news.length,
+    news
   }
 }
 
@@ -44,28 +38,6 @@ export const getTopNews = userParams => {
       dispatch(setNews(articles))
       dispatch(setTotalPages(totalPages))
     }
-  }
-}
-
-const setLastNewsStoryIndex = (news, articlesPerPage) => {
-  let lastNewsStoryIndex =
-    news.length > articlesPerPage ? articlesPerPage : news.length
-  return {
-    type: actionTypes.SET_LAST_NEWS_STORY_INDEX,
-    lastNewsStoryIndex,
-  }
-}
-
-const calculateLastPage = (news, articlesPerPage) => {
-  return news.length % articlesPerPage === 0
-    ? news.length / articlesPerPage
-    : Math.ceil(news.length / articlesPerPage)
-}
-
-const setLastPage = (news, articlesPerPage) => {
-  return {
-    type: actionTypes.SET_LAST_PAGE,
-    lastPage: calculateLastPage(news, articlesPerPage),
   }
 }
 
@@ -145,7 +117,7 @@ export const getCollection = () => {
 
       if (initialPageLoad || hasSavedMoreNews) {
         dispatch(setCollectionNews(userSavedNews))
-        setPaginationData(dispatch, userSavedNews, articlesPerPage)
+        // setPaginationData(dispatch, userSavedNews, articlesPerPage)
       }
     } catch (error) {
       console.error(error)
