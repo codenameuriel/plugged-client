@@ -5,7 +5,10 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../../store/actions/index'
 
 import Layout from '../../hoc/Layout/Layout'
-import Content from '../../components/Content/Content'
+import Articles from '../../components/Articles/Articles'
+import Loader from '../../components/Loader/Loader'
+
+import DashboardStyles from './Dashboard.module.css'
 
 class Dashboard extends Component {
   state = {
@@ -17,7 +20,91 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.onGetDashboardNews()
+    this.props.getDashboardNews()
+  }
+
+  createArticlesProps(news, userLoggedIn, addToCollection) {
+    let articlesProps = { news, userLoggedIn }
+    if (userLoggedIn) {
+      articlesProps = {
+        ...articlesProps,
+        userLoggedIn,
+        inCollection: false,
+        addToCollection
+      }
+    }
+    return articlesProps
+  }
+
+  allUserContent(dashboardNews, userLoggedIn, addToCollection) {
+    let userContent = []
+    for (let category in dashboardNews) {
+      let news = dashboardNews[category]
+      let articlesProps = this.createArticlesProps(
+        news,
+        userLoggedIn,
+        addToCollection
+      )
+      userContent.push(this.content(articlesProps, category))
+    }
+    return userContent
+  }
+
+  articlesHeading(category) {
+    return (
+      <h1>
+        <span>
+          <hr />
+        </span>
+        {category}
+        <span>
+          <hr />
+        </span>
+      </h1>
+    )
+  }
+
+  content(articlesProps, category) {
+    return (
+      <div className={DashboardStyles.Dashboard}>
+        {this.articlesHeading(category)}
+        <section className={DashboardStyles.Articles}>
+          <Articles articlesProps={articlesProps} />
+        </section>
+      </div>
+    )
+    //     const { user, dashboardNews, onPostNewsStory } = this.props
+    //     let dashboardContent = []
+    //     for (let category in dashboardNews) {
+    //       dashboardContent.push(
+    //         <section className={ContentStyles.Dashboard}>
+    //           <h1>
+    //             <span>
+    //               <hr />
+    //             </span>
+    //             {category}
+    //             <span>
+    //               <hr />
+    //             </span>
+    //           </h1>
+    //           <div className={ContentStyles.News}>
+    //             {dashboardNews[category].map((newsStory, index) => {
+    //               return (
+    //                 <ArticleCard
+    //                   {...newsStory}
+    //                   key={`${index}${newsStory.url}`}
+    //                   isAuthenticated={!!user}
+    //                   inCollection={false}
+    //                   onPostNewsStory={onPostNewsStory}
+    //                 />
+    //               )
+    //             })}
+    //           </div>
+    //         </section>
+    //       )
+    //     }
+    //     return dashboardContent
+    //   }
   }
 
   render() {
@@ -90,9 +177,15 @@ class Dashboard extends Component {
     //     </>
     // }
     const { type, title, subtitle } = this.state
+    const { dashboardNews, userLoggedIn, addToCollection } = this.props
+
     return (
       <Layout title={title} subtitle={subtitle} type={type}>
-        <Content type={type} />
+        {dashboardNews ? (
+          this.allUserContent(dashboardNews, userLoggedIn, addToCollection)
+        ) : (
+          <Loader />
+        )}
         <button
           onClick={() =>
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
@@ -109,13 +202,15 @@ const mapStateToProps = state => {
   return {
     user: state.auth.user,
     userLoggedIn: state.auth.userLoggedIn,
-    topicNews: state.news.topicNews
+    dashboardNews: state.news.dashboardNews
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetDashboardNews: () => dispatch(actionCreators.getDashboardNews())
+    getDashboardNews: () => dispatch(actionCreators.getDashboardNews()),
+    addToCollection: newsStory =>
+      dispatch(actionCreators.saveNewsStory(newsStory))
   }
 }
 

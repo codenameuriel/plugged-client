@@ -1,21 +1,16 @@
 /** @format */
 
 import React from 'react'
-// import { connect } from 'react-redux'
-// import * as actionCreators from '../../store/actions/index'
 
-// import Loader from '../Loader/Loader'
 import ArticleCard from '../ArticleCard/ArticleCard'
 
-// import ContentStyles from './Content.module.css'
-
 const Articles = props => {
-  const { articlesProps: { news, isLoggedIn, inCollection, addToCollection } } = props
+  const { articlesProps: { news, userLoggedIn, inCollection, addToCollection } } = props
   return news.map((newsStory, idx) => (
     <ArticleCard
       key={idx}
       newsStory={newsStory}
-      isLoggedIn={isLoggedIn}
+      userLoggedIn={userLoggedIn}
       inCollection={inCollection}
       addToCollection={addToCollection}
     />
@@ -35,18 +30,6 @@ export default Articles
 //         onPostNewsStory={onPostNewsStory}
 //       />
 //     ))
-//   }
-
-//   renderTopNews() {
-//     const { news, user, onPostNewsStory } = this.props
-//     if (news) {
-//       return (
-//         <section className={ContentStyles.News}>
-//           {this.createArticleCards(news, user, onPostNewsStory)}
-//         </section>
-//       )
-//     }
-//     return
 //   }
 
 //   renderDashboardNews() {

@@ -1,0 +1,27 @@
+.Articles {
+  display: flex;
+  margin: 0 auto;
+  padding: 25px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.Dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.Dashboard h1 {
+  margin: 0 auto 25px auto;
+  text-transform: uppercase;
+  font-size: 150%;
+  border-top: 2px solid #eee;
+  border-bottom: 2px solid #eee;
+  width: 25%;
+  text-align: center;
+}
+
+.Dashboard span hr {
+  width: 25%;
+  border: 1px solid #32e0c4;
+}

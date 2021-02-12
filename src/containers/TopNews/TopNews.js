@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
 import * as actionCreators from '../../store/actions/index'
 import { checkParamsForUpdate } from '../../utils/params'
 
@@ -26,24 +27,25 @@ class TopNews extends Component {
   componentDidUpdate(prevProps) {
     const { getTopNews, params: currParams } = this.props
     const { params: prevParams } = prevProps
-    // "check for new params" more meaningful name
 
     let paramsHaveChanged = checkParamsForUpdate(prevParams, currParams)
     if (paramsHaveChanged) getTopNews(currParams)
   }
 
-  renderArticles(news, isLoggedIn, addToCollection) {
-    let articlesProps = { news, isLoggedIn }
-
-    if (isLoggedIn) {
+  createArticlesProps(news, userLoggedIn, addToCollection) {
+    let articlesProps = { news, userLoggedIn }
+    if (userLoggedIn) {
       articlesProps = {
         ...articlesProps,
-        isLoggedIn,
+        userLoggedIn,
         inCollection: false,
         addToCollection
       }
     }
+    return articlesProps
+  }
 
+  content(articlesProps) {
     return (
       <section className={TopNewsStyles.Articles}>
         <Articles articlesProps={articlesProps} />
@@ -53,12 +55,17 @@ class TopNews extends Component {
 
   render() {
     const { type, title, subtitle } = this.state
-    const { news, user, addToCollection } = this.props
+    const { news, userLoggedIn, addToCollection } = this.props
+    const articlesProps = this.createArticlesProps(
+      news,
+      userLoggedIn,
+      addToCollection
+    )
 
     return (
       <Layout title={title} subtitle={subtitle} type={type}>
         <PageManager />
-        {news ? this.renderArticles(news, !!user, addToCollection) : <Loader />}
+        {news ? this.content(articlesProps) : <Loader />}
         <button
           onClick={() =>
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
@@ -73,7 +80,7 @@ class TopNews extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user,
+    userLoggedIn: state.auth.userLoggedIn,
     news: state.news.news,
     params: state.params.params
   }
