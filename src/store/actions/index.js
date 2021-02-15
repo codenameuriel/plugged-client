@@ -2,14 +2,12 @@
 
 export { changePage, firstPage } from './pageManager'
 export {
-  getTopNews,
+  getNews,
   clearNews,
   getDashboardNews,
   saveNewsStory,
   getCollection,
-  getTopicNews,
-  setSearchTopic,
-  clearTopicNews,
+  clearTopicNews
 } from './news'
 export { login, signup } from './auth'
-export { clearParams } from './params'
+export { clearParams, setSearchTopic } from './params'

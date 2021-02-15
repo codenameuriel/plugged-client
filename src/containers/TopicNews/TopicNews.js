@@ -7,7 +7,10 @@ import { checkParamsForUpdate } from '../../utils/params'
 
 import Layout from '../../hoc/Layout/Layout'
 import PageManager from '../PageManager/PageManager'
-import Content from '../../components/Content/Content'
+import Articles from '../../components/Articles/Articles'
+import Loader from '../../components/Loader/Loader'
+
+import TopicNewsStyles from './TopicNews.module.css'
 
 class TopicNews extends Component {
   state = {
@@ -17,31 +20,51 @@ class TopicNews extends Component {
       <>
         Here's the latest on <span>"{this.props.params.q}"</span>
       </>
-    ),
+    )
   }
 
   componentDidMount() {
-    this.props.onGetTopicNews(this.props.params)
+    this.props.getNews('topic-news', this.props.params)
   }
 
   componentDidUpdate(prevProps) {
-    const { onGetTopicNews, params: currParams } = this.props
+    const { getNews, params: currParams } = this.props
     const { params: prevParams } = prevProps
     let paramsHaveChanged = checkParamsForUpdate(prevParams, currParams)
     if (paramsHaveChanged) {
-      onGetTopicNews(currParams)
+      getNews('topic-news', currParams)
       this.setState({
         subtitle: (
           <>
             Here's the latest on <span>"{currParams.q}"</span>
           </>
-        ),
+        )
       })
     }
   }
 
   componentWillUnmount() {
     this.props.onClearParams()
+  }
+
+  createArticlesProps(news, userLoggedIn, addToCollection) {
+    let articlesProps = { news, userLoggedIn }
+    let loggedInProps = { inCollection: false, addToCollection }
+    if (userLoggedIn) {
+      articlesProps = {
+        ...articlesProps,
+        ...loggedInProps
+      }
+    }
+    return articlesProps
+  }
+
+  content(articlesProps) {
+    return (
+      <section className={TopicNewsStyles.Articles}>
+        <Articles articlesProps={articlesProps} />
+      </section>
+    )
   }
 
   // renderDisplay = () => {
@@ -90,10 +113,17 @@ class TopicNews extends Component {
 
   render() {
     const { type, title, subtitle } = this.state
+    const { news, userLoggedIn, addToCollection } = this.props
+    const articlesProps = this.createArticlesProps(
+      news,
+      userLoggedIn,
+      addToCollection
+    )
+
     return (
       <Layout title={title} subtitle={subtitle} type={type}>
         <PageManager />
-        <Content type={type} />
+        {news ? this.content(articlesProps) : <Loader />}
         <button
           onClick={() =>
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
@@ -108,18 +138,20 @@ class TopicNews extends Component {
 
 const mapStateToProps = state => {
   return {
-    // searchTopic: state.news.searchTopic,
+    userLoggedIn: state.auth.userLoggedIn,
     params: state.params.params,
+    news: state.news.news
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetTopicNews: params => dispatch(actionCreators.getTopicNews(params)),
+    getNews: (pathName, params) =>
+      dispatch(actionCreators.getNews(pathName, params)),
     onClearParams: () => {
       dispatch(actionCreators.clearParams())
       dispatch(actionCreators.firstPage())
-    },
+    }
   }
 }
 

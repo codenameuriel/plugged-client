@@ -21,15 +21,15 @@ class TopNews extends Component {
   }
 
   componentDidMount() {
-    this.props.getTopNews()
+    this.props.getNews('top-news')
   }
 
   componentDidUpdate(prevProps) {
-    const { getTopNews, params: currParams } = this.props
+    const { getNews, params: currParams } = this.props
     const { params: prevParams } = prevProps
 
     let paramsHaveChanged = checkParamsForUpdate(prevParams, currParams)
-    if (paramsHaveChanged) getTopNews(currParams)
+    if (paramsHaveChanged) getNews('top-news', currParams)
   }
 
   createArticlesProps(news, userLoggedIn, addToCollection) {
@@ -87,7 +87,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTopNews: params => dispatch(actionCreators.getTopNews(params)),
+    getNews: (pathName, params) =>
+      dispatch(actionCreators.getNews(pathName, params)),
     addToCollection: newsStory =>
       dispatch(actionCreators.saveNewsStory(newsStory))
   }

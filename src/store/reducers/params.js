@@ -2,7 +2,7 @@
 
 import * as actionTypes from '../actions/actionTypes'
 const initialState = {
-  params: {},
+  params: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,19 +11,19 @@ const reducer = (state = initialState, action) => {
       return {
         params: {
           ...state.params,
-          page: action.page,
-        },
+          page: action.page
+        }
       }
     case actionTypes.SET_SEARCH_TOPIC:
       return {
         params: {
           ...state.params,
-          q: action.searchTopic,
-        },
+          q: action.searchTopic
+        }
       }
     case actionTypes.CLEAR_PARAMS:
       return {
-        params: {},
+        params: {}
       }
     default:
       return state

@@ -34,10 +34,8 @@ class Search extends Component {
 
   enterSearch = () => {
     const { inputValue } = this.state
-    const { onSetSearchTopic, history } = this.props
-    // onGetTopicNews(inputValue);
-    // set topic
-    onSetSearchTopic(inputValue)
+    const { setSearchTopic, history } = this.props
+    setSearchTopic(inputValue)
     this.clearInput()
     history.push('/topic-news')
   }
@@ -65,7 +63,8 @@ class Search extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSetSearchTopic: topic => dispatch(actionCreators.setSearchTopic(topic))
+    setSearchTopic: searchTopic =>
+      dispatch(actionCreators.setSearchTopic(searchTopic))
   }
 }
 

@@ -19,14 +19,14 @@ export const clearNews = () => {
 const setTotalPages = totalPages => {
   return {
     type: actionTypes.SET_TOTAL_PAGES,
-    totalPages,
+    totalPages
   }
 }
 
-export const getTopNews = userParams => {
+export const getNews = (pathName, userParams) => {
   return async dispatch => {
-    const data = await getData('top-news', userParams)
-    
+    const data = await getData(pathName, userParams)
+
     // destructure for potential error message
     const { articles, totalPages, message: errorMsg } = data
 
@@ -44,7 +44,7 @@ export const getTopNews = userParams => {
 const fetchNewsFailed = error => {
   return {
     type: actionTypes.FETCH_NEWS_FAILED,
-    error,
+    error
   }
 }
 
@@ -66,7 +66,7 @@ export const getDashboardNews = () => {
 const setDashboardNews = news => {
   return {
     type: actionTypes.SET_DASHBOARD_NEWS,
-    news,
+    news
   }
 }
 
@@ -89,7 +89,7 @@ export const saveNewsStory = newsStory => {
 const saveToUserCollection = (newsStory, user) => {
   let collectionObject = {
     user_id: user.id,
-    article_id: newsStory.id,
+    article_id: newsStory.id
   }
 
   postData('http://localhost:4000/collections', collectionObject)
@@ -99,7 +99,7 @@ const setCollectionNews = news => {
   return {
     type: actionTypes.SET_COLLECTION_NEWS,
     news,
-    totalCollectionNews: news.length,
+    totalCollectionNews: news.length
   }
 }
 
@@ -129,36 +129,22 @@ export const getCollection = () => {
 
 export const clearTopicNews = () => {
   return {
-    type: actionTypes.CLEAR_TOPIC_NEWS,
+    type: actionTypes.CLEAR_TOPIC_NEWS
   }
 }
 
-export const setSearchTopic = searchTopic => {
-  return {
-    type: actionTypes.SET_SEARCH_TOPIC,
-    searchTopic,
-  }
-}
+// export const getTopicNews = userParams => {
+//   return async dispatch => {
+//     try {
+//       const data = await getData('topic-news', userParams)
+//       const { articles, totalPages } = data
 
-const setTopicNews = news => {
-  return {
-    type: actionTypes.SET_TOPIC_NEWS,
-    news,
-  }
-}
-
-export const getTopicNews = userParams => {
-  return async dispatch => {
-    try {
-      const data = await getData('topic-news', userParams)
-      const { articles, totalPages } = data
-      console.log(data)
-
-      dispatch(setTopicNews(articles))
-      dispatch(setTotalPages(totalPages))
-    } catch (error) {
-      console.error(error)
-      dispatch(fetchNewsFailed(error))
-    }
-  }
-}
+//       // set news instead of set topic news
+//       dispatch(setTopicNews(articles))
+//       dispatch(setTotalPages(totalPages))
+//     } catch (error) {
+//       console.error(error)
+//       dispatch(fetchNewsFailed(error))
+//     }
+//   }
+// }
