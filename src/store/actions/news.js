@@ -54,6 +54,7 @@ export const getDashboardNews = () => {
       const { user } = getState().auth
       const categoryParam = { categories: user.categories.join(',') }
       const data = await getData('dashboard-news', categoryParam)
+      console.log(data)
       dispatch(setDashboardNews(data))
     } catch (error) {
       console.error(error)

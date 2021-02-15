@@ -73,38 +73,6 @@ class Dashboard extends React.Component {
         </section>
       </div>
     )
-    //     const { user, dashboardNews, onPostNewsStory } = this.props
-    //     let dashboardContent = []
-    //     for (let category in dashboardNews) {
-    //       dashboardContent.push(
-    //         <section className={ContentStyles.Dashboard}>
-    //           <h1>
-    //             <span>
-    //               <hr />
-    //             </span>
-    //             {category}
-    //             <span>
-    //               <hr />
-    //             </span>
-    //           </h1>
-    //           <div className={ContentStyles.News}>
-    //             {dashboardNews[category].map((newsStory, index) => {
-    //               return (
-    //                 <ArticleCard
-    //                   {...newsStory}
-    //                   key={`${index}${newsStory.url}`}
-    //                   isAuthenticated={!!user}
-    //                   inCollection={false}
-    //                   onPostNewsStory={onPostNewsStory}
-    //                 />
-    //               )
-    //             })}
-    //           </div>
-    //         </section>
-    //       )
-    //     }
-    //     return dashboardContent
-    //   }
   }
 
   render() {
