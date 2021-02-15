@@ -34,12 +34,11 @@ class TopNews extends Component {
 
   createArticlesProps(news, userLoggedIn, addToCollection) {
     let articlesProps = { news, userLoggedIn }
+    let loggedInProps = { inCollection: false, addToCollection }
     if (userLoggedIn) {
       articlesProps = {
         ...articlesProps,
-        userLoggedIn,
-        inCollection: false,
-        addToCollection
+        ...loggedInProps
       }
     }
     return articlesProps

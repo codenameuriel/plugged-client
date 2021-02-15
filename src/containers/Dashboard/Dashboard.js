@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../store/actions/index'
 
@@ -10,7 +10,7 @@ import Loader from '../../components/Loader/Loader'
 
 import DashboardStyles from './Dashboard.module.css'
 
-class Dashboard extends Component {
+class Dashboard extends React.Component {
   state = {
     type: 'dashboard',
     title: 'Dashboard',

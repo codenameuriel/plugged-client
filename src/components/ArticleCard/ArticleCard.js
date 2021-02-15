@@ -35,7 +35,7 @@ const ArticleCard = props => {
     const { newsStory, isAuthenticated, onPostNewsStory } = props
     const { title, url, urlToImage, description, content } = newsStory
     const postFormatNewsStory = formatNewsStoryForPost(newsStory)
-  
+
     return (
       <article className={ArticleCardStyles.ArticleCard}>
         <h2>{title}</h2>
