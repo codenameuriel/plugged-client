@@ -18,13 +18,13 @@ class Search extends Component {
     this.setState({ inputValue: '' })
   }
 
-  inputChange = event => {
-    this.setState({ inputValue: event.target.value })
+  inputChange = ({ target: { value } }) => {
+    this.setState({ inputValue: value })
   }
 
-  handleEnterInput = event => {
-    if (event.key === 'Enter') {
-      this.handleEmptyInput(event.target.value)
+  handleEnterInput = ({ key, target: { value } }) => {
+    if (key === 'Enter') {
+      this.handleEmptyInput(value)
     }
   }
 
