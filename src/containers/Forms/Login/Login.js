@@ -7,11 +7,15 @@ import * as actionCreators from '../../../store/actions/index'
 class Login extends Component {
   state = {
     username: '',
-    password: '',
+    password: ''
   }
 
   handleInputChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value })
+  }
+
+  clearInputs = () => {
+    this.setState({ username: '', password: '' })
   }
 
   formHandler = event => {
@@ -20,6 +24,7 @@ class Login extends Component {
     const { username, password } = this.state
     const userData = { username, password }
     onLogin(userData)
+    this.clearInputs()
   }
 
   render() {
@@ -55,13 +60,13 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user,
+    user: state.auth.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: userData => dispatch(actionCreators.login(userData)),
+    onLogin: userData => dispatch(actionCreators.login(userData))
   }
 }
 
