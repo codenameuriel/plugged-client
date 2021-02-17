@@ -9,5 +9,5 @@ export {
   getCollection,
   clearTopicNews
 } from './news'
-export { login, signup } from './auth'
+export { login, signup, clearAuthError } from './auth'
 export { clearParams, setSearchTopic } from './params'

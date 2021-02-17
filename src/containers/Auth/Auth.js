@@ -3,6 +3,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+
+import errorHandler from '../../hoc/errorHandler/errorHandler'
+
 import Layout from '../../hoc/Layout/Layout'
 import Login from '../Forms/Login/Login'
 import Signup from '../Forms/Signup/Signup'
@@ -82,8 +85,9 @@ class Auth extends Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
+    error: state.auth.error,
     authRedirect: state.auth.authRedirect,
   }
 }
 
-export default connect(mapStateToProps)(Auth)
+export default connect(mapStateToProps)(errorHandler(Auth))

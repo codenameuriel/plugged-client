@@ -6,9 +6,8 @@ import { postData } from '../../utils/fetch'
 export const login = userData => {
   return async dispatch => {
     const { returnedUser: user } = await postData('/login', userData)
-    console.log(user)
-    if (!user.username) {
-      dispatch(loginFailed())
+    if (!user) {
+      dispatch(loginFailed('Unable to Login. Please check your credentials'))
     } else {
       dispatch(setUser(user))
       dispatch(setUserLoggedIn())
@@ -28,6 +27,12 @@ export const signup = newUserData => {
       dispatch(setUser(newUser))
       dispatch(setAuthRedirect())
     }
+  }
+}
+
+export const clearAuthError = () => {
+  return {
+    type: actionTypes.CLEAR_AUTH_ERROR
   }
 }
 

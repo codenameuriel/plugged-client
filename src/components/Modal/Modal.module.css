@@ -1,0 +1,41 @@
+.Backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.Modal {
+  position: fixed;
+  z-index: 500;
+  background-color: #222831;
+  width: 70%;
+  border: 1px solid #32e0c4;;
+  box-shadow: 1px 1px 1px black;
+  padding: 16px;
+  left: 15%;
+  top: 30%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  text-align: center;
+  color: #32e0c4;
+}
+
+button {
+  color: #eee;
+  background-color: #2e343f;
+  border: 2px solid#eee;
+  cursor: pointer;
+  outline: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  transition: border 0.3s;
+  margin-right: 85%;
+}
+
+button:hover {
+  border: 2px solid #32e0c4;
+}

@@ -21,6 +21,7 @@ export const postData = async (pathName, data = {}) => {
     })
     return response.json()
   } catch (error) {
+    console.error('this is a login error', error)
     return error
   }
 }

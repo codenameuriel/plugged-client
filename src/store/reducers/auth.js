@@ -36,6 +36,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: action.error,
       }
+    case actionTypes.CLEAR_AUTH_ERROR:
+      return {
+        ...state,
+        error: null
+      }
     default:
       return state
   }
