@@ -5,7 +5,7 @@ import React from 'react'
 import ArticleCard from '../ArticleCard/ArticleCard'
 
 const Articles = props => {
-  // Collection page will provide inCollection prop
+  // Collection page will provide inCollection prop otherwise set to undefined
   const {
     articlesProps: { news, userLoggedIn, onClick, inCollection }
   } = props

@@ -10,7 +10,7 @@ import IconStyles from '../UI/Icon/Icon.module.css'
 
 const ArticleCard = props => {
   const {
-    newsStory: { title, url, urlToImage }
+    newsStory: { title, url, urlToImage, description, content }
   } = props
 
   return (
@@ -19,6 +19,7 @@ const ArticleCard = props => {
       <a target='_blank' rel='noopener noreferrer' href={url}>
         <img src={urlToImage || Plug} alt={title} />
       </a>
+      <p>{description || formatContent(content)}</p>
       {pageActions(props)}
     </article>
   )
@@ -34,14 +35,10 @@ function pageActions(props) {
     userLoggedIn
   } = props
 
-  if ('inCollection' in props && props.inCollection) {
-    return (
-      <>
-        <p>{description || formatContent(content)}</p>
-        <Button onClick={onClick} description={'Remove from collection'} />
-      </>
-    )
+  if (props.inCollection) {
+    return <Button onClick={onClick} description={'Remove from collection'} />
   } else {
+    // modify newsStory data for POST request - add to user collection
     const formattedNewsStory = formatNewsStory({
       title,
       url,
@@ -51,16 +48,11 @@ function pageActions(props) {
       source
     })
 
-    return (
-      <>
-        <p>{description || formatContent(content)}</p>
-        {authenticatedActions(userLoggedIn, onClick, formattedNewsStory)}
-      </>
-    )
+    return authenticatedActions(userLoggedIn, onClick, formattedNewsStory)
   }
 }
 
-// formats the newsStory POST request data fields
+// formats the newsStory object data fields for POST request
 function formatNewsStory(newsStory) {
   return {
     ...newsStory,
@@ -107,5 +99,4 @@ function authenticatedActions(userLoggedIn, onClick, newsStory) {
       </div>
     )
   }
-  return
 }
