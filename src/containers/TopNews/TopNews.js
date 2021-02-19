@@ -34,7 +34,7 @@ class TopNews extends Component {
 
   createArticlesProps(news, userLoggedIn, addToCollection) {
     let articlesProps = { news, userLoggedIn }
-    let loggedInProps = { inCollection: false, addToCollection }
+    let loggedInProps = { onClick: addToCollection }
     if (userLoggedIn) {
       articlesProps = {
         ...articlesProps,

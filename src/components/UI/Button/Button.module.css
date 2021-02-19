@@ -11,6 +11,7 @@
 
 .Collection {
   margin-bottom: 20px;
+  margin: initial;
 }
 
 .PageManager {

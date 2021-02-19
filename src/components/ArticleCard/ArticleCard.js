@@ -9,53 +9,59 @@ import ArticleCardStyles from './ArticleCard.module.css'
 import IconStyles from '../UI/Icon/Icon.module.css'
 
 const ArticleCard = props => {
-  const { inCollection } = props
-  if (inCollection) {
-    const {
-      id,
-      title,
-      description,
-      url,
-      url_to_image,
-      removeCollection
-    } = props
+  const {
+    newsStory: { title, url, urlToImage }
+  } = props
 
-    // () => removeFromCollection(id)
-    return (
-      <article>
-        <h2>{title}</h2>
-        <a target='_blank' rel='noopener noreferrer' href={url}>
-          <img src={url_to_image || Plug} alt={title} />
-        </a>
-        <p>{description}</p>
-        <Button onClick={null} description={'Remove from collection'} />
-      </article>
-    )
-  } else {
-    const { newsStory, isAuthenticated, onPostNewsStory } = props
-    const { title, url, urlToImage, description, content } = newsStory
-    const postFormatNewsStory = formatNewsStoryForPost(newsStory)
-
-    return (
-      <article className={ArticleCardStyles.ArticleCard}>
-        <h2>{title}</h2>
-        <a target='_blank' rel='noopener noreferrer' href={url}>
-          <img src={urlToImage || Plug} alt={title} />
-        </a>
-        <p>{description || formatContent(content)}</p>
-        {authenticatedActions(
-          isAuthenticated,
-          onPostNewsStory,
-          postFormatNewsStory
-        )}
-      </article>
-    )
-  }
+  return (
+    <article className={ArticleCardStyles.ArticleCard}>
+      <h2>{title}</h2>
+      <a target='_blank' rel='noopener noreferrer' href={url}>
+        <img src={urlToImage || Plug} alt={title} />
+      </a>
+      {pageActions(props)}
+    </article>
+  )
 }
 
 export default ArticleCard
 
-function formatNewsStoryForPost(newsStory) {
+// renders different UI elements depending on page
+function pageActions(props) {
+  const {
+    newsStory: { title, url, urlToImage, description, content, source },
+    onClick,
+    userLoggedIn
+  } = props
+
+  if ('inCollection' in props && props.inCollection) {
+    return (
+      <>
+        <p>{description || formatContent(content)}</p>
+        <Button onClick={onClick} description={'Remove from collection'} />
+      </>
+    )
+  } else {
+    const formattedNewsStory = formatNewsStory({
+      title,
+      url,
+      urlToImage,
+      description,
+      content,
+      source
+    })
+
+    return (
+      <>
+        <p>{description || formatContent(content)}</p>
+        {authenticatedActions(userLoggedIn, onClick, formattedNewsStory)}
+      </>
+    )
+  }
+}
+
+// formats the newsStory POST request data fields
+function formatNewsStory(newsStory) {
   return {
     ...newsStory,
     source: newsStory.source.name,
@@ -63,16 +69,18 @@ function formatNewsStoryForPost(newsStory) {
   }
 }
 
+// removes '[...]' characters from content field
 function formatContent(content) {
   if (content && content.includes('[')) {
     return content.split('[')[0].trim()
   }
 }
 
-function authenticatedActions(isAuthenticated, onPostNewsStory, newsStory) {
-  if (isAuthenticated) {
+// adds functionalities if user is logged in
+function authenticatedActions(userLoggedIn, onClick, newsStory) {
+  if (userLoggedIn) {
     const addToCollection = () => {
-      onPostNewsStory(newsStory)
+      onClick(newsStory)
       alert('News story was added to your collection!')
     }
 

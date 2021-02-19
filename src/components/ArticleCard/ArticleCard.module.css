@@ -25,10 +25,11 @@
 
 .Actions {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 10px 0 0 0;
+  justify-content: center;
+  padding: 10px 0 20px 0;
   border-top: 1px solid #32e0c4;
+  /* background: white; */
 }
 
 /* widescreen desktop view */
