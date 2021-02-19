@@ -94,6 +94,7 @@ class Signup extends Component {
               id='password'
               type='password'
               name='password'
+              title="Password must contain minimum of 4 characters"
               placeholder='Enter password'
               value={password}
               onChange={this.handleInputChange}
