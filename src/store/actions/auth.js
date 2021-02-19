@@ -6,8 +6,9 @@ import { postData } from '../../utils/fetch'
 export const login = userData => {
   return async dispatch => {
     const { returnedUser: user } = await postData('/login', userData)
+
     if (!user) {
-      dispatch(loginFailed('Unable to Login. Please check your credentials'))
+      dispatch(loginFailed('Unable to Log in. Please check your credentials'))
     } else {
       dispatch(setUser(user))
       dispatch(setUserLoggedIn())
@@ -19,12 +20,12 @@ export const login = userData => {
 export const signup = newUserData => {
   return async dispatch => {
     const { returnedUser: newUser } = await postData('/signup', newUserData)
-    console.log(newUser)
 
-    if (!newUser.username) {
-      dispatch(signupFailed())
+    if (!newUser) {
+      dispatch(signupFailed('Unable to Sign up. Please check your credentials'))
     } else {
       dispatch(setUser(newUser))
+      dispatch(setUserLoggedIn())
       dispatch(setAuthRedirect())
     }
   }
@@ -63,27 +64,27 @@ const setUserLoggedIn = () => {
 const setUser = user => {
   return {
     type: actionTypes.SET_USER,
-    user,
+    user
   }
 }
 
 const setAuthRedirect = () => {
   return {
     type: actionTypes.SET_AUTH_REDIRECT,
-    authRedirect: '/dashboard',
+    authRedirect: '/dashboard'
   }
 }
 
 const loginFailed = error => {
   return {
     type: actionTypes.LOGIN_FAILED,
-    error,
+    error
   }
 }
 
 const signupFailed = error => {
   return {
     type: actionTypes.SIGNUP_FAILED,
-    error,
+    error
   }
 }
