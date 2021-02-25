@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 
 import * as actionCreators from '../../store/actions/index'
 
+import Button from '../UI/Button/Button'
+
 import ModalStyles from './Modal.module.css'
 
 class Modal extends React.Component {
@@ -15,7 +17,7 @@ class Modal extends React.Component {
       <>
         <div className={ModalStyles.Backdrop}></div>
         <div className={ModalStyles.Modal}>
-          <button onClick={clearAuthError}>Dismiss</button>
+          <Button type='modal' description='Dismiss' onClick={clearAuthError} />
           <p>{error}</p>
         </div>
       </>

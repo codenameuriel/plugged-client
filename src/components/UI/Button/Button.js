@@ -15,6 +15,9 @@ const Button = ({ type, description, onClick }) => {
     case 'search':
       buttonStyles = [ButtonStyles.Button, ButtonStyles.Search]
       break
+    case 'modal':
+      buttonStyles = [ButtonStyles.Button, ButtonStyles.Modal]
+      break
     default:
       break
   }

@@ -24,18 +24,10 @@
   color: #32e0c4;
 }
 
-button {
-  color: #eee;
-  background-color: #2e343f;
-  border: 2px solid#eee;
-  cursor: pointer;
-  outline: none;
-  border-radius: 30px;
-  padding: 10px 20px;
-  transition: border 0.3s;
+.Button {
   margin-right: 85%;
 }
 
-button:hover {
+.Button:hover {
   border: 2px solid #32e0c4;
 }

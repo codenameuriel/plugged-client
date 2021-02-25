@@ -19,6 +19,10 @@
   margin-right: 10px;
 }
 
+.Modal {
+  margin-right: 85%;
+}
+
 .Search {
   background-color: #32e0c4;
   border: 2px solid transparent;
@@ -39,7 +43,7 @@
     font-size: 105%;
   }
 
-  .Collection:hover, .PageManager:hover {
+  .Collection:hover, .PageManager:hover, .Modal:hover {
     border: 2px solid #32e0c4;
   }
 

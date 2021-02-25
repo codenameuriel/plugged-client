@@ -1,11 +1,12 @@
 .Search {
-  /* background-color: red; */
-  width: 30%;
+  background-color: red;
+  width: 25%;
+  align-items: center;
 }
 
 .Search input {
   padding: 10px 20px;
-  width: 50%;
+  /* width: 45%; */
   border: 2px solid #eee;
   outline: none; 
   border-radius: 30px;
