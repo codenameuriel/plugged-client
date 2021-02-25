@@ -23,11 +23,3 @@
   text-align: center;
   color: #32e0c4;
 }
-
-.Button {
-  margin-right: 85%;
-}
-
-.Button:hover {
-  border: 2px solid #32e0c4;
-}

@@ -52,9 +52,9 @@ class Search extends Component {
           placeholder='Search by topic'
         />
         <Button
-          type={'search'}
+          type='search'
           onClick={() => this.handleEmptyInput(inputValue)}
-          description={'Search'}
+          description='Search'
         />
       </div>
     )
