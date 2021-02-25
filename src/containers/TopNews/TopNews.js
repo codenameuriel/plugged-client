@@ -10,6 +10,7 @@ import Layout from '../../hoc/Layout/Layout'
 import PageManager from '../PageManager/PageManager'
 import Articles from '../../components/Articles/Articles'
 import Loader from '../../components/Loader/Loader'
+import Button from '../../components/UI/Button/Button'
 
 import TopNewsStyles from './TopNews.module.css'
 
@@ -65,13 +66,12 @@ class TopNews extends Component {
       <Layout title={title} subtitle={subtitle} type={type}>
         <PageManager />
         {news ? this.content(articlesProps) : <Loader />}
-        <button
+        <Button
+          description={'Scroll Top'}
           onClick={() =>
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
           }
-        >
-          Scroll Top
-        </button>
+        />
       </Layout>
     )
   }

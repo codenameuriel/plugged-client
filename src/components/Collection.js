@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../store/actions/index'
 
 import Layout from '../hoc/Layout/Layout'
-import Content from './Content/Content'
+// import Content from './Content/Content'
 
 class Collection extends Component {
   state = {
@@ -23,7 +23,7 @@ class Collection extends Component {
     return (
       <Layout type={type} title={title} subtitle={subtitle}>
         {/* <PageManager/> */}
-        <Content type={type} />
+        {/* <Content type={type} /> */}
       </Layout>
     )
   }
