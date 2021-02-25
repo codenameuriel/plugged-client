@@ -7,6 +7,7 @@ import * as actionCreators from '../../store/actions/index'
 import Layout from '../../hoc/Layout/Layout'
 import Articles from '../../components/Articles/Articles'
 import Loader from '../../components/Loader/Loader'
+import Button from '../../components/UI/Button/Button'
 
 import DashboardStyles from './Dashboard.module.css'
 
@@ -85,13 +86,12 @@ class Dashboard extends React.Component {
         ) : (
           <Loader />
         )}
-        <button
+        <Button
+          description='Scroll Top'
           onClick={() =>
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
           }
-        >
-          Scroll Top
-        </button>
+        />
       </Layout>
     )
   }
