@@ -67,7 +67,7 @@ class TopNews extends Component {
         <PageManager />
         {news ? this.content(articlesProps) : <Loader />}
         <Button
-          description={'Scroll Top'}
+          description='Scroll Top'
           onClick={() =>
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
           }

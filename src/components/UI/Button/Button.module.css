@@ -33,6 +33,10 @@
   transition: border color 0.3s;
 }
 
+.Button:hover {
+  border: 2px solid #32e0c4;
+}
+
 /* desktop view */
 @media (min-width: 750px) {
   .Collection {
@@ -41,10 +45,6 @@
 
   .PageManager {
     font-size: 105%;
-  }
-
-  .Collection:hover, .PageManager:hover, .Modal:hover {
-    border: 2px solid #32e0c4;
   }
 
   .Search:hover {
