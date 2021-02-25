@@ -4,7 +4,6 @@ import React from 'react'
 import ButtonStyles from './Button.module.css'
 
 const Button = ({ type, description, onClick }) => {
-  // onClick prop will contain click event
   let buttonStyles = [ButtonStyles.Button]
   switch (type) {
     case 'collection':
