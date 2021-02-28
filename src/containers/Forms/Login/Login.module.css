@@ -20,6 +20,14 @@
   background-color: #eee;
 }
 
+.UsernameContainer input, .PasswordContainer input {
+  transition: border 0.3s;
+}
+
+.Submit {
+  transition: background-color 0.3s;
+}
+
 .UsernameContainer input:hover, 
 .UsernameContainer input:focus, 
 .PasswordContainer input:hover,
@@ -54,4 +62,18 @@
 .Submit:hover {
   background-color: #1bfad6;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/* wide desktop view */
+@media (min-width: 1300px) {
+  .Form {
+    width: 30%;
+  }
+}
+
+/* desktop view */
+@media (max-width: 1299px) {
+  .Form {
+    width: 40%;
+  }
 }
