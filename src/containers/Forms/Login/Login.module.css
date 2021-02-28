@@ -1,8 +1,6 @@
 .Form {
   display: flex;
   flex-direction: column;
-  width: 35%;
-  margin: 10% auto;
   justify-content: center;
 }
 
@@ -51,7 +49,6 @@
 }
 
 .Submit {
-  width: 25%;
   border: none;
   padding: 10px;
   font-size: 100%;
@@ -68,12 +65,34 @@
 @media (min-width: 1300px) {
   .Form {
     width: 30%;
+    margin: 10% auto;
+  }
+
+  .Submit {
+    width: 20%;
   }
 }
 
 /* desktop view */
 @media (max-width: 1299px) {
   .Form {
-    width: 40%;
+    width: 45%;
+    margin: 15% auto;
+  }
+
+  .Submit {
+    width: 20%;
+  }
+}
+
+/* mobile portrait view */
+@media (max-width: 649px) {
+  .Form {
+    width: 60%;
+    margin: 20% auto;
+  }
+
+  .Submit {
+    width: 25%;
   }
 }
