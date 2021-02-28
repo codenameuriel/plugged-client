@@ -1,54 +1,17 @@
 .Form {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%); */
-
-  /* margin-right: 0px;
-  left: 819px;
-  top: 416px; */
-  /* margin: 0 auto; */
   display: flex;
   flex-direction: column;
   width: 35%;
   margin: 10% auto;
   justify-content: center;
-
-
-
-  /* background-color: blue; */
 }
 
 .UsernameContainer, .PasswordContainer {
   width: 50%;
   margin: 0 auto;
-
-
-  /* background-color: red; */
 }
 
-.UsernameContainer input {
-  width: 100%;
-  padding: 6px;
-  border: 2px solid transparent;
-  outline: none; 
-  border-radius: 30px;
-  background-color: #eee;
-  margin: 0 auto;
-}
-
-.UsernameContainer input:hover {
-  border: 2px solid #32e0c4;
-}
-
-.UsernameContainer input:focus {
-  background-color: #26292e;
-  border: 2px solid #32e0c4;
-  color: #eee; 
-}
-
-.PasswordContainer input {
+.UsernameContainer input, .PasswordContainer input, .Submit {
   width: 100%;
   padding: 6px;
   border: 2px solid transparent;
@@ -57,35 +20,38 @@
   background-color: #eee;
 }
 
-.PasswordContainer input:hover {
-  border: 2px solid #32e0c4;
-}
-
+.UsernameContainer input:hover, 
+.UsernameContainer input:focus, 
+.PasswordContainer input:hover,
 .PasswordContainer input:focus {
-  background-color: #26292e;
   border: 2px solid #32e0c4;
+}
+
+.UsernameContainer input:focus, 
+.PasswordContainer input:focus,
+.Submit,
+.Submit:active {
   color: #eee;
+}
+
+.UsernameContainer input:focus, .PasswordContainer input:focus {
+  background-color: #26292e;
+}
+
+.Submit, .Submit:active {
+  background-color: #32e0c4;
 }
 
 .Submit {
   width: 25%;
-  background-color: #32e0c4;
-  color: #eee;
   border: none;
   padding: 10px;
   font-size: 100%;
-  border-radius: 30px;
   cursor: pointer;
-  outline: none;
   margin: 0 auto;
 }
 
 .Submit:hover {
   background-color: #1bfad6;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-
-.Submit:active {
-  background-color: #32e0c4;
-  color: #eee;
 }
