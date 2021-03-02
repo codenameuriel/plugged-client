@@ -12,7 +12,7 @@
 .UsernameContainer input, .PasswordContainer input, .Submit {
   width: 100%;
   margin-top: 5px;
-  padding: 6px;
+  padding: 12px;
   border: 2px solid transparent;
   outline: none; 
   border-radius: 30px;

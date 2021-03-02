@@ -1,0 +1,126 @@
+.SignupForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Credentials, .Categories {
+  width: 50%;
+  margin: 5px auto;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.Credentials input:focus,
+.Submit {
+  color: #eee;
+}
+
+.Credentials input {
+  width: 50%;
+  padding: 12px;
+  margin: 5px 0;
+  border: 2px solid transparent;
+  outline: none; 
+  border-radius: 30px;
+  background-color: #eee;
+}
+
+.Credentials input:hover,
+.Credentials input:focus {
+  border: 2px solid #32e0c4;
+}
+
+.Credentials input:focus {
+  background-color: #26292e;
+}
+
+.CategoryName {
+  margin-left: 5px;
+}
+
+.Submit, .Submit:active {
+  background-color: #32e0c4;
+}
+
+.Submit {
+  width: 15%;
+  margin: 5px auto;
+  border: none;
+  padding: 10px;
+  font-size: 100%;
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+}
+
+.Submit:hover {
+  background-color: #1bfad6;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.Checkbox {
+  display: flex;
+  margin: 0;
+}
+
+.Checkbox input {
+  height: 20px;
+  width: 20px;
+
+  appearance: none;
+ 
+  border-radius: 30px;
+  outline: none;
+  transition-duration: 0.3s;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.Checkbox input:hover {
+  background-color: #32e0c4;
+}
+
+.Checkbox:checked {
+  background-color: #32e0c4;
+}
+
+/* wide desktop view */
+@media (min-width: 1300px) {
+  .SignupForm {
+    width: 50%;
+    margin: 3% auto;
+  }
+}
+
+/* desktop view */
+@media (max-width: 1299px) {
+  .SignupForm {
+    width: 75%;
+    margin: 10% auto;
+  }
+}
+
+/* mobile portrait view */
+@media (max-width: 649px) {
+  .SignupForm {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .Credentials, .Categories {
+    width: 75%;
+  }
+
+  .Submit {
+    width: 30%;
+  }
+
+  .Credentials,
+  .Categories,
+  .Credentials legend,
+  .Categories legend,
+  .Submit {
+    font-size: 90%;
+  }
+}
