@@ -37,15 +37,31 @@ class Dashboard extends React.Component {
 	}
 
 	allUserContent(dashboardNews, userLoggedIn, addToCollection) {
-		let userContent = [];
-		for (let category in dashboardNews) {
-			let news = dashboardNews[category];
-			let articlesProps = this.createArticlesProps(
-				news,
-				userLoggedIn,
-				addToCollection
+		let userContent = null;
+
+		// check if new user signed up and subscribed to categories
+		if (Object.keys(dashboardNews).length) {
+			userContent = [];
+
+			for (let category in dashboardNews) {
+				let news = dashboardNews[category];
+				let articlesProps = this.createArticlesProps(
+					news,
+					userLoggedIn,
+					addToCollection
+				);
+				userContent.push(this.content(articlesProps, category));
+				userContent.push(
+					<Button
+						description='Scroll Top'
+						onClick={() =>
+							window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} />
+				);
+			}
+		} else {
+			userContent = (
+				<p>It looks like you're not subscribed to news. Go to Categories and subscribe to your news</p>
 			);
-			userContent.push(this.content(articlesProps, category));
 		}
 		return userContent;
 	}
@@ -78,20 +94,12 @@ class Dashboard extends React.Component {
 	render() {
 		const { type, title, subtitle } = this.state;
 		const { dashboardNews, userLoggedIn, addToCollection } = this.props;
-
+		
 		return (
 			<Layout title={title} subtitle={subtitle} type={type}>
-				{dashboardNews ? (
+				{dashboardNews ? 
 					this.allUserContent(dashboardNews, userLoggedIn, addToCollection)
-				) : (
-					<Loader />
-				)}
-				<Button
-					description='Scroll Top'
-					onClick={() =>
-						window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-					}
-				/>
+					: <Loader />}
 			</Layout>
 		);
 	}
