@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         news: null,
-        collectioNews: updateState(state.collectionNews)
+        collectionNews: updateState(state.collectionNews)
       }
     case actionTypes.SET_DASHBOARD_NEWS:
       // collectionNews requires updating to new state
