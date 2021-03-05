@@ -30,6 +30,8 @@ export const getNews = (pathName, userParams) => {
 		// destructure for potential error message
 		const { articles, totalPages, message: errorMsg } = data;
 
+    console.log('inside getNews', data);
+
 		// server-side catches potential errors and sends an error object with a message property
 		// in that case, data object will represent error object with a message property
 		if (errorMsg) {
