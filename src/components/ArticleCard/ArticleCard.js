@@ -1,17 +1,15 @@
-/** @format */
+import React from 'react';
+import { FaTwitter } from 'react-icons/fa';
+import Button from '../UI/Button/Button';
 
-import React from 'react'
-import { FaTwitter } from 'react-icons/fa'
-import Button from '../UI/Button/Button'
-
-import Plug from '../../assets/Plug.png'
-import ArticleCardStyles from './ArticleCard.module.css'
-import IconStyles from '../UI/Icon/Icon.module.css'
+import Plug from '../../assets/Plug.png';
+import ArticleCardStyles from './ArticleCard.module.css';
+import IconStyles from '../UI/Icon/Icon.module.css';
 
 const ArticleCard = props => {
   const {
     newsStory: { title, url, urlToImage, description, content }
-  } = props
+  } = props;
 
   return (
     <article className={ArticleCardStyles.ArticleCard}>
@@ -22,21 +20,21 @@ const ArticleCard = props => {
       <p>{description || formatContent(content)}</p>
       {pageActions(props)}
     </article>
-  )
+  );
 }
 
-export default ArticleCard
+export default ArticleCard;
 
 // renders different UI elements depending on page
 function pageActions(props) {
   const {
-    newsStory: { title, url, urlToImage, description, content, source },
+    newsStory: { title, url, urlToImage, description, content, source, publishedAt },
     onClick,
     userLoggedIn
-  } = props
+  } = props;
 
   if (props.inCollection) {
-    return <Button onClick={onClick} description={'Remove from collection'} />
+    return <Button onClick={onClick} description={'Remove from collection'} />;
   } else {
     // modify newsStory data for POST request - add to user collection
     const formattedNewsStory = formatNewsStory({
@@ -45,10 +43,11 @@ function pageActions(props) {
       urlToImage,
       description,
       content,
-      source
-    })
+      source,
+      publishedAt
+    });
 
-    return authenticatedActions(userLoggedIn, onClick, formattedNewsStory)
+    return authenticatedActions(userLoggedIn, onClick, formattedNewsStory);
   }
 }
 
@@ -58,13 +57,13 @@ function formatNewsStory(newsStory) {
     ...newsStory,
     source: newsStory.source.name,
     content: formatContent(newsStory.content)
-  }
+  };
 }
 
 // removes '[...]' characters from content field
 function formatContent(content) {
   if (content && content.includes('[')) {
-    return content.split('[')[0].trim()
+    return content.split('[')[0].trim();
   }
 }
 
@@ -72,9 +71,9 @@ function formatContent(content) {
 function authenticatedActions(userLoggedIn, onClick, newsStory) {
   if (userLoggedIn) {
     const addToCollection = () => {
-      onClick(newsStory)
-      alert('News story was added to your collection!')
-    }
+      onClick(newsStory);
+      alert('News story was added to your collection!');
+    };
 
     return (
       <div className={ArticleCardStyles.Actions}>
@@ -97,6 +96,6 @@ function authenticatedActions(userLoggedIn, onClick, newsStory) {
           charSet='utf-8'
         ></script>
       </div>
-    )
+    );
   }
 }

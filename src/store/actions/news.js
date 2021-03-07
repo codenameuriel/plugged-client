@@ -30,8 +30,6 @@ export const getNews = (pathName, userParams) => {
 		// destructure for potential error message
 		const { articles, totalPages, message: errorMsg } = data;
 
-    console.log('inside getNews', data);
-
 		// server-side catches potential errors and sends an error object with a message property
 		// in that case, data object will represent error object with a message property
 		if (errorMsg) {
@@ -72,15 +70,15 @@ const setDashboardNews = news => {
 	};
 };
 
+// POST request to add news story to user's collection of news stories
 export const saveNewsStory = newsStory => {
 	return async (dispatch, getState) => {
-		const { user } = getState().auth.user;
+		const { user } = getState().auth;
 		try {
-			const savedNewsStory = await postData(
-				'http://localhost:4000/articles',
-				newsStory
-			);
-			saveToUserCollection(savedNewsStory, user);
+			// object is used to find user and add news story to user's collection
+			const userNewsStory = { username: user.username, newsStory: newsStory };
+			const savedNewsStory = await postData('/add-to-collection', userNewsStory);
+			console.log(savedNewsStory);
 		} catch (error) {
 			console.error(error);
 			dispatch(fetchNewsFailed(error));
