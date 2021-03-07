@@ -1,82 +1,82 @@
-/** @format */
+import * as actionTypes from './actionTypes';
+import { postData } from '../../utils/fetch';
 
-import * as actionTypes from './actionTypes'
-import { postData } from '../../utils/fetch'
-import { act } from 'react-dom/test-utils'
+const authErrorMsg = 'Unable to Log in. Please check your credentials';
 
 export const login = userData => {
-  return async dispatch => {
-    const { returnedUser: user } = await postData('/login', userData)
+	return async dispatch => {
+		const { returnedUser: user } = await postData('/login', userData);
 
-    if (!user) {
-      dispatch(loginFailed('Unable to Log in. Please check your credentials'))
-    } else {
-      console.log(user);
-      dispatch(setUser(user));
-      dispatch(setUserLoggedIn());
-      dispatch(setCollectionNews(user.articles));
-      dispatch(setAuthRedirect());
-    }
-  }
-}
+		if (!user) {
+			dispatch(loginFailed(authErrorMsg));
+		} else {
+			console.log(user);
+			dispatch(setUser(user));
+			dispatch(setUserLoggedIn());
+			dispatch(setCollectionNews(user.articles));
+			dispatch(setAuthRedirect());
+		}
+	};
+};
 
 export const signup = newUserData => {
-  return async dispatch => {
-    const { returnedUser: newUser } = await postData('/signup', newUserData)
+	return async dispatch => {
+		const { returnedUser: newUser } = await postData('/signup', newUserData);
 
-    if (!newUser) {
-      dispatch(signupFailed('Unable to Sign up. Please check your credentials'))
-    } else {
-      dispatch(setUser(newUser));
-      dispatch(setUserLoggedIn());
-      dispatch(setAuthRedirect());
-    }
-  }
-}
+		if (!newUser) {
+			dispatch(signupFailed(authErrorMsg));
+		} else {
+			dispatch(setUser(newUser));
+			dispatch(setUserLoggedIn());
+      dispatch(setCollectionNews(newUser.articles));
+			dispatch(setAuthRedirect());
+		}
+	};
+};
 
 const setCollectionNews = news => {
-  return {
-    type: actionTypes.SET_COLLECTION_NEWS,
-    news
-  };
+	return {
+		type: actionTypes.SET_COLLECTION_NEWS,
+		news
+	};
 };
 
 export const clearAuthError = () => {
-  return {
-    type: actionTypes.CLEAR_AUTH_ERROR
-  }
-}
+	return {
+		type: actionTypes.CLEAR_AUTH_ERROR
+	};
+};
 
 const setUserLoggedIn = () => {
-  return {
-    type: actionTypes.SET_USER_LOGGED_IN
-  }
-}
+	return {
+		type: actionTypes.SET_USER_LOGGED_IN
+	};
+};
 
 const setUser = user => {
-  return {
-    type: actionTypes.SET_USER,
-    user
-  }
-}
+	return {
+		type: actionTypes.SET_USER,
+		user
+	};
+};
 
 const setAuthRedirect = () => {
-  return {
-    type: actionTypes.SET_AUTH_REDIRECT,
-    authRedirect: '/dashboard'
-  }
-}
+	return {
+		type: actionTypes.SET_AUTH_REDIRECT,
+		authRedirect: '/dashboard'
+	};
+};
 
 const loginFailed = error => {
-  return {
-    type: actionTypes.LOGIN_FAILED,
-    error
-  }
-}
+	return {
+		type: actionTypes.LOGIN_FAILED,
+		error
+	};
+};
 
 const signupFailed = error => {
-  return {
-    type: actionTypes.SIGNUP_FAILED,
-    error
-  }
-}
+	return {
+		type: actionTypes.SIGNUP_FAILED,
+		error
+	};
+};
