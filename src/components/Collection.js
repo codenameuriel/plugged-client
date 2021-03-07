@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../store/actions/index';
 
 import Layout from '../hoc/Layout/Layout';
+import PageManager from '../containers/PageManager/PageManager';
+import Articles from './Articles/Articles';
+import Loader from './Loader/Loader';
+import Button from './UI/Button/Button';
 
 class Collection extends Component {
   state = {
@@ -14,7 +18,7 @@ class Collection extends Component {
   };
 
   componentDidMount() {
-    this.props.onGetCollection();
+    this.props.getCollection();
   }
 
   render() {
@@ -30,7 +34,7 @@ class Collection extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetCollection: () => dispatch(actionCreators.getCollection())
+    getCollection: () => dispatch(actionCreators.getCollection())
   };
 };
 

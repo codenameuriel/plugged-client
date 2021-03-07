@@ -78,7 +78,7 @@ export const saveNewsStory = newsStory => {
 			// object is used to find user and add news story to user's collection
 			const userNewsStory = { username: user.username, newsStory: newsStory };
 			const savedNewsStory = await postData('/add-to-collection', userNewsStory);
-			console.log(savedNewsStory);
+			dispatch(setCollectionNews(savedNewsStory));
 		} catch (error) {
 			console.error(error);
 			dispatch(fetchNewsFailed(error));
@@ -89,16 +89,15 @@ export const saveNewsStory = newsStory => {
 const setCollectionNews = news => {
 	return {
 		type: actionTypes.SET_COLLECTION_NEWS,
-		news,
-		totalCollectionNews: news.length
+		news
 	};
 };
 
 export const getCollection = () => {
 	return async (dispatch, getState) => {
-		const { user } = getState().auth.user;
+		const { user } = getState().auth;
 		const { collectionNews } = getState().news;
-		const { articlesPerPage } = getState().pageManager;
+
 		try {
 			const userSavedNews = await getData(
 				`http://localhost:4000/collections/${user.id}`

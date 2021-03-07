@@ -2,6 +2,7 @@
 
 import * as actionTypes from './actionTypes'
 import { postData } from '../../utils/fetch'
+import { act } from 'react-dom/test-utils'
 
 export const login = userData => {
   return async dispatch => {
@@ -10,9 +11,11 @@ export const login = userData => {
     if (!user) {
       dispatch(loginFailed('Unable to Log in. Please check your credentials'))
     } else {
-      dispatch(setUser(user))
-      dispatch(setUserLoggedIn())
-      dispatch(setAuthRedirect())
+      console.log(user);
+      dispatch(setUser(user));
+      dispatch(setUserLoggedIn());
+      dispatch(setCollectionNews(user.articles));
+      dispatch(setAuthRedirect());
     }
   }
 }
@@ -24,12 +27,19 @@ export const signup = newUserData => {
     if (!newUser) {
       dispatch(signupFailed('Unable to Sign up. Please check your credentials'))
     } else {
-      dispatch(setUser(newUser))
-      dispatch(setUserLoggedIn())
-      dispatch(setAuthRedirect())
+      dispatch(setUser(newUser));
+      dispatch(setUserLoggedIn());
+      dispatch(setAuthRedirect());
     }
   }
 }
+
+const setCollectionNews = news => {
+  return {
+    type: actionTypes.SET_COLLECTION_NEWS,
+    news
+  };
+};
 
 export const clearAuthError = () => {
   return {
@@ -42,24 +52,6 @@ const setUserLoggedIn = () => {
     type: actionTypes.SET_USER_LOGGED_IN
   }
 }
-// const authenticateUser = async(dispatch, username) => {
-//   try {
-//     const resp = await fetch(`http://localhost:4000/users/login/${username}`);
-//     let user = await resp.json();
-//     user = {
-//       user,
-//       username: user.username,
-//       categories: user.categories,
-//       topics: user.topics,
-//       sources: user.sources,
-//       newspapers: user.get_newspapers
-//     };
-//     dispatch(setUser(user));
-//     dispatch(setAuthRedirect());
-//   } catch (error) {
-//     dispatch(authenticateUserFailed());
-//   }
-// };
 
 const setUser = user => {
   return {
