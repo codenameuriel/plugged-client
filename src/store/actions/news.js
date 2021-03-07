@@ -86,15 +86,6 @@ export const saveNewsStory = newsStory => {
 	};
 };
 
-const saveToUserCollection = (newsStory, user) => {
-	let collectionObject = {
-		user_id: user.id,
-		article_id: newsStory.id
-	};
-
-	postData('http://localhost:4000/collections', collectionObject);
-};
-
 const setCollectionNews = news => {
 	return {
 		type: actionTypes.SET_COLLECTION_NEWS,
