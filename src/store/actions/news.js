@@ -123,19 +123,3 @@ export const clearTopicNews = () => {
 		type: actionTypes.CLEAR_TOPIC_NEWS
 	};
 };
-
-// export const getTopicNews = userParams => {
-//   return async dispatch => {
-//     try {
-//       const data = await getData('topic-news', userParams)
-//       const { articles, totalPages } = data
-
-//       // set news instead of set topic news
-//       dispatch(setTopicNews(articles))
-//       dispatch(setTotalPages(totalPages))
-//     } catch (error) {
-//       console.error(error)
-//       dispatch(fetchNewsFailed(error))
-//     }
-//   }
-// }
