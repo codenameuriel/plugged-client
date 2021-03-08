@@ -32,29 +32,50 @@
   /* background: white; */
 }
 
+.ArticleCard:hover {
+  transform: scale(1.02, 1.02);
+  box-shadow: 0 8px 16px 0 rgb(0, 0, 0);
+}
+
 /* widescreen desktop view */
 @media (min-width: 1300px) {
   .ArticleCard {
     width: 30%;
   }
 
-  .ArticleCard:hover {
-    transform: scale(1.02, 1.02);
-    box-shadow: 0 8px 16px 0 rgb(0, 0, 0);
-  }
-
   .ArticleCard h2 {
     font-size: 120%;
-    width: 75%;
+    height: 75px;
   }
 
   .ArticleCard p {
-    font-size: 80%;
-    width: 75%;
+    font-size: 85%;
+    height: 125px;
   }
 
   .ArticleCard img {
     height: 300px;
+  }
+}
+
+/* desktop view */
+@media (max-width: 1299px) {
+  .ArticleCard {
+    width: 45%;
+  }
+
+  .ArticleCard h2 {
+    font-size: 105%;
+    height: 65px;
+  }
+
+  .ArticleCard p {
+    font-size: 75%;
+    height: 100px;
+  }
+
+  .ArticleCard img {
+    height: 250px;
   }
 }
 

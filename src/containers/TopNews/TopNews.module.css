@@ -5,3 +5,13 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
+/* wide desktop view */
+@media (min-width: 1300px) {
+
+}
+
+/* desktop view */
+@media (max-width: 1299px) {
+ 
+}
