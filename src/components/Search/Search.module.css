@@ -1,17 +1,9 @@
-.Search {
-  width: 25%;
-  align-items: center;
-}
-
 .Search input {
-  padding: 10px 20px;
-  /* width: 45%; */
   border: 2px solid #eee;
   outline: none; 
   border-radius: 30px;
   background-color: transparent;
   color: #eee;
-  font-size: 100%;
   transition: background-color 0.3s;
 }
 
@@ -21,4 +13,28 @@
 
 .Search input:focus {
   background-color: #20d1b4;
+}
+
+/* wide desktop view */
+@media (min-width: 1300px) {
+  .Search {
+    width: 25%;
+  }
+
+  .Search input {
+    padding: 8px 15px;
+    font-size: 100%;
+  }
+}
+
+/* desktop view */
+@media (max-width: 1299px) {
+  .Search {
+    width: 30%;
+  }
+
+  .Search input {
+    padding: 7px 10px;
+    font-size: 85%;
+  }
 }

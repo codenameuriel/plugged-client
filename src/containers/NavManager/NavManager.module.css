@@ -1,5 +1,3 @@
-/** @format */
-
 .Nav {
   display: flex;
   background: #32e0c4;
@@ -7,9 +5,12 @@
   align-items: center;
 }
 
-/* Search */
-.Nav div {
-  margin-left: 40%;
+.NavLinks {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 0;
+  margin-left: auto;
+  padding: 1rem;
 }
 
 .ListItem a {
@@ -21,29 +22,46 @@
   transition: border 0.3s;
 }
 
-/* desktop view */
-@media (min-width: 750px) {
-  .NavLinks {
-    display: flex;
-    flex-direction: row-reverse;
-    margin: 0;
-    margin-left: auto;
-    padding: 1rem;
+.ListItem a:hover {
+  border: 2px solid white;
+  color: #26292e;
+}
+
+/* wide desktop view */
+@media (min-width: 1300px) {
+  /* Search bar */
+  .Nav div {
+    margin-left: 40%;
+  }
+
+  .ListItem {
+    font-size: 115%;
+    margin-right: 5px;
   }
 
   .ListItem a {
-    font-size: 125%;
-    padding: 10px 20px;
-  }
-
-  .ListItem a:hover {
-    border: 2px solid white;
-    color: #26292e;
+    padding: 10px;
   }
 }
 
-/* mobile view */
-@media (max-width: 749px) {
+/* desktop view */
+@media (max-width: 1299px) {
+  .Nav div {
+    margin-left: 15%;
+  }
+
+  .ListItem {
+    font-size: 110%;
+    /* padding: 5px; */
+  }
+
+  .ListItem a {
+    padding: 10px;
+  }
+}
+
+/* mobile portrait view */
+@media (max-width: 649px) {
   .SideDrawerNav {
     width: 100%;
   }
