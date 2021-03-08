@@ -1,98 +1,111 @@
-/** @format */
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import DrawerToggle from '../../components/DrawerToggle/DrawerToggle';
+import Search from '../../components/Search/Search';
 
-import DrawerToggle from '../../components/DrawerToggle/DrawerToggle'
-import Search from '../../components/Search/Search'
-
-import NavManagerStyles from './NavManager.module.css'
+import NavManagerStyles from './NavManager.module.css';
 
 class NavManager extends Component {
-  state = {
-    links: [
-      {
-        page: 'collection',
-        auth: true,
-        link: <NavLink to='/collection'>COLLECTION</NavLink>,
-      },
-      {
-        page: 'signup',
-        auth: false,
-        link: <NavLink to='/signup'>SIGN UP</NavLink>,
-      },
-      {
-        page: 'login',
-        auth: false,
-        link: <NavLink to='/login'>LOG IN</NavLink>,
-      },
-      {
-        page: 'dashboard',
-        auth: true,
-        link: <NavLink to='/dashboard'>DASHBOARD</NavLink>,
-      },
-      {
-        page: 'top-news',
-        auth: false,
-        link: <NavLink to='/top-news'>TOP NEWS</NavLink>,
-      },
-    ],
-  }
+	state = {
+		links: [
+			{
+				page: 'collection',
+				auth: true,
+				link: <NavLink to='/collection'>COLLECTION</NavLink>
+			},
+			{
+				page: 'signup',
+				auth: false,
+				link: <NavLink to='/signup'>SIGN UP</NavLink>
+			},
+			{
+				page: 'login',
+				auth: false,
+				link: <NavLink to='/login'>LOG IN</NavLink>
+			},
+			{
+				page: 'dashboard',
+				auth: true,
+				link: <NavLink to='/dashboard'>DASHBOARD</NavLink>
+			},
+			{
+				page: 'top-news',
+				auth: false,
+				link: <NavLink to='/top-news'>TOP NEWS</NavLink>
+			},
+			{
+				page: 'categories',
+				auth: true,
+				link: <NavLink to='/categories'>CATEGORIES</NavLink>
+			}
+		]
+	};
 
-  renderLinks() {
-    const { type, user } = this.props
-    const { links } = this.state
-    const topNewsLink = links.find(link => link.page === 'top-news')
-    let renderedLinks = links.filter(
-      link => link.page !== type && link.auth === !!user
-    )
+	renderLinks() {
+		const { type, userLoggedIn } = this.props;
+		const { links } = this.state;
 
-    if (!!user)
-      renderedLinks = links
-        .filter(link => link.page !== type && link.auth === !!user)
-        .concat(topNewsLink)
+    // base links
+    // user is not authenticated
+		let renderedLinks = (
+      links.filter(link => link.page !== type && !link.auth)
+    );
 
-    return renderedLinks.map((link, index) => {
-      return (
-        <li className={NavManagerStyles.ListItem} key={index}>
-          {link.link}
-        </li>
-      )
-    })
-  }
+    // if user is authenticated
+		if (userLoggedIn) {
+			renderedLinks = (
+        links.filter(link => {
+          return link.page !== type && link.auth === userLoggedIn;
+        })
+      );
 
-  render() {
-    const { openSideDrawer, fromSideDrawer } = this.props
-    const onDashboardPage = window.location.pathname === '/dashboard'
-    const onTopicNewsPage = window.location.pathname === '/topic-news'
-    let navStyles = NavManagerStyles.Nav
-    let navLinksStyles = NavManagerStyles.NavLinks
-
-    if (fromSideDrawer) {
-      navStyles = NavManagerStyles.SideDrawerNav
-      navLinksStyles = NavManagerStyles.SideDrawerNavLinks
+      // render top news links when not in top news page and user is authenticated
+      const topNewsLink = links.find(link => link.page === 'top-news');
+      if (type !== 'top-news') renderedLinks.push(topNewsLink);
     }
 
-    return (
-      <nav className={navStyles}>
-        {fromSideDrawer ? null : (
-          <DrawerToggle openSideDrawer={openSideDrawer} />
-        )}
-        {(onDashboardPage || onTopicNewsPage) && <Search />}
-        <ul className={navLinksStyles}>{this.renderLinks()}</ul>
-      </nav>
-    )
-  }
+		return renderedLinks.map((link, index) => {
+			return (
+				<li className={NavManagerStyles.ListItem} key={index}>
+					{link.link}
+				</li>
+			);
+		});
+	}
+
+	render() {
+		const { openSideDrawer, fromSideDrawer } = this.props;
+		const onDashboardPage = window.location.pathname === '/dashboard';
+		const onTopicNewsPage = window.location.pathname === '/topic-news';
+		let navStyles = NavManagerStyles.Nav;
+		let navLinksStyles = NavManagerStyles.NavLinks;
+
+		if (fromSideDrawer) {
+			navStyles = NavManagerStyles.SideDrawerNav;
+			navLinksStyles = NavManagerStyles.SideDrawerNavLinks;
+		}
+
+		return (
+			<nav className={navStyles}>
+				{fromSideDrawer ? null : (
+					<DrawerToggle openSideDrawer={openSideDrawer} />
+				)}
+				{(onDashboardPage || onTopicNewsPage) && <Search />}
+				<ul className={navLinksStyles}>{this.renderLinks()}</ul>
+			</nav>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-  return {
-    user: state.auth.user,
-  }
-}
+	return {
+		userLoggedIn: state.auth.userLoggedIn
+	};
+};
 
-export default connect(mapStateToProps)(NavManager)
+export default connect(mapStateToProps)(NavManager);
 
 // const links = [
 //   <NavLink className={`${AppStyles.link} ${AppStyles.right}`} onClick={this.logOutUser} to="/top-news">LOG OUT</NavLink>,
