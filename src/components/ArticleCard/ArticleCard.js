@@ -11,6 +11,8 @@ const ArticleCard = props => {
     newsStory: { title, url, urlToImage, description, content }
   } = props;
 
+  console.log(props.newsStory);
+
   return (
     <article className={ArticleCardStyles.ArticleCard}>
       <h2>{title}</h2>
@@ -34,7 +36,7 @@ function pageActions(props) {
   } = props;
 
   if (props.inCollection) {
-    return <Button onClick={onClick} description={'Remove from collection'} />;
+    return <Button onClick={() => onClick(props.newsStory)} description={'Remove from collection'} />;
   } else {
     // modify newsStory data for POST request - add to user collection
     const formattedNewsStory = formatNewsStory({

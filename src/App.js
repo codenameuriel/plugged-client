@@ -5,14 +5,14 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 // import components
-import TopNews from './containers/TopNews/TopNews'
-import Dashboard from './containers/Dashboard/Dashboard'
-import Collection from './components/Collection' // change to Collection
-import Category from './components/CategorySelector' // change to Category
-import Source from './components/SourceNews' // change to Source
-import Newspaper from './components/NewspaperMenu' // change to Newspaper
-import Auth from './containers/Auth/Auth'
-import TopicNews from './containers/TopicNews/TopicNews'
+import TopNews from './containers/TopNews/TopNews';
+import Dashboard from './containers/Dashboard/Dashboard';
+import CollectionNews from './containers/CollectionNews/CollectionNews';
+import Category from './components/CategorySelector'; // change to Category
+import Source from './components/SourceNews'; // change to Source
+import Newspaper from './components/NewspaperMenu'; // change to Newspaper
+import Auth from './containers/Auth/Auth';
+import TopicNews from './containers/TopicNews/TopicNews';
 
 class App extends React.Component {
   // state = {
@@ -190,7 +190,7 @@ class App extends React.Component {
           <Route path='/top-news' component={TopNews} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/topic-news' component={TopicNews} />
-          <Route path='/collection' component={Collection} />
+          <Route path='/collection' component={CollectionNews} />
           <Route path='/categories' component={Category} />
           <Route path='/sources' component={Source} />
           <Route path='/newspapers' component={Newspaper} />

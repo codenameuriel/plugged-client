@@ -6,7 +6,7 @@ export {
   clearNews,
   getDashboardNews,
   saveNewsStory,
-  getCollection,
+  removeFromCollection,
   clearTopicNews
 } from './news'
 export { login, signup, clearAuthError } from './auth'

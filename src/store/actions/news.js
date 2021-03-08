@@ -1,7 +1,7 @@
 /** @format */
 
 import * as actionTypes from './actionTypes';
-import { getData, postData } from '../../utils/fetch';
+import { deleteData, getData, postData, updateData } from '../../utils/fetch';
 
 const setNews = news => {
 	return {
@@ -93,28 +93,16 @@ const setCollectionNews = news => {
 	};
 };
 
-export const getCollection = () => {
-	return async (dispatch, getState) => {
-		const { user } = getState().auth;
-		const { collectionNews } = getState().news;
-
+export const removeFromCollection = newsStory => {
+	return async dispatch => {
 		try {
-			const userSavedNews = await getData(
-				`http://localhost:4000/collections/${user.id}`
-			);
-			const initialPageLoad = !Boolean(collectionNews);
-			const hasSavedMoreNews =
-				collectionNews && Boolean(userSavedNews.length > collectionNews.length);
+			const remainingUserNews = await deleteData('remove-from-collection', newsStory._id);
 
-			if (initialPageLoad || hasSavedMoreNews) {
-				dispatch(setCollectionNews(userSavedNews));
-				// setPaginationData(dispatch, userSavedNews, articlesPerPage)
-			}
+			dispatch(setCollectionNews(remainingUserNews));
 		} catch (error) {
 			console.error(error);
-			dispatch(fetchNewsFailed(error));
 		}
-	};
+	}
 };
 
 export const clearTopicNews = () => {
