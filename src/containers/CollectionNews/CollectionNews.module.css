@@ -5,3 +5,9 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
+.NoNews {
+  font-size: 125%;
+  margin: 15% auto;
+  width: 25%;
+}

@@ -11,8 +11,6 @@ const ArticleCard = props => {
     newsStory: { title, url, urlToImage, description, content }
   } = props;
 
-  console.log(props.newsStory);
-
   return (
     <article className={ArticleCardStyles.ArticleCard}>
       <h2>{title}</h2>
@@ -20,36 +18,17 @@ const ArticleCard = props => {
         <img src={urlToImage || Plug} alt={title} />
       </a>
       <p>{description || formatContent(content)}</p>
-      {pageActions(props)}
+      {newsStoryActions(props)}
     </article>
   );
 }
 
 export default ArticleCard;
 
-// renders different UI elements depending on page
-function pageActions(props) {
-  const {
-    newsStory: { title, url, urlToImage, description, content, source, publishedAt },
-    onClick,
-    userLoggedIn
-  } = props;
-
-  if (props.inCollection) {
-    return <Button onClick={() => onClick(props.newsStory)} description={'Remove from collection'} />;
-  } else {
-    // modify newsStory data for POST request - add to user collection
-    const formattedNewsStory = formatNewsStory({
-      title,
-      url,
-      urlToImage,
-      description,
-      content,
-      source,
-      publishedAt
-    });
-
-    return authenticatedActions(userLoggedIn, onClick, formattedNewsStory);
+// removes '[...]' characters from content field
+function formatContent(content) {
+  if (content && content.includes('[')) {
+    return content.split('[')[0].trim();
   }
 }
 
@@ -62,26 +41,41 @@ function formatNewsStory(newsStory) {
   };
 }
 
-// removes '[...]' characters from content field
-function formatContent(content) {
-  if (content && content.includes('[')) {
-    return content.split('[')[0].trim();
-  }
+// prepares news story depending on page source
+function newsStoryActions(props) {
+  const { newsStory: propsNewsStory, inCollection } = props;
+
+  // check if Article Card is not from CollectionNews
+  // will format news story for potential POST request
+  let newsStory = !inCollection ? formatNewsStory(propsNewsStory) : propsNewsStory;
+
+  return authenticatedActions(props, newsStory);
 }
 
-// adds functionalities if user is logged in
-function authenticatedActions(userLoggedIn, onClick, newsStory) {
-  if (userLoggedIn) {
-    const addToCollection = () => {
-      onClick(newsStory);
-      alert('News story was added to your collection!');
-    };
+// adds functionalities based on user logged in status and page source
+function authenticatedActions(props, newsStory) {
+  const { userLoggedIn, inCollection, onClick } = props;
+  let alertMsg, btnDescription, content;
 
-    return (
+  if (!inCollection) {
+    alertMsg = 'News story was added to your collection';
+    btnDescription = 'Add to collection';
+  } else {
+    alertMsg = 'News story was removed from your collection';
+    btnDescription = 'Remove from collection';
+  }
+
+  const btnAction = () => {
+    onClick(newsStory);
+    alert(alertMsg);
+  };
+
+  if (userLoggedIn) {
+    content = (
       <div className={ArticleCardStyles.Actions}>
         <Button
-          onClick={addToCollection}
-          description={'Add to collection'}
+          onClick={btnAction}
+          description={btnDescription}
           type={'collection'}
         />
         <a
@@ -100,4 +94,6 @@ function authenticatedActions(userLoggedIn, onClick, newsStory) {
       </div>
     );
   }
+  
+  return content;
 }

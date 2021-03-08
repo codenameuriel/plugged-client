@@ -12,7 +12,7 @@ import Articles from '../../components/Articles/Articles';
 
 import CollectionNewsStyles from './CollectionNews.module.css';
 
-class Collection extends Component {
+class CollectionNews extends Component {
   state = {
     type: 'collection',
     title: 'Collection',
@@ -22,6 +22,8 @@ class Collection extends Component {
   createArticlesProps(news, userLoggedIn, removeFromCollection) {
     let articlesProps = { news, userLoggedIn };
     let loggedInProps = { onClick: removeFromCollection };
+
+    // if user is authenticated then provide ability to remove articles from collection
     if (userLoggedIn) {
       articlesProps = {
         ...articlesProps,
@@ -52,7 +54,9 @@ class Collection extends Component {
     return (
       <Layout type={type} title={title} subtitle={subtitle}>
         <PageManager />
-        {news.length ? this.content(articlesProps) : <p>No saved news</p>}
+        {news.length ? 
+          this.content(articlesProps) : 
+          <p className={CollectionNewsStyles.NoNews}>No saved news</p>}
       </Layout>
     );
   }
@@ -71,4 +75,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Collection);
+export default connect(mapStateToProps, mapDispatchToProps)(CollectionNews);
