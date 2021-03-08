@@ -5,7 +5,6 @@
   cursor: pointer;
   outline: none;
   border-radius: 30px;
-  padding: 10px 20px;
   transition: border 0.3s;
 }
 
@@ -27,8 +26,7 @@
   background-color: #32e0c4;
   border: 2px solid transparent;
   text-decoration: none;
-  font-size: 85%;
-  margin-left: 10px;
+  margin-left: 5px;
   color: #eee;
   transition: border color 0.3s;
 }
@@ -37,24 +35,53 @@
   border: 2px solid #32e0c4;
 }
 
-/* desktop view */
-@media (min-width: 750px) {
-  .Collection {
+.Search:hover {
+  color: #2e343f;
+  border: 2px solid #eee;
+}
+
+/* wide desktop view */
+@media (min-width: 1300px) {
+  .Button {
+    padding: 10px 20px;
+  }
+
+  .Search {
+    padding: 8px 15px;
     font-size: 90%;
+  }
+
+  .Collection {
+    font-size: 85%;
   }
 
   .PageManager {
     font-size: 105%;
   }
+}
 
-  .Search:hover {
-    color: #2e343f;
-    border: 2px solid #eee;
+/* desktop view */
+@media (max-width: 1299px) {
+  .Button {
+    padding: 8px 15px;
+  }
+
+  .Search {
+    padding: 7px 10px;
+    font-size: 80%;
+  }
+
+  .Collection {
+    font-size: 85%;
+  }
+
+  .PageManager {
+    font-size: 100%;
   }
 }
 
 /* mobile view */
-@media (max-width: 749px) {
+@media (max-width: 649px) {
   .Collection {
     padding: 10px 15px;
     font-size: 70%;
