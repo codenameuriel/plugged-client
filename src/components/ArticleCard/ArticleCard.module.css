@@ -7,14 +7,8 @@
   transition: transform 0.3s;
 }
 
-.ArticleCard h2 {
+.ArticleCard h2, .ArticleCard p {
   margin: 0 auto;
-  padding: 25px;
-}
-
-.ArticleCard p {
-  margin: 0 auto;
-  padding: 25px;
 }
 
 .ArticleCard img {
@@ -29,7 +23,6 @@
   justify-content: center;
   padding: 10px 0 20px 0;
   border-top: 1px solid #32e0c4;
-  /* background: white; */
 }
 
 .ArticleCard:hover {
@@ -41,6 +34,10 @@
 @media (min-width: 1300px) {
   .ArticleCard {
     width: 30%;
+  }
+
+  .ArticleCard h2, .ArticleCard p {
+    padding: 25px;
   }
 
   .ArticleCard h2 {
@@ -64,6 +61,10 @@
     width: 45%;
   }
 
+  .ArticleCard h2, .ArticleCard p {
+    padding: 20px;
+  }
+
   .ArticleCard h2 {
     font-size: 105%;
     height: 65px;
@@ -79,40 +80,27 @@
   }
 }
 
-/* mobile landscape view */
-@media (max-width: 799px) {
-  .ArticleCard {
-    width: 45%;
-  }
-
-  .ArticleCard h2 {
-    font-size: 85%;
-  }
-
-  .ArticleCard p {
-    font-size: 65%;
-  }
-
-  .ArticleCard img {
-    height: 250px;
-  }
-}
-
 /* mobile portrait view */ 
 @media (max-width: 649px) {
   .ArticleCard {
-    width: 100%;
+    width: 90%;
+  }
+
+  .ArticleCard h2, .ArticleCard p {
+    padding: 15px;
   }
   
   .ArticleCard h2 {
-    font-size: 90%;
+    font-size: 85%;
+    height: 55px;
   }
   
   .ArticleCard p {
-    font-size: 80%;
+    font-size: 65%;
+    height: 90px;
   }
 
   .ArticleCard img {
-    height: 200px;
+    height: 175px;
   }
 }
