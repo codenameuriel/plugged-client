@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
@@ -51,13 +49,15 @@ class Dashboard extends React.Component {
 					addToCollection
 				);
 				userContent.push(this.content(articlesProps, category));
-				userContent.push(
-					<Button
-						description='Scroll Top'
-						onClick={() =>
-							window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} />
-				);
 			}
+
+			userContent.push(
+				<Button
+					key={"scroll-btn"}
+					description='Scroll Top'
+					onClick={() =>
+						window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })} />
+			);
 		} else {
 			userContent = (
 				<p>It looks like you're not subscribed to news. Go to Categories and subscribe to your news</p>
@@ -82,7 +82,7 @@ class Dashboard extends React.Component {
 
 	content(articlesProps, category) {
 		return (
-			<div className={DashboardStyles.Dashboard}>
+			<div key={category} className={DashboardStyles.Dashboard}>
 				{this.articlesHeading(category)}
 				<section className={DashboardStyles.Articles}>
 					<Articles articlesProps={articlesProps} />

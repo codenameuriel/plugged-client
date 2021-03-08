@@ -10,7 +10,6 @@ export const login = userData => {
 		if (!user) {
 			dispatch(loginFailed(authErrorMsg));
 		} else {
-			console.log(user);
 			dispatch(setUser(user));
 			dispatch(setUserLoggedIn());
 			dispatch(setCollectionNews(user.articles));
