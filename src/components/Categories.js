@@ -31,9 +31,8 @@ class Categories extends React.Component {
 		return CATEGORIES.map(category => {
 			return (
 				<CategoryCard 
-					title={category.title} 
+					category={category.type} 
 					image={category.image}
-					history={null}
 					subscribeToCategory={null} />
 			);
 		});
