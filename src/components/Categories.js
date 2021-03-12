@@ -1,48 +1,55 @@
-import React from 'react'
-import Nav from './Nav'
-import CategoryCard from './CategoryCard'
-import { Link } from 'react-router-dom'
-import CategorySelectorStyles from '../styles/CategorySelector.module.css'
-import technologyBackground from "../assets/technologynewsbackground.png"
-import businessBackground from "../assets/businessnewsbackground.jpg"
-import entertainmentBackground from "../assets/entertainmentnews.png"
-import healthBackground from "../assets/healthnewsbackground.jpg"
-import scienceBackground from "../assets/sciencenewsbackground.jpg"
-import sportsBackground from "../assets/sportsnewsbackground.jpg"
+import React from 'react';
+import CategoryCard from './CategoryCard';
 
-const CategorySelector = ({history, links, loggedInUser, subscribeToCategory}) => {
+// import CategorySelectorStyles from '../styles/CategorySelector.module.css';
+import technologyBackground from '../assets/technologynewsbackground.png';
+import businessBackground from '../assets/businessnewsbackground.jpg';
+import entertainmentBackground from '../assets/entertainmentnews.png';
+import healthBackground from '../assets/healthnewsbackground.jpg';
+import scienceBackground from '../assets/sciencenewsbackground.jpg';
+import sportsBackground from '../assets/sportsnewsbackground.jpg';
 
-  const renderDisplay = () => {
-    let display;
+import Layout from '../hoc/Layout/Layout';
 
-    if (loggedInUser.username) {
-      display = 
-        <React.Fragment>
-          <header className={CategorySelectorStyles.header} >
-            <h1>Categories</h1>
-            <p>View your news by categories</p>
-          </header>
-          <Nav links={links}/>
-          <div className={CategorySelectorStyles.container} >
-            <CategoryCard title={"Business"} image={businessBackground} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
-            <CategoryCard title={"Entertainment"} image={entertainmentBackground} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
-            <CategoryCard title={"Health"} image={healthBackground} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
-            <CategoryCard title={"Science"} image={scienceBackground} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
-            <CategoryCard title={"Sports"} image={sportsBackground} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
-            <CategoryCard title={"Technology"} image={technologyBackground} history={history} loggedInUser={loggedInUser}subscribeToCategory={subscribeToCategory}/>
-          </div>
-        </React.Fragment>
-    } else {
-      display = <h5 className={CategorySelectorStyles.h5} ><Link className={CategorySelectorStyles.link} to="/login">Log in</Link> to see the news by category</h5>
-    }
-    return display
-  }
+const CATEGORIES = [
+	{ type: 'Business', image: businessBackground }, 
+	{ type: 'Entertainment', image: entertainmentBackground }, 
+	{ type: 'Health', image: healthBackground }, 
+	{ type: 'Science', image: scienceBackground }, 
+	{ type: 'Sports', image: sportsBackground }, 
+	{ type: 'Technology', image: technologyBackground }
+];
 
-  return (
-    <div>
-      {renderDisplay()}
-    </div>
-  )
+class Categories extends React.Component {
+	state = {
+		title: 'Categories',
+		subtitle: 'View your news by categories',
+		type: 'categories'
+	}
+
+	renderCategories() {
+		return CATEGORIES.map(category => {
+			return (
+				<CategoryCard 
+					title={category.title} 
+					image={category.image}
+					history={null}
+					subscribeToCategory={null} />
+			);
+		});
+	}
+
+	render() {
+		const { title, subtitle, type } = this.state;
+
+		return (
+			<Layout title={title} subtitle={subtitle} type={type}>
+				<div>
+					{this.renderCategories()}
+				</div>
+			</Layout>
+		);
+	}
 }
 
-export default CategorySelector
+export default Categories;
