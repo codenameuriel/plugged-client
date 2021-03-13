@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -9,8 +7,8 @@ import TopNews from './containers/TopNews/TopNews';
 import Dashboard from './containers/Dashboard/Dashboard';
 import CollectionNews from './containers/CollectionNews/CollectionNews';
 import Categories from './containers/Categories/Categories';
-import Source from './components/SourceNews'; // change to Source
-import Newspaper from './components/NewspaperMenu'; // change to Newspaper
+// import Source from './components/SourceNews'; // change to Source
+// import Newspaper from './components/NewspaperMenu'; // change to Newspaper
 import Auth from './containers/Auth/Auth';
 import TopicNews from './containers/TopicNews/TopicNews';
 
@@ -192,8 +190,8 @@ class App extends React.Component {
           <Route path='/topic-news' component={TopicNews} />
           <Route path='/collection' component={CollectionNews} />
           <Route path='/categories' component={Categories} />
-          <Route path='/sources' component={Source} />
-          <Route path='/newspapers' component={Newspaper} />
+          {/* <Route path='/sources' component={Source} /> */}
+          {/* <Route path='/newspapers' component={Newspaper} /> */}
         </Switch>
       )
     }

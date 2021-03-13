@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
-import Button from './UI/Button/Button';
+import Button from '../UI/Button/Button';
 
-import CategoryCardStyles from '../styles/CategoryCard.module.css'
+import CategoryCardStyles from './CategoryCard.module.css'
 
 const CategoryCard = props => {
   const { 

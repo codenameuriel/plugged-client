@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as actionCreators from '../../store/actions/index';
 
-import CategoryCard from '../../components/CategoryCard';
+import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import Layout from '../../hoc/Layout/Layout';
 
 import technologyBackground from '../../assets/technologynews.png';

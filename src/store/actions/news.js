@@ -1,5 +1,3 @@
-/** @format */
-
 import * as actionTypes from './actionTypes';
 import { deleteData, getData, postData } from '../../utils/fetch';
 
