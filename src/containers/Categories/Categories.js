@@ -32,13 +32,17 @@ class Categories extends React.Component {
 	}
 
 	renderCategories() {
-		const { subscribeToCategories } = this.props;
+		const { userCategories, subscribeToCategories } = this.props;
 
 		return CATEGORIES.map(category => {
+			const { type, image } = category;
+			const isSubscribed = userCategories.includes(type);
+
 			return (
 				<CategoryCard 
-					category={category.type} 
-					image={category.image}
+					category={type} 
+					image={image}
+					isSubscribed={isSubscribed}
 					subscribeToCategories={subscribeToCategories} />
 			);
 		});
@@ -57,10 +61,16 @@ class Categories extends React.Component {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
 	return {
-		subscribeToCategories: categories => dispatch(actionCreators.subscribeToCategories(categories))
+		userCategories: state.auth.user.categories
 	};
 };
 
-export default connect(null, mapDispatchToProps)(Categories);
+const mapDispatchToProps = dispatch => {
+	return {
+		subscribeToCategories: (isSubscribed, categories) => dispatch(actionCreators.subscribeToCategories(isSubscribed, categories))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

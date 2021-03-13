@@ -1,6 +1,4 @@
-/** @format */
-
-export { changePage, firstPage } from './pageManager'
+export { changePage, firstPage } from './pageManager';
 export {
   getNews,
   clearNews,
@@ -8,7 +6,7 @@ export {
   saveNewsStory,
   removeFromCollection,
   clearTopicNews
-} from './news'
-export { login, signup, clearAuthError } from './auth'
-export { clearParams, setSearchTopic } from './params'
+} from './news';
+export { login, signup, clearAuthError } from './auth';
+export { clearParams, setSearchTopic } from './params';
 export { subscribeToCategories } from './subscription';

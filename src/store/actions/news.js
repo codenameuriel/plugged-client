@@ -77,7 +77,9 @@ export const saveNewsStory = newsStory => {
 		try {
 			// object is used to find user and add news story to user's collection
 			const userNewsStory = { username: user.username, newsStory: newsStory };
-			const savedNewsStory = await postData('/add-to-collection', userNewsStory);
+			const savedNewsStory = ( 
+				await postData('/add-to-collection', userNewsStory)
+			);
 			dispatch(setCollectionNews(savedNewsStory));
 		} catch (error) {
 			console.error(error);

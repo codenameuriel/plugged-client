@@ -1,22 +1,22 @@
 import * as actionTypes from './actionTypes';
 import { postData } from '../../utils/fetch';
 
-// subscription data consists of username and the categories to add to user's collection
-export const subscribeToCategories = categories => {
+export const subscribeToCategories = (isSubscribed, categories) => {
   return async (dispatch, getState) => {
     const { user } = getState().auth;
     const subscriptionData = {
       username: user.username,
-      categories: categories
+      categories,
+      isSubscribed // backend will use isSubscribed to determine action to take with categories
     };
 
     try {
       // destructure for categories array
-      const { categories: updatedCategories} = await postData('/subscribe/categories', subscriptionData);
+      const { categories: updatedCategories} = await postData('/subscriptions/categories', subscriptionData);
 
       dispatch(updateUsersCategories(updatedCategories));
     } catch (error) {
-
+      console.error(error);
     }
   };
 };

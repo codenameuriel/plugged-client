@@ -5,16 +5,27 @@ import Button from './UI/Button/Button';
 
 import CategoryCardStyles from '../styles/CategoryCard.module.css'
 
-const CategoryCard = ({ category, history, subscribeToCategories, image }) => {
+const CategoryCard = props => {
+  const { 
+    category, 
+    history, 
+    isSubscribed, 
+    subscribeToCategories, 
+    image 
+  } = props;
+
   const redirectToCategoryNews = category => {
     const cat = category.toLowerCase();
     history.push(`/categories/${cat}`);
   };
 
-  const subscribe = category => {
-    alert('You subscribed!');
-    subscribeToCategories(category);
+  const subscribe = () => {
+    const alertMsg = isSubscribed ? 'You unsubscribed!' : 'You subscribed'
+    alert(alertMsg);
+    subscribeToCategories(isSubscribed, category);
   };
+
+  const btnDescription = isSubscribed ? 'Unsubscribe' : 'Subscribe';
 
   return (
     <div 
@@ -25,8 +36,8 @@ const CategoryCard = ({ category, history, subscribeToCategories, image }) => {
         onClick={() => redirectToCategoryNews(category)}>{category}</h3>
       <Button 
         type={null} 
-        description={'Subscribe'} 
-        onClick={() => subscribe(category)} />
+        description={btnDescription} 
+        onClick={subscribe} />
     </div>
   );
 };
