@@ -14,6 +14,13 @@ const reducer = (state = initialState, action) => {
           page: action.page
         }
       }
+    case actionTypes.SET_CATEGORY_PARAM:
+      return {
+        params: {
+          ...state.params,
+          category: action.category
+        }
+      }
     case actionTypes.SET_SEARCH_TOPIC:
       return {
         params: {
@@ -24,7 +31,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CLEAR_PARAMS:
       return {
         params: {}
-      }
+      };
     default:
       return state
   }

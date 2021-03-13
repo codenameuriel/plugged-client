@@ -7,15 +7,17 @@ import CategoryCardStyles from './CategoryCard.module.css'
 
 const CategoryCard = props => {
   const { 
-    category, 
+    category,
+    image, 
     history, 
     isSubscribed, 
     subscribeToCategories, 
-    image 
+    setCategoryParam
   } = props;
 
   const redirectToCategoryNews = category => {
     const cat = category.toLowerCase();
+    setCategoryParam(cat);
     history.push(`/categories/${cat}`);
   };
 

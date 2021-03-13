@@ -12,3 +12,10 @@ export const setSearchTopic = searchTopic => {
     searchTopic
   };
 };
+
+export const setCategoryParam = category => {
+  return {
+    type: actionTypes.SET_CATEGORY_PARAM,
+    category
+  };
+};
