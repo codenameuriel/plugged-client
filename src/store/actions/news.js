@@ -1,7 +1,7 @@
 /** @format */
 
 import * as actionTypes from './actionTypes';
-import { deleteData, getData, postData, updateData } from '../../utils/fetch';
+import { deleteData, getData, postData } from '../../utils/fetch';
 
 const setNews = news => {
 	return {
