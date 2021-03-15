@@ -39,6 +39,11 @@ class NavManager extends Component {
 				page: 'categories',
 				auth: true,
 				link: <NavLink to='/categories'>CATEGORIES</NavLink>
+			},
+			{
+				page: 'sources',
+				auth: true,
+				link: <NavLink to='/sources'>SOURCES</NavLink>
 			}
 		]
 	};
