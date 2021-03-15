@@ -7,6 +7,7 @@ import TopNews from './containers/TopNews/TopNews';
 import Dashboard from './containers/Dashboard/Dashboard';
 import CollectionNews from './containers/CollectionNews/CollectionNews';
 import Categories from './containers/Categories/Categories';
+import CategoryNews from './containers/CategoryNews/CategoryNews';
 // import Source from './components/SourceNews'; // change to Source
 // import Newspaper from './components/NewspaperMenu'; // change to Newspaper
 import Auth from './containers/Auth/Auth';
@@ -189,7 +190,9 @@ class App extends React.Component {
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/topic-news' component={TopicNews} />
           <Route path='/collection' component={CollectionNews} />
+          <Route path='/categories/:category' component={CategoryNews} />
           <Route path='/categories' component={Categories} />
+          
           {/* <Route path='/sources' component={Source} /> */}
           {/* <Route path='/newspapers' component={Newspaper} /> */}
         </Switch>
