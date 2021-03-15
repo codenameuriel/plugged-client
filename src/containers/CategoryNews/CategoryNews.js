@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../../store/actions/index';
+import { checkParamsForUpdate } from '../../utils/params';
 
 import Layout from '../../hoc/Layout/Layout';
 import PageManager from '../PageManager/PageManager';
@@ -22,7 +23,15 @@ class CategoryNews extends React.Component {
 
   componentDidMount() {
     const { params } = this.props;
-    this.props.getCategoryNews('/category-news', params);
+    this.props.getCategoryNews('category-news', params);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { getCategoryNews, params: currParams } = this.props;
+    const { params: prevParams } = prevProps;
+
+    let paramsHaveChanged = checkParamsForUpdate(prevParams, currParams);
+    if (paramsHaveChanged) getCategoryNews('category-news', currParams);
   }
 
   componentWillUnmount() {
