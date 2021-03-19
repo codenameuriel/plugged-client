@@ -68,6 +68,19 @@ const setDashboardNews = news => {
 	};
 };
 
+// get news sources
+export const getSources = () => {
+	return async dispatch => {
+		try {
+			const sources = await getData('/sources', {});
+			return sources;
+		} catch (error) {
+			// handle error
+			console.error(error);
+		}
+	};
+};
+
 // POST request to add news story to user's collection of news stories
 export const saveNewsStory = newsStory => {
 	return async (dispatch, getState) => {

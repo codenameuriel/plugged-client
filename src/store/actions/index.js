@@ -3,6 +3,7 @@ export {
   getNews,
   clearNews,
   getDashboardNews,
+  getSources,
   saveNewsStory,
   removeFromCollection,
   clearTopicNews
