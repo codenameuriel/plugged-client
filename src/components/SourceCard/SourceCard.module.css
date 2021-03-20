@@ -1,0 +1,48 @@
+.SourceSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+.SourceCards {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 75%;
+  margin: 0 auto; 
+}
+
+.SourceCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  border-radius: 30px;
+  background-color: #2e343f;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.SourceCard img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+}
+
+.SourceCard p {
+  font-size: 80%;
+  height: 75px;
+  padding: 8px 12px;
+}
+
+.SourceCard a {
+  font-size: 70%;
+  text-decoration: none;
+  color: #32e0c4;
+  height: 50px;
+}
