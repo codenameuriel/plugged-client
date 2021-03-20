@@ -1,29 +1,28 @@
-.SourceSection {
+.SourceSection, .SourceCards, .SourceCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 75%;
+}
+
+.SourceSection, .SourceCards {
   margin: 0 auto;
+}
+
+.SourceSection, .SourceCard {
+  align-items: center;
   margin-bottom: 25px;
 }
 
 .SourceCards {
-  display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
   flex-wrap: wrap;
-  width: 75%;
-  margin: 0 auto; 
+  justify-content: space-evenly;
 }
 
 .SourceCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 40%;
   border-radius: 30px;
   background-color: #2e343f;
   margin-top: 25px;
-  margin-bottom: 25px;
   transition: transform 0.3s;
 }
 
@@ -44,13 +43,13 @@
 }
 
 .SourceCard p {
-  font-size: 80%;
+  font-size: 75%;
   height: 75px;
   padding: 8px 12px;
 }
 
 .SourceCard a {
-  font-size: 70%;
+  font-size: 75%;
   text-decoration: none;
   color: #32e0c4;
   height: 50px;
@@ -58,4 +57,30 @@
 
 .SourceCard a:hover {
   color: white;
+}
+
+/* widescreen desktop view */
+@media (min-width: 1300px) {
+  .SourceSection, .SourceCards {
+    width: 75%;
+  }
+}
+
+/* desktop view */
+@media (max-width: 1299px) {
+  .SourceSection, .SourceCards {
+    width: 90%;
+  }
+
+  .SourceCard p {
+    font-size: 70%;
+  }
+
+  .SourceCard a {
+    font-size: 70%;
+  }
+
+  .SourceCard img {
+    height: 150px;
+  }
 }
