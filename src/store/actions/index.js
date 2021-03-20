@@ -9,5 +9,5 @@ export {
   clearTopicNews
 } from './news';
 export { login, signup, clearAuthError } from './auth';
-export { clearParams, setSearchTopic, setCategoryParam } from './params';
+export { clearParams, setSearchTopic, setCategoryParam, setSourcesParam } from './params';
 export { subscribeToCategories } from './subscription';

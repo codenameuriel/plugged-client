@@ -1,16 +1,27 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
 import DecoratedHeading from '../UI/DecoratedHeading/DecoratedHeading';
 import SourceCardStyles from './SourceCard.module.css';
 
-const SourceCard = ({ category, sources }) => {
+const SourceCard = ({ category, sources, setSourcesParam, history }) => {
+  const redirectToSourceNews = source => {
+    const formattedSource = formatSourceName(source);
+    console.log(formattedSource);
+    setSourcesParam(formattedSource);
+    history.push(`/sources/${formattedSource}`);
+  };
+
   const renderSources = sources => {
     return sources.map(source => {
       const { image, _doc: { name, description, url }} = source;
 
+      console.log(name);
+
       return (
         <div className={SourceCardStyles.SourceCard}>
-          <img 
+          <img
+            onClick={() => redirectToSourceNews(name)}
             src={`data:image/${'png'};base64,${image}`} 
             alt={`${name}`} />
           <p>{description}</p>
@@ -33,7 +44,7 @@ const SourceCard = ({ category, sources }) => {
   );
 };
 
-export default SourceCard;
+export default withRouter(SourceCard);
 
 const formatCategory = category => {
   return category[0].toUpperCase() + category.slice(1);
@@ -49,4 +60,9 @@ const formatUrl = url => {
   if (!urlString.startsWith('www.')) urlString = `www.${urlString}`;
   
   return urlString;
+};
+
+const formatSourceName = source => {
+  const pattern = /\s/g;
+  return source.toLowerCase().replace(pattern, '-');
 };

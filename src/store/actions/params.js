@@ -19,3 +19,10 @@ export const setCategoryParam = category => {
     category
   };
 };
+
+export const setSourcesParam = source => {
+  return {
+    type: actionTypes.SET_SOURCES_PARAM,
+    sources: source
+  };
+};
