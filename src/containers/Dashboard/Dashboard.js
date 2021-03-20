@@ -4,6 +4,7 @@ import * as actionCreators from '../../store/actions/index';
 
 import Layout from '../../hoc/Layout/Layout';
 import Articles from '../../components/Articles/Articles';
+import DecoratedHeading from '../../components/UI/DecoratedHeading/DecoratedHeading';
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/UI/Button/Button';
 
@@ -66,24 +67,10 @@ class Dashboard extends React.Component {
 		return userContent;
 	}
 
-	articlesHeading(category) {
-		return (
-			<h1>
-				<span>
-					<hr />
-				</span>
-				{category}
-				<span>
-					<hr />
-				</span>
-			</h1>
-		);
-	}
-
 	content(articlesProps, category) {
 		return (
 			<div key={category} className={DashboardStyles.Dashboard}>
-				{this.articlesHeading(category)}
+				<DecoratedHeading heading={category} />
 				<section className={DashboardStyles.Articles}>
 					<Articles articlesProps={articlesProps} />
 				</section>

@@ -24,14 +24,23 @@
   background-color: #2e343f;
   margin-top: 25px;
   margin-bottom: 25px;
+  transition: transform 0.3s;
+}
+
+.SourceCard:hover {
+  transform: scale(1.02, 1.02);
+  box-shadow: 0 8px 16px 0 rgb(0, 0, 0);
 }
 
 .SourceCard img {
   height: 200px;
   width: 100%;
-  object-fit: cover;
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
+}
+
+.SourceCard img:hover {
+  cursor: pointer;
 }
 
 .SourceCard p {
@@ -45,4 +54,8 @@
   text-decoration: none;
   color: #32e0c4;
   height: 50px;
+}
+
+.SourceCard a:hover {
+  color: white;
 }
