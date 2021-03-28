@@ -35,9 +35,7 @@ class CategoryNews extends React.Component {
   }
 
   componentWillUnmount() {
-    const { clearNews, clearParams } = this.props;
-
-    clearNews();
+    const { clearParams } = this.props;
     clearParams();
   }
 
@@ -91,7 +89,6 @@ const mapDispatchToProps = dispatch => {
   return {
     getCategoryNews: (pathName, params) => 
       dispatch(actionCreators.getNews(pathName, params)),
-    clearNews: () => dispatch(actionCreators.clearNews()),
     clearParams: () => dispatch(actionCreators.clearParams()),
     addToCollection: newsStory =>
       dispatch(actionCreators.saveNewsStory(newsStory))

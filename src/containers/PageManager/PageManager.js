@@ -7,6 +7,10 @@ import Button from '../../components/UI/Button/Button';
 import PageManagerStyles from './PageManager.module.css';
 
 class PageManager extends Component {
+	componentWillUnmount() {
+		this.props.onFirstPage();
+	}
+
 	renderButtons() {
 		const { 
 			onNextPage, onPrevPage, onFirstPage, page, totalPages: lastPage

@@ -32,7 +32,8 @@ class TopNews extends Component {
   }
 
   componentWillUnmount() {
-    this.props.clearNews();
+    const { clearParams } = this.props;
+    clearParams();
   }
   
   createArticlesProps(news, userLoggedIn, addToCollection) {
@@ -91,7 +92,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getNews: (pathName, params) =>
       dispatch(actionCreators.getNews(pathName, params)),
-    clearNews: () => dispatch(actionCreators.clearNews()),
+    clearParams: () => dispatch(actionCreators.clearParams()),
     addToCollection: newsStory =>
       dispatch(actionCreators.saveNewsStory(newsStory))
   };
