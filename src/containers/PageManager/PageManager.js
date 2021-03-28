@@ -7,29 +7,15 @@ import Button from '../../components/UI/Button/Button';
 import PageManagerStyles from './PageManager.module.css';
 
 class PageManager extends Component {
-	// state = {
-	//   page: 1,
-	//   currentPage: '',
-	//   showPrevPageButton: false,
-	//   totalResults: 0,
-	//   lastPage: false,
-	//   topicNews: [],
-	//   searchTopic: '',
-	//   topicHeader: '',
-	//   displaySearchTopic: '',
-	//   source: '',
-	//   sourceNews: []
-	// }
-
 	renderButtons() {
-		const {
-			onNextPage,
-			onPrevPage,
-			onFirstPage,
-			page,
-			totalPages: lastPage
+		const { 
+			onNextPage, onPrevPage, onFirstPage, page, totalPages: lastPage
 		} = this.props;
 		let buttons = null;
+
+		// do not render buttons if only one page of news articles
+		if (lastPage === 1) return buttons;
+
 		if (page === 1) {
 			buttons = (
 				<Button
@@ -72,175 +58,6 @@ class PageManager extends Component {
 
 		return buttons;
 	}
-
-	// componentDidUpdate = (prevProps) => {
-	//   if (prevProps.loggedInUser !== this.props.loggedInUser) {
-	//     this.setState({
-	//       page: 1,
-	//       searchTopic: '',
-	//       topicHeader: ''
-	//     })
-	//   }
-	// }
-
-	// setTotalResults = total => {
-	//   this.setState({
-	//     totalResults: total
-	//   })
-	// }
-
-	// toggleLastPage = () => {
-	//   let isLastPage = this.state.lastPage
-
-	//   this.setState({
-	//     lastPage: !isLastPage
-	//   })
-	// }
-
-	// togglePrevPageButton = () => {
-	//   if (this.state.page === 1) {
-	//     this.setState({
-	//       showPrevPageButton: false
-	//     })
-	//   } else {
-	//     this.setState({
-	//       showPrevPageButton: true
-	//     })
-	//   }
-	// }
-
-	// nextPage = () => {
-	//   const { page, totalResults } = this.state
-	//   let lastPage;
-
-	//   if (totalResults % 9 === 0) {
-	//     lastPage = totalResults / 9
-	//   } else if (totalResults % 9 !== 0) {
-	//     lastPage = Math.ceil(totalResults / 9)
-	//   }
-
-	//   if (page === lastPage) {
-	//     this.setState({
-	//       page: 1
-	//     }, () => {
-	//       this.togglePrevPageButton()
-	//       this.toggleLastPage()
-	//     })
-	//   } else {
-	//     this.setState({
-	//       page: page + 1
-	//     }, () => {
-	//       this.togglePrevPageButton()
-	//     })
-	//   }
-
-	//   if (page === lastPage - 1) {
-	//     this.toggleLastPage()
-	//   }
-	// }
-
-	// topicNextPage = () => {
-	//   const { page, totalResults } = this.state
-	//   let lastPage;
-
-	//   if (totalResults % 9 === 0) {
-	//     lastPage = totalResults / 9
-	//   } else if (totalResults % 9 !== 0) {
-	//     lastPage = Math.ceil(totalResults / 9)
-	//   }
-
-	//   if (page === lastPage) {
-	//     this.setState({
-	//       page: 1
-	//     }, () => {
-	//       this.togglePrevPageButton()
-	//       this.toggleLastPage()
-	//     })
-	//   } else {
-	//     this.setState({
-	//       page: page + 1
-	//     }, () => {
-	//       this.togglePrevPageButton()
-	//     })
-	//   }
-
-	//   if (page === lastPage - 1) {
-	//     this.toggleLastPage()
-	//   }
-
-	//   this.getTopicNews()
-	// }
-
-	// prevPage = () => {
-	//   let page = this.state.page
-	//   if (page !== 1) {
-	//     this.setState({
-	//       page: page - 1
-	//     }, () => {
-	//       this.togglePrevPageButton()
-	//     })
-	//   }
-	// }
-
-	// topicPrevPage = () => {
-	//   let page = this.state.page
-	//   if (page !== 1) {
-	//     this.setState({
-	//       page: page - 1
-	//     }, () => {
-	//       this.togglePrevPageButton()
-	//     })
-	//   }
-
-	//   this.getTopicNews()
-	// }
-
-	// handleSearchChange = event => {
-	//   this.setState({
-	//     searchTopic: event.target.value
-	//   })
-	// }
-
-	// clearSearch = () => {
-	//   this.setState({
-	//     searchTopic: ''
-	//   })
-	// }
-
-	// getTopicNews = () => {
-	//   const { page, searchTopic } = this.state
-
-	//   fetch(`https://newsapi.org/v2/everything?q=${searchTopic}&language=en&pageSize=9&page=${page}`, apiKey)
-	//   .then(resp => resp.json())
-	//   .then(data => this.setState({
-	//     topicNews: data.articles
-	//   }, () => this.setTotalResults(data.totalResults)))
-	//   .then(this.setState({
-	//     topicHeader: searchTopic
-	//   }))
-	//   .then(this.clearSearch())
-	// }
-
-	// getSourceNews = source => {
-	//   let parsedSource;
-	//   if (source.indexOf(' ') > 0) {
-	//     parsedSource = source.replace(/\s+/g, '-').toLowerCase();
-	//   } else {
-	//     parsedSource = source
-	//   }
-
-	//   fetch(`https://newsapi.org/v2/top-headlines?sources=${parsedSource}&pageSize=9&page=1`, apiKey)
-	//   .then(resp => resp.json())
-	//   .then(data => this.setState({
-	//     sourceNews: data.articles
-	//   }, () => this.setSource(source)))
-	// }
-
-	// setSource = source => {
-	//   this.setState({
-	//     source: source
-	//   })
-	// }
 
 	// render() {
 	// const [logout, collection, topNews, login, signup, categories, dashboard, account, sources, newspapers] = this.props.links

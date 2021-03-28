@@ -16,8 +16,6 @@ const SourceCard = ({ category, sources, setSourcesParam, history }) => {
     return sources.map(source => {
       const { image, _doc: { name, description, url }} = source;
 
-      console.log(name);
-
       return (
         <div className={SourceCardStyles.SourceCard}>
           <img
