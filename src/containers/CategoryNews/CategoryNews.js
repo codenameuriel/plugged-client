@@ -11,17 +11,15 @@ import Loader from '../../components/Loader/Loader';
 
 import CategoryNewsStyles from './CategoryNews.module.css';
 
-const category = window.location.pathname.split('/')[1];
-const categoryTitle = category[0].toUpperCase() + category.slice(1);
-
 class CategoryNews extends React.Component {
   state = {
     title: 'Category News',
-    subtitle: `Top News in ${categoryTitle}`,
+    subtitle: '',
     type: 'category news'
   }
 
   componentDidMount() {
+    this.setSubtitle();
     const { params } = this.props;
     this.props.getCategoryNews('category-news', params);
   }
@@ -37,6 +35,12 @@ class CategoryNews extends React.Component {
   componentWillUnmount() {
     const { clearParams } = this.props;
     clearParams();
+  }
+
+  setSubtitle() {
+    const category = window.location.pathname.split('/')[2];
+    const categoryTitle = category[0].toUpperCase() + category.slice(1);
+    this.setState({ subtitle: `Top News in ${categoryTitle}` });
   }
 
   createArticlesProps(news, userLoggedIn, addToCollection) {
