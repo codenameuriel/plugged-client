@@ -11,19 +11,16 @@ import Loader from '../../components/Loader/Loader';
 
 import SourceNewsStyles from './SourceNews.module.css';
 
-const sources = window.location.pathname.split('/')[1];
-const sourcesTitle = sources[0].toUpperCase() + sources.slice(1);
-
 class SourceNews extends React.Component {
   state = {
     title: 'Source News',
-    subtitle: `Top News in ${sourcesTitle}`,
+    subtitle: '',
     type: 'sources news'
   }
 
   componentDidMount() {
+    this.setSubtitle();
     const { params } = this.props;
-    console.log(params);
     this.props.getSourcesNews('sources-news', params);
   }
 
@@ -38,6 +35,16 @@ class SourceNews extends React.Component {
   componentWillUnmount() {
     const { clearParams } = this.props;
     clearParams();
+  }
+
+  setSubtitle() {
+    const sourcesString = window.location.pathname.split('/')[2];
+    const sourcesArray = sourcesString.split('-');
+    const sources = (
+      sourcesArray.map(source => source[0].toUpperCase() + source.slice(1))
+    );
+    const sourcesTitle = sources.join(' ');
+    this.setState({ subtitle: `Top News in ${sourcesTitle}` });
   }
 
   createArticlesProps(news, userLoggedIn, addToCollection) {
