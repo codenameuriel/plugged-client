@@ -14,14 +14,28 @@ class Dashboard extends React.Component {
 	state = {
 		type: 'dashboard',
 		title: 'Dashboard',
-		subtitle: this.props.userLoggedIn
-			? `All your news in one place. Welcome back ${this.props.user.username}`
-			: `All your news in one place. Welcome to Plugged, ${this.props.user.username}`
+		subtitle: ''
 	};
 
 	componentDidMount() {
+		this.setSubtitle();
 		this.props.getDashboardNews();
 	}
+
+	setSubtitle() {
+		const { userLoggedIn } = this.props;
+		let subtitle = 'All your news in one place.';
+		if (userLoggedIn) {
+			const { username } = this.props.user;
+			const stylizedUsername = <span>{username}</span>;
+			subtitle = (
+				<>
+					{subtitle} Welcome back {stylizedUsername} 
+				</>
+			);
+		}
+    this.setState({ subtitle });
+  }
 
 	createArticlesProps(news, userLoggedIn, addToCollection) {
 		let articlesProps = { news, userLoggedIn };
