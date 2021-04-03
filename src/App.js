@@ -11,6 +11,9 @@ import CategoryNews from './containers/CategoryNews/CategoryNews';
 import Sources from './containers/Sources/Sources';
 import SourceNews from './containers/SourceNews/SourceNews';
 
+// FIX RENDERING
+import NewspaperMenu from './containers/Newspaper/NewspaperMenu/NewspaperMenu';
+
 // import Newspaper from './components/NewspaperMenu'; // change to Newspaper
 import Auth from './containers/Auth/Auth';
 import TopicNews from './containers/TopicNews/TopicNews';
@@ -196,7 +199,7 @@ class App extends React.Component {
           <Route path='/categories' component={Categories} />
           <Route path='/sources/:source' component={SourceNews} />
           <Route path='/sources' component={Sources} />
-          {/* <Route path='/newspapers' component={Newspaper} /> */}
+          <Route path='/newspaper/menu' component={NewspaperMenu} />
         </Switch>
       )
     }
