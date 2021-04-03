@@ -44,6 +44,11 @@ class NavManager extends Component {
 				page: 'sources',
 				auth: true,
 				link: <NavLink to='/sources'>SOURCES</NavLink>
+			},
+			{
+				page: 'newspaper-menu',
+				auth: true,
+				link: <NavLink to='/newspaper/menu'>NEWSPAPER</NavLink>
 			}
 		]
 	};
