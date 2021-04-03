@@ -50,20 +50,30 @@ class NewspaperForm extends React.Component {
     );
   }
 
+  renderNewspaperTitleSelection(title) {
+    return (
+      <label htmlFor="newspaperTitle">
+        Newspaper Title:
+        <br />
+        <input 
+          type="text" 
+          name="newspaperTitle"
+          onChange={this.handleNewspaperTitleChange}
+          value={title} 
+          required />
+      </label>
+    );
+  }
+
+  handleNewspaperTitleChange = ({ target: { value, name }}) => {
+    this.setState({ [name]: value });
+  }
+
   render() {
     const { newspaperTitle } = this.state;
     return (
       <form action="" onSubmit={null}>
-        <label htmlFor="newspaperTitle">
-          Newspaper Title:
-          <br />
-          <input 
-            type="text" 
-            name="newspaperTile"
-            onChange={null}
-            value={newspaperTitle} 
-            required />
-        </label>
+        {this.renderNewspaperTitleSelection(newspaperTitle)}
         <br />
         {this.renderCategorySelection()}
         <br />

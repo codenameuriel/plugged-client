@@ -12,7 +12,7 @@ class NewspaperMenu extends React.Component {
     viewForm: false
   }
 
-  handleBtnClick = () => {
+  toggleFormView = () => {
     this.setState(prevState => ({ viewForm: !prevState.viewForm }));
   }
 
@@ -20,7 +20,7 @@ class NewspaperMenu extends React.Component {
     const { title, subtitle, type, viewForm } = this.state;
     return (
       <Layout title={title} subtitle={subtitle} type={type}>
-        <Button onClick={this.handleBtnClick} description={viewForm ? 'Close' : 'Build a newspaper'} />
+        <Button onClick={this.toggleFormView} description={viewForm ? 'Close' : 'Build a newspaper'} />
         {viewForm && <NewspaperForm />}
       </Layout>
     );
