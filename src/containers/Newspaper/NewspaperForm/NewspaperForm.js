@@ -4,12 +4,14 @@ import { CATEGORIES } from '../../../utils/categories';
 
 class NewspaperForm extends React.Component {
   state = {
-    newspaperTitle: ''
+    newspaperTitle: '',
+    categories: []
   }
 
-  renderCategorySelection() {
+  renderCategoriesSelection(categories) {
+    console.log(categories);
     return (
-      <fieldset onChange={null}>
+      <fieldset>
         <label htmlFor="categories">
           Select Categories:
           <br />
@@ -17,11 +19,12 @@ class NewspaperForm extends React.Component {
             const { type } = category;
             return (
               <>
-                <label htmlFor="categories">
+                <label htmlFor={type}>
                   {type}:
-                  <input 
+                  <input
+                    onChange={event => this.handleCategoriesCheckbox(event, categories)}
                     type="checkbox"
-                    name="categories"
+                    name={type}
                     value={type} />
                 </label>
                 <br />
@@ -31,6 +34,18 @@ class NewspaperForm extends React.Component {
         </label>
       </fieldset>
     );
+  }
+
+  handleCategoriesCheckbox = ({ target: { checked, value }}, categories) => {
+    // add category
+    if (checked) this.setState({ categories: [...categories, value] });
+    // remove category
+    else {
+      const removeCategory = categories.find(category => category === value);
+      this.setState({ 
+        categories: categories.filter(category => category !== removeCategory)
+      });
+    }
   }
 
   renderSourcesSelection() {
@@ -70,12 +85,12 @@ class NewspaperForm extends React.Component {
   }
 
   render() {
-    const { newspaperTitle } = this.state;
+    const { newspaperTitle, categories } = this.state;
     return (
       <form action="" onSubmit={null}>
         {this.renderNewspaperTitleSelection(newspaperTitle)}
         <br />
-        {this.renderCategorySelection()}
+        {this.renderCategoriesSelection(categories)}
         <br />
         {this.renderSourcesSelection()}
       </form>

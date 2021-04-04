@@ -6,8 +6,8 @@ import NewspaperMenuStyles from '../styles/NewspaperMenu.module.css'
 
 class NewspaperMenu extends Component {
   state = {
-    viewForm: false,
-    title: '',
+    // viewForm: false,
+    // title: '',
     categorySelect: '',
     categories: [],
     sources: [],
@@ -24,13 +24,13 @@ class NewspaperMenu extends Component {
     }
   }
 
-  toggleViewForm = () => {
-    let view = this.state.viewForm
+  // toggleViewForm = () => {
+  //   let view = this.state.viewForm
 
-    this.setState({
-      viewForm: !view
-    })
-  }
+  //   this.setState({
+  //     viewForm: !view
+  //   })
+  // }
 
   addCategories = event => {
     const { categories } = this.state
@@ -45,11 +45,11 @@ class NewspaperMenu extends Component {
     }
   }
 
-  handleTitleChange = event => {
-    this.setState({
-      title: event.target.value
-    })
-  }
+  // handleTitleChange = event => {
+  //   this.setState({
+  //     title: event.target.value
+  //   })
+  // }
 
   handleCategoryChange = event => {
     const { renderSourceForm } = this.state
@@ -164,11 +164,11 @@ class NewspaperMenu extends Component {
     return (
       <>
         <form className={NewspaperMenuStyles.form} onSubmit={this.handleFormSubmit} >
-          <label className={NewspaperMenuStyles.label} >Newspaper Title: </label><br />
+          {/* <label className={NewspaperMenuStyles.label} >Newspaper Title: </label><br />
           <input className={NewspaperMenuStyles.input} onChange={this.handleTitleChange} type="text" value={this.state.title} required/>
-          <br />
+          <br /> */}
   
-          <fieldset onChange={this.addCategories}>      
+          {/* <fieldset onChange={this.addCategories}>      
               <label className={NewspaperMenuStyles.label}>Select Categories: </label><br /><br />      
               <input className={NewspaperMenuStyles.checkbox} type="checkbox" name="categories" value="Business" />
               <label className={NewspaperMenuStyles.business} >Business</label><br />      
@@ -182,7 +182,7 @@ class NewspaperMenu extends Component {
               <label className={NewspaperMenuStyles.sports} >Sports</label><br />       
               <input className={NewspaperMenuStyles.checkbox} type="checkbox" name="categories" value="Technology" />
               <label className={NewspaperMenuStyles.technology} >Technology</label><br />         
-          </fieldset><br />
+          </fieldset><br /> */}
 
           <label className={NewspaperMenuStyles.label} >Select Sources by Category: </label><br /><br />
           <select className={NewspaperMenuStyles.select} onChange={this.handleCategoryChange} >
