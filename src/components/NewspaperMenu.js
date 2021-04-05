@@ -32,18 +32,18 @@ class NewspaperMenu extends Component {
   //   })
   // }
 
-  addCategories = event => {
-    const { categories } = this.state
-    if (categories.find(category => category === event.target.value)) {
-      this.setState({
-        categories: [...categories].filter(category => category !== event.target.value)
-      })
-    } else {
-      this.setState({
-        categories: [...categories, event.target.value]
-      })
-    }
-  }
+  // addCategories = event => {
+  //   const { categories } = this.state
+  //   if (categories.find(category => category === event.target.value)) {
+  //     this.setState({
+  //       categories: [...categories].filter(category => category !== event.target.value)
+  //     })
+  //   } else {
+  //     this.setState({
+  //       categories: [...categories, event.target.value]
+  //     })
+  //   }
+  // }
 
   // handleTitleChange = event => {
   //   this.setState({
