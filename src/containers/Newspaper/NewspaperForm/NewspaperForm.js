@@ -53,12 +53,12 @@ class NewspaperForm extends React.Component {
             return (
               <>
                 <label htmlFor={type}>
-                  {type}:
                   <input
                     onChange={event => this.handleCategoriesSelection(event, categories)}
                     type="checkbox"
                     name={type}
                     value={type} />
+                  {type}:
                 </label>
                 <br />
               </>
@@ -115,23 +115,28 @@ class NewspaperForm extends React.Component {
     const category = sourceCategory[0].toLowerCase() + sourceCategory.slice(1);
     // store array of sources
     const sources = allSources[category];
-    return sources.map(source => {
-      const { name } = source._doc;
-      return (
-        <>
-          <label htmlFor={name}>
-            {name}:
-            <input
-              onChange={this.handleSourceSelection}
-              checked={selectedSources.includes(name)}
-              type="checkbox" 
-              name={name} 
-              value={name} />
-          </label>
-          <br />
-        </>
-      );
-    });
+    return (
+      <fieldset>
+        <legend>Select Sources</legend>
+        {sources.map(source => {
+          const { name } = source._doc;
+          return (
+            <>
+              <label htmlFor={name}>
+                <input
+                  onChange={this.handleSourceSelection}
+                  checked={selectedSources.includes(name)}
+                  type="checkbox" 
+                  name={name} 
+                  value={name} />
+                {name}
+              </label>
+              <br />
+            </>
+          );
+        })}
+      </fieldset>
+    );
   }
 
   handleSourceSelection = ({ target: { value, checked }}) => {

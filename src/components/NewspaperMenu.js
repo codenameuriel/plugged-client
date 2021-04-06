@@ -8,11 +8,11 @@ class NewspaperMenu extends Component {
   state = {
     // viewForm: false,
     // title: '',
-    categorySelect: '',
-    categories: [],
-    sources: [],
-    renderSourceForm: false,
-    sourceNames: [],
+    // categorySelect: '',
+    // categories: [],
+    // sources: [],
+    // renderSourceForm: false,
+    // sourceNames: [],
     topic: '',
     addedTopics: [],
     newspapers: []
@@ -73,18 +73,18 @@ class NewspaperMenu extends Component {
   //   })))
   // }
 
-  handleSourcesFormCheck = event => {
-    const { sourceNames } = this.state
-    if (sourceNames.find(sourceName => sourceName === event.target.value)) {
-      this.setState({
-        sourceNames: [...sourceNames].filter(sourceName => sourceName !== event.target.value)
-      })
-    } else {
-      this.setState({
-        sourceNames: [...this.state.sourceNames, event.target.value]
-      })
-    }
-  }
+  // handleSourcesFormCheck = event => {
+  //   const { sourceNames } = this.state
+  //   if (sourceNames.find(sourceName => sourceName === event.target.value)) {
+  //     this.setState({
+  //       sourceNames: [...sourceNames].filter(sourceName => sourceName !== event.target.value)
+  //     })
+  //   } else {
+  //     this.setState({
+  //       sourceNames: [...this.state.sourceNames, event.target.value]
+  //     })
+  //   }
+  // }
 
   handleTopicChange = event => {
     this.setState({
@@ -119,23 +119,23 @@ class NewspaperMenu extends Component {
     })
   }
 
-  renderSourcesForm = () => {
-    const { sources, sourceNames } = this.state
-    return sources.map(source => {
-      return (
-        <>
-          <input
-            className={NewspaperMenuStyles.checkbox}
-            onChange={this.handleSourcesFormCheck}
-            checked={sourceNames.find(sn => sn === source.name) && "checked"}
-            type="checkbox" 
-            name="sources" 
-            value={source.name} />
-          <label className={NewspaperMenuStyles.sourceOption} >{source.name}</label><br />
-        </>
-      )
-    })
-  }
+  // renderSourcesForm = () => {
+  //   const { sources, sourceNames } = this.state
+  //   return sources.map(source => {
+  //     return (
+  //       <>
+  //         <input
+  //           className={NewspaperMenuStyles.checkbox}
+  //           onChange={this.handleSourcesFormCheck}
+  //           checked={sourceNames.find(sn => sn === source.name) && "checked"}
+  //           type="checkbox" 
+  //           name="sources" 
+  //           value={source.name} />
+  //         <label className={NewspaperMenuStyles.sourceOption} >{source.name}</label><br />
+  //       </>
+  //     )
+  //   })
+  // }
 
   handleFormSubmit = event => {
     const { title, categories, sourceNames, addedTopics } = this.state
@@ -184,7 +184,7 @@ class NewspaperMenu extends Component {
               <label className={NewspaperMenuStyles.technology} >Technology</label><br />         
           </fieldset><br /> */}
 
-          <label className={NewspaperMenuStyles.label} >Select Sources by Category: </label><br /><br />
+          {/* <label className={NewspaperMenuStyles.label} >Select Sources by Category: </label><br /><br />
           <select className={NewspaperMenuStyles.select} onChange={this.handleCategoryChange} >
             <option value="Select" >Select Category</option>
             <option value="Business" >Business</option>
@@ -193,17 +193,17 @@ class NewspaperMenu extends Component {
             <option value="Science" >Science</option>
             <option value="Sports" >Sports</option>
             <option value="Technology" >Technology</option>
-          </select>
+          </select> */}
 
         
-          {this.state.renderSourceForm &&
+          {/* {this.state.renderSourceForm &&
           <>
             <br /><br />
             <fieldset>
               {this.renderSourcesForm()}
             </fieldset>
           </>
-          }    
+          }     */}
          
           <br /><br/>
           <label className={NewspaperMenuStyles.label} >Add a Topic: </label><br />
