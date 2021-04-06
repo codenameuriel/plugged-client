@@ -193,11 +193,23 @@ class NewspaperForm extends React.Component {
         <legend>Added Topics</legend>
         {topics.map(topic => {
           return (
-            <p onClick={null}>{topic}</p>
+            <div>
+              <p>{topic}</p>
+              <Button 
+                description={'Remove'} 
+                onClick={event => this.selectedTopicsOnClick(event, topic, topics)} />
+            </div>
           );
         })}
       </fieldset>
     );
+  }
+
+  selectedTopicsOnClick = (event, currentTopic, topics) => {
+    event.preventDefault();
+    const removeTopic = topics.find(topic => topic === currentTopic);
+    const updatedTopics = topics.filter(topic => topic !== removeTopic);
+    this.setState({ topics: updatedTopics });
   }
 
   render() {

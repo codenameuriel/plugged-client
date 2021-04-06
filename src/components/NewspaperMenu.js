@@ -13,8 +13,8 @@ class NewspaperMenu extends Component {
     // sources: [],
     // renderSourceForm: false,
     // sourceNames: [],
-    topic: '',
-    addedTopics: [],
+    // topic: '',
+    // addedTopics: [],
     newspapers: []
   }
 
@@ -101,23 +101,23 @@ class NewspaperMenu extends Component {
   //   })
   // }
 
-  removeFromAddedTopics = target => {
-    const { addedTopics } = this.state
-    this.setState({
-      addedTopics: [...addedTopics].filter(topic => topic !== target)
-    })
-  }
+  // removeFromAddedTopics = target => {
+  //   const { addedTopics } = this.state
+  //   this.setState({
+  //     addedTopics: [...addedTopics].filter(topic => topic !== target)
+  //   })
+  // }
 
-  renderTopics = () => {
-    const { addedTopics } = this.state
-    return addedTopics.map(t => {
-      return (
-        <>
-          <p className={NewspaperMenuStyles.topics} onClick={() => this.removeFromAddedTopics(t)} >"{t}"</p>
-        </>
-      )  
-    })
-  }
+  // renderTopics = () => {
+  //   const { addedTopics } = this.state
+  //   return addedTopics.map(t => {
+  //     return (
+  //       <>
+  //         <p className={NewspaperMenuStyles.topics} onClick={() => this.removeFromAddedTopics(t)} >"{t}"</p>
+  //       </>
+  //     )  
+  //   })
+  // }
 
   // renderSourcesForm = () => {
   //   const { sources, sourceNames } = this.state
@@ -210,12 +210,12 @@ class NewspaperMenu extends Component {
           <input className={NewspaperMenuStyles.input} onChange={this.handleTopicChange} type="text" value={this.state.topic} />
           <button className={NewspaperMenuStyles.addBtn} onClick={this.addTopic} >Add</button><br /> */}
 
-          {this.state.addedTopics.length > 0 &&
+          {/* {this.state.addedTopics.length > 0 &&
           <> 
           <h3>Added Topics</h3>
           {this.renderTopics()}
           </>
-          }
+          } */}
 
           <input className={NewspaperMenuStyles.build} onClick={() => {
             alert(`You've just created the ${this.state.title} newspaper`)
