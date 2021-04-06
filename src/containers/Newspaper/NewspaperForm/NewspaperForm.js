@@ -109,7 +109,7 @@ class NewspaperForm extends React.Component {
     this.setState({ sourceCategory: value });
   }
 
-  renderSourceSelection() {
+  renderSourceSelection(selectedSources) {
     const { sourceCategory, allSources } = this.state;
     // format sourceCategory to use as a key
     const category = sourceCategory[0].toLowerCase() + sourceCategory.slice(1);
@@ -123,6 +123,7 @@ class NewspaperForm extends React.Component {
             {name}:
             <input
               onChange={this.handleSourceSelection}
+              checked={selectedSources.includes(name)}
               type="checkbox" 
               name={name} 
               value={name} />
@@ -146,7 +147,7 @@ class NewspaperForm extends React.Component {
   }
 
   render() {
-    const { newspaperTitle, categories, sourceCategory } = this.state;
+    const { newspaperTitle, categories, sourceCategory, sources } = this.state;
     return (
       <form onSubmit={null}>
         {this.renderNewspaperTitleSelection(newspaperTitle)}
@@ -155,7 +156,7 @@ class NewspaperForm extends React.Component {
         <br />
         {this.renderSourceCategoriesSelection()}
         <br />
-        {sourceCategory && this.renderSourceSelection()}
+        {sourceCategory && this.renderSourceSelection(sources)}
       </form>
     );
   }
