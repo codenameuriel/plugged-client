@@ -10,7 +10,8 @@ class NewspaperForm extends React.Component {
     newspaperTitle: '',
     categories: [],
     sourceCategory: '',
-    sources: {}
+    allSources: {},
+    sources: []
   }
 
   componentDidMount() {
@@ -20,8 +21,27 @@ class NewspaperForm extends React.Component {
   async setSources() {
     const { getSources } = this.props;
     // fetch all sources
-    const sources = await getSources();
-    this.setState({ sources: sources });
+    const allSources = await getSources();
+    this.setState({ allSources });
+  }
+
+  renderNewspaperTitleSelection(title) {
+    return (
+      <label htmlFor="newspaperTitle">
+        Newspaper Title:
+        <br />
+        <input 
+          type="text" 
+          name="newspaperTitle"
+          onChange={this.handleNewspaperTitleChange}
+          value={title} 
+          required />
+      </label>
+    );
+  }
+
+  handleNewspaperTitleChange = ({ target: { value, name }}) => {
+    this.setState({ [name]: value });
   }
 
   renderCategoriesSelection(categories) {
@@ -50,13 +70,16 @@ class NewspaperForm extends React.Component {
 
   handleCategoriesSelection = ({ target: { checked, value }}, categories) => {
     // add category
-    if (checked) this.setState({ categories: [...categories, value] });
+    if (checked) this.setState(prevState => {
+      return { categories: [...prevState.categories, value] }
+    });
     // remove category
     else {
       const removeCategory = categories.find(category => category === value);
-      this.setState({ 
-        categories: categories.filter(category => category !== removeCategory)
-      });
+      const updatedCategories = (
+        categories.filter(category => category !== removeCategory)
+      );
+      this.setState({ categories: updatedCategories });
     }
   }
 
@@ -86,36 +109,53 @@ class NewspaperForm extends React.Component {
     this.setState({ sourceCategory: value });
   }
 
-  renderNewspaperTitleSelection(title) {
-    return (
-      <label htmlFor="newspaperTitle">
-        Newspaper Title:
-        <br />
-        <input 
-          type="text" 
-          name="newspaperTitle"
-          onChange={this.handleNewspaperTitleChange}
-          value={title} 
-          required />
-      </label>
-    );
+  renderSourceSelection() {
+    const { sourceCategory, allSources } = this.state;
+    // format sourceCategory to use as a key
+    const category = sourceCategory[0].toLowerCase() + sourceCategory.slice(1);
+    // store array of sources
+    const sources = allSources[category];
+    return sources.map(source => {
+      const { name } = source._doc;
+      return (
+        <>
+          <label htmlFor={name}>
+            {name}:
+            <input
+              onChange={this.handleSourceSelection}
+              type="checkbox" 
+              name={name} 
+              value={name} />
+          </label>
+          <br />
+        </>
+      );
+    });
   }
 
-  handleNewspaperTitleChange = ({ target: { value, name }}) => {
-    this.setState({ [name]: value });
+  handleSourceSelection = ({ target: { value, checked }}) => {
+    if (checked) {
+      this.setState(prevState => {
+        return { sources: [...prevState.sources, value]}
+      });
+    } else {
+      const { sources } = this.state;
+      const updatedSources = sources.filter(source => source !== value);
+      this.setState({ sources: updatedSources });
+    }
   }
 
   render() {
-    const { newspaperTitle, categories } = this.state;
+    const { newspaperTitle, categories, sourceCategory } = this.state;
     return (
-      <form action="" onSubmit={null}>
+      <form onSubmit={null}>
         {this.renderNewspaperTitleSelection(newspaperTitle)}
         <br />
         {this.renderCategoriesSelection(categories)}
         <br />
         {this.renderSourceCategoriesSelection()}
         <br />
-        {}
+        {sourceCategory && this.renderSourceSelection()}
       </form>
     );
   }

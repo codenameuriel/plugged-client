@@ -51,27 +51,27 @@ class NewspaperMenu extends Component {
   //   })
   // }
 
-  handleCategoryChange = event => {
-    const { renderSourceForm } = this.state
-    if (renderSourceForm) {
-      this.setState({
-        renderSourceForm: false 
-      })
-    }
-    this.setState({
-      categorySelect: event.target.value
-    }, () => this.fetchSources(this.state.categorySelect.toLowerCase()))
-  }
+  // handleCategoryChange = event => {
+  //   const { renderSourceForm } = this.state
+  //   if (renderSourceForm) {
+  //     this.setState({
+  //       renderSourceForm: false 
+  //     })
+  //   }
+  //   this.setState({
+  //     categorySelect: event.target.value
+  //   }, () => this.fetchSources(this.state.categorySelect.toLowerCase()))
+  // }
 
-  fetchSources = category => {
-    fetch(`http://localhost:4000/get-sources/${category}`)
-    .then(resp => resp.json())
-    .then(data => this.setState({
-      sources: data
-    }, () => this.setState({
-      renderSourceForm: true
-    })))
-  }
+  // fetchSources = category => {
+  //   fetch(`http://localhost:4000/get-sources/${category}`)
+  //   .then(resp => resp.json())
+  //   .then(data => this.setState({
+  //     sources: data
+  //   }, () => this.setState({
+  //     renderSourceForm: true
+  //   })))
+  // }
 
   handleSourcesFormCheck = event => {
     const { sourceNames } = this.state
