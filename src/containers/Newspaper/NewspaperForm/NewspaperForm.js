@@ -157,25 +157,27 @@ class NewspaperForm extends React.Component {
     }
   }
 
-  renderTopicSelection(topic) {
+  renderTopicSelection(topic, topics) {
     return (
       <fieldset>
         <legend>Topics</legend>
         <input 
-          onChange={this.handleTopicSelection} 
+          onChange={this.handleTopicSelectionChange} 
           type="text"
           placeholder={'Enter a topic'} 
           value={topic} />
         <Button description={'Add'} onClick={this.topicSelectionOnClick} />
+        {topics.length !== 0 && this.renderSelectedTopics(topics)}
       </fieldset>
     );
   }
 
-  handleTopicSelection = ({ target: { value }}) => {
+  handleTopicSelectionChange = ({ target: { value }}) => {
     this.setState({ topic: value });
   }
 
-  topicSelectionOnClick = () => {
+  topicSelectionOnClick = event => {
+    event.preventDefault();
     // add topic on click of button and clear topic input field
     this.setState(prevState => {
       return { 
@@ -185,6 +187,19 @@ class NewspaperForm extends React.Component {
     });
   }
 
+  renderSelectedTopics(topics) {
+    return (
+      <fieldset>
+        <legend>Added Topics</legend>
+        {topics.map(topic => {
+          return (
+            <p onClick={null}>{topic}</p>
+          );
+        })}
+      </fieldset>
+    );
+  }
+
   render() {
     const { 
       newspaperTitle, 
@@ -192,7 +207,8 @@ class NewspaperForm extends React.Component {
       sourceCategory, 
       allSources, 
       sources, 
-      topic 
+      topic,
+      topics
     } = this.state;
 
     return (
@@ -203,7 +219,7 @@ class NewspaperForm extends React.Component {
         <br />
         {this.renderSourceCategoriesSelection(sourceCategory, allSources, sources)}
         <br />
-        {this.renderTopicSelection(topic)}
+        {this.renderTopicSelection(topic, topics)}
       </form>
     );
   }

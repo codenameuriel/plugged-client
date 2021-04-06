@@ -86,20 +86,20 @@ class NewspaperMenu extends Component {
   //   }
   // }
 
-  handleTopicChange = event => {
-    this.setState({
-      topic: event.target.value
-    })
-  }
+  // handleTopicChange = event => {
+  //   this.setState({
+  //     topic: event.target.value
+  //   })
+  // }
 
-  addTopic = event => {
-    event.preventDefault()
-    const { topic, addedTopics } = this.state
-    this.setState({
-      addedTopics: [...addedTopics, topic],
-      topic: ''
-    })
-  }
+  // addTopic = event => {
+  //   event.preventDefault()
+  //   const { topic, addedTopics } = this.state
+  //   this.setState({
+  //     addedTopics: [...addedTopics, topic],
+  //     topic: ''
+  //   })
+  // }
 
   removeFromAddedTopics = target => {
     const { addedTopics } = this.state
@@ -205,10 +205,10 @@ class NewspaperMenu extends Component {
           </>
           }     */}
          
-          <br /><br/>
+          {/* <br /><br/>
           <label className={NewspaperMenuStyles.label} >Add a Topic: </label><br />
           <input className={NewspaperMenuStyles.input} onChange={this.handleTopicChange} type="text" value={this.state.topic} />
-          <button className={NewspaperMenuStyles.addBtn} onClick={this.addTopic} >Add</button><br />
+          <button className={NewspaperMenuStyles.addBtn} onClick={this.addTopic} >Add</button><br /> */}
 
           {this.state.addedTopics.length > 0 &&
           <> 
