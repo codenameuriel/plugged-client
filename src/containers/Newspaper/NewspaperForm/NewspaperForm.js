@@ -5,13 +5,17 @@ import * as actionCreators from '../../../store/actions/index';
 
 import { CATEGORIES } from '../../../utils/categories';
 
+import Button from '../../../components/UI/Button/Button';
+
 class NewspaperForm extends React.Component {
   state = {
     newspaperTitle: '',
     categories: [],
     sourceCategory: '',
     allSources: {},
-    sources: []
+    sources: [],
+    topic: '',
+    topics: []
   }
 
   componentDidMount() {
@@ -27,16 +31,16 @@ class NewspaperForm extends React.Component {
 
   renderNewspaperTitleSelection(title) {
     return (
-      <label htmlFor="newspaperTitle">
-        Newspaper Title:
-        <br />
+      <fieldset>
+        <legend>Title</legend>
         <input 
           type="text" 
           name="newspaperTitle"
+          placeholder='Enter a title'
           onChange={this.handleNewspaperTitleChange}
           value={title} 
           required />
-      </label>
+      </fieldset>
     );
   }
 
@@ -47,7 +51,7 @@ class NewspaperForm extends React.Component {
   renderCategoriesSelection(categories) {
     return (
       <fieldset>
-        <legend>Select Categories</legend>
+        <legend>Categories</legend>
           {CATEGORIES.map(category => {
             const { type } = category;
             return (
@@ -84,23 +88,26 @@ class NewspaperForm extends React.Component {
   }
 
   // creates form to select sources by category
-  renderSourceCategoriesSelection() {
+  renderSourceCategoriesSelection(sourceCategory, allSources, selectedSources) {
     return (
-      <label htmlFor="sourceCategories">
-        Select Sources by Category:
-        <br />
-        <select 
-          name="sourceCategories" 
-          onChange={this.handleSourceCategoriesSelection}>
-          <option value="Select">Select Category</option>
-          {CATEGORIES.map(category => {
-            const { type } = category;
-            return (
-              <option value={type}>{type}</option>
-            );
-          })}
-        </select>
-      </label>
+      <fieldset>
+        <legend>Sources</legend>
+        <label htmlFor="sourceCategories">
+          Filter by:
+          <select 
+            name="sourceCategories" 
+            onChange={this.handleSourceCategoriesSelection}>
+            <option value="Select">Select Category</option>
+            {CATEGORIES.map(category => {
+              const { type } = category;
+              return (
+                <option value={type}>{type}</option>
+              );
+            })}
+          </select>
+        </label>
+        {sourceCategory && this.renderSourceSelection(sourceCategory, allSources, selectedSources)}
+      </fieldset>
     );
   }
 
@@ -109,15 +116,14 @@ class NewspaperForm extends React.Component {
     this.setState({ sourceCategory: value });
   }
 
-  renderSourceSelection(selectedSources) {
-    const { sourceCategory, allSources } = this.state;
+  renderSourceSelection(sourceCategory, allSources, selectedSources) {
     // format sourceCategory to use as a key
     const category = sourceCategory[0].toLowerCase() + sourceCategory.slice(1);
     // store array of sources
     const sources = allSources[category];
     return (
       <fieldset>
-        <legend>Select Sources</legend>
+        <legend>{`${sourceCategory} Sources`}</legend>
         {sources.map(source => {
           const { name } = source._doc;
           return (
@@ -151,17 +157,53 @@ class NewspaperForm extends React.Component {
     }
   }
 
+  renderTopicSelection(topic) {
+    return (
+      <fieldset>
+        <legend>Topics</legend>
+        <input 
+          onChange={this.handleTopicSelection} 
+          type="text"
+          placeholder={'Enter a topic'} 
+          value={topic} />
+        <Button description={'Add'} onClick={this.topicSelectionOnClick} />
+      </fieldset>
+    );
+  }
+
+  handleTopicSelection = ({ target: { value }}) => {
+    this.setState({ topic: value });
+  }
+
+  topicSelectionOnClick = () => {
+    // add topic on click of button and clear topic input field
+    this.setState(prevState => {
+      return { 
+        topics: [...prevState.topics, prevState.topic],
+        topic: ''
+      };
+    });
+  }
+
   render() {
-    const { newspaperTitle, categories, sourceCategory, sources } = this.state;
+    const { 
+      newspaperTitle, 
+      categories, 
+      sourceCategory, 
+      allSources, 
+      sources, 
+      topic 
+    } = this.state;
+
     return (
       <form onSubmit={null}>
         {this.renderNewspaperTitleSelection(newspaperTitle)}
         <br />
         {this.renderCategoriesSelection(categories)}
         <br />
-        {this.renderSourceCategoriesSelection()}
+        {this.renderSourceCategoriesSelection(sourceCategory, allSources, sources)}
         <br />
-        {sourceCategory && this.renderSourceSelection(sources)}
+        {this.renderTopicSelection(topic)}
       </form>
     );
   }
