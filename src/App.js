@@ -10,11 +10,7 @@ import Categories from './containers/Categories/Categories';
 import CategoryNews from './containers/CategoryNews/CategoryNews';
 import Sources from './containers/Sources/Sources';
 import SourceNews from './containers/SourceNews/SourceNews';
-
-// FIX RENDERING
 import NewspaperMenu from './containers/Newspaper/NewspaperMenu/NewspaperMenu';
-
-// import Newspaper from './components/NewspaperMenu'; // change to Newspaper
 import Auth from './containers/Auth/Auth';
 import TopicNews from './containers/TopicNews/TopicNews';
 

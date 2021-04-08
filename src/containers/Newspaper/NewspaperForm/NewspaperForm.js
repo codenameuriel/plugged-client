@@ -212,6 +212,12 @@ class NewspaperForm extends React.Component {
     this.setState({ topics: updatedTopics });
   }
 
+  handleFormSubmit = (event, formData) => {
+    event.preventDefault();
+    const { newspaperTitle, categories, sources, topics } = formData;
+    
+  }
+
   render() {
     const { 
       newspaperTitle, 
@@ -224,7 +230,7 @@ class NewspaperForm extends React.Component {
     } = this.state;
 
     return (
-      <form onSubmit={null}>
+      <form onSubmit={event => this.handleFormSubmit(event, this.state)}>
         {this.renderNewspaperTitleSelection(newspaperTitle)}
         <br />
         {this.renderCategoriesSelection(categories)}
@@ -232,6 +238,7 @@ class NewspaperForm extends React.Component {
         {this.renderSourceCategoriesSelection(sourceCategory, allSources, sources)}
         <br />
         {this.renderTopicSelection(topic, topics)}
+        <input type="submit" value="Submit" />
       </form>
     );
   }
