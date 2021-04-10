@@ -11,3 +11,4 @@ export {
 export { login, signup, clearAuthError } from './auth';
 export { clearParams, setSearchTopic, setCategoryParam, setSourcesParam } from './params';
 export { subscribeToCategories } from './subscription';
+export { createNewspaper } from './newspaper';

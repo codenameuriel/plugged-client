@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../../../store/actions/index';
-
 import { CATEGORIES } from '../../../utils/categories';
 
 import Button from '../../../components/UI/Button/Button';
@@ -73,12 +72,13 @@ class NewspaperForm extends React.Component {
   }
 
   handleCategoriesSelection = ({ target: { checked, value }}, categories) => {
-    // add category
-    if (checked) this.setState(prevState => {
-      return { categories: [...prevState.categories, value] }
-    });
-    // remove category
-    else {
+    if (checked) {
+      // add category
+      this.setState(prevState => {
+        return { categories: [...prevState.categories, value] }
+      });
+    } else {
+      // remove category
       const removeCategory = categories.find(category => category === value);
       const updatedCategories = (
         categories.filter(category => category !== removeCategory)
@@ -212,10 +212,14 @@ class NewspaperForm extends React.Component {
     this.setState({ topics: updatedTopics });
   }
 
-  handleFormSubmit = (event, formData) => {
+  handleFormSubmit = (event, state) => {
+    // prevent form from reloading page
     event.preventDefault();
-    const { newspaperTitle, categories, sources, topics } = formData;
-    
+    // extract data from state to create a newspaper
+    const { newspaperTitle, categories, sources, topics } = state;
+    // construct data object to submit via POST request
+    const formData = { newspaperTitle, categories, sources, topics };
+    this.props.createNewspaper(formData);
   }
 
   render() {
@@ -252,7 +256,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSources: () => dispatch(actionCreators.getSources()) 
+    getSources: () => dispatch(actionCreators.getSources()),
+    createNewspaper: newspaperData => dispatch(actionCreators.createNewspaper(newspaperData))
   };
 };
 
