@@ -20,6 +20,13 @@ class NewspaperMenu extends React.Component {
 
   renderNewspapers() {
     const { newspapers } = this.props;
+    
+    // content for when a user has no created newspapers
+    if (newspapers.length === 0) {
+      return <p>Get started by creating a newspaper!</p>;
+    }
+
+    // content for created newspapers
     return (
       <section>
         {newspapers.map(newspaper => <NewspaperCard newspaper={newspaper} />)}
