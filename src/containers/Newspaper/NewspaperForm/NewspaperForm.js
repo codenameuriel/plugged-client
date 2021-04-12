@@ -212,7 +212,21 @@ class NewspaperForm extends React.Component {
     this.setState({ topics: updatedTopics });
   }
 
+  clearFormData() {
+    this.setState({
+      newspaperTitle: '',
+      categories: [],
+      sourceCategory: '',
+      allSources: {},
+      sources: [],
+      topic: '',
+      topics: []
+    });
+  }
+
   handleFormSubmit = (event, state) => {
+    const { toggleFormView } = this.props;
+
     // prevent form from reloading page
     event.preventDefault();
     // extract data from state to create a newspaper
@@ -220,6 +234,11 @@ class NewspaperForm extends React.Component {
     // construct data object to submit via POST request
     const formData = { newspaperTitle, categories, sources, topics };
     this.props.createNewspaper(formData);
+
+    // clear form data
+    this.clearFormData();
+    // close the form
+    toggleFormView();
   }
 
   render() {
@@ -247,12 +266,6 @@ class NewspaperForm extends React.Component {
     );
   }
 }
-
-// const mapStateToProps = state => {
-//   return {
-
-//   };
-// };
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -6,6 +6,8 @@ import Button from '../../../components/UI/Button/Button';
 import NewspaperForm from '../NewspaperForm/NewspaperForm';
 import NewspaperCard from '../NewspaperCard/NewspaperCard';
 
+import NewspaperMenuStyles from './NewspaperMenu.module.css';
+
 class NewspaperMenu extends React.Component {
   state = {
     type: 'newspaper-menu',
@@ -28,7 +30,7 @@ class NewspaperMenu extends React.Component {
 
     // content for created newspapers
     return (
-      <section>
+      <section className={NewspaperMenuStyles.Newspapers}>
         {newspapers.map(newspaper => <NewspaperCard newspaper={newspaper} />)}
       </section>
     );
@@ -39,7 +41,7 @@ class NewspaperMenu extends React.Component {
     return (
       <Layout title={title} subtitle={subtitle} type={type}>
         <Button onClick={this.toggleFormView} description={viewForm ? 'Close' : 'Build a newspaper'} />
-        {viewForm && <NewspaperForm />}
+        {viewForm && <NewspaperForm toggleFormView={this.toggleFormView} />}
         {this.renderNewspapers()}
       </Layout>
     );

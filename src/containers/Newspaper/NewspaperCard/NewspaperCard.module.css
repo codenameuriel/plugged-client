@@ -1,5 +1,5 @@
 .NewspaperCard {
-  width: 26%;
+  width: 25%;
 
   padding: 10px;
   margin-bottom: 25px;
@@ -11,6 +11,7 @@
 }
 
 .NewspaperCard:hover {
+  transform: scale(1.02, 1.02);
   box-shadow: 0 8px 16px 0 black;
   cursor: pointer;
 }
