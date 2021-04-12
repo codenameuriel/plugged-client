@@ -1,34 +1,34 @@
-.newspaperCard {
+.NewspaperCard {
   width: 26%;
-  margin: 50px auto;
-  padding: 30px;
-  text-align: center;
-  /* background-color: #393e46; */
-  background-color: #26292e;
-  color: #eee;
-  border-radius: 30px;
 
-  order: 3;
-  flex-basis: auto; 
+  padding: 10px;
+  margin-bottom: 25px;
+  text-align: center;
+  background-color: #2e343f;
+  color: white;
+  border-radius: 30px;
+  transition: transform 0.3s;
 }
 
-.newspaperCard:hover {
-  /* transform: translateY(-60px); */
-  /* transform: scale(1.15, 1.15); */
-  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
+.NewspaperCard:hover {
   box-shadow: 0 8px 16px 0 black;
   cursor: pointer;
 }
 
-.p {
+.Name {
+  font-size: 100%;
   color: #32e0c4;
 }
 
-.h1 {
-  font-size: 38px;
+h1 {
+  font-size: 200%;
 }
 
-.button {
+h2 {
+  font-size: 150%;
+}
+
+/* .button {
   background-color: #32e0c4;
   color: #eee;
   border: none;
@@ -53,4 +53,4 @@
   background-color: #32e0c4;
   color: #eee;
   transform: translateY(4px);
-}
+} */

@@ -9,4 +9,6 @@ body {
   sans-serif;
   background-color: #222831;
   color: #eee;
+  line-height: 1.6;
+  word-spacing: .5px;
 }
