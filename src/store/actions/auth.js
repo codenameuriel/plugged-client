@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import { postData } from '../../utils/fetch';
+import { setNewspapers } from './newspaper';
 
 const authErrorMsg = 'Unable to Log in. Please check your credentials';
 
@@ -10,9 +11,11 @@ export const login = userData => {
 		if (!user) {
 			dispatch(loginFailed(authErrorMsg));
 		} else {
+			const { newspapers } = user;
 			dispatch(setUser(user));
 			dispatch(setUserLoggedIn());
 			dispatch(setCollectionNews(user.articles));
+			dispatch(setNewspapers(newspapers));
 			dispatch(setAuthRedirect());
 		}
 	};

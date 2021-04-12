@@ -13,7 +13,7 @@ class NewspaperMenu extends React.Component {
     subtitle: 'Create and customize your news feed',
     viewForm: false
   }
-
+  
   toggleFormView = () => {
     this.setState(prevState => ({ viewForm: !prevState.viewForm }));
   }

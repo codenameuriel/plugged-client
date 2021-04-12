@@ -248,11 +248,11 @@ class NewspaperForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
+// const mapStateToProps = state => {
+//   return {
 
-  };
-};
+//   };
+// };
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -261,4 +261,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewspaperForm);
+export default connect(null, mapDispatchToProps)(NewspaperForm);
