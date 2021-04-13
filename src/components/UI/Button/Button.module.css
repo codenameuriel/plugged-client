@@ -18,6 +18,10 @@
   margin-right: 10px;
 }
 
+.Newspaper {
+  margin-left: 45%;
+}
+ 
 .Modal {
   margin-right: 85%;
 }
@@ -55,7 +59,7 @@
     font-size: 85%;
   }
 
-  .PageManager {
+  .PageManager, .Newspaper {
     font-size: 105%;
   }
 }
@@ -75,7 +79,7 @@
     font-size: 85%;
   }
 
-  .PageManager {
+  .PageManager, .Newspaper {
     font-size: 100%;
   }
 }
@@ -87,7 +91,7 @@
     font-size: 70%;
   }
 
-  .PageManager {
+  .PageManager, .Newspaper {
     font-size: 90%;
   }
 }

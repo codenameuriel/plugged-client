@@ -18,6 +18,9 @@ const Button = ({ type, description, onClick }) => {
     case 'modal':
       buttonStyles = [ButtonStyles.Button, ButtonStyles.Modal]
       break
+    case 'newspaper':
+      buttonStyles = [ButtonStyles.Button, ButtonStyles.Newspaper]
+      break
     default:
       break
   }

@@ -40,7 +40,7 @@ class NewspaperMenu extends React.Component {
     const { title, subtitle, type, viewForm } = this.state;
     return (
       <Layout title={title} subtitle={subtitle} type={type}>
-        <Button onClick={this.toggleFormView} description={viewForm ? 'Close' : 'Build a newspaper'} />
+        <Button type={'newspaper'} onClick={this.toggleFormView} description={viewForm ? 'Close' : 'Build a newspaper'} />
         {viewForm && <NewspaperForm toggleFormView={this.toggleFormView} />}
         {this.renderNewspapers()}
       </Layout>
