@@ -13,7 +13,7 @@ const ArticleCard = props => {
 
   return (
     <article className={ArticleCardStyles.ArticleCard}>
-      <h2>{title}</h2>
+      <h2>{removeSourceFromTitle(title)}</h2>
       <a target='_blank' rel='noopener noreferrer' href={url}>
         <img src={urlToImage || Plug} alt={title} />
       </a>
@@ -24,6 +24,11 @@ const ArticleCard = props => {
 }
 
 export default ArticleCard;
+
+// format the title, removing the article source
+function removeSourceFromTitle(title) {
+  return title.split(' - ')[0];
+}
 
 // removes '[...]' characters from content field
 function formatContent(content) {
