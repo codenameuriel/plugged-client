@@ -1,0 +1,77 @@
+.Form {
+  margin: 25px auto;
+  width: 65%;
+  height: 50%;
+  background-color: #29303b;
+  padding: 30px 60px;
+  overflow: auto;
+}
+
+.Form input[type=text] {
+  width: 25%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 2px solid white;
+}
+
+.Form input[type-text],
+.Form input[type=submit],
+.Form input[type=checkbox] {
+  outline: none;
+}
+
+.Form, 
+.Form input[type=text]:focus,
+.Form input[type=submit],
+.Form input[type=submit]:hover {
+  color: white;
+}
+
+.Form,
+.Form input[type=text],
+.Form input[type=submit],
+.Form input[type=checkbox] {
+  border-radius: 30px;
+}
+
+.Form input[type=text]:hover,
+.Form input[type=text]:focus {
+  background-color: #26292e;
+  border-bottom: 2px solid #32e0c4;
+}
+
+.Form input[type=submit] {
+  width: 10%;
+  margin-top: 25px;
+  margin-left: 45%;
+  padding: 10px 20px;
+  border: none;
+  font-size: 100%;
+}
+
+.Form input[type=submit],
+.Form input[type=checkbox] {
+  cursor: pointer;
+}
+
+.Form input[type=submit],
+.Form input[type=checkbox]:hover,
+.Form input[type=checkbox]:checked {
+  background-color: #32e0c4;
+}
+
+.Form input[type=submit]:hover {
+  background-color: #1bfad6;
+}
+
+.Form button {
+  margin-left: 8px;
+}
+
+.Form input[type=checkbox] {
+  height: 20px;
+  width: 20px;
+  appearance: none;
+  transition-duration: 0.3s;
+  background-color: white;
+}

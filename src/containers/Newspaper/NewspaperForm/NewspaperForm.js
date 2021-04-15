@@ -6,6 +6,8 @@ import { CATEGORIES } from '../../../utils/categories';
 
 import Button from '../../../components/UI/Button/Button';
 
+import NewspaperFormStyles from './NewspaperForm.module.css';
+
 class NewspaperForm extends React.Component {
   state = {
     newspaperTitle: '',
@@ -61,7 +63,7 @@ class NewspaperForm extends React.Component {
                     type="checkbox"
                     name={type}
                     value={type} />
-                  {type}:
+                  {type}
                 </label>
                 <br />
               </>
@@ -253,7 +255,9 @@ class NewspaperForm extends React.Component {
     } = this.state;
 
     return (
-      <form onSubmit={event => this.handleFormSubmit(event, this.state)}>
+      <form 
+        className={NewspaperFormStyles.Form}
+        onSubmit={event => this.handleFormSubmit(event, this.state)}>
         {this.renderNewspaperTitleSelection(newspaperTitle)}
         <br />
         {this.renderCategoriesSelection(categories)}
