@@ -1,6 +1,6 @@
-import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // import components
 import TopNews from './containers/TopNews/TopNews';
@@ -62,51 +62,6 @@ class App extends React.Component {
   //   }))
   // }
 
-  // postArticle = article => {
-  //   fetch('http://localhost:4000/articles', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     body: JSON.stringify(article)
-  //   })
-  //   .then(resp => resp.json())
-  //   .then(this.setArticle)
-  // }
-
-  // setArticle = article => {
-  //   this.setState({
-  //     article: article
-  //   }, () => this.addToCollection(this.state.article))
-  // }
-
-  // addToCollection = article => {
-  //   let collectionObj = {
-  //     user_id: this.state.loggedInUser.id,
-  //     article_id: this.state.article.id
-  //   }
-
-  //   fetch('http://localhost:4000/collections', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     body: JSON.stringify(collectionObj)
-  //   })
-  // }
-
-  // setLoggedInUser = user => {
-  //   this.setState({
-  //     loggedInUser: user,
-  //     categories: user.categories,
-  //     topics: user.topics,
-  //     sources: user.sources,
-  //     loggedInUsersNewspapers: user.get_newspapers
-  //   })
-  // }
-
   // logOutUser = () => {
   //   this.setState({
   //     loggedInUser: {},
@@ -116,60 +71,8 @@ class App extends React.Component {
   //   })
   // }
 
-  // subscribeToCategory = (userID, category) => {
-  //   fetch('http://localhost:4000/user_categories', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       user_id: userID,
-  //       category_name: category
-  //     })
-  //   })
-  //   .then(resp => resp.json())
-  //   .then(this.setLoggedInUser)
-  //   // .then(console.log)
-  // }
-
-  // unsubscribeFromCategory = category => {
-  //   let list = this.state.unsubscribe
-
-  //   if (!list.find(c => c === category)){
-  //     this.setState({
-  //       unsubscribe: [...list, category]
-  //     })
-  //   } else {
-  //     this.setState({
-  //       unsubscribe: [...list.filter(c => c !== category)]
-  //     })
-  //   }
-  // }
-
-  // unsubscribeSubmit = event => {
-  //   event.preventDefault()
-
-  //   fetch('http://localhost:4000/user_categories/unsubscribe', {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       user_id: this.state.loggedInUser.id,
-  //       categories: this.state.unsubscribe
-  //     })
-  //   })
-  //   .then(resp => resp.json())
-  //   .then(this.setLoggedInUser)
-  //   .then(this.setState({
-  //     unsubscribe: []
-  //   }))
-  // }
-
   render() {
-    const { user: isAuthenticated } = this.props
+    const { user: isAuthenticated } = this.props;
 
     // base routes, no user authentication needed
     let routes = (
@@ -179,7 +82,7 @@ class App extends React.Component {
         <Route path='/top-news' component={TopNews} />
         <Redirect from='/' to='/top-news' />
       </Switch>
-    )
+    );
 
     // routes only available when a user is authenticated
     if (isAuthenticated) {
@@ -197,7 +100,7 @@ class App extends React.Component {
           <Route path='/sources' component={Sources} />
           <Route path='/newspaper/menu' component={NewspaperMenu} />
         </Switch>
-      )
+      );
     }
 
     // const links = [
@@ -216,14 +119,14 @@ class App extends React.Component {
     //   <NavLink className={AppStyles.link} to="/newspapers">NEWSPAPER</NavLink>
     // ]
 
-    return routes
+    return routes;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user,
-  }
-}
+    user: state.auth.user
+  };
+};
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);
